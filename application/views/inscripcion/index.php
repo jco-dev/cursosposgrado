@@ -1,5 +1,5 @@
 <?php include('_script.global.php'); ?>
-<script src="<?= base_url('assets/js/inscricpion/ver_inscritos.js') ?>"></script>
+<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
 
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->

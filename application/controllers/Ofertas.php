@@ -20,10 +20,14 @@ class Ofertas extends CI_Controller
 	{
 		$tarjeta = '';
 		$cursos = $this->ofertas_model->listado_cursos();
-		foreach ($cursos as $key => $curso) {
-			$this->data['curso'] = $curso;
-			$tarjeta .= $this->load->view('ofertas/tarjeta/tarjeta_curso', $this->data, true);
+		if ($cursos != NULL) {
+			foreach ($cursos as $key => $curso) {
+				$this->data['curso'] = $curso;
+				$tarjeta .= $this->load->view('ofertas/tarjeta/tarjeta_curso', $this->data, true);
+			}
+			echo $tarjeta;
+		} else {
+			echo "No existen cursos";
 		}
-		echo $tarjeta;
 	}
 }

@@ -15,9 +15,7 @@ class Inscripcion extends PSG_Controller
     public function index()
     {
         $this->data['municipios'] = $this->inscripcion_model->listar_municipios();
-        $this->data['cursos'] = $this->sql_ssl->listar_tabla(
-            'mdl_listado_cursos'
-        );
+        $this->data['cursos'] = $this->inscripcion_model->listar_cursos();
         $this->templater->view('inscripcion/index', $this->data);
     }
 
@@ -27,22 +25,22 @@ class Inscripcion extends PSG_Controller
         $this->templater->view('inscripcion/ver_inscritos', $this->data);
     }
 
-    public function imprimir_recibo()
-    {
-        $datos = array(
-            'titulo' => "CURSO PLATAFORMA MOODLE",
-            'fecha' => date('d-m-Y'),
-            'numero' => '002',
-            'importe' => '100 Bs.',
-            'descripcion' => "PAGO DEL CURSO DE PLATAFORMAS DE MOODLE",
-            'recibido_por' => "WALTER PACO SILES",
-            'entregado_a' => "LIC TANTOS",
-            'a_favor_de' => "JUAN CARLOS CONDORI"
-        );
+    // public function imprimir_recibo()
+    // {
+    //     $datos = array(
+    //         'titulo' => "CURSO PLATAFORMA MOODLE",
+    //         'fecha' => date('d-m-Y'),
+    //         'numero' => '002',
+    //         'importe' => '100 Bs.',
+    //         'descripcion' => "PAGO DEL CURSO DE PLATAFORMAS DE MOODLE",
+    //         'recibido_por' => "ING WALTER PACO SILES",
+    //         'entregado_a' => "LIC TANTOS",
+    //         'a_favor_de' => "JUAN CARLOS CONDORI"
+    //     );
 
-        $rep = new ImprimirCertificado();
-        $rep->imprimir_recibo($datos);
-    }
+    //     $rep = new ImprimirCertificado();
+    //     $rep->imprimir_recibo($datos);
+    // }
 
     public function curso($id)
     {

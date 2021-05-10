@@ -654,7 +654,6 @@
 
 
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
-	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 
 </body>
