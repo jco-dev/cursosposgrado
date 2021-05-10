@@ -1,4 +1,7 @@
-<?= include('_scripts.php') ?>
+<?php include('_script.global.php'); ?>
+<?php include('_style.php'); ?>
+<script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion.js') ?>"></script>
+
 <div class="container pt-2" id="padding-container">
     <div class="card card-custom p-0" style="border: 2px solid #000000;">
         <div class="card-body p-0">
@@ -24,7 +27,7 @@
                 <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                     <div class="wizard-label">
                         <h3 class="wizard-title">
-                            <span>1.</span>Setup Location
+                            <span>1.</span>Datos personales
                         </h3>
                         <div class="wizard-bar"></div>
                     </div>
@@ -34,22 +37,22 @@
                 <div class="wizard-step" data-wizard-type="step">
                     <div class="wizard-label">
                         <h3 class="wizard-title">
-                            <span>2.</span>Enter Details
+                            <span>2.</span>Detalles de pago
                         </h3>
                         <div class="wizard-bar"></div>
                     </div>
                 </div>
                 <!--end::Wizard Step 2 Nav-->
-                <!--begin::Wizard Step 4 Nav-->
+                <!--begin::Wizard Step 3 Nav-->
                 <div class="wizard-step" data-wizard-type="step">
                     <div class="wizard-label">
                         <h3 class="wizard-title">
-                            <span>4.</span>Delivery Address
+                            <span>3.</span>Tipo de certificaci&oacute;n solicitado
                         </h3>
                         <div class="wizard-bar"></div>
                     </div>
                 </div>
-                <!--end::Wizard Step 4 Nav-->
+                <!--end::Wizard Step 3 Nav-->
             </div>
         </div>
         <!--end: Wizard Nav-->

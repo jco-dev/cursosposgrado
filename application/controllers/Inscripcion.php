@@ -46,17 +46,15 @@ class Inscripcion extends PSG_Controller
 
     public function curso($id)
     {
-        // var_dump();
-        // $id_curso = $this->encryption->decrypt(htmlajax_ver_inscritos_entity_decode(preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($this->input->get('id_curso'))), ENT_COMPAT, 'UTF-8'));
         $id_curso = $this->encryption->decrypt(base64_decode($id));
-        // $this->id = $id_curso;
         $this->data['data'] = $this->inscripcion_model->data_curso($id_curso);
         $this->data['municipios'] = $this->inscripcion_model->listar_municipios();
         $this->data['curso'] = $id;
         if (isset($this->data['data'])) {
             $this->load->view("inscripcion/curso", $this->data);
         } else {
-            // redirect('/');
+            $this->data['data'] = null;
+            $this->load->view("inscripcion/curso", $this->data);
         }
     }
 
@@ -100,9 +98,9 @@ class Inscripcion extends PSG_Controller
                     [
                         'ci' => $ci,
                         'expedido' => $expedido,
-                        'nombre' => $nombre,
-                        'paterno' => $paterno,
-                        'materno' => $materno,
+                        'nombre' => ucwords(trim($nombre)),
+                        'paterno' => ucwords(trim($paterno)),
+                        'materno' => ucwords(trim($materno)),
                         'genero' => $genero,
                         'id_municipio' => $id_municipio,
                         'fecha_nacimiento' => $fecha_nacimiento,
@@ -164,9 +162,9 @@ class Inscripcion extends PSG_Controller
                     'mdl_participante',
                     [
                         'expedido' => $expedido,
-                        'nombre' => $nombre,
-                        'paterno' => $paterno,
-                        'materno' => $materno,
+                        'nombre' => ucwords(trim($nombre)),
+                        'paterno' => ucwords(trim($paterno)),
+                        'materno' => ucwords(trim($materno)),
                         'genero' => $genero,
                         'id_municipio' => $id_municipio,
                         'fecha_nacimiento' => $fecha_nacimiento,
@@ -280,11 +278,7 @@ class Inscripcion extends PSG_Controller
                     return "
 					<a id='btn_editar_conf' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
                         <i class='nav-icon la la-edit'></i>
-                        </a>
-                        <a id='btn_eliminar_conf' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-danger btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Eliminar el curso de la configuracion'>
-                            <i class='nav-icon la la-trash'></i>
-                        </a>
-					
+                        </a>					
 					";
                 })
             );

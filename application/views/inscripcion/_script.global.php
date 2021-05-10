@@ -70,36 +70,3 @@
 <script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/pages/crud/forms/widgets/select2.js') ?>"></script>
-<!--end::Global Theme Bundle-->
-<!--begin::Page Scripts(used by this page)-->
-<script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion.js') ?>"></script>
-
-<style>
-    @media (min-width: 576px) and (max-width: 767.98px) {
-        #padding-container {
-            padding-right: 60px;
-            padding-left: 60px;
-        }
-    }
-
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        #padding-container {
-            padding-right: 120px;
-            padding-left: 120px;
-        }
-    }
-
-    @media (min-width: 992px) and (max-width: 1199.98px) {
-        #padding-container {
-            padding-right: 180px;
-            padding-left: 180px;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        #padding-container {
-            padding-right: 240px;
-            padding-left: 240px;
-        }
-    }
-</style>

@@ -56,24 +56,21 @@ var KTWizard3 = (function () {
 		_validations.push(
 			FormValidation.formValidation(_formEl, {
 				fields: {
-					correo: {
+					address1: {
 						validators: {
 							notEmpty: {
 								message: "Address is required",
 							},
-							emailAddress: {
-								message: "",
-							},
 						},
 					},
-					nombre: {
+					postcode: {
 						validators: {
 							notEmpty: {
 								message: "Postcode is required",
 							},
 						},
 					},
-					ci: {
+					city: {
 						validators: {
 							notEmpty: {
 								message: "City is required",
