@@ -8,7 +8,7 @@ var KTDatatablesVerInscritos = (function () {
 			.DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "/inscripcion/ajax_ver_inscritos",
+				ajax: "/inscripcionadmin/ajax_ver_inscritos",
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],

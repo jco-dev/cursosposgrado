@@ -7,24 +7,19 @@
 	<title>Verificador de certificados | PSG</title>
 	<meta name="description" content="Verificador de certificados psg" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<!--begin::Fonts-->
+
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendors Styles(used by this page)-->
+
 	<link href="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.css') ?>" rel="stylesheet" type="text/css" />
-	<!--end::Page Vendors Styles-->
-	<!--begin::Global Theme Styles(used by all pages)-->
+
 	<link href="<?= base_url('assets/plugins/global/plugins.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/style.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/pages/wizard/wizard-3.css') ?>" rel="stylesheet" type="text/css" />
-	<!--end::Global Theme Styles-->
-	<!--begin::Layout Themes(used by all pages)-->
 	<link href="<?= base_url('assets/css/themes/layout/header/base/light.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/themes/layout/header/menu/light.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/themes/layout/brand/dark.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/themes/layout/aside/dark.css') ?>" rel="stylesheet" type="text/css" />
-	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="https://plataformavirtual.upea.bo/theme/image.php/boost/theme/1608126776/favicon" />
 
 </head>
@@ -46,31 +41,19 @@
 			</div>
 		<?php endforeach; ?>
 	</div>
-	<!--begin::Main-->
-	<!--begin::Header Mobile-->
 	<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
-		<!--begin::Logo-->
 		<a href="<?= base_url('/') ?>">
-			<!-- <img alt="Logo" src="<?= base_url('assets/media/logos/logo-light.png') ?>" /> -->
 			<h3 class="text-white font-weight-boldest">PSG - SSL</h3>
 		</a>
-		<!--end::Logo-->
-		<!--begin::Toolbar-->
 		<div class="d-flex align-items-center">
-			<!--begin::Aside Mobile Toggle-->
 			<button class="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
 				<span></span>
 			</button>
-			<!--end::Aside Mobile Toggle-->
-			<!--begin::Header Menu Mobile Toggle-->
 			<button class="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
 				<span></span>
 			</button>
-			<!--end::Header Menu Mobile Toggle-->
-			<!--begin::Topbar Mobile Toggle-->
 			<button class="btn btn-hover-text-primary p-0 ml-2" id="kt_header_mobile_topbar_toggle">
 				<span class="svg-icon svg-icon-xl">
-					<!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 						<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 							<polygon points="0 0 24 0 24 24 0 24" />
@@ -78,30 +61,19 @@
 							<path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
 						</g>
 					</svg>
-					<!--end::Svg Icon-->
 				</span>
 			</button>
-			<!--end::Topbar Mobile Toggle-->
 		</div>
-		<!--end::Toolbar-->
 	</div>
-	<!--end::Header Mobile-->
 	<div class="d-flex flex-column flex-root">
-		<!--begin::Page-->
 		<div class="d-flex flex-row flex-column-fluid page">
-			<!--begin::Aside-->
 			<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
-				<!--begin::Brand-->
 				<div class="brand flex-column-auto" id="kt_brand">
-					<!--begin::Logo-->
 					<a href="index.html" class="brand-logo">
 						<span class="text-white font-weight-boldest">PSG</span>
 					</a>
-					<!--end::Logo-->
-					<!--begin::Toggle-->
 					<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
 						<span class="svg-icon svg-icon svg-icon-xl">
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Angle-double-left.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<polygon points="0 0 24 0 24 24 0 24" />
@@ -109,17 +81,12 @@
 									<path d="M10.7071009,15.7071068 C10.3165766,16.0976311 9.68341162,16.0976311 9.29288733,15.7071068 C8.90236304,15.3165825 8.90236304,14.6834175 9.29288733,14.2928932 L15.2928873,8.29289322 C15.6714663,7.91431428 16.2810527,7.90106866 16.6757187,8.26284586 L22.6757187,13.7628459 C23.0828377,14.1360383 23.1103407,14.7686056 22.7371482,15.1757246 C22.3639558,15.5828436 21.7313885,15.6103465 21.3242695,15.2371541 L16.0300699,10.3841378 L10.7071009,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(15.999997, 11.999999) scale(-1, 1) rotate(-270.000000) translate(-15.999997, -11.999999)" />
 								</g>
 							</svg>
-							<!--end::Svg Icon-->
 						</span>
 					</button>
-					<!--end::Toolbar-->
 				</div>
-				<!--end::Brand-->
-				<!--begin::Aside Menu-->
 				<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
-					<!--begin::Menu Container-->
 					<div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
-						<!--begin::Menu Nav-->
+
 						<ul class="menu-nav">
 							<li class="menu-item" aria-haspopup="true">
 								<a href="<?= base_url('principal') ?>" class="menu-link">
@@ -154,7 +121,7 @@
 									<i class="menu-arrow"></i>
 									<ul class="menu-subnav">
 										<li class="menu-item" aria-haspopup="true">
-											<a href="<?= base_url('inscripcion') ?>" class="menu-link">
+											<a href="<?= base_url('inscripcionadmin') ?>" class="menu-link">
 												<i class="menu-bullet menu-bullet-dot">
 													<span></span>
 												</i>
@@ -163,7 +130,7 @@
 										</li>
 
 										<li class="menu-item" aria-haspopup="true">
-											<a href="<?= base_url('inscripcion/ver_inscritos') ?>" class="menu-link">
+											<a href="<?= base_url('inscripcionadmin/ver_inscritos') ?>" class="menu-link">
 												<i class="menu-bullet menu-bullet-dot">
 													<span></span>
 												</i>
@@ -174,14 +141,9 @@
 								</div>
 							</li>
 						</ul>
-						<!--end::Menu Nav-->
 					</div>
-					<!--end::Menu Container-->
 				</div>
-				<!--end::Aside Menu-->
 			</div>
-			<!--end::Aside-->
-			<!--begin::Wrapper-->
 			<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<!--begin::Header-->
 				<div id="kt_header" class="header header-fixed">
@@ -469,26 +431,17 @@
 				</div>
 				<!--end::Footer-->
 			</div>
-			<!--end::Wrapper-->
 		</div>
-		<!--end::Page-->
 	</div>
-	<!--end::Main-->
-	<!-- begin::User Panel-->
 	<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
-		<!--begin::Header-->
 		<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
 			<h3 class="font-weight-bold m-0">Perfil Usuario
-				<!-- <small class="text-muted font-size-sm ml-2">12 mensajes</small> -->
 			</h3>
 			<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 				<i class="ki ki-close icon-xs text-muted"></i>
 			</a>
 		</div>
-		<!--end::Header-->
-		<!--begin::Content-->
 		<div class="offcanvas-content pr-5 mr-n5">
-			<!--begin::Header-->
 			<div class="d-flex align-items-center mt-5">
 				<div class="symbol symbol-100 mr-5">
 					<div class="symbol-label" style="background-image:url('../assets/img/media/users/300_21.jpg')"></div>
@@ -502,7 +455,6 @@
 							<span class="navi-link p-0 pb-2">
 								<span class="navi-icon mr-1">
 									<span class="svg-icon svg-icon-lg svg-icon-primary">
-										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24" />
@@ -510,7 +462,6 @@
 												<circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5" />
 											</g>
 										</svg>
-										<!--end::Svg Icon-->
 									</span>
 								</span>
 								<span class="navi-text text-muted text-hover-primary">psg_posgrado@gmail.com</span>
@@ -522,19 +473,13 @@
 					</div>
 				</div>
 			</div>
-			<!--end::Header-->
-			<!--begin::Separator-->
 			<div class="separator separator-dashed mt-8 mb-5"></div>
-			<!--end::Separator-->
-			<!--begin::Nav-->
 			<div class="navi navi-spacer-x-0 p-0">
-				<!--begin::Item-->
 				<a href="#" class="navi-item">
 					<div class="navi-link">
 						<div class="symbol symbol-40 bg-light mr-3">
 							<div class="symbol-label">
 								<span class="svg-icon svg-icon-md svg-icon-success">
-									<!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
 									<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 											<rect x="0" y="0" width="24" height="24" />
@@ -542,7 +487,6 @@
 											<circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
 										</g>
 									</svg>
-									<!--end::Svg Icon-->
 								</span>
 							</div>
 						</div>
@@ -554,14 +498,9 @@
 						</div>
 					</div>
 				</a>
-				<!--end:Item-->
 			</div>
-			<!--end::Nav-->
 		</div>
-		<!--end::Content-->
 	</div>
-	<!-- end::User Panel-->
-	<!--begin::Scrolltop-->
 	<div id="kt_scrolltop" class="scrolltop">
 		<span class="svg-icon">
 			<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Up-2.svg-->
@@ -575,9 +514,6 @@
 			<!--end::Svg Icon-->
 		</span>
 	</div>
-	<!--end::Scrolltop-->
-	<!--begin::Global Theme Bundle(used by all pages)-->
-
 	<script>
 		var KTAppSettings = {
 			"breakpoints": {
@@ -638,21 +574,13 @@
 			"font-family": "Poppins"
 		};
 	</script>
-	<!--end::Global Config-->
-	<!--begin::Global Theme Bundle(used by all pages)-->
 	<script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
-	<!--end::Global Theme Bundle-->
-	<!--begin::Page Vendors(used by this page)-->
+
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos.js') ?>"></script>
-
-	<!--begin::Page Scripts(used by this page)-->
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>
-	<!--end::Page Scripts-->
-
-
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 

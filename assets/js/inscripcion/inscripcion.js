@@ -204,7 +204,7 @@ jQuery(document).ready(function () {
 			let data = new FormData($(this)[0]);
 			$.ajax({
 				type: "POST",
-				url: "/inscripcion/guardar_preinscripcion",
+				url: "/inscripcionadmin/guardar_preinscripcion",
 				data: data,
 				cache: false,
 				contentType: false,
@@ -227,7 +227,7 @@ jQuery(document).ready(function () {
 	// traer datos
 	$("#ci").on("change", function (e) {
 		let ci = $(this).val();
-		$.post("/inscripcion/buscar_por_ci", { ci: ci }, function (response) {
+		$.post("/inscripcionadmin/buscar_por_ci", { ci: ci }, function (response) {
 			if (typeof response.datos != "undefined") {
 				//poner datos
 				$("#expedido").val(response.datos[0].expedido).trigger("change");

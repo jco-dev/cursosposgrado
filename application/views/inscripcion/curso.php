@@ -1,6 +1,17 @@
 <?php include('_script.global.php'); ?>
 <?php include('_style.php'); ?>
 <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion.js') ?>"></script>
+<script src='https://www.google.com/recaptcha/api.js?render=6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU'></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU', {
+                action: 'homepage'
+            })
+            .then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+            });
+    });
+</script>
 
 <div class="container pt-2" id="padding-container">
     <div class="card card-custom p-0" style="border: 2px solid #000000;">
@@ -61,6 +72,7 @@
             <div class="col-lg-12">
                 <!--begin: Wizard Form-->
                 <form class="form" id="frm_curso_inscripcion">
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                     <?php include('_curso_id.php'); ?>
                     <?php include('_form.php'); ?>
                     <!--begin: Wizard Actions-->

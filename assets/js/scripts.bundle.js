@@ -5588,6 +5588,13 @@ var KTWizard = function (elementId, options) {
 	};
 
 	/**
+	 * Get new step number
+	 */
+	the.getNewStep = function () {
+		return the.newStep();
+	};
+
+	/**
 	 * Resume step
 	 */
 	the.start = function () {

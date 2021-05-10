@@ -194,24 +194,49 @@ jQuery(document).ready(function () {
 		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
 			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
 		} else {
-			let data = new FormData($(this)[0]);
-			$.ajax({
-				type: "POST",
-				url: "/inscripcion/guardar_preinscripcion",
-				data: data,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: "JSON",
-			}).done(function (response) {
-				if (typeof response.exito != "undefined") {
-					Swal.fire("Exito!", response.exito, "success");
-				}
-				if (typeof response.error != "undefined") {
-					Swal.fire("Error!", response.error, "error");
-				}
-				if (typeof response.warning != "undefined") {
-					Swal.fire("Advertencia!", response.warning, "info");
+			Swal.fire({
+				text: "Si todo esta bien! Por favor confirme sus datos para enviar.",
+				icon: "success",
+				showCancelButton: true,
+				buttonsStyling: false,
+				confirmButtonText: "Si, enviar!",
+				cancelButtonText: "No, cancelar",
+				customClass: {
+					confirmButton: "btn font-weight-bold btn-primary",
+					cancelButton: "btn font-weight-bold btn-default",
+				},
+			}).then(function (result) {
+				if (result.value) {
+					let data = new FormData($("#frm_curso_inscripcion")[0]);
+					$.ajax({
+						type: "POST",
+						url: "/inscripcion/guardar_preinscripcion",
+						data: data,
+						cache: false,
+						contentType: false,
+						processData: false,
+						dataType: "JSON",
+					}).done(function (response) {
+						if (typeof response.exito != "undefined") {
+							Swal.fire("Exito!", response.exito, "success");
+						}
+						if (typeof response.error != "undefined") {
+							Swal.fire("Error!", response.error, "error");
+						}
+						if (typeof response.warning != "undefined") {
+							Swal.fire("Advertencia!", response.warning, "info");
+						}
+					});
+				} else if (result.dismiss === "cancel") {
+					Swal.fire({
+						text: "Tus datos no han sido enviado!.",
+						icon: "error",
+						buttonsStyling: false,
+						confirmButtonText: "Ok",
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-primary",
+						},
+					});
 				}
 			});
 		}
