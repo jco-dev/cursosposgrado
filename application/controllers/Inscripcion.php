@@ -21,6 +21,12 @@ class Inscripcion extends PSG_Controller
         $this->templater->view('inscripcion/index', $this->data);
     }
 
+    public function ver_inscritos()
+    {
+
+        $this->templater->view('inscripcion/ver_inscritos', $this->data);
+    }
+
     public function imprimir_recibo()
     {
         $datos = array(
@@ -41,7 +47,7 @@ class Inscripcion extends PSG_Controller
     public function curso($id)
     {
         // var_dump();
-        // $id_curso = $this->encryption->decrypt(html_entity_decode(preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($this->input->get('id_curso'))), ENT_COMPAT, 'UTF-8'));
+        // $id_curso = $this->encryption->decrypt(htmlajax_ver_inscritos_entity_decode(preg_replace("/%u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($this->input->get('id_curso'))), ENT_COMPAT, 'UTF-8'));
         $id_curso = $this->encryption->decrypt(base64_decode($id));
         // $this->id = $id_curso;
         $this->data['data'] = $this->inscripcion_model->data_curso($id_curso);
@@ -238,6 +244,63 @@ class Inscripcion extends PSG_Controller
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['datos' => $respuesta])
             );
+        }
+    }
+
+    public function ajax_ver_inscritos()
+    {
+        if ($this->input->is_ajax_request()) {
+            $table = "mdl_ver_inscritos";
+            $primaryKey = 'id_participante';
+            $columns = array(
+                array('dt' => 0, 'db' => 'id_participante'),
+                array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
+                    return '' . $ci . '';
+                }),
+                array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
+                    return '' . $nombre . '';
+                }),
+                array('dt' => 3, 'db' => 'id_municipio'),
+                array('dt' => 4, 'db' => 'celular'),
+                array('dt' => 5, 'db' => 'id_course_moodle'),
+                array('dt' => 6, 'db' => 'tipo_pago'),
+                array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
+                    return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                }),
+                array('dt' => 8, 'db' => 'id_transaccion'),
+                array('dt' => 9, 'db' => 'tipo_certificacion'),
+                array('dt' => 10, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
+                    if ($img == "") {
+                        return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                    } else {
+                        return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
+                    }
+                }),
+                array('dt' => 11, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
+                    return "
+					<a id='btn_editar_conf' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
+                        <i class='nav-icon la la-edit'></i>
+                        </a>
+                        <a id='btn_eliminar_conf' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-danger btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Eliminar el curso de la configuracion'>
+                            <i class='nav-icon la la-trash'></i>
+                        </a>
+					
+					";
+                })
+            );
+            $sql_details = array(
+                'driver' => $this->db->dbdriver,
+                'user' => $this->db->username,
+                'pass' => $this->db->password,
+                'db' => $this->db->database,
+                'host' => $this->db->hostname
+            );
+
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL), 'UTF-8', 'ISO-8859-2')
+            ));
+
+            return;
         }
     }
 }

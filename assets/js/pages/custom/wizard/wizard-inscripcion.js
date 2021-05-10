@@ -191,7 +191,7 @@ jQuery(document).ready(function () {
 
 	$("#frm_curso_inscripcion").submit(function (e) {
 		e.preventDefault();
-		if (!$("#tipo_certificado_solicitado").is(":checked")) {
+		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
 			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
 		} else {
 			let data = new FormData($(this)[0]);

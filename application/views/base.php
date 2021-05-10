@@ -163,7 +163,7 @@
 										</li>
 
 										<li class="menu-item" aria-haspopup="true">
-											<a href="#" class="menu-link">
+											<a href="<?= base_url('inscripcion/ver_inscritos') ?>" class="menu-link">
 												<i class="menu-bullet menu-bullet-dot">
 													<span></span>
 												</i>
@@ -655,6 +655,7 @@
 
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
+	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 
 </body>
 <!--end::Body-->
