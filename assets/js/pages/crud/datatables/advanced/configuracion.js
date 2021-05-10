@@ -74,7 +74,7 @@ var KTDatatablesConfiguracion = (function () {
 							$("#tamano_texto").val(response.exito[0].tamano_texto);
 
 							$("#detalle_curso").val(response.exito[0].detalle_curso);
-							$("#url_pdf").val(response.exito[0].url_pdf);
+							$("#inversion").val(response.exito[0].inversion);
 							$("#celular_referencia").val(
 								response.exito[0].celular_referencia
 							);

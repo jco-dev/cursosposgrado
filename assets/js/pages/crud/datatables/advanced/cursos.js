@@ -242,6 +242,32 @@ var KTDatatablesCursos = (function () {
 						}
 					}
 				);
+			})
+			.on("click", "#btn_imprimir_blanco", function (e) {
+				let id = $(this).attr("data-id");
+
+				$.post(
+					"/cursos/imprimir_certificado_blanco",
+					{
+						id,
+					},
+					function (response) {
+						if (typeof response.error != "undefined") {
+							Swal.fire("Error!", response.error, "error");
+						} else {
+							$("#modal-body-certificado").children().remove();
+							$("#modal-body-certificado").html(
+								'<embed src="data:application/pdf;base64,' +
+									response +
+									'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="600px" style="border: none;"/>'
+							);
+							$("#modal_imprimir_certificado").modal({
+								backdrop: "static",
+								keyboard: true,
+							});
+						}
+					}
+				);
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {

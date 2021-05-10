@@ -181,14 +181,22 @@ class Cursos_model extends PSG_Model
 		if ($id != null) {
 			$sql = "SELECT
 			mcc.imagen_curso,
+			mc.fullname as nombre_curso,
 			mcc.nota_aprobacion,
-			mcc.fecha_certificacion,
+			DATE_FORMAT(mcc.fecha_certificacion, '%Y-%m-%d') as fecha_certificacion,
+			DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') as fecha_inicial,
+			DATE_FORMAT(mcc.fecha_final, '%Y-%m-%d') as fecha_final,
+			mcc.carga_horaria,
 			mcc.posx_nombre_participante,
 			mcc.posy_nombre_participante,
 			mcc.posx_bloque_texto,
 			mcc.posy_bloque_texto,
 			mcc.posx_qr,
 			mcc.posy_qr,
+			mcc.posx_tipo_participacion,
+			mcc.posy_tipo_participacion,
+			mcc.posx_nombre_curso,
+			mcc.posy_nombre_curso,
 			mcc.fuente_pdf,
 			mcc.tamano_titulo,
 			mcc.tamano_subtitulo,
@@ -196,7 +204,8 @@ class Cursos_model extends PSG_Model
 			mcc.color_nombre_participante,
 			mcc.color_subtitulo,
 			mcc.estado_curso
-			FROM mdl_configuracion_curso mcc WHERE mcc.id_course_moodle = '$id' AND mcc.estado_curso <> 'ELIMINADO'
+			FROM mdl_configuracion_curso mcc 
+			INNER JOIN mdl_course mc ON mcc.id_course_moodle = mc.id AND mcc.id_course_moodle = '$id' AND mcc.estado_curso <> 'ELIMINADO'
 			";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {

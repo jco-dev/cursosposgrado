@@ -88,10 +88,13 @@ class Configuracion extends PSG_Controller
                 array('dt' => 28, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
                     return '<span class="label label-light-success label-inline font-weight-bolder mr-2">' . $celular . '</span>';
                 }),
-                array('dt' => 29, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                array('dt' => 29, 'db' => 'inversion', 'formatter' => function ($inversion) {
+                    return '<span class="label label-warning label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
+                }),
+                array('dt' => 30, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 30, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                array('dt' => 31, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
                     return "
                         <a id='btn_editar_conf' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
                         <i class='nav-icon la la-edit'></i>
@@ -183,14 +186,39 @@ class Configuracion extends PSG_Controller
             $tamano_subtitulo = $this->input->post('tamano_subtitulo');
             $tamano_texto = $this->input->post('tamano_texto');
             $detalle_curso = $this->input->post('detalle_curso');
-            $url_pdf = $this->input->post('url_pdf');
             $celular_referencia = $this->input->post('celular_referencia');
+            $inversion = $this->input->post('inversion');
+            // subida del archivo pdf del curso
+            if (isset($_FILES['url_pdf']) && $_FILES['url_pdf']['error'] === UPLOAD_ERR_OK) {
+                $fileTmpPath = $_FILES['url_pdf']['tmp_name'];
+                $fileName = $_FILES['url_pdf']['name'];
+                $fileSize = $_FILES['url_pdf']['size'];
+                $fileType = $_FILES['url_pdf']['type'];
+                $fileNameCmps = explode(".", $fileName);
+                $fileExtension = strtolower(end($fileNameCmps));
+
+                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+                $allowedfileExtensions = array('pdf', 'docx', 'doc');
+                if (in_array($fileExtension, $allowedfileExtensions)) {
+                    $uploadFileDir = 'assets/pdf_descripcion_curso/';
+                    $dest_path = $uploadFileDir . $newFileName;
+                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                        $this->sql_ssl->modificar_tabla(
+                            'mdl_configuracion_curso',
+                            ['url_pdf' => $dest_path],
+                            ['id_configuracion_curso' => $id_configuracion_curso]
+                        );
+                    }
+                }
+            }
+            // fin subida del archivo pdf del curso
 
             list($r, $g, $b) = sscanf($this->input->post('color_nombre_participante'), "#%02x%02x%02x");
             $color_nombre_participante = "$r, $g, $b";
             list($r1, $g1, $b1) = sscanf($this->input->post('color_subtitulo'), "#%02x%02x%02x");
             $color_subtitulo = "$r1, $g1, $b1";
 
+            // subida de las imagenes del curso y banner del curso
             $ruta = '';
             if ($this->input->post('imagen_curso')) {
                 if (preg_match('/^data:image\/(\w+);base64,/', $this->input->post('imagen_curso'), $formato)) {
@@ -210,6 +238,7 @@ class Configuracion extends PSG_Controller
                     file_put_contents(FCPATH . 'assets/img/banner_cursos/' . $nombre, base64_decode($imagen));
                 }
             }
+            // fin subida de imagenes del curso y banner del curso
 
             if ($ruta == '' && $ruta1 == '') {
                 $respuesta = $this->sql_ssl->modificar_tabla(
@@ -238,8 +267,8 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
-                        'url_pdf' => $url_pdf,
-                        'celular_referencia' => $celular_referencia
+                        'celular_referencia' => $celular_referencia,
+                        'inversion' => $inversion
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -288,9 +317,9 @@ class Configuracion extends PSG_Controller
                         'color_subtitulo' => $color_subtitulo,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
-                        'url_pdf' => $url_pdf,
                         'banner_curso' => $ruta1,
-                        'celular_referencia' => $celular_referencia
+                        'celular_referencia' => $celular_referencia,
+                        'inversion' => $inversion
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -337,9 +366,9 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
-                        'url_pdf' => $url_pdf,
                         'banner_curso' => $ruta1,
-                        'celular_referencia' => $celular_referencia
+                        'celular_referencia' => $celular_referencia,
+                        'inversion' => $inversion
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -387,9 +416,8 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
-                        'url_pdf' => $url_pdf,
-                        'celular_referencia' => $celular_referencia
-
+                        'celular_referencia' => $celular_referencia,
+                        'inversion' => $inversion
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
 

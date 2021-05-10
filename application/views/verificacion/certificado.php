@@ -21,11 +21,11 @@
 							<div class="row bg-success text-white rounded">
 								<div class="col-md-12 text-center">
 									<label class="font-italic">Este certificado está emitido a:</label>
-									<h6 class="font-weight-bold"><i class="fa fa-user"></i> <?php echo $certificado['nombre'] . ' ' . $certificado['apellido']; ?></h6>
-									<label class="font-italic">Por su <label class="font-weight-bold"><?php echo($certificado['participacion_aprobacion'] === 'A' ? 'APROBACIÓN' : 'PARTICIPACIÓN'); ?></label> en el curso:</label>
-									<h6 class="font-weight-bold"><i class="fa fa-graduation-cap"></i> <?php echo $certificado['nombre_curso']; ?></h6>
+									<h6 class="font-weight-bold"><i class="fa fa-user"></i> <?php echo $certificado['firstname'] . ' ' . $certificado['lastname']; ?></h6>
+									<label class="font-italic">Por su <label class="font-weight-bold"><?php echo($certificado['tipo_participacion'] === 'A' ? 'APROBACIÓN' : 'PARTICIPACIÓN'); ?></label> en el curso:</label>
+									<h6 class="font-weight-bold"><i class="fa fa-graduation-cap"></i> <?php echo $certificado['fullname']; ?></h6>
 									<label class="font-italic">Realizado en fecha:</label>
-									<h6 class="font-weight-bold"><i class="fa fa-calendar"></i> <?php echo fecha_literal($certificado['fecha_certificacion'], 1); ?></h6>
+									<h6 class="font-weight-bold"><i class="fa fa-calendar"></i> <?php echo fecha_literal($certificado['fecha_registro'], 1); ?></h6>
 								</div>
 							</div>
 							<div class="row">

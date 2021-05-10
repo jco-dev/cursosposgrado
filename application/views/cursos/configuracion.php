@@ -882,6 +882,7 @@
                         <th>url_pdf</th>
                         <th>Banner Curso</th>
                         <th>N&uacute;mero Referencia</th>
+                        <th>Inversi&oacute;n</th>
                         <th>Estado Curso</th>
                         <th>Acciones</th>
                     </tr>
@@ -1064,15 +1065,24 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <label for="detalle_curso">Detalle Curso <span class="text-danger">(*)</span>:</label>
-                            <input type="text" class="form-control" id="detalle_curso" name="detalle_curso" />
+                            <textarea name="detalle_curso" id="detalle_curso" rows="2" class="form-control"></textarea>
                             <span class="form-text text-muted">Ingrese detalle del curso</span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-4">
+                            <label for="inversion">Inversi&oacute;n <span class="text-danger">(*)</span>:</label>
+                            <input type="number" class="form-control" id="inversion" name="inversion" />
+                            <span class="form-text text-muted">Ingrese la inversi&oacute;n del curso</span>
                         </div>
                         <div class="col-lg-4">
                             <label for="url_pdf">URL pdf <span class="text-danger">(*)</span>:</label>
-                            <input type="text" class="form-control" id="url_pdf" name="url_pdf" />
-                            <span class="form-text text-muted">Ingrese url pdf</span>
+                            <input type="file" class="form-control" id="url_pdf" name="url_pdf" accept=".pdf, .doc, .docx" />
+                            <span class="form-text text-muted">Suba descripcion del curso formato pdf del curso</span>
                         </div>
                         <div class="col-lg-4">
                             <label for="celular_referencia">Numero de Referencia <span class="text-danger">(*)</span>:</label>

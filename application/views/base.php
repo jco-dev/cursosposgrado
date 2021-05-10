@@ -143,11 +143,35 @@
 									<span class="menu-text">Configuraci&oacute;n</span>
 								</a>
 							</li>
-							<li class="menu-item" aria-haspopup="true">
-								<a href="<?= base_url('inscripcion') ?>" class="menu-link">
+
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="javascript:;" class="menu-link menu-toggle">
 									<i class="menu-icon flaticon2-contract"></i>
-									<span class="menu-text">Inscripci&oacute;n</span>
+									<span class="menu-text">Inscripciones</span>
+									<i class="menu-arrow"></i>
 								</a>
+								<div class="menu-submenu">
+									<i class="menu-arrow"></i>
+									<ul class="menu-subnav">
+										<li class="menu-item" aria-haspopup="true">
+											<a href="<?= base_url('inscripcion') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-dot">
+													<span></span>
+												</i>
+												<span class="menu-text">Inscribir</span>
+											</a>
+										</li>
+
+										<li class="menu-item" aria-haspopup="true">
+											<a href="#" class="menu-link">
+												<i class="menu-bullet menu-bullet-dot">
+													<span></span>
+												</i>
+												<span class="menu-text">Ver inscritos</span>
+											</a>
+										</li>
+									</ul>
+								</div>
 							</li>
 						</ul>
 						<!--end::Menu Nav-->
@@ -467,7 +491,7 @@
 			<!--begin::Header-->
 			<div class="d-flex align-items-center mt-5">
 				<div class="symbol symbol-100 mr-5">
-					<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+					<div class="symbol-label" style="background-image:url('../assets/img/media/users/300_21.jpg')"></div>
 					<i class="symbol-badge bg-success"></i>
 				</div>
 				<div class="d-flex flex-column">
@@ -623,7 +647,6 @@
 	<!--end::Global Theme Bundle-->
 	<!--begin::Page Vendors(used by this page)-->
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos.js') ?>"></script>
-	<script src="<?= base_url('assets/js/pages/custom/wizard/wizard-3.js') ?>"></script>
 
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>

@@ -14,10 +14,10 @@ class Verificar_model extends PSG_Model
 		$resultado = array('code' => 'info', 'message' => 'Certificado no encontrado.');
 		if (!is_null($id)) {
 			$this->db->select("*");
-			$this->db->from("calificaciones cal");
-			$this->db->join("participantes p", "p.id = cal.id_participante");
-			$this->db->join("cursos c", "c.id = cal.id_curso");
-			$this->db->where("md5(concat('CERTIFICADO_', cal.id)) = '" . $id . "'");
+			$this->db->from("inscripcion_curso insc");
+			$this->db->join("user u", "u.id = insc.id_user_moodle");
+			$this->db->join("course c", "c.id = insc.id_course_moodle");
+			$this->db->where("md5(concat('CERTIFICADO_', insc.id_inscripcion_curso)) = '" . $id . "'");
 			$query = $this->db->get();
 			if ($query) {
 				if ($query->num_rows() === 1) {

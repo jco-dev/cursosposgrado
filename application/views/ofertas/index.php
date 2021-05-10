@@ -23,7 +23,7 @@
     <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="assets/img/posgrado.ico" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -50,7 +50,7 @@
                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <polygon points="0 0 24 0 24favicon 24 0 24" />
                             <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
                             <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
                         </g>
@@ -96,92 +96,8 @@
                     <div class="d-flex flex-column-fluid">
                         <!--begin::Container-->
                         <div class="container-fluid px-lg-30">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-xs-12">
-                                    <div class="card card-custom gutter-b">
-                                        <!--begin::Body-->
-                                        <div class="card-body p-0 pb-3">
-                                            <!--begin::Image-->
-                                            <div class="bgi-no-repeat bgi-size-cover min-h-150px">
-                                                <img src="assets/img/curso1.jpeg" class="img-fluid rounded-top" alt="">
-                                            </div>
-                                            <!--end::Image-->
+                            <div class="row" id="contenido_cursos">
 
-                                            <div class="p-2">
-                                                <p class="text-dark-75 font-size-lg font-weight-boldest text-center mb-2">
-                                                    GESTION Y ADMINISTRACION DE HERRAMIENTAS PARA LA EDUCACION VIRTUAL
-                                                </p>
-
-                                                <div class="separator separator-solid mt-0 mb-0"></div>
-
-                                                <ul class="navi navi-hover pb-3 p-2">
-                                                    <li class="navi-item p-1">
-                                                        <a href="#" class="navi-link py-1">
-                                                            <span class="navi-icon">
-                                                                <i class="flaticon2-calendar-9"></i>
-                                                            </span>
-                                                            <span class="font-size-lg font-weight-bold">Inicio: &nbsp;</span>
-                                                            <span class="font-size-md font-weight-normal">20-05-2020</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link py-1">
-                                                            <span class="navi-icon">
-                                                                <i class="flaticon2-crisp-icons-1"></i>
-                                                            </span>
-                                                            <span class="font-size-lg font-weight-bold">Horarios: &nbsp;</span>
-                                                            <span class="font-size-md font-weight-normal">PLATAFORMA HABILITADO 24/7</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link py-1">
-                                                            <span class="navi-icon">
-                                                                <i class="flaticon2-layers-1"></i>
-                                                            </span>
-                                                            <span class="font-size-lg font-weight-bold">Carga Horaria: &nbsp;</span>
-                                                            <span class="font-size-md font-weight-normal">180 Horas</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link py-1">
-                                                            <span class="navi-icon">
-                                                                <i class="flaticon-price-tag"></i>
-                                                            </span>
-                                                            <span class="font-size-lg font-weight-bold">Inversi&oacute;n: &nbsp;</span>
-                                                            <span class="font-size-md font-weight-normal">Bs. 100</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="navi-item">
-                                                        <a href="#" class="navi-link py-1">
-                                                            <span class="navi-icon">
-                                                                <i class="flaticon2-calendar-4 text-danger"></i>
-                                                            </span>
-                                                            <span class="font-size-lg font-weight-bold text-danger">L&iacute;mite de Inscripci&oacute;n: &nbsp;</span>
-                                                            <span class="font-size-md font-weight-normal text-danger">20-05-2020</span>
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-
-
-                                                <div class="d-flex justify-content-around">
-                                                    <a href="#" class="btn btn-danger btn-bg-dark btn-shadow-hover font-size-sm btn-sm font-weight-bold">
-                                                        <i class="flaticon2-printer icon-sm"></i>
-                                                        Descargar Contenido
-                                                    </a>
-
-                                                    <a href="#" class="btn btn-info btn-bg-dark btn-shadow-hover font-size-sm btn-sm font-weight-bold">
-                                                        <i class="flaticon-edit-1 icon-sm"></i>
-                                                        Inscríbete Ahora
-                                                    </a>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!--end::Body-->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!--end::Container-->
@@ -287,6 +203,7 @@
     <!--end::Page Vendors-->
     <!--begin::Page Scripts(used by this page)-->
     <script src="assets/js/pages/widgets.js"></script>
+    <script src="assets/js/oferta/oferta.js"></script>
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->
