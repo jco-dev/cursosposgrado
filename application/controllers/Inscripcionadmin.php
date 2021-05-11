@@ -273,11 +273,10 @@ class Inscripcionadmin extends PSG_Controller
                     }
                 }),
                 array('dt' => 11, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
-                    return "
-					<a id='btn_editar_conf' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
-                        <i class='nav-icon la la-edit'></i>
-                        </a>					
-					";
+                    return "<a id='btn_confirmar_inscripcion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean mr-3' title='Confirmar la inscripcion'>
+                        <i class='nav-icon la la-check'></i>
+                         Confirmar
+                    </a>";
                 })
             );
             $sql_details = array(

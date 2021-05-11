@@ -22,7 +22,8 @@ class Ofertas_model extends PSG_Model
 			mcc.url_pdf,
 			mcc.celular_referencia
 			from mdl_configuracion_curso mcc
-			inner join mdl_course mc on mcc.id_course_moodle = mc.id";
+			inner join mdl_course mc on mcc.id_course_moodle = mc.id 
+			WHERE DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());

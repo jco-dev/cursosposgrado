@@ -24,27 +24,28 @@ var KTDatatablesVerInscritos = (function () {
 				],
 				responsive: true,
 			})
-			.on("click", "#btn_configuracion", function () {
+			.on("click", "#btn_confirmar_inscripcion", function () {
 				let id = $(this).attr("data-id");
-				$.post(
-					"/cursos/ingresar_configuracion",
-					{
-						id,
-					},
-					function (response) {
-						if (typeof response.exito != "undefined") {
-							Swal.fire("Exito!", response.exito, "success");
-						}
+				console.log(id + " confirmar inscripcion");
+				// $.post(
+				// 	"/cursos/ingresar_configuracion",
+				// 	{
+				// 		id,
+				// 	},
+				// 	function (response) {
+				// 		if (typeof response.exito != "undefined") {
+				// 			Swal.fire("Exito!", response.exito, "success");
+				// 		}
 
-						if (typeof response.warning != "undefined") {
-							Swal.fire("Advertencia!", response.warning, "warning");
-						}
+				// 		if (typeof response.warning != "undefined") {
+				// 			Swal.fire("Advertencia!", response.warning, "warning");
+				// 		}
 
-						if (typeof response.error != "undefined") {
-							Swal.fire("Error!", response.error, "error");
-						}
-					}
-				);
+				// 		if (typeof response.error != "undefined") {
+				// 			Swal.fire("Error!", response.error, "error");
+				// 		}
+				// 	}
+				// );
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {

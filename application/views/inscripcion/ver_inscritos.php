@@ -4,7 +4,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-title">
                 <h3 class="card-label">
-                    Inscripciones
+                    Pre - Inscripciones
                 </h3>
             </div>
         </div>

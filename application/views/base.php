@@ -114,7 +114,7 @@
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle">
 									<i class="menu-icon flaticon2-contract"></i>
-									<span class="menu-text">Inscripciones</span>
+									<span class="menu-text">Pre-inscripciones</span>
 									<i class="menu-arrow"></i>
 								</a>
 								<div class="menu-submenu">
@@ -134,7 +134,7 @@
 												<i class="menu-bullet menu-bullet-dot">
 													<span></span>
 												</i>
-												<span class="menu-text">Ver inscritos</span>
+												<span class="menu-text">Ver preinscritos</span>
 											</a>
 										</li>
 									</ul>
@@ -444,7 +444,7 @@
 		<div class="offcanvas-content pr-5 mr-n5">
 			<div class="d-flex align-items-center mt-5">
 				<div class="symbol symbol-100 mr-5">
-					<div class="symbol-label" style="background-image:url('../assets/img/media/users/300_21.jpg')"></div>
+					<div class="symbol-label" style="background-image:url('../assets/media/users/blank.png')"></div>
 					<i class="symbol-badge bg-success"></i>
 				</div>
 				<div class="d-flex flex-column">
