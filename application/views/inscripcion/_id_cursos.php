@@ -6,7 +6,7 @@
             <option value=""> Elige </option>
             <?php
             foreach ($cursos as  $curso) {
-                echo "<option value='" . base64_encode($this->encryption->encrypt($curso->id)) . "'>" . $curso->fullname . "</option>";
+                echo "<option value='" . base64_encode($this->encryption->encrypt($curso->id_course_moodle)) . "'>" . $curso->fullname . "</option>";
             }
             ?>
         </select>

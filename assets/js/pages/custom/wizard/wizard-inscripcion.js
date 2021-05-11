@@ -29,8 +29,7 @@ var KTWizard3 = (function () {
 					KTUtil.scrollTop();
 				} else {
 					Swal.fire({
-						text:
-							"Lo sentimos, parece que se han detectado algunos errores. Vuelve a intentarlo.",
+						text: "Lo sentimos, parece que se han detectado algunos errores. Vuelve a intentarlo.",
 						icon: "error",
 						buttonsStyling: false,
 						confirmButtonText: "Ok",
@@ -65,6 +64,28 @@ var KTWizard3 = (function () {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
+							stringLength: {
+								max: 11,
+								message: "El CI celular debe tener al menos 11 dígitos",
+							},
+						},
+					},
+					paterno: {
+						validators: {
+							regexp: {
+								regexp: /^[A-Za-zs]+$/i,
+								message:
+									"El apellido paterno puede constar de caracteres alfabéticos y solo espacios",
+							},
+						},
+					},
+					materno: {
+						validators: {
+							regexp: {
+								regexp: /^[A-Za-zs]+$/i,
+								message:
+									"El apellidos materno puede constar de caracteres alfabéticos y solo espacios",
+							},
 						},
 					},
 					correo: {
@@ -82,6 +103,11 @@ var KTWizard3 = (function () {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
+							regexp: {
+								regexp: /^[A-Za-zs ]+$/i,
+								message:
+									"El nombre puede constar de caracteres alfabéticos y solo espacios",
+							},
 						},
 					},
 					celular: {
@@ -89,11 +115,17 @@ var KTWizard3 = (function () {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
+							regexp: {
+								regexp: /^(7|6)?[0-9]{7}$/i,
+								message: "El número celular debe empezar por 6 o 7",
+							},
 							integer: {
 								message: "El número celular no es válido",
-								// The default separators
-								thousandsSeparator: "",
-								decimalSeparator: ".",
+							},
+							stringLength: {
+								max: 8,
+								min: 8,
+								message: "El número celular debe tener 8 dígitos",
 							},
 						},
 					},
@@ -134,6 +166,25 @@ var KTWizard3 = (function () {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					fecha_pago: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					monto_pago: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+							between: {
+								min: 100,
+								max: 1000,
+								message: "El monto de pago debe estar entre 100 y 1000",
 							},
 						},
 					},

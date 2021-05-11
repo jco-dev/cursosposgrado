@@ -15,7 +15,7 @@
                      <select name="expedido" id="expedido" class="form-control">
                          <option value=""> Elige </option>
                          <option value="CH">CH</option>
-                         <option value="LP">LP</option>
+                         <option value="LP" selected>LP</option>
                          <option value="CB">CB</option>
                          <option value="OR">OR</option>
                          <option value="PT">PT</option>
@@ -68,7 +68,7 @@
              <label for="materno"> Género </label>
              <div class="radio-list">
                  <label class="radio">
-                     <input type="radio" name="genero" id="genero" value="M" />
+                     <input type="radio" name="genero" id="genero" value="M" checked />
                      <span></span>Masculino
                  </label>
                  <label class="radio">
@@ -81,7 +81,7 @@
 
      <br>
      <div class="card card-custom">
-         <div class="card-body">
+         <div class="card-body form-group pb-0">
              <label for="fecha_nacimiento"> Fecha Nacimiento </label>
              <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" />
          </div>
@@ -149,7 +149,7 @@
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
              <label for="fecha_pago">Fecha Pago <span class="text-danger">(*)</span></label>
-             <input type="date" id="fecha_pago" name="fecha_pago" class="form-control">
+             <input type="date" id="fecha_pago" name="fecha_pago" class="form-control" value="<?= date("Y-m-d") ?>" />
          </div>
      </div>
 
@@ -199,7 +199,7 @@
                      <span></span>F&iacute;sico
                  </label>
                  <label class="radio">
-                     <input type="radio" name="tipo_certificado_solicitado" id="tipo_certificado_solicitado" value="AMBOS" />
+                     <input type="radio" checked name="tipo_certificado_solicitado" id="tipo_certificado_solicitado" value="AMBOS" />
                      <span></span>Ambos
                  </label>
              </div>
