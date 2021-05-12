@@ -269,7 +269,17 @@ jQuery(document).ready(function () {
 						dataType: "JSON",
 					}).done(function (response) {
 						if (typeof response.exito != "undefined") {
-							Swal.fire("Exito!", response.exito, "success");
+							Swal.fire({
+								title: response.exito,
+								text: "¡Gracias por inscribirse al curso!",
+								icon: "success",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
 						}
 						if (typeof response.error != "undefined") {
 							Swal.fire("Error!", response.error, "error");

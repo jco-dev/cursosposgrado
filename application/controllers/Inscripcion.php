@@ -287,4 +287,13 @@ class Inscripcion extends CI_Controller
             return false;
         }
     }
+
+    public function datos_estudiante_curso()
+    {
+        $id_preinscripcion = $this->input->post("id");
+        $respuesta = $this->inscripcion_model->datos_estudiante_curso($id_preinscripcion);
+        $this->output->set_content_type('application/json')->set_output(
+            json_encode(['exito' => $respuesta])
+        );
+    }
 }

@@ -1,11 +1,10 @@
 "use strict";
-
+let _wizard;
 // Class definition
 var KTWizard3 = (function () {
 	// Base elements
 	var _wizardEl;
 	var _formEl;
-	var _wizard;
 	var _validations = [];
 
 	// Private functions
@@ -29,8 +28,7 @@ var KTWizard3 = (function () {
 					KTUtil.scrollTop();
 				} else {
 					Swal.fire({
-						text:
-							"Lo sentimos, parece que se han detectado algunos errores. Vuelve a intentarlo.",
+						text: "Lo sentimos, parece que se han detectado algunos errores. Vuelve a intentarlo.",
 						icon: "error",
 						buttonsStyling: false,
 						confirmButtonText: "Ok",
@@ -213,6 +211,7 @@ jQuery(document).ready(function () {
 			}).done(function (response) {
 				if (typeof response.exito != "undefined") {
 					Swal.fire("Exito!", response.exito, "success");
+					_wizard.rese;
 				}
 				if (typeof response.error != "undefined") {
 					Swal.fire("Error!", response.error, "error");

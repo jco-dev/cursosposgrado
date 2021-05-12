@@ -256,9 +256,11 @@ class Inscripcionadmin extends PSG_Controller
                 array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
                     return '' . $nombre . '';
                 }),
-                array('dt' => 3, 'db' => 'id_municipio'),
+                array('dt' => 3, 'db' => 'municipio_enviar'),
                 array('dt' => 4, 'db' => 'celular'),
-                array('dt' => 5, 'db' => 'id_course_moodle'),
+                array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
+                    return "<small>$curso</small>";
+                }),
                 array('dt' => 6, 'db' => 'tipo_pago'),
                 array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
                     return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
@@ -293,5 +295,17 @@ class Inscripcionadmin extends PSG_Controller
 
             return;
         }
+    }
+
+    public function confirmar_inscripcion()
+    {
+        $id_preinscripcion_curso = $this->input->post('id');
+        $datos = (array) $this->sql_ssl->listar_tabla(
+            'mdl_preinscripcion_curso',
+            ['id_preinscripcion_curso' => $id_preinscripcion_curso],
+            null,
+            'row'
+        );
+        var_dump($datos);
     }
 }
