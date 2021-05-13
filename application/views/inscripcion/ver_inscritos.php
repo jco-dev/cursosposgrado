@@ -7,6 +7,15 @@
                     Pre - Inscripciones
                 </h3>
             </div>
+            <div class="card-toolbar">
+                <select class="form-control" id="cursos" name="cursos">
+                    <option value="">-- Descargar CSV --</option>
+                    <option value="all">Ver todos</option>
+                    <?php foreach ($cursos as $curso) {
+                        echo "<option value='$curso->id_course_moodle'>$curso->fullname</option>";
+                    } ?>
+                </select>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-separate table-head-custom table-checkable" id="tbl_ver_inscripcion">

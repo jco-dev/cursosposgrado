@@ -114,6 +114,10 @@ class Cursos extends PSG_Controller
 					<a id="btn_imprimir_blanco" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Imprimir certificado en blanco">
 						<i class="nav-icon la la-print"></i>
 					</a>
+
+					<a id="btn_enviar_por_correo" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Enviar certificados">
+						<i class="nav-icon la la-send"></i>
+					</a>
 					';
 				})
 			);
@@ -521,6 +525,54 @@ class Cursos extends PSG_Controller
 			} else {
 				$rep = new ImprimirCertificado();
 				$rep->imprimir_blanco($datos_curso);
+			}
+		}
+	}
+
+	public function enviar_certificados()
+	{
+		$idcurso = $this->input->post('id');
+
+		// generar certificados del curso en el directorio  assets/certificados_enviar/ en la carpeta id_curso
+		$directorio = "assets/certificados_enviar/$idcurso/";
+		if (!is_dir($directorio)) {
+			if (mkdir($directorio, 0777, true)) {
+				chmod($directorio, 0777);
+				$estudiantes = $this->cursos_model->get_estudiantes_curso($idcurso);
+				if (!empty($estudiantes)) {
+					$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
+					if ($datos_curso == NULL) {
+						$this->output->set_content_type('application/json')->set_output(json_encode(
+							[
+								'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
+							]
+						));
+					} else {
+						if ($datos_curso[0]->imagen_curso == NULL) {
+							$this->output->set_content_type('application/json')->set_output(json_encode(
+								[
+									'error' => 'Por favor suba la imagen del certificado del curso'
+								]
+							));
+							return;
+						} else {
+							$rep = new ImprimirCertificado();
+							$rep->guardar_certificados($datos_curso, $estudiantes);
+						}
+					}
+				} else {
+					$this->output->set_content_type('application/json')->set_output(json_encode(
+						[
+							'error' => 'No existen estudiantes inscritos en el curso'
+						]
+					));
+				}
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'error' => 'Error al crear el directorio'
+					]
+				));
 			}
 		}
 	}

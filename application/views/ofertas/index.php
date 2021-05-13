@@ -17,7 +17,7 @@
     <link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="assets/img/posgrado.ico" />
+    <link rel="shortcut icon" href="<?= base_url('assets/img/posgrado.ico') ?>" />
 </head>
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading">

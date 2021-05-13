@@ -397,4 +397,77 @@ class ImprimirCertificado extends Fpdf_psg
 
         echo base64_encode($this->Output('S'));
     }
+
+    public function guardar_certificados($datos_curso = null, $datos_estudiante = null)
+    {
+        // var_dump($datos_estudiante);
+        $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
+        $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
+        foreach ($datos_estudiante as $key => $estudiante) {
+            $pdf = new FPDF();
+            $pdf->AddPage("L", "letter");
+            $aleatorio = random_int(1, 9);
+            $pdf->Image("assets/img/imagen_cursos/$estudiante->id/" . $estudiante->id . "_" . $aleatorio . ".jpg", 0, 0, 279.4, 215.9);
+
+            // Nombre estudiante
+            $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
+            $pdf->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
+            $pdf->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
+            $pdf->AddFont('Parisienne-Regular', '', 'Parisienne-Regular.php');
+            $pdf->SetFont('Parisienne-Regular', '', $datos_curso[0]->tamano_titulo + 10);
+            // $pdf->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
+            $pdf->SetFont('Arial', 'B', $datos_curso[0]->tamano_titulo);
+            $pdf->SetXY($datos_curso[0]->posx_nombre_participante + 15, $datos_curso[0]->posy_nombre_participante);
+            $pdf->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER)), 0, 1, 'C');
+
+            // TIPO PARTICIPACION
+            $pdf->SetTextColor(0, 0, 0);
+            if ($estudiante->tipo_participacion == "PARTICIPANTE") {
+                $pdf->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+                $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+                $pdf->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+                $pdf->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+                $pdf->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+                $pdf->Cell(190, 11, utf8_decode($this->verificar_aprobacion($datos_curso[0]->nota_aprobacion, $estudiante->calificacion_final)), 0, 1, '');
+            } elseif ($estudiante->tipo_participacion == "EXPOSITOR") {
+                $pdf->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+                $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+                $pdf->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+                $pdf->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+                $pdf->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+                $pdf->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso:"), 0, 1, '');
+            } elseif ($estudiante->tipo_participacion == "ORGANIZADOR") {
+                $pdf->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+                $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+                $pdf->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+                $pdf->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+                $pdf->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+                $pdf->Cell(190, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso:"), 0, 1, '');
+            } else {
+                $pdf->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+                $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+                $pdf->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+                $pdf->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+                $pdf->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+                $pdf->Cell(190, 11, utf8_decode("Por haber participado  del curso:"), 0, 1, '');
+            }
+
+            //qr
+            $code = md5('CERTIFICADO_' . $estudiante->id_inscripcion_curso);
+            $pdf->Image("http://localhost/generar_qr/qr_generator.php?code=" . $code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36, "png");
+            // texto de verificacion qr
+            $pdf->SetXY(intval($datos_curso[0]->posx_qr), intval($datos_curso[0]->posy_qr) + 36);
+            $pdf->SetFont('Arial', '', 10);
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->MultiCell(36, 3.5, utf8_decode("Código QR de verificación del certificado"), 0, "C");
+
+            $name = $estudiante->id_inscripcion_curso . ".pdf";
+            $pdf->Output("F", "assets/certificados_enviar/$estudiante->id/$name");
+            $pdf->Close();
+        }
+    }
+
+    public function guardarpdf($datos_curso, $estudiante)
+    {
+    }
 }

@@ -166,5 +166,13 @@ var KTDatatablesVerInscritos = (function () {
 })();
 
 jQuery(document).ready(function () {
+	$("#cursos").select2({
+		placeholder: "-- Descargar CSV --",
+		minimumResultsForSearch: Infinity,
+	});
+
+	$("#cursos").on("change", function (e) {
+		console.log("cambio", $(this).val());
+	});
 	KTDatatablesVerInscritos.init();
 });

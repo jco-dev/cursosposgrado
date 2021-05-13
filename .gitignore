@@ -29,11 +29,12 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
-assets/img/banner_cursos
+assets/img/banner_cursos/
 assets/img/preinscripcion_respaldo/
 assets/pdf_descripcion_curso/
 assets/pdf_temp/
 assets/img/imagen_cursos/
 assets/img/respaldo_pago/
+assets/certificados_enviar/
 
 
