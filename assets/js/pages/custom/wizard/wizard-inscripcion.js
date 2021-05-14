@@ -238,6 +238,51 @@ jQuery(document).ready(function () {
 		minimumResultsForSearch: Infinity,
 	});
 
+	$("#respaldo_transaccion").on("change", function () {
+		var imagen = this.files[0];
+		// se valida el formato de la imagen png y jpeg
+		if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
+			$("#respaldo_transaccion").val("");
+			Swal.fire(
+				"Error!",
+				"¡La imagen debe estar en formato JPG o PNG!",
+				"error"
+			);
+		} else if (imagen["size"] > 2000000) {
+			$("#respaldo_transaccion").val("");
+			Swal.fire("error", "La imagen no debe pesar más de 2MB!", "error");
+		} else {
+			var datosImagen = new FileReader();
+			datosImagen.readAsDataURL(imagen);
+
+			$(datosImagen).on("load", function (event) {
+				var rutaImagen = event.target.result;
+				$("#img-preview").attr("src", rutaImagen);
+				$("a.image-popup-no-margins").attr("href", rutaImagen);
+			});
+		}
+		//ocultar la imagen y visualiar
+		if ($(this).val() != "") {
+			$("a.image-popup-no-margins").removeClass("d-none");
+		} else {
+			$("a.image-popup-no-margins").addClass("d-none");
+		}
+	});
+
+	$(".image-popup-no-margins").magnificPopup({
+		type: "image",
+		closeOnContentClick: true,
+		closeBtnInside: false,
+		fixedContentPos: true,
+		mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
+		image: {
+			verticalFit: true,
+		},
+		zoom: {
+			enabled: true, // don't foget to change the duration also in CSS
+		},
+	});
+
 	KTWizard3.init();
 
 	$("#frm_curso_inscripcion").submit(function (e) {

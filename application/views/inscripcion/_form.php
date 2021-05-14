@@ -166,8 +166,14 @@
          <div class="card-body form-group pb-0">
              <label class="col-form-label text-lg-right">Respaldo de la transacción (Subir fotografía o captura del depósito o transacción) <span class="text-danger">(*)</span></label>
              <div class="custom-file">
-                 <input type="file" class="custom-file-input" id="respaldo_transaccion" name="respaldo_transaccion" accept="image/jpeg,image/png,application/pdf" />
+                 <input type="file" class="custom-file-input" id="respaldo_transaccion" name="respaldo_transaccion" accept="image/jpeg,image/png" />
                  <label class="custom-file-label" for="">Añadir archivo</label>
+             </div>
+             <div class="d-flex justify-content-center mt-3">
+                 <a class="image-popup-no-margins d-none" href="#">
+                     <img class="img img-thumbnail" src="" width="120" id="img-preview" height="120"> &nbsp;
+                     <i class="fa fa-eye text-info"></i>
+                 </a>
              </div>
          </div>
      </div>

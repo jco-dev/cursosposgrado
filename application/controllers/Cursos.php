@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('America/La_Paz');
 require_once APPPATH . '/controllers/Reportes/ImprimirCertificado.php';
-
+require_once APPPATH . '/controllers/SendEmail.php';
 class Cursos extends PSG_Controller
 {
 	public function __construct()
@@ -557,7 +557,13 @@ class Cursos extends PSG_Controller
 							return;
 						} else {
 							$rep = new ImprimirCertificado();
-							$rep->guardar_certificados($datos_curso, $estudiantes);
+							$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
+
+							// enviar por email 
+							$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
+							$send = new SendEmail();
+							$res = $send->enviar_correos($respuesta1);
+							var_dump($res);
 						}
 					}
 				} else {

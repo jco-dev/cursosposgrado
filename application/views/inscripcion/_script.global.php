@@ -3,6 +3,7 @@
 <link href="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url('assets/css/style.bundle.css') ?>" rel="stylesheet" type="text/css" />
 <link href="<?= base_url('assets/css/pages/wizard/wizard-3.css') ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('assets/css/magnific-popup/magnific-popup.css') ?>" rel="stylesheet" type="text/css" />
 
 <script>
     var KTAppSettings = {
@@ -70,3 +71,4 @@
 <script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/pages/crud/forms/widgets/select2.js') ?>"></script>
+<script src="<?= base_url('assets/js/magnific-popup/jquery.magnific-popup.min.js') ?>"></script>

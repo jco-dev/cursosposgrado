@@ -307,6 +307,6 @@ class Inscripcionadmin extends PSG_Controller
             null,
             'row'
         );
-        var_dump($datos);
+        // var_dump($datos);
     }
 }
