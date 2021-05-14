@@ -213,3 +213,73 @@
      </div>
  </div>
  <!--end: Wizard Step 3-->
+
+ <!--begin: Wizard Step 4-->
+ <div class="pb-5" data-wizard-type="step-content">
+     <div class="card card-custom">
+         <div class="card-header bg-info-o-5 border-0">
+             <div class="card-title p-3" id="card-title-inscripcion">
+                 <h3 class="card-label">Completado. Revise sus datos para enviar</h3>
+             </div>
+             <!--begin::Body-->
+             <div class="card-body">
+
+                 <ul class="list-group">
+                     <li class="list-group-item active"><strong>1. DATOS PERSONALES</strong></li>
+                     <li class="list-group-item">
+                         <strong>Carnet de Identidad:&nbsp;</strong> <span id="m_ci"></span> <span id="m_expedido"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Correo:&nbsp;</strong>
+                         <span id="m_correo"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Nombres:&nbsp;</strong> <span id="m_nombre"></span> <span id="m_paterno"></span> <span id="m_materno"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>G&eacute;nero: &nbsp;</strong>
+                         <span id="m_genero"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Fecha Nacimiento (YYYY-MM-DD): </strong>
+                         <span id="m_fecha_nacimiento"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>N&uacute;mero celular: &nbsp;</strong>
+                         <span id="m_celular"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Ciudad residencia: &nbsp;</strong>
+                         <span id="m_ciudad_residencia"></span>
+                     </li>
+                     <li class="list-group-item active">
+                         <storng>2. PAGO DEL CURSO</storng>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Modalidad Inscripci&oacute;n:</strong>&nbsp;
+                         <span id="m_modalidad_inscripcion"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Id Transacci&oacute;n:</strong>&nbsp;
+                         <span id="m_id_transaccion"></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Fecha Pago: &nbsp;</strong>
+                         <span id="m_fecha_pago"><?= date("Y-m-d") ?></span>
+                     </li>
+                     <li class="list-group-item">
+                         <strong>Monto Pago:&nbsp;</strong>
+                         <span id="m_monto_pago"></span>
+                     </li>
+                     <li class="list-group-item active"><strong>3. RECOGO DEL CERTIFICADO</strong></li>
+                     <li class="list-group-item">
+                         <strong>Tipo certificado solicitado:</strong>
+                         <span id="m_tipo_certificado_solicitado">Ambos</span>
+                     </li>
+                 </ul>
+             </div>
+             <!--end::Body-->
+         </div>
+     </div>
+ </div>
+ <!--end: Wizard Step 4-->

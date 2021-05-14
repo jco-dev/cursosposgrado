@@ -1,4 +1,5 @@
 <?php include('_script.global.php'); ?>
+
 <script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
 
 <div class="d-flex flex-column-fluid">
@@ -41,6 +42,17 @@
                                 </div>
                             </div>
                             <!--end::Wizard Step 3 Nav-->
+
+                            <!--begin::Wizard Step 4 Nav-->
+                            <div class="wizard-step" data-wizard-type="step">
+                                <div class="wizard-label">
+                                    <h3 class="wizard-title">
+                                        <span>4.</span>Completado
+                                    </h3>
+                                    <div class="wizard-bar"></div>
+                                </div>
+                            </div>
+                            <!--end::Wizard Step 4 Nav-->
                         </div>
                     </div>
                     <!--end: Wizard Nav-->

@@ -49,7 +49,7 @@ var KTWizard3 = (function () {
 		});
 
 		_wizard.on("core.form.validating", function () {
-			alert("Validating ...");
+			// alert("Validating ...");
 		});
 	};
 
@@ -327,10 +327,28 @@ jQuery(document).ready(function () {
 							});
 						}
 						if (typeof response.error != "undefined") {
-							Swal.fire("Error!", response.error, "error");
+							Swal.fire({
+								title: response.error,
+								icon: "error",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
 						}
 						if (typeof response.warning != "undefined") {
-							Swal.fire("Advertencia!", response.warning, "info");
+							Swal.fire({
+								title: response.warning,
+								icon: "info",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
 						}
 					});
 				} else if (result.dismiss === "cancel") {
@@ -355,16 +373,32 @@ jQuery(document).ready(function () {
 			if (typeof response.datos != "undefined") {
 				//poner datos
 				$("#expedido").val(response.datos[0].expedido).trigger("change");
+
 				$("#correo").val(response.datos[0].correo);
+				$("#m_correo").text(response.datos[0].correo);
+
 				$("#nombre").val(response.datos[0].nombre);
+				$("#m_nombre").text(response.datos[0].nombre);
+
 				$("#paterno").val(response.datos[0].paterno);
+				$("#m_paterno").text(response.datos[0].paterno);
+
 				$("#materno").val(response.datos[0].materno);
+				$("#m_materno").text(response.datos[0].materno);
+
 				$("#genero").val(response.datos[0].genero);
+				$("#m_genero").text(response.datos[0].genero);
+
 				$("#celular").val(response.datos[0].celular);
+				$("#m_celular").text(response.datos[0].celular);
+
 				$("#fecha_nacimiento").val(response.datos[0].fecha_nacimiento);
+				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
+
 				$("#ciudad_residencia")
 					.val(response.datos[0].id_municipio)
 					.trigger("change");
+
 				$("input[name=genero][value=" + response.datos[0].genero + "]").attr(
 					"checked",
 					"checked"
@@ -372,4 +406,73 @@ jQuery(document).ready(function () {
 			}
 		});
 	});
+
+	// mostrar datos ingresados en el paso final
+	$("#ci").on("change", function () {
+		$("#m_ci").html($(this).val());
+	});
+
+	$("#expedido").on("change", function () {
+		$("#m_expedido").html($(this).val());
+	});
+
+	$("#correo").on("change", function () {
+		$("#m_correo").text($(this).val());
+	});
+
+	$("#nombre").on("change", function () {
+		$("#m_nombre").text($(this).val());
+	});
+
+	$("#paterno").on("change", function () {
+		$("#m_paterno").text($(this).val());
+	});
+
+	$("#materno").on("change", function () {
+		$("#m_materno").text($(this).val());
+	});
+
+	$('input[name=genero][type="radio"]').on("change", function () {
+		$("#m_genero").text($(this).val());
+	});
+
+	$("#fecha_nacimiento").on("change", function () {
+		$("#m_fecha_nacimiento").html($(this).val());
+	});
+
+	$("#celular").on("change", function () {
+		$("#m_celular").html($(this).val());
+	});
+
+	$("#ciudad_residencia").on("change", function () {
+		$("#m_ciudad_residencia").html($("#ciudad_residencia :selected").text());
+	});
+
+	// MOSTRAR DATOS INGRASADOS PASO 2
+	$('input[name=modalidad_inscripcion][type="radio"]').on(
+		"change",
+		function () {
+			$("#m_modalidad_inscripcion").text($(this).val());
+		}
+	);
+
+	$("#id_transaccion").on("change", function () {
+		$("#m_id_transaccion").html($(this).val());
+	});
+
+	$("#fecha_pago").on("change", function () {
+		$("#m_fecha_pago").html($(this).val());
+	});
+
+	$("#monto_pago").on("change", function () {
+		$("#m_monto_pago").html("Bs. " + $(this).val());
+	});
+
+	// para el paso 3
+	$('input[name=tipo_certificado_solicitado][type="radio"]').on(
+		"change",
+		function () {
+			$("#m_tipo_certificado_solicitado").text($(this).val());
+		}
+	);
 });

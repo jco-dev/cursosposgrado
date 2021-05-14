@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
 	<link href="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.css') ?>" rel="stylesheet" type="text/css" />
-
+	<link href="<?= base_url('assets/css/magnific-popup/magnific-popup.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/plugins/global/plugins.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/style.bundle.css') ?>" rel="stylesheet" type="text/css" />
@@ -577,6 +577,7 @@
 	<script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
+	<script src="<?= base_url('assets/js/magnific-popup/jquery.magnific-popup.min.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
 
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos.js') ?>"></script>
