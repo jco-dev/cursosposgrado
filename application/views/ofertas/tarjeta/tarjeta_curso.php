@@ -76,16 +76,20 @@
                 </ul>
 
                 <div class="d-flex justify-content-around">
-                    <a href="<?= base_url($curso->url_pdf) ?>" target="_blank" class="btn btn-danger btn-bg-dark btn-shadow-hover font-size-sm btn-sm font-weight-bold">
-                        <i class="flaticon2-printer icon-sm"></i>
-                        Descargar Contenido
+                    <a href="<?= base_url($curso->url_pdf) ?>" target="_blank" class="btn btn-info btn-shadow-hover font-size-sm btn-sm font-weight-bold">
+                        <i class="fa fa-eye icon-sm"></i>
+                        Detalles
                     </a>
 
-                    <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-info btn-bg-dark btn-shadow-hover font-size-sm btn-sm font-weight-bold" target="_blank">
-                        <i class="flaticon-edit-1 icon-sm"></i>
-                        Inscríbete Ahora
+                    <a href="<?= base_url('informacion/index/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold" target="_blank">
+                        <i class="fa fa-th-list icon-sm"></i>
+                        Informaci&oacute;n
                     </a>
 
+                    <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-success btn-shadow-hover font-size-sm btn-sm font-weight-bold px-4" target="_blank">
+                        <i class="fa fa-check icon-sm"></i>
+                        Registro
+                    </a>
                 </div>
             </div>
 
