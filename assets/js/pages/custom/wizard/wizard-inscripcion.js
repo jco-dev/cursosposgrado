@@ -390,7 +390,7 @@ jQuery(document).ready(function () {
 					"checked",
 					true
 				);
-				$("#m_genero").val(response.datos[0].genero);
+				$("#m_genero").text(response.datos[0].genero);
 
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
