@@ -143,84 +143,13 @@ var KTWizard3 = (function () {
 				},
 			}).on()
 		);
-
-		// Step 2
-		_validations.push(
-			FormValidation.formValidation(_formEl, {
-				fields: {
-					modalidad_inscripcion: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					id_transaccion: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					respaldo_transaccion: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					fecha_pago: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					monto_pago: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-							between: {
-								min: 100,
-								max: 1000,
-								message: "El monto de pago debe estar entre 100 y 1000",
-							},
-						},
-					},
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap(),
-				},
-			})
-		);
-
-		// Step 3
-		_validations.push(
-			FormValidation.formValidation(_formEl, {
-				fields: {
-					tipo_certificado_solicitado: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap(),
-				},
-			})
-		);
 	};
 
 	return {
 		// public functions
 		init: function () {
 			_wizardEl = KTUtil.getById("kt_wizard_v3");
-			_formEl = KTUtil.getById("frm_curso_inscripcion");
+			_formEl = KTUtil.getById("frm_curso_informacion");
 
 			initWizard();
 			initValidation();
@@ -238,132 +167,62 @@ jQuery(document).ready(function () {
 		minimumResultsForSearch: Infinity,
 	});
 
-	$("#respaldo_transaccion").on("change", function () {
-		var imagen = this.files[0];
-		// se valida el formato de la imagen png y jpeg
-		if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
-			$("#respaldo_transaccion").val("");
-			Swal.fire(
-				"Error!",
-				"¡La imagen debe estar en formato JPG o PNG!",
-				"error"
-			);
-		} else if (imagen["size"] > 2000000) {
-			$("#respaldo_transaccion").val("");
-			Swal.fire("error", "La imagen no debe pesar más de 2MB!", "error");
-		} else {
-			var datosImagen = new FileReader();
-			datosImagen.readAsDataURL(imagen);
-
-			$(datosImagen).on("load", function (event) {
-				var rutaImagen = event.target.result;
-				$("#img-preview").attr("src", rutaImagen);
-				$("a.image-popup-no-margins").attr("href", rutaImagen);
-			});
-		}
-		//ocultar la imagen y visualiar
-		if ($(this).val() != "") {
-			$("a.image-popup-no-margins").removeClass("d-none");
-		} else {
-			$("a.image-popup-no-margins").addClass("d-none");
-		}
-	});
-
-	$(".image-popup-no-margins").magnificPopup({
-		type: "image",
-		closeOnContentClick: true,
-		closeBtnInside: false,
-		fixedContentPos: true,
-		mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
-		image: {
-			verticalFit: true,
-		},
-		zoom: {
-			enabled: true, // don't foget to change the duration also in CSS
-		},
+	$("#profesion_oficio").select2({
+		placeholder: "Elige",
 	});
 
 	KTWizard3.init();
 
-	$("#frm_curso_inscripcion").submit(function (e) {
+	$("#frm_curso_informacion").submit(function (e) {
 		e.preventDefault();
-		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
-			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
-		} else {
-			Swal.fire({
-				text: "Si todo esta bien! Por favor confirme sus datos para enviar.",
-				icon: "success",
-				showCancelButton: true,
-				buttonsStyling: false,
-				confirmButtonText: "Si, enviar!",
-				cancelButtonText: "No, cancelar",
-				customClass: {
-					confirmButton: "btn font-weight-bold btn-primary",
-					cancelButton: "btn font-weight-bold btn-default",
-				},
-			}).then(function (result) {
-				if (result.value) {
-					let data = new FormData($("#frm_curso_inscripcion")[0]);
-					$.ajax({
-						type: "POST",
-						url: "/inscripcion/guardar_preinscripcion",
-						data: data,
-						cache: false,
-						contentType: false,
-						processData: false,
-						dataType: "JSON",
-					}).done(function (response) {
-						if (typeof response.exito != "undefined") {
-							Swal.fire({
-								title: response.exito,
-								text: "¡Gracias por inscribirse al curso!",
-								icon: "success",
-								showCancelButton: false,
-								confirmButtonText: "Ok",
-							}).then(function (result) {
-								if (result.value) {
-									location.reload();
-								}
-							});
-						}
-						if (typeof response.error != "undefined") {
-							Swal.fire({
-								title: response.error,
-								icon: "error",
-								showCancelButton: false,
-								confirmButtonText: "Ok",
-							}).then(function (result) {
-								if (result.value) {
-									location.reload();
-								}
-							});
-						}
-						if (typeof response.warning != "undefined") {
-							Swal.fire({
-								title: response.warning,
-								icon: "info",
-								showCancelButton: false,
-								confirmButtonText: "Ok",
-							}).then(function (result) {
-								if (result.value) {
-									location.reload();
-								}
-							});
-						}
-					});
-				} else if (result.dismiss === "cancel") {
-					Swal.fire({
-						text: "Tus datos no han sido enviado!.",
-						icon: "error",
-						buttonsStyling: false,
-						confirmButtonText: "Ok",
-						customClass: {
-							confirmButton: "btn font-weight-bold btn-primary",
-						},
-					});
-				}
-			});
-		}
+
+		let data = new FormData($("#frm_curso_informacion")[0]);
+		$.ajax({
+			type: "POST",
+			url: "/informacion/guardar_informacion",
+			data: data,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "JSON",
+		}).done(function (response) {
+			if (typeof response.exito != "undefined") {
+				Swal.fire({
+					title: response.exito,
+					icon: "success",
+					showCancelButton: false,
+					confirmButtonText: "Ok",
+				}).then(function (result) {
+					if (result.value) {
+						location.reload();
+					}
+				});
+			}
+			if (typeof response.error != "undefined") {
+				Swal.fire({
+					title: response.error,
+					icon: "error",
+					showCancelButton: false,
+					confirmButtonText: "Ok",
+				}).then(function (result) {
+					if (result.value) {
+						location.reload();
+					}
+				});
+			}
+			if (typeof response.warning != "undefined") {
+				Swal.fire({
+					title: response.warning,
+					icon: "info",
+					showCancelButton: false,
+					confirmButtonText: "Ok",
+				}).then(function (result) {
+					if (result.value) {
+						location.reload();
+					}
+				});
+			}
+		});
 	});
 
 	// traer datos
@@ -390,7 +249,7 @@ jQuery(document).ready(function () {
 					"checked",
 					true
 				);
-				$("#m_genero").val(response.datos[0].genero);
+				$("#m_genero").text(response.datos[0].genero);
 
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
@@ -400,6 +259,10 @@ jQuery(document).ready(function () {
 
 				$("#ciudad_residencia")
 					.val(response.datos[0].id_municipio)
+					.trigger("change");
+
+				$("#profesion_oficio")
+					.val(response.datos[0].id_profesion_oficio)
 					.trigger("change");
 
 				$("input[name=genero][value=" + response.datos[0].genero + "]").attr(
@@ -436,6 +299,7 @@ jQuery(document).ready(function () {
 	});
 
 	$('input[name=genero][type="radio"]').on("change", function () {
+		console.log($(this).val());
 		$("#m_genero").text($(this).val());
 	});
 
@@ -451,31 +315,7 @@ jQuery(document).ready(function () {
 		$("#m_ciudad_residencia").html($("#ciudad_residencia :selected").text());
 	});
 
-	// MOSTRAR DATOS INGRASADOS PASO 2
-	$('input[name=modalidad_inscripcion][type="radio"]').on(
-		"change",
-		function () {
-			$("#m_modalidad_inscripcion").text($(this).val());
-		}
-	);
-
-	$("#id_transaccion").on("change", function () {
-		$("#m_id_transaccion").html($(this).val());
+	$("#profesion_oficio").on("change", function () {
+		$("#m_profesion_oficio").html($("#profesion_oficio :selected").text());
 	});
-
-	$("#fecha_pago").on("change", function () {
-		$("#m_fecha_pago").html($(this).val());
-	});
-
-	$("#monto_pago").on("change", function () {
-		$("#m_monto_pago").html("Bs. " + $(this).val());
-	});
-
-	// para el paso 3
-	$('input[name=tipo_certificado_solicitado][type="radio"]').on(
-		"change",
-		function () {
-			$("#m_tipo_certificado_solicitado").text($(this).val());
-		}
-	);
 });

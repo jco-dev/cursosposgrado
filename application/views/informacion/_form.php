@@ -68,7 +68,7 @@
              <label for="materno"> Género </label>
              <div class="radio-list">
                  <label class="radio">
-                     <input type="radio" name="genero" id="genero" value="M" checked />
+                     <input type="radio" name="genero" id="genero" value="M" />
                      <span></span>Masculino
                  </label>
                  <label class="radio">
@@ -110,109 +110,24 @@
          </div>
      </div>
 
+     <br>
+     <div class="card card-custom">
+         <div class="card-body form-group pb-0">
+             <label for="profesion_oficio"> Profesi&oacute;n u Ocupaci&oacute;n </label> <br>
+             <select name="profesion_oficio" id="profesion_oficio" class="form-control">
+                 <option value=""> Elige </option>
+                 <?php
+                    foreach ($profesiones_ocupaciones as $key => $value) {
+                        echo "<option value='" . $value->id_profesion_oficio . "'>" . $value->descripcion . "</option>";
+                    }
+                    ?>
+             </select>
+         </div>
+     </div>
+
 
  </div>
  <!--end: Wizard Step 1-->
- <!--begin: Wizard Step 2-->
- <div class="pb-5" data-wizard-type="step-content">
-     <h4 class="mb-10 font-weight-bold text-dark">Pago del Curso</h4>
-
-     <div class="card card-custom">
-         <div class="card-body pb-0">
-             <label for="modalidad_inscripcion"> Modalidad de Inscripci&oacute;n <span class="text-danger">(*)</span></label>
-             <div class="radio-list form-group">
-                 <label class="radio">
-                     <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="TIGO MONEY" />
-                     <span></span>Tigo Money
-                 </label>
-                 <label class="radio">
-                     <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="DEPOSITO BANCARIO" />
-                     <span></span>Depósito o transferencia bancaria
-                 </label>
-                 <label class="radio">
-                     <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EFECTIVO" />
-                     <span></span>Pago en oficina
-                 </label>
-             </div>
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="id_transaccion">ID de transacción(código de transación de tigo money, transación bancaria o el número recibo de su inscripción en oficina) <span class="text-danger">(*)</span></label>
-             <input type="text" id="id_transaccion" name="id_transaccion" class="form-control" placeholder="Tu respuesta">
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="fecha_pago">Fecha Pago <span class="text-danger">(*)</span></label>
-             <input type="date" id="fecha_pago" name="fecha_pago" class="form-control" value="<?= date("Y-m-d") ?>" />
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="monto_pago">Monto Pago <span class="text-danger">(*)</span></label>
-             <input type="number" id="monto_pago" name="monto_pago" class="form-control">
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label class="col-form-label text-lg-right">Respaldo de la transacción (Subir fotografía o captura del depósito o transacción) <span class="text-danger">(*)</span></label>
-             <div class="custom-file">
-                 <input type="file" class="custom-file-input" id="respaldo_transaccion" name="respaldo_transaccion" accept="image/jpeg,image/png" />
-                 <label class="custom-file-label" for="">Añadir archivo</label>
-             </div>
-             <div class="d-flex justify-content-center mt-3">
-                 <a class="image-popup-no-margins d-none" href="#">
-                     <img class="img img-thumbnail" src="" width="120" id="img-preview" height="120"> &nbsp;
-                     <i class="fa fa-eye text-info"></i>
-                 </a>
-             </div>
-         </div>
-     </div>
-
- </div>
- <!--end: Wizard Step 2-->
- <!--begin: Wizard Step 3-->
- <div class="pb-5" data-wizard-type="step-content">
-     <div class="card card-custom">
-         <div class="card-header border-0 bg-info">
-             <div class="card-title">
-                 <h3 class="card-label text-white">Recojo o envío de certificado</h3>
-             </div>
-         </div>
-         <div class="card-body text-justify">Describa a continuación la forma de recojo de su certificado (Nota: Para acceder al certificado de aprobación será necesario obtener una nota mínima de 66 puntos) Para el envío de su certificado puede ser por flota o Currier con costo adicional dependiendo de la ciudad que reside </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="tipo_certificado_solicitado">Solicite el tipo de certificado <span class="text-danger">(*)</span></label>
-             <div class="radio-list form-group" id="error-certificado">
-                 <label class="radio">
-                     <input type="radio" name="tipo_certificado_solicitado" id="tipo_certificado_solicitado" value="DIGITAL" />
-                     <span></span>Digital
-                 </label>
-                 <label class="radio">
-                     <input type="radio" name="tipo_certificado_solicitado" id="tipo_certificado_solicitado" value="FISICO" />
-                     <span></span>F&iacute;sico
-                 </label>
-                 <label class="radio">
-                     <input type="radio" checked name="tipo_certificado_solicitado" id="tipo_certificado_solicitado" value="AMBOS" />
-                     <span></span>Ambos
-                 </label>
-             </div>
-         </div>
-     </div>
- </div>
- <!--end: Wizard Step 3-->
 
  <!--begin: Wizard Step 4-->
  <div class="pb-5" data-wizard-type="step-content">
@@ -252,30 +167,12 @@
                          <strong>Ciudad residencia: &nbsp;</strong>
                          <span id="m_ciudad_residencia"></span>
                      </li>
-                     <li class="list-group-item active">
-                         <storng>2. PAGO DEL CURSO</storng>
-                     </li>
+
                      <li class="list-group-item">
-                         <strong>Modalidad Inscripci&oacute;n:</strong>&nbsp;
-                         <span id="m_modalidad_inscripcion"></span>
+                         <strong>Profesi&oacute;n u Oficio: &nbsp;</strong>
+                         <span id="m_profesion_oficio"></span>
                      </li>
-                     <li class="list-group-item">
-                         <strong>Id Transacci&oacute;n:</strong>&nbsp;
-                         <span id="m_id_transaccion"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Fecha Pago: &nbsp;</strong>
-                         <span id="m_fecha_pago"><?= date("Y-m-d") ?></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Monto Pago:&nbsp;</strong>
-                         <span id="m_monto_pago"></span>
-                     </li>
-                     <li class="list-group-item active"><strong>3. RECOGO DEL CERTIFICADO</strong></li>
-                     <li class="list-group-item">
-                         <strong>Tipo certificado solicitado:</strong>
-                         <span id="m_tipo_certificado_solicitado">Ambos</span>
-                     </li>
+
                  </ul>
              </div>
              <!--end::Body-->

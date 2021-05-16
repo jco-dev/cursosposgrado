@@ -66,11 +66,12 @@ class Inscripcion extends CI_Controller
                 $fecha_pago = $this->input->post('fecha_pago');
                 $monto_pago = $this->input->post('monto_pago');
                 $tipo_certificado_solicitado = $this->input->post('tipo_certificado_solicitado');
+                $estado = "PREINSCRITO";
 
                 // verificar la inscripcion del curso con ci
                 $respuesta = $this->sql_ssl->listar_tabla(
                     'mdl_participante_preinscripcion_curso',
-                    ['ci' => $ci, 'id_course_moodle' => $id_curso]
+                    ['ci' => $ci, 'id_course_moodle' => $id_curso, 'estado' => "PREINSCRITO"]
                 );
 
                 if (count($respuesta) == 0) {
@@ -87,9 +88,9 @@ class Inscripcion extends CI_Controller
                             [
                                 'ci' => $ci,
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(trim($nombre)),
-                                'paterno' => ucwords(trim($paterno)),
-                                'materno' => ucwords(trim($materno)),
+                                'nombre' => ucwords(strtolower(trim($nombre))),
+                                'paterno' => ucwords(strtolower(trim($paterno))),
+                                'materno' => ucwords(strtolower(trim($materno))),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -129,7 +130,8 @@ class Inscripcion extends CI_Controller
                                     'monto_pago' => $monto_pago,
                                     'tipo_certificacion' => $tipo_certificado_solicitado,
                                     'fecha_pago' => $fecha_pago,
-                                    'respaldo_pago' => $ruta
+                                    'respaldo_pago' => $ruta,
+                                    'estado' => $estado
                                 ]
 
                             );
@@ -151,9 +153,9 @@ class Inscripcion extends CI_Controller
                             'mdl_participante',
                             [
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(trim($nombre)),
-                                'paterno' => ucwords(trim($paterno)),
-                                'materno' => ucwords(trim($materno)),
+                                'nombre' => ucwords(strtolower(trim($nombre))),
+                                'paterno' => ucwords(strtolower(trim($paterno))),
+                                'materno' => ucwords(strtolower(trim($materno))),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -195,7 +197,8 @@ class Inscripcion extends CI_Controller
                                     'monto_pago' => $monto_pago,
                                     'tipo_certificacion' => $tipo_certificado_solicitado,
                                     'fecha_pago' => $fecha_pago,
-                                    'respaldo_pago' => $ruta
+                                    'respaldo_pago' => $ruta,
+                                    'estado' => $estado
                                 ]
 
                             );

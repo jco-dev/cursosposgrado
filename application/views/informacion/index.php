@@ -61,6 +61,7 @@
                 <form class="form" id="frm_curso_informacion">
                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                     <?php include('_curso_id.php'); ?>
+                    <?php include("_form.php"); ?>
                     <!--begin: Wizard Actions-->
                     <div class="d-flex justify-content-between border-top mt-5 pt-10">
                         <div class="mr-2">
