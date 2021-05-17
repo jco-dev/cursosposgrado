@@ -538,48 +538,76 @@ class Cursos extends PSG_Controller
 		if (!is_dir($directorio)) {
 			if (mkdir($directorio, 0777, true)) {
 				chmod($directorio, 0777);
-				$estudiantes = $this->cursos_model->get_estudiantes_curso($idcurso);
-				if (!empty($estudiantes)) {
-					$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
-					if ($datos_curso == NULL) {
-						$this->output->set_content_type('application/json')->set_output(json_encode(
-							[
-								'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
-							]
-						));
-					} else {
-						if ($datos_curso[0]->imagen_curso == NULL) {
-							$this->output->set_content_type('application/json')->set_output(json_encode(
-								[
-									'error' => 'Por favor suba la imagen del certificado del curso'
-								]
-							));
-							return;
-						} else {
-							$rep = new ImprimirCertificado();
-							$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
-
-							// enviar por email 
-							$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
-							$send = new SendEmail();
-							$res = $send->enviar_correos($respuesta1);
-							var_dump($res);
-						}
-					}
-				} else {
-					$this->output->set_content_type('application/json')->set_output(json_encode(
-						[
-							'error' => 'No existen estudiantes inscritos en el curso'
-						]
-					));
-				}
-			} else {
-				$this->output->set_content_type('application/json')->set_output(json_encode(
-					[
-						'error' => 'Error al crear el directorio'
-					]
-				));
 			}
 		}
+
+		// Enviar los correos
+		$estudiantes = $this->cursos_model->get_estudiantes_curso($idcurso);
+		if (!empty($estudiantes)) {
+			$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
+			if ($datos_curso == NULL) {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
+					]
+				));
+			} else {
+				if ($datos_curso[0]->imagen_curso == NULL) {
+					$this->output->set_content_type('application/json')->set_output(json_encode(
+						[
+							'error' => 'Por favor suba la imagen del certificado del curso'
+						]
+					));
+				} else {
+					$rep = new ImprimirCertificado();
+					$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
+
+					if (is_int($respuesta)) {
+						// enviar por email 
+						$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
+						$send = new SendEmail();
+						$res = $send->enviar_correos($respuesta1);
+						// var_dump($res);
+						if (is_int($res)) {
+							$this->output->set_content_type('application/json')->set_output(json_encode(
+								[
+									'exito' => 'Correos enviados correctamente'
+								]
+							));
+						} else {
+							$this->output->set_content_type('application/json')->set_output(json_encode(
+								[
+									'error' => 'Error al enviar los correos'
+								]
+							));
+						}
+					}
+				}
+			}
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => 'No existen estudiantes inscritos en el curso'
+				]
+			));
+		}
 	}
+
+	// Descargar pdf curso
+	// public function descargar_pdf_curso()
+	// {
+	// 	$id = $this->input->post('id');
+	// 	$idcurso = $this->encryption->decrypt(base64_decode($id));
+	// 	$pdf = $this->cursos_model->get_url_pdf($idcurso);
+	// 	if (count($pdf) == 1) {
+	// 		$filepath = $pdf[0]->url_pdf;
+	// 		echo $filepath;
+	// 	} else {
+	// 		$this->output->set_content_type('application/json')->set_output(json_encode(
+	// 			[
+	// 				'error' => 'Error al descargar la informacion del curso'
+	// 			]
+	// 		));
+	// 	}
+	// }
 }

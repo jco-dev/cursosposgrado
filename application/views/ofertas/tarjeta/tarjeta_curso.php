@@ -92,6 +92,10 @@
                         <i class="fa fa-eye icon-sm"></i>
                         Detalles
                     </a>
+                    <!-- <a href="javascript:;" data-id="<?= base64_encode($this->encryption->encrypt($curso->id_course_moodle)) ?>" id="descargar_pdf_curso" name="descargar_pdf_curso" class="btn btn-info btn-shadow-hover font-size-sm btn-sm font-weight-bold">
+                        <i class="fa fa-eye icon-sm"></i>
+                        Detalles
+                    </a> -->
 
                     <a href="<?= base_url('informacion/index/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold" target="_blank">
                         <i class="fa fa-th-list icon-sm"></i>

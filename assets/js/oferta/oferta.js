@@ -11,4 +11,21 @@ jQuery(document).ready(function () {
 	};
 
 	listado_cursos();
+
+	// $("#kt_content").on("click", "a#descargar_pdf_curso", function () {
+	// 	let id = $(this).attr("data-id");
+	// 	let data = new FormData();
+	// 	data.append("id", id);
+	// 	$.ajax({
+	// 		url: "/cursos/descargar_pdf_curso",
+	// 		method: "POST",
+	// 		//dataType: 'JSON',
+	// 		data: data,
+	// 		// cache: false,
+	// 		contentType: false,
+	// 		processData: false,
+	// 	}).done(function (regreso) {
+	// 		window.open(regreso, "_blank");
+	// 	});
+	// });
 });
