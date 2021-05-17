@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('America/La_Paz');
 require_once APPPATH . '/controllers/Reportes/ImprimirCertificado.php';
+require_once APPPATH . '/controllers/SendEmail.php';
 
 class Inscripcion extends CI_Controller
 {
@@ -298,5 +299,24 @@ class Inscripcion extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(
             json_encode(['exito' => $respuesta])
         );
+    }
+
+    public function enviar_correo_personal()
+    {
+        $id = $this->input->post('id');
+
+        $respuesta1 = $this->inscripcion_model->get_data_informacion($id);
+
+        $send = new SendEmail();
+        $res = $send->enviar_correo_personal($respuesta1);
+        if ($res) {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['exito' => "Correo enviado correctamente"])
+            );
+        } else {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['error' => "Error al enviar el correo"])
+            );
+        }
     }
 }

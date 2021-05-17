@@ -309,4 +309,59 @@ class Inscripcionadmin extends PSG_Controller
         );
         // var_dump($datos);
     }
+
+    public function ver_informacion()
+    {
+        $this->templater->view('inscripcion/ver_informacion', $this->data);
+    }
+
+    public function ajax_ver_informacion()
+    {
+
+        if ($this->input->is_ajax_request()) {
+            $table = "mdl_ver_informacion";
+            $primaryKey = 'id_participante';
+            $columns = array(
+                array('dt' => 0, 'db' => 'id_participante'),
+                array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
+                    return '' . $ci . '';
+                }),
+                array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
+                    return '' . $nombre . '';
+                }),
+                array('dt' => 3, 'db' => 'correo'),
+                array('dt' => 4, 'db' => 'profesion_ocupacion'),
+                array('dt' => 5, 'db' => 'celular'),
+                array('dt' => 6, 'db' => 'curso', 'formatter' => function ($curso) {
+                    return "<small>$curso</small>";
+                }),
+                array('dt' => 7, 'db' => 'estado_correo', 'formatter' => function ($estado) {
+                    if ($estado == 0) {
+                        return '<span class="text-xs label label-danger label-inline">FALTA</span>';
+                    } else {
+                        return '<span class="text-sm-center  label label-info label-inline">ENVIADO</span>';
+                    }
+                }),
+                array('dt' => 8, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
+                    return "<a id='btn_enviar_informacion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean' title='Enviar correo'>
+                        <i class='nav-icon la la-send'></i>
+                         Enviar
+                    </a>";
+                })
+            );
+            $sql_details = array(
+                'driver' => $this->db->dbdriver,
+                'user' => $this->db->username,
+                'pass' => $this->db->password,
+                'db' => $this->db->database,
+                'host' => $this->db->hostname
+            );
+
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL), 'UTF-8', 'ISO-8859-2')
+            ));
+
+            return;
+        }
+    }
 }

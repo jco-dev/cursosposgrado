@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-require_once APPPATH . '/libraries/Templater.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -74,6 +73,54 @@ class SendEmail extends PSG_Controller
             return "APROBADO";
         } else {
             return "PARTICIPADO";
+        }
+    }
+
+    public function enviar_correo_personal($datos)
+    {
+        if (count($datos) == 1) {
+            $cn = 0;
+            foreach ($datos as $estudiante) {
+                $this->data['nombre'] = utf8_decode($estudiante->nombre_completo);
+                $this->data['email'] = $estudiante->correo;
+                $this->data['curso'] = utf8_decode($estudiante->fullname);
+                $this->data['imagen'] = $estudiante->banner_curso;
+                $mensaje = $this->CI->load->view('correo/email_informacion', $this->data, TRUE);
+                // var_dump($mensaje);
+                $mail = new \PHPMailer\PHPMailer\PHPMailer();
+                $mail->IsSMTP();
+                $mail->isHTML(true);
+                $mail->SMTPDebug = 0;
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = "ssl";
+                $mail->Host = "mail.upea.bo";
+                $mail->Port = 465;
+                $mail->Username = "posgrado@upea.bo";
+                $mail->Password = "Posgrado#1";
+                $mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
+                $mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
+                $mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
+                $mail->addAddress($estudiante->correo, utf8_decode($estudiante->nombre_completo));
+                $mail->Subject = 'CERTIFICADO DIGITAL DEL CURSO';
+                $mail->Body = $mensaje;
+                $mail->AltBody = 'CERTIFICADO DIGITAL DEL CURSO: ' . $this->data['curso'];
+                $mail->addAttachment($estudiante->url_pdf);
+
+                if (!$mail->send()) {
+                    echo 'Error: ' . $mail->ErrorInfo;
+                } else {
+                    echo 'Mensaje Enviado correctamente.';
+                    $cn++;
+                }
+            }
+
+            if ($cn == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 }

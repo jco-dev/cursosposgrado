@@ -137,6 +137,15 @@
 												<span class="menu-text">Ver preinscritos</span>
 											</a>
 										</li>
+
+										<li class="menu-item" aria-haspopup="true">
+											<a href="<?= base_url('inscripcionadmin/ver_informacion') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-dot">
+													<span></span>
+												</i>
+												<span class="menu-text">Ver informaci&oacute;n</span>
+											</a>
+										</li>
 									</ul>
 								</div>
 							</li>
@@ -584,6 +593,7 @@
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
+	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
 
 </body>
 <!--end::Body-->

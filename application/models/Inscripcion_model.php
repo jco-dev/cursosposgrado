@@ -44,8 +44,24 @@ class Inscripcion_model extends PSG_Model
 	public function datos_estudiante_curso($id_preinscripcion)
 	{
 		$sql = "SELECT concat(mppc.nombre, ' ', mppc.paterno, ' ', mppc.materno) as nombre_completo, 
-		mc.fullname as curso FROM mdl_participante_preinscripcion_curso mppc INNER JOIN mdl_course mc ON
+		mc.fullname as curso, mppc.estado_correo FROM mdl_participante_preinscripcion_curso mppc INNER JOIN mdl_course mc ON
 		mppc.id_course_moodle = mc.id AND mppc.id_preinscripcion_curso = $id_preinscripcion";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
+
+	public function get_data_informacion($id_preinscripcion)
+	{
+		$sql = "SELECT concat(mp.nombre, ' ', mp.paterno, ' ', mp.materno) as nombre_completo, 
+		mc.fullname,mp.correo, mcc.url_pdf, mcc.banner_curso
+		FROM mdl_participante mp INNER JOIN mdl_preinscripcion_curso mpc ON mp.id_participante = mpc.id_participante
+		INNER JOIN mdl_configuracion_curso mcc ON mpc.id_course_moodle = mcc.id_course_moodle
+		INNER JOIN mdl_course mc on mc.id = mcc.id_course_moodle
+		AND mpc.id_preinscripcion_curso = $id_preinscripcion";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
