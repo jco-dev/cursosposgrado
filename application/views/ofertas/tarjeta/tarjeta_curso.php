@@ -63,6 +63,18 @@
                             <span class="font-size-md font-weight-normal"><?= $curso->celular_referencia ?></span>
                         </a>
                     </li>
+                    <?php if (date('Y-m-d') <= $curso->fecha_fin_descuento) { ?>
+                        <li class="navi-item">
+                            <a href="#" class="navi-link py-1">
+                                <span class="navi-icon">
+                                    <i class="navi-icon flaticon2-chronometer"></i>
+                                </span>
+                                <span class="font-size-lg font-weight-bold">Descuento: &nbsp;</span>
+                                <span class="font-size-md font-weight-normal"> <span class="label label-warning label-inline"><?= $curso->descuento ?>%</span> hasta <span class="label label-warning label-inline"><?= $curso->fecha_fin_descuento ?></span></span>
+                            </a>
+                        </li>
+                    <?php } ?>
+
                     <li class="navi-item">
                         <a href="#" class="navi-link py-1">
                             <span class="navi-icon">

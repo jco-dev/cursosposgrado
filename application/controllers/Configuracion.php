@@ -89,12 +89,20 @@ class Configuracion extends PSG_Controller
                     return '<span class="label label-light-success label-inline font-weight-bolder mr-2">' . $celular . '</span>';
                 }),
                 array('dt' => 29, 'db' => 'inversion', 'formatter' => function ($inversion) {
-                    return '<span class="label label-warning label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
+                    return '<span class="label label-primary label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
                 }),
-                array('dt' => 30, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                array('dt' => 30, 'db' => 'descuento', 'formatter' => function ($des) {
+                    if ($des == "") {
+                        $des = 0;
+                    }
+                    return '<span class="label label-warning label-inline font-weight-bolder mr-2">' . $des . ' %</span>';
+                }),
+                array('dt' => 31, 'db' => 'fecha_inicio_descuento'),
+                array('dt' => 32, 'db' => 'fecha_fin_descuento'),
+                array('dt' => 33, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 31, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                array('dt' => 34, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
                     return "
                         <a id='btn_editar_conf' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
                         <i class='nav-icon la la-edit'></i>
@@ -188,6 +196,9 @@ class Configuracion extends PSG_Controller
             $detalle_curso = $this->input->post('detalle_curso');
             $celular_referencia = $this->input->post('celular_referencia');
             $inversion = $this->input->post('inversion');
+            $descuento = $this->input->post('descuento');
+            $fecha_inicio_descuento = $this->input->post('fecha_inicio_descuento');
+            $fecha_fin_descuento = $this->input->post('fecha_fin_descuento');
             // subida del archivo pdf del curso
             if (isset($_FILES['url_pdf']) && $_FILES['url_pdf']['error'] === UPLOAD_ERR_OK) {
                 $fileTmpPath = $_FILES['url_pdf']['tmp_name'];
@@ -268,7 +279,10 @@ class Configuracion extends PSG_Controller
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
                         'celular_referencia' => $celular_referencia,
-                        'inversion' => $inversion
+                        'inversion' => $inversion,
+                        'descuento' => $descuento,
+                        'fecha_inicio_descuento' => $fecha_inicio_descuento,
+                        'fecha_fin_descuento' => $fecha_fin_descuento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -319,7 +333,10 @@ class Configuracion extends PSG_Controller
                         'detalle_curso' => $detalle_curso,
                         'banner_curso' => $ruta1,
                         'celular_referencia' => $celular_referencia,
-                        'inversion' => $inversion
+                        'inversion' => $inversion,
+                        'descuento' => $descuento,
+                        'fecha_inicio_descuento' => $fecha_inicio_descuento,
+                        'fecha_fin_descuento' => $fecha_fin_descuento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -368,7 +385,10 @@ class Configuracion extends PSG_Controller
                         'detalle_curso' => $detalle_curso,
                         'banner_curso' => $ruta1,
                         'celular_referencia' => $celular_referencia,
-                        'inversion' => $inversion
+                        'inversion' => $inversion,
+                        'descuento' => $descuento,
+                        'fecha_inicio_descuento' => $fecha_inicio_descuento,
+                        'fecha_fin_descuento' => $fecha_fin_descuento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -417,7 +437,10 @@ class Configuracion extends PSG_Controller
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
                         'celular_referencia' => $celular_referencia,
-                        'inversion' => $inversion
+                        'inversion' => $inversion,
+                        'descuento' => $descuento,
+                        'fecha_inicio_descuento' => $fecha_inicio_descuento,
+                        'fecha_fin_descuento' => $fecha_fin_descuento
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
 

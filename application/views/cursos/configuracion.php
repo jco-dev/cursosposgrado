@@ -883,6 +883,9 @@
                         <th>Banner Curso</th>
                         <th>N&uacute;mero Referencia</th>
                         <th>Inversi&oacute;n</th>
+                        <th>Descuento</th>
+                        <th>Fecha Inicio Descuento</th>
+                        <th>Fecha Fin Descuento</th>
                         <th>Estado Curso</th>
                         <th>Acciones</th>
                     </tr>
@@ -1088,6 +1091,24 @@
                             <label for="celular_referencia">Numero de Referencia <span class="text-danger">(*)</span>:</label>
                             <input type="text" class="form-control" id="celular_referencia" name="celular_referencia" />
                             <span class="form-text text-muted">Ingrese numero referencia del curso</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-4">
+                            <label for="descuento">Descuento <span class="text-danger">(*)</span>:</label>
+                            <input type="number" class="form-control" id="descuento" name="descuento" />
+                            <span class="form-text text-muted">Ingrese el descuento del curso</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="fecha_inicio_descuento">Fecha Inicio Descuento <span class="text-danger">(*)</span>:</label>
+                            <input type="date" class="form-control" id="fecha_inicio_descuento" name="fecha_inicio_descuento" />
+                            <span class="form-text text-muted">Ingrese la fecha de inicio del descuento</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="fecha_fin_descuento">Fecha Fin Descuento <span class="text-danger">(*)</span>:</label>
+                            <input type="date" class="form-control" id="fecha_fin_descuento" name="fecha_fin_descuento" />
+                            <span class="form-text text-muted">Ingrese la fecha fin del descuento</span>
                         </div>
                     </div>
 

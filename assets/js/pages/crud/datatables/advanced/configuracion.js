@@ -75,15 +75,21 @@ var KTDatatablesConfiguracion = (function () {
 
 							$("#detalle_curso").val(response.exito[0].detalle_curso);
 							$("#inversion").val(response.exito[0].inversion);
+							$("#descuento").val(response.exito[0].descuento);
+							$("#fecha_inicio_descuento").val(
+								response.exito[0].fecha_inicio_descuento
+							);
+							$("#fecha_fin_descuento").val(
+								response.exito[0].fecha_fin_descuento
+							);
 							$("#celular_referencia").val(
 								response.exito[0].celular_referencia
 							);
 
 							let colores = null;
 							if (response.exito[0].color_nombre_participante != null) {
-								colores = response.exito[0].color_nombre_participante.split(
-									", "
-								);
+								colores =
+									response.exito[0].color_nombre_participante.split(", ");
 								$("#color_nombre_participante").val(
 									RGB2Color(colores[0], colores[1], colores[2])
 								);
