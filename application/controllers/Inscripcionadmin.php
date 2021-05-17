@@ -246,55 +246,135 @@ class Inscripcionadmin extends PSG_Controller
 
     public function ajax_ver_inscritos()
     {
-        if ($this->input->is_ajax_request()) {
-            $table = "mdl_ver_inscritos";
-            $primaryKey = 'id_participante';
-            $columns = array(
-                array('dt' => 0, 'db' => 'id_participante'),
-                array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
-                    return '' . $ci . '';
-                }),
-                array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
-                    return '' . $nombre . '';
-                }),
-                array('dt' => 3, 'db' => 'municipio_enviar'),
-                array('dt' => 4, 'db' => 'celular'),
-                array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
-                    return "<small>$curso</small>";
-                }),
-                array('dt' => 6, 'db' => 'tipo_pago'),
-                array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
-                    return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
-                }),
-                array('dt' => 8, 'db' => 'id_transaccion'),
-                array('dt' => 9, 'db' => 'tipo_certificacion'),
-                array('dt' => 10, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
-                    if ($img == "") {
-                        return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
-                    } else {
-                        return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
-                    }
-                }),
-                array('dt' => 11, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
-                    return "<a id='btn_confirmar_inscripcion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean mr-3' title='Confirmar la inscripcion'>
-                        <i class='nav-icon la la-check'></i>
-                         Confirmar
-                    </a>";
-                })
-            );
-            $sql_details = array(
-                'driver' => $this->db->dbdriver,
-                'user' => $this->db->username,
-                'pass' => $this->db->password,
-                'db' => $this->db->database,
-                'host' => $this->db->hostname
-            );
+        $id = $this->input->post('id');
+        if ($id != "") {
+            if ($this->input->is_ajax_request()) {
+                $table = "mdl_ver_inscritos";
+                $primaryKey = 'id_participante';
+                $condicion = "id_course_moodle= $id";
+                $columns = array(
+                    array('dt' => 0, 'db' => 'id_participante'),
+                    array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
+                        return '' . $ci . '';
+                    }),
+                    array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
+                        return '' . $nombre . '';
+                    }),
+                    array('dt' => 3, 'db' => 'municipio_enviar'),
+                    array('dt' => 4, 'db' => 'celular'),
+                    array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
+                        return "<small>$curso</small>";
+                    }),
+                    array('dt' => 6, 'db' => 'tipo_pago'),
+                    array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
+                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    }),
+                    array('dt' => 8, 'db' => 'id_transaccion'),
+                    array('dt' => 9, 'db' => 'tipo_certificacion'),
+                    array('dt' => 10, 'db' => 'estado'),
+                    array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
+                        if ($img == "") {
+                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                        } else {
+                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
+                        }
+                    }),
+                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
+                        return "<a id='btn_confirmar_inscripcion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean mr-3' title='Confirmar la inscripcion'>
+                            <i class='nav-icon la la-check'></i>
+                             Confirmar
+                        </a>";
+                    })
+                );
+                $sql_details = array(
+                    'driver' => $this->db->dbdriver,
+                    'user' => $this->db->username,
+                    'pass' => $this->db->password,
+                    'db' => $this->db->database,
+                    'host' => $this->db->hostname
+                );
 
-            $this->output->set_content_type('application/json')->set_output(json_encode(
-                mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL), 'UTF-8', 'ISO-8859-2')
-            ));
+                $this->output->set_content_type('application/json')->set_output(json_encode(
+                    mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $condicion, NULL), 'UTF-8', 'ISO-8859-2')
+                ));
 
-            return;
+                return;
+            }
+        } else {
+            if ($this->input->is_ajax_request()) {
+                $table = "mdl_ver_inscritos";
+                $primaryKey = 'id_participante';
+                $columns = array(
+                    array('dt' => 0, 'db' => 'id_participante'),
+                    array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
+                        return '' . $ci . '';
+                    }),
+                    array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
+                        return '' . $nombre . '';
+                    }),
+                    array('dt' => 3, 'db' => 'municipio_enviar'),
+                    array('dt' => 4, 'db' => 'celular'),
+                    array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
+                        return "<small>$curso</small>";
+                    }),
+                    array('dt' => 6, 'db' => 'tipo_pago'),
+                    array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
+                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    }),
+                    array('dt' => 8, 'db' => 'id_transaccion'),
+                    array('dt' => 9, 'db' => 'tipo_certificacion'),
+                    array('dt' => 10, 'db' => 'estado', 'formatter' => function ($estado) {
+                        if ($estado == "INTERESADO") {
+                            return "<span class='label label-info label-inline mr-2'>INTERESADO</span>";
+                        } elseif ($estado == "PREINSCRITO") {
+                            return "<span class='label label-warning label-inline mr-2'>PREINSCRITO</span>";
+                        } elseif ($estado == "INSCRITO") {
+                            return "<span class='label label-success label-inline mr-2'>INSCRITO</span>";
+                        } else {
+                            return "<span class='label label-danger label-inline mr-2'>ANULADO</span>";
+                        }
+                    }),
+                    array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
+                        if ($img == "") {
+                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                        } else {
+                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
+                        }
+                    }),
+                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                        $datos = '';
+                        if ($row['estado'] == "PREINSCRITO") {
+                            $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>
+                            <option value='INSCRITO'>INSCRITO</option>
+                            <option value='ANULADO'>ANULADO</option>";
+                        } elseif ($row['estado'] == "INSCRITO") {
+                            $datos .= "<option value='PREINSCRITO'>PREINSCRITO</option>
+                            <option value='INSCRITO' selected>INSCRITO</option>
+                            <option value='ANULADO'>ANULADO</option>";
+                        } else {
+                            $datos .= "<option value='PREINSCRITO'>PREINSCRITO</option>
+                            <option value='INSCRITO'>INSCRITO</option>
+                            <option value='ANULADO' selected>ANULADO</option>";
+                        }
+                        return "<select data-id='$id' class='custom-select form-control bg-secondary' id='estado_preinscrito' name='estado_preinscrito_$id'>
+                            $datos
+                        </select>";
+                    })
+                );
+                $sql_details = array(
+                    'driver' => $this->db->dbdriver,
+                    'user' => $this->db->username,
+                    'pass' => $this->db->password,
+                    'db' => $this->db->database,
+                    'host' => $this->db->hostname
+                );
+
+                $this->output->set_content_type('application/json')->set_output(json_encode(
+                    mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL), 'UTF-8', 'ISO-8859-2')
+                ));
+
+                return;
+            }
         }
     }
 
@@ -308,6 +388,27 @@ class Inscripcionadmin extends PSG_Controller
             'row'
         );
         // var_dump($datos);
+    }
+
+    public function confirmar_cambio_estado()
+    {
+        $id_preinscripcion_curso = $this->input->post('id');
+        $data = $this->input->post('data');
+        $respuesta = $this->sql_ssl->modificar_tabla(
+            'mdl_preinscripcion_curso',
+            ['estado' => $data],
+            ['id_preinscripcion_curso' => $id_preinscripcion_curso]
+        );
+
+        if ($respuesta) {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['exito' => "Cambio de estado realizado correctamente"])
+            );
+        } else {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['error' => "Error al realizar el cambio de estado"])
+            );
+        }
     }
 
     public function ver_informacion()

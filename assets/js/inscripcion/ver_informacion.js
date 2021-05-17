@@ -114,8 +114,5 @@ var KTDatatablesVerInformacion = (function () {
 })();
 
 jQuery(document).ready(function () {
-	$("#cursos").on("change", function (e) {
-		console.log("cambio", $(this).val());
-	});
 	KTDatatablesVerInformacion.init();
 });

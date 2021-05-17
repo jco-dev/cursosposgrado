@@ -31,8 +31,9 @@
                         <th>monto pago</th>
                         <th>transaccion</th>
                         <th>certificaci&oacute;n</th>
+                        <th>Estado</th>
                         <th>respaldo</th>
-                        <th>Acciones</th>
+                        <th>Cambiar estado</th>
                     </tr>
                 </thead>
             </table>

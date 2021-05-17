@@ -1,8 +1,8 @@
 "use strict";
+let tbl_ver_inscripcion;
 var KTDatatablesVerInscritos = (function () {
 	var init = function () {
-		var tbl_ver_inscripcion = $("#tbl_ver_inscripcion");
-
+		tbl_ver_inscripcion = $("#tbl_ver_inscripcion");
 		// begin first tbl_ver_inscripcion
 		tbl_ver_inscripcion
 			.DataTable({
@@ -73,17 +73,22 @@ var KTDatatablesVerInscritos = (function () {
 						title: "certificacion",
 					},
 					{
+						field: "estado",
+						title: "estado,",
+					},
+					{
 						field: "respaldo_pago",
 						title: "respaldo pago",
 					},
 					{
 						field: "id_preinscripcion_curso",
-						title: "Acciones",
+						title: "Cambiar estado",
 					},
 				],
 			})
-			.on("click", "#btn_confirmar_inscripcion", function () {
+			.on("change", "select#estado_preinscrito", function () {
 				let id = $(this).attr("data-id");
+				let data = $(this).val();
 				let nombre = "";
 				let curso = "";
 				// traer datos del estudiante y curso para mostrar
@@ -98,7 +103,7 @@ var KTDatatablesVerInscritos = (function () {
 							curso = response.exito[0].curso;
 							Swal.fire({
 								title:
-									"¿Si todo esta bien ?. Por favor confirme la inscripción",
+									"¿Si todo esta bien ?. Por favor confirme el cambio de estado!",
 								html: `<strong>PRE-INSCRITO:</strong> ${nombre} <br><strong>AL CURSO:</strong> ${curso}<br>¡Esta acción no se puede deshacer!`,
 								icon: "warning",
 								showCancelButton: true,
@@ -112,24 +117,23 @@ var KTDatatablesVerInscritos = (function () {
 							}).then(function (result) {
 								if (result.value) {
 									$.post(
-										"/inscripcionadmin/confirmar_inscripcion",
-										{ id: id },
+										"/inscripcionadmin/confirmar_cambio_estado",
+										{ id: id, data: data },
 										function (response) {
 											if (typeof response.exito != "undefined") {
 												Swal.fire("Exito!", response.exito, "success");
 												tbl_ver_inscripcion.DataTable().ajax.reload();
 											}
 											if (typeof response.error != "undefined") {
+												tbl_ver_inscripcion.DataTable().ajax.reload();
 												Swal.fire("Error!", response.error, "error");
-											}
-											if (typeof response.warning != "undefined") {
-												Swal.fire("Advertencia!", response.warning, "info");
 											}
 										}
 									);
 								} else if (result.dismiss === "cancel") {
+									tbl_ver_inscripcion.DataTable().ajax.reload();
 									Swal.fire({
-										text: "No se ha confirmado la inscripción!.",
+										text: "No se ha confirmado el cambio de estado!.",
 										icon: "error",
 										buttonsStyling: false,
 										confirmButtonText: "Ok",
@@ -172,7 +176,189 @@ jQuery(document).ready(function () {
 	});
 
 	$("#cursos").on("change", function (e) {
-		console.log("cambio", $(this).val());
+		if ($(this).val() != "all") {
+			let id = $(this).val();
+			tbl_ver_inscripcion.dataTable().fnClearTable();
+			tbl_ver_inscripcion.dataTable().fnDestroy();
+
+			tbl_ver_inscripcion.DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: {
+					url: "/inscripcionadmin/ajax_ver_inscritos",
+					data: { id },
+					type: "post",
+				},
+				lengthMenu: [
+					[10, 20, 30, 50, 100, -1],
+					[10, 20, 30, 50, 100, "Todos"],
+				],
+				iDisplayLength: -1,
+				responsive: true,
+				sortable: true,
+				// layout definition
+				layout: {
+					scroll: false,
+					footer: false,
+				},
+
+				// column sorting
+				sortable: true,
+				pagination: true,
+				columns: [
+					{
+						field: "id_participante",
+						title: "#",
+						width: 15,
+						textAlign: "center",
+					},
+					{
+						field: "ci",
+						title: "ci",
+						width: 70,
+					},
+					{
+						field: "nombre_completo",
+						title: "Nombres",
+						width: 250,
+					},
+					{
+						field: "municipio_enviar",
+						title: "Enviar a",
+						width: 150,
+					},
+					{
+						field: "celular",
+						title: "celular",
+					},
+					{
+						field: "curso",
+						title: "curso",
+						width: 150,
+					},
+					{
+						field: "tipo_pago",
+						title: "tipo pago",
+					},
+					{
+						field: "monto_pago",
+						title: "monto pago",
+					},
+					{
+						field: "id_transaccion",
+						title: "transaccion",
+					},
+
+					{
+						field: "tipo_certificacion",
+						title: "certificacion",
+					},
+					{
+						field: "estado",
+						title: "estado",
+					},
+					{
+						field: "respaldo_pago",
+						title: "respaldo pago",
+					},
+					{
+						field: "id_preinscripcion_curso",
+						title: "Cambiar estado",
+					},
+				],
+			});
+
+			console.log("Descargar csv");
+		} else {
+			tbl_ver_inscripcion.dataTable().fnClearTable();
+			tbl_ver_inscripcion.dataTable().fnDestroy();
+
+			tbl_ver_inscripcion.DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: {
+					url: "/inscripcionadmin/ajax_ver_inscritos",
+					data: { id: null },
+					type: "post",
+				},
+				lengthMenu: [
+					[10, 20, 30, 50, 100, -1],
+					[10, 20, 30, 50, 100, "Todos"],
+				],
+				iDisplayLength: -1,
+				responsive: true,
+				sortable: true,
+				// layout definition
+				layout: {
+					scroll: false,
+					footer: false,
+				},
+
+				// column sorting
+				sortable: true,
+				pagination: true,
+				columns: [
+					{
+						field: "id_participante",
+						title: "#",
+						width: 15,
+						textAlign: "center",
+					},
+					{
+						field: "ci",
+						title: "ci",
+						width: 70,
+					},
+					{
+						field: "nombre_completo",
+						title: "Nombres",
+						width: 250,
+					},
+					{
+						field: "municipio_enviar",
+						title: "Enviar a",
+						width: 150,
+					},
+					{
+						field: "celular",
+						title: "celular",
+					},
+					{
+						field: "curso",
+						title: "curso",
+						width: 150,
+					},
+					{
+						field: "tipo_pago",
+						title: "tipo pago",
+					},
+					{
+						field: "monto_pago",
+						title: "monto pago",
+					},
+					{
+						field: "id_transaccion",
+						title: "transaccion",
+					},
+					{
+						field: "tipo_certificacion",
+						title: "certificacion",
+					},
+					{
+						field: "estado",
+						title: "estado",
+					},
+					{
+						field: "respaldo_pago",
+						title: "respaldo pago",
+					},
+					{
+						field: "id_preinscripcion_curso",
+						title: "Cambiar estado",
+					},
+				],
+			});
+		}
 	});
 	KTDatatablesVerInscritos.init();
 });
