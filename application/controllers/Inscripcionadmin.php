@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('America/La_Paz');
 require_once APPPATH . '/controllers/Reportes/ImprimirCertificado.php';
+require_once APPPATH . 'controllers/Reportes/Reporte_estudiantes_excel.php';
 
 class Inscripcionadmin extends PSG_Controller
 {
@@ -279,11 +280,24 @@ class Inscripcionadmin extends PSG_Controller
                             return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
                         }
                     }),
-                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
-                        return "<a id='btn_confirmar_inscripcion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean mr-3' title='Confirmar la inscripcion'>
-                            <i class='nav-icon la la-check'></i>
-                             Confirmar
-                        </a>";
+                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                        $datos = '';
+                        if ($row['estado'] == "PREINSCRITO") {
+                            $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>
+                            <option value='INSCRITO'>INSCRITO</option>
+                            <option value='ANULADO'>ANULADO</option>";
+                        } elseif ($row['estado'] == "INSCRITO") {
+                            $datos .= "<option value='PREINSCRITO'>PREINSCRITO</option>
+                            <option value='INSCRITO' selected>INSCRITO</option>
+                            <option value='ANULADO'>ANULADO</option>";
+                        } else {
+                            $datos .= "<option value='PREINSCRITO'>PREINSCRITO</option>
+                            <option value='INSCRITO'>INSCRITO</option>
+                            <option value='ANULADO' selected>ANULADO</option>";
+                        }
+                        return "<select data-id='$id' class='custom-select form-control bg-secondary' id='estado_preinscrito' name='estado_preinscrito_$id'>
+                            $datos
+                        </select>";
                     })
                 );
                 $sql_details = array(
@@ -463,6 +477,22 @@ class Inscripcionadmin extends PSG_Controller
             ));
 
             return;
+        }
+    }
+
+    public function descargar_csv($id)
+    {
+        $data = $this->sql_ssl->listar_tabla(
+            'mdl_participante_preinscripcion_curso',
+            ['estado' => "INSCRITO", 'id_course_moodle' => $id]
+        );
+
+        if (count($data) != 0) {
+            $curso = $this->sql_ssl->listar_tabla("mdl_course", ["id" => $data[0]->id_course_moodle]);
+            if (count($curso) == 1) {
+                $rep = new Reporte_estudiantes_excel();
+                $rep->lista_estudiantes($data, $curso[0]->fullname);
+            }
         }
     }
 }

@@ -37,7 +37,6 @@ class Inscripcion extends CI_Controller
         $this->form_validation->set_rules('correo', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('nombre', 'nombre', 'required');
         $this->form_validation->set_rules('paterno', 'paterno', 'required');
-        $this->form_validation->set_rules('fecha_nacimiento', 'fecha nacimiento', 'callback_date_valid|callback_fecha_vacio');
         $this->form_validation->set_rules('celular', 'celular', 'callback_validar_celular');
         $this->form_validation->set_rules('fecha_pago', 'fecha pago', 'required|callback_date_valid|callback_fecha_vacio');
         $this->form_validation->set_rules('monto_pago', 'monto pago', 'required|callback_monto_valid');

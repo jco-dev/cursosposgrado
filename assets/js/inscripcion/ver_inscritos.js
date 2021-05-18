@@ -268,7 +268,14 @@ jQuery(document).ready(function () {
 				],
 			});
 
-			console.log("Descargar csv");
+			// descargar csv
+			if (id != "") {
+				window.open("/inscripcionadmin/descargar_csv/" + id, "_blank");
+			} else {
+				console.log("error al descargar csv");
+			}
+
+			// console.log("Descargar csv: " + id);
 		} else {
 			tbl_ver_inscripcion.dataTable().fnClearTable();
 			tbl_ver_inscripcion.dataTable().fnDestroy();
