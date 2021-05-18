@@ -69,4 +69,15 @@ class Inscripcion_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function ver_estudiantes_confirmados($idcurso)
+	{
+		$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  WHERE estado= 'INSCRITO' AND id_course_moodle = $idcurso";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }

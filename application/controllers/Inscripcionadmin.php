@@ -495,4 +495,19 @@ class Inscripcionadmin extends PSG_Controller
             }
         }
     }
+
+    public function ver_estudiantes()
+    {
+        $idcurso = $this->input->post('id');
+        $respuesta = $this->inscripcion_model->ver_estudiantes_confirmados($idcurso);
+        if (count($respuesta) >= 1) {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['data' => $respuesta[0]->total])
+            );
+        } else {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['data' => null])
+            );
+        }
+    }
 }

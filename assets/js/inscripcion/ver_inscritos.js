@@ -270,9 +270,18 @@ jQuery(document).ready(function () {
 
 			// descargar csv
 			if (id != "") {
-				window.open("/inscripcionadmin/descargar_csv/" + id, "_blank");
-			} else {
-				console.log("error al descargar csv");
+				$.post(
+					"/inscripcionadmin/ver_estudiantes",
+					{ id: id },
+					function (response) {
+						console.log(response);
+						if (response.data != null) {
+							if (parseInt(response.data) > 0) {
+								window.open("/inscripcionadmin/descargar_csv/" + id, "_blank");
+							}
+						}
+					}
+				);
 			}
 
 			// console.log("Descargar csv: " + id);
