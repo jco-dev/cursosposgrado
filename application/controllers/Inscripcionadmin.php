@@ -272,7 +272,17 @@ class Inscripcionadmin extends PSG_Controller
                     }),
                     array('dt' => 8, 'db' => 'id_transaccion'),
                     array('dt' => 9, 'db' => 'tipo_certificacion'),
-                    array('dt' => 10, 'db' => 'estado'),
+                    array('dt' => 10, 'db' => 'estado', 'formatter' => function ($estado) {
+                        if ($estado == "INTERESADO") {
+                            return "<span class='label label-info label-inline mr-2'>INTERESADO</span>";
+                        } elseif ($estado == "PREINSCRITO") {
+                            return "<span class='label label-warning label-inline mr-2'>PREINSCRITO</span>";
+                        } elseif ($estado == "INSCRITO") {
+                            return "<span class='label label-success label-inline mr-2'>INSCRITO</span>";
+                        } else {
+                            return "<span class='label label-danger label-inline mr-2'>ANULADO</span>";
+                        }
+                    }),
                     array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
                         if ($img == "") {
                             return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';

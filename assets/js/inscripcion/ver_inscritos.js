@@ -274,7 +274,6 @@ jQuery(document).ready(function () {
 					"/inscripcionadmin/ver_estudiantes",
 					{ id: id },
 					function (response) {
-						console.log(response);
 						if (response.data != null) {
 							if (parseInt(response.data) > 0) {
 								window.open("/inscripcionadmin/descargar_csv/" + id, "_blank");

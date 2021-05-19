@@ -66,51 +66,45 @@ class Informacion extends CI_Controller
 				if (count($respuesta) == 0) {
 					//inscribir
 					//verificamos si ya esta inscrito en participante
-					$respuesta = $this->sql_ssl->listar_tabla(
+
+					// inscribir en participante y preinscripcion
+					$resp = $this->sql_ssl->insertar_tabla(
 						'mdl_participante',
-						['ci' => $ci]
+						[
+							'ci' => $ci,
+							'expedido' => $expedido,
+							'nombre' => ucwords(strtolower(trim($nombre))),
+							'paterno' => ucwords(strtolower(trim($paterno))),
+							'materno' => ucwords(strtolower(trim($materno))),
+							'genero' => $genero,
+							'id_municipio' => $id_municipio,
+							'id_profesion_oficio' => $id_profesion_oficio,
+							'fecha_nacimiento' => $fecha_nacimiento,
+							'correo' => $correo,
+							'celular' => $celular
+						]
 					);
-					if (count($respuesta) == 0) {
-						// inscribir en participante y preinscripcion
-						$resp = $this->sql_ssl->insertar_tabla(
-							'mdl_participante',
+
+					if (is_numeric($resp)) {
+						$res = $this->sql_ssl->insertar_tabla(
+							'mdl_preinscripcion_curso',
 							[
-								'ci' => $ci,
-								'expedido' => $expedido,
-								'nombre' => ucwords(strtolower(trim($nombre))),
-								'paterno' => ucwords(strtolower(trim($paterno))),
-								'materno' => ucwords(strtolower(trim($materno))),
-								'genero' => $genero,
-								'id_municipio' => $id_municipio,
-								'id_profesion_oficio' => $id_profesion_oficio,
-								'fecha_nacimiento' => $fecha_nacimiento,
-								'correo' => $correo,
-								'celular' => $celular
+								'id_participante' => $resp,
+								'id_course_moodle' => $id_curso,
+								'estado' => $estado
 							]
+
 						);
 
-						if (is_numeric($resp)) {
-							$res = $this->sql_ssl->insertar_tabla(
-								'mdl_preinscripcion_curso',
-								[
-									'id_participante' => $resp,
-									'id_course_moodle' => $id_curso,
-									'estado' => $estado
-								]
-
+						if (is_numeric($res)) {
+							$this->output->set_content_type('application/json')->set_output(
+								json_encode(['exito' => "Registrado correctamente le enviaremos la información a su correo registrado"])
 							);
-
-							if (is_numeric($res)) {
-								$this->output->set_content_type('application/json')->set_output(
-									json_encode(['exito' => "Registrado correctamente le enviaremos la información a su correo registrado"])
-								);
-							} else {
-								$this->output->set_content_type('application/json')->set_output(
-									json_encode(['error' => "Error al registrarse por favor intente de nuevo"])
-								);
-							}
+						} else {
+							$this->output->set_content_type('application/json')->set_output(
+								json_encode(['error' => "Error al registrarse por favor intente de nuevo"])
+							);
 						}
-					} else {
 					}
 				} else {
 
@@ -141,7 +135,8 @@ class Informacion extends CI_Controller
 
 					if ($respuesta) {
 						$this->output->set_content_type('application/json')->set_output(
-							json_encode(['exito' => "Datos actualizados correctamente"])
+							// json_encode(['exito' => "Datos actualizados correctamente"])
+							json_encode(['exito' => "Ya se encuentra registrado"])
 						);
 					} else {
 						$this->output->set_content_type('application/json')->set_output(
