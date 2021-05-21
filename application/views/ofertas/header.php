@@ -83,7 +83,7 @@
         <!--begin::Toggle-->
         <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
             <div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-                <img class="h-20px w-20px rounded-sm" src="assets/media/svg/flags/128-spain.svg" alt="" />
+                <img class="h-20px w-20px rounded-sm" src="assets/media/svg/flags/150-bolivia.svg" alt="" />
             </div>
         </div>
         <!--end::Toggle-->

@@ -1,8 +1,8 @@
 <style>
-    @media (min-width: 576px) and (max-width: 767.98px) {
+    @media (min-width: 650px) and (max-width: 767.98px) {
         #padding-container {
-            padding-right: 60px;
-            padding-left: 60px;
+            padding-right: 50px;
+            padding-left: 50px;
         }
     }
 

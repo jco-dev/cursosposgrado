@@ -63,7 +63,7 @@
                             <span class="font-size-md font-weight-normal"><?= $curso->celular_referencia ?></span>
                         </a>
                     </li>
-                    <?php if (date('Y-m-d') <= $curso->fecha_fin_descuento) { ?>
+                    <?php if (date('Y-m-d') <= $curso->fecha_fin_descuento && $curso->descuento != 0) { ?>
                         <li class="navi-item">
                             <a href="#" class="navi-link py-1">
                                 <span class="navi-icon">
