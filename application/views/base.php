@@ -149,6 +149,18 @@
 									</ul>
 								</div>
 							</li>
+
+							<li class="menu-section">
+								<h4 class="menu-text">VERIFICAR</h4>
+								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+							</li>
+
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('cursos/ci') ?>" class="menu-link">
+									<i class="menu-icon flaticon2-check-mark"></i>
+									<span class="menu-text">Verificar</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

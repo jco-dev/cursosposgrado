@@ -610,4 +610,9 @@ class Cursos extends PSG_Controller
 	// 		));
 	// 	}
 	// }
+
+	public function ci()
+	{
+		$this->templater->view('verificacion/ci', $this->data);
+	}
 }
