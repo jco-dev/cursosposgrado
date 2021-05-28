@@ -8,22 +8,22 @@
 
     @media (min-width: 768px) and (max-width: 991.98px) {
         #padding-container {
-            padding-right: 120px;
-            padding-left: 120px;
+            padding-right: 110px;
+            padding-left: 110px;
         }
     }
 
     @media (min-width: 992px) and (max-width: 1199.98px) {
         #padding-container {
-            padding-right: 180px;
-            padding-left: 180px;
+            padding-right: 200px;
+            padding-left: 200px;
         }
     }
 
     @media (min-width: 1200px) {
         #padding-container {
-            padding-right: 240px;
-            padding-left: 240px;
+            padding-right: 310px;
+            padding-left: 310px;
         }
     }
 </style>

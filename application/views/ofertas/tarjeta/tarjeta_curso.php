@@ -55,7 +55,7 @@
                     </li>
 
                     <li class="navi-item">
-                        <a href="#" class="navi-link py-1">
+                        <a target="_blank" href="https://api.whatsapp.com/send/?phone=59162332648&text=M%C3%A1s%20informaci%C3%B3n%20sobre%20el%20curso%20de:%20*<?= $curso->fullname?>%20-%20UPEA*" class="navi-link py-1">
                             <span class="navi-icon">
                                 <i class="navi-icon flaticon2-phone"></i>
                             </span>
