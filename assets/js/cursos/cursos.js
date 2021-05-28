@@ -67,8 +67,33 @@ var KTDatatablesAdvancedColumnRendering = (function () {
 })();
 
 jQuery(document).ready(function () {
-	$("#btn_agregar_curso").on("click", function () {
-		console.log("agregar");
-	});
-	KTDatatablesAdvancedColumnRendering.init();
+	$("#verificar_cursos_por_ci").on('submit', function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		let data = new FormData($(this)[0]);
+		$.ajax({
+			type: "POST",
+			url: "/cursos/verificar_ci",
+			data: data,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "html",
+		}).done(function (response) {
+			// console.log(response)
+			$("#cursos_listado").children().remove();
+			$("#cursos_listado").append(response);
+			// if (typeof response.exito != "undefined") {
+			// 	Swal.fire("Exito!", response.exito, "success");
+			// }
+
+			// if (typeof response.warning != "undefined") {
+			// 	Swal.fire("Advertencia!", response.warning, "warning");
+			// }
+
+			// if (typeof response.error != "undefined") {
+			// 	Swal.fire("Error!", response.error, "error");
+			// }
+		});
+	})
 });

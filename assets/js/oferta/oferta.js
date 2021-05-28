@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
 			contentType: "html",
 		}).done(function (response) {
 			$("#contenido_cursos").children().remove();
-			$("#contenido_cursos").append(response);
+			 $("#contenido_cursos").append(response);
 		});
 	};
 

@@ -10,8 +10,8 @@
         <!--end::Copyright-->
         <!--begin::Nav-->
         <div class="nav nav-dark">
-            <a href="javascript:;" target="_blank" class="nav-link pl-0 pr-5">Acerca de Nosotros</a>
-            <a href="javascript:;" target="_blank" class="nav-link pl-0 pr-0">Contacto</a>
+            <a href="javascript:;" class="nav-link pl-0 pr-5">Acerca de Nosotros</a>
+            <a href="javascript:;" class="nav-link pl-0 pr-0">Contacto</a>
         </div>
         <!--end::Nav-->
     </div>

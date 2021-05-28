@@ -7,7 +7,7 @@
          <div class="card-body pb-0">
              <div class="form-group row">
                  <div class="col-lg-9">
-                     <label for="ci"> Carnet <span class="text-danger">(*)</span></label>
+                     <label for="ci"> N&uacute;mero C.I. <span class="text-danger">(*)</span></label>
                      <input type="text" class="form-control" name="ci" id="ci" placeholder="Tu respuesta" />
                  </div>
                  <div class="col-lg-3">

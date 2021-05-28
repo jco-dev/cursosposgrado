@@ -82,32 +82,39 @@ class SendEmail extends PSG_Controller
                 $this->data['email'] = $estudiante->correo;
                 $this->data['curso'] = utf8_decode($estudiante->fullname);
                 $this->data['imagen'] = $estudiante->banner_curso;
-                $mensaje = $this->CI->load->view('correo/email_informacion', $this->data, TRUE);
+                $mensaje = $this->CI->load->view('correo/email_informacion1', $this->data, TRUE);
                 // var_dump($mensaje);
                 $mail = new \PHPMailer\PHPMailer\PHPMailer();
                 $mail->IsSMTP();
                 $mail->isHTML(true);
                 $mail->SMTPDebug = 0;
                 $mail->SMTPAuth = true;
+                // $mail->SMTPSecure = "tls";
                 $mail->SMTPSecure = "ssl";
+                // $mail->Host = "smtp.mailtrap.io";
                 $mail->Host = "mail.upea.bo";
+                // $mail->Port = 25;
                 $mail->Port = 465;
+                // $mail->Username = "ffffff";
                 $mail->Username = "posgrado@upea.bo";
+                // $mail->Password = "76499092bb5e36";
                 $mail->Password = "Posgrado#1";
                 $mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
                 $mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
                 $mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
                 $mail->addAddress($estudiante->correo, utf8_decode($estudiante->nombre_completo));
-                $mail->Subject = 'CERTIFICADO DIGITAL DEL CURSO';
+                $mail->Subject = utf8_decode('INFORMACIÓN DEL CURSO');
                 $mail->Body = $mensaje;
-                $mail->AltBody = 'CERTIFICADO DIGITAL DEL CURSO: ' . $this->data['curso'];
+                $mail->AltBody = utf8_decode('INFORMACIÓN DEL CURSO: ' . $this->data['curso']);
                 $mail->addAttachment($estudiante->url_pdf);
 
                 if (!$mail->send()) {
-                    echo 'Error: ' . $mail->ErrorInfo;
+                    // echo 'Error: ' . $mail->ErrorInfo;
+                    $cn = 0;
                 } else {
-                    echo 'Mensaje Enviado correctamente.';
                     $cn++;
+                    // echo 'Mensaje Enviado correctamente.';
+                    
                 }
             }
 

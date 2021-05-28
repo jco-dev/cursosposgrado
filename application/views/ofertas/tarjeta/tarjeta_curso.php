@@ -63,7 +63,7 @@
                             <span class="font-size-md font-weight-normal"><?= $curso->celular_referencia ?></span>
                         </a>
                     </li>
-                    <?php if (date('Y-m-d') <= $curso->fecha_fin_descuento && $curso->descuento != 0) { ?>
+                    <?php if (date('d-m-Y') <= $curso->fecha_fin_descuento && $curso->descuento > 0) { ?>
                         <li class="navi-item">
                             <a href="#" class="navi-link py-1">
                                 <span class="navi-icon">
@@ -104,7 +104,7 @@
 
                     <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-success btn-shadow-hover font-size-sm btn-sm font-weight-bold px-4" target="_blank">
                         <i class="fa fa-check icon-sm"></i>
-                        Registro
+                        Inscribirse
                     </a>
                 </div>
             </div>

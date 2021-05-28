@@ -606,6 +606,7 @@
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
+	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>
 
 </body>
 <!--end::Body-->

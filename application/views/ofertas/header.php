@@ -88,10 +88,8 @@
         </div>
         <!--end::Toggle-->
         <!--begin::Dropdown-->
-        <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
-            <!--begin::Nav-->
+        <!-- <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
             <ul class="navi navi-hover py-4">
-                <!--begin::Item-->
                 <li class="navi-item">
                     <a href="#" class="navi-link">
                         <span class="symbol symbol-20 mr-3">
@@ -100,10 +98,8 @@
                         <span class="navi-text">English</span>
                     </a>
                 </li>
-                <!--end::Item-->
             </ul>
-            <!--end::Nav-->
-        </div>
+        </div> -->
         <!--end::Dropdown-->
     </div>
     <!--end::Languages-->

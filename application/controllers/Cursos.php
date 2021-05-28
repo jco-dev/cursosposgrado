@@ -615,4 +615,55 @@ class Cursos extends PSG_Controller
 	{
 		$this->templater->view('verificacion/ci', $this->data);
 	}
+
+	public function verificar_ci()
+	{
+		$id = $this->input->post("ci");
+		$respuesta = $this->sql_ssl->listar_tabla(
+			'mdl_ver_cursos_inscritos_ci',
+			['ci' => $id]
+		);
+
+		$res = '<table width=100% class="table table-responsive-sm table-responsive-md table-bordered table-condensed table-striped">
+		<thead class="thead">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Curso</th>
+				<th scope="col">Tipo Participacion</th>
+				<th scope="col">Fecha</th>
+			</tr>
+		</thead>';
+
+		if (count($respuesta) > 0) {
+			$cn = 1;
+			foreach ($respuesta as $key => $value) {
+				$res .= '<tbody>
+					<tr>
+						<th scope="row">' . $cn . '</th>
+						<td>' . $value->nombre_completo . '</td>
+						<td>' . $value->curso . '</td>
+						<td>
+							<span class="label label-inline label-light-primary font-weight-bold">
+								PARTICIPANTE
+							</span>
+						</td>
+						<td>12-12-2021</td>
+					</tr>
+				</tbody>';
+				$cn++;
+			}
+		} else {
+			$res .= '<tbody>
+				<tr>
+					<td colspan="5" class="text-center">No existe registros con el ci: ' . $id . '</td>
+				</tr>
+			</tbody>';
+		}
+
+
+
+		$res .= '</table>';
+		echo $res;
+	}
 }

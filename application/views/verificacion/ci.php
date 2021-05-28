@@ -22,7 +22,7 @@
                                 <!--end::Svg Icon-->
                             </span>
                         </div>
-                        <div class="alert-text">Ingrese su ci del usuario para verificar que cursos pas&oacute; el usuario.</div>
+                        <div class="alert-text">Ingrese su ci para verificar que cursos pas&oacute; el usuario.</div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,38 +47,7 @@
         <div class="card-footer">
             <div class="container">
                 <div id="cursos_listado">
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Nick</td>
-                                <td>Stone</td>
-                                <td>
-                                    <span class="label label-inline label-light-primary font-weight-bold">
-                                        Pending
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Ana</td>
-                                <td>Jacobs</td>
-                                <td>
-                                    <span class="label label-inline label-light-success font-weight-bold">
-                                        Approved
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    
                 </div>
             </div>
         </div>

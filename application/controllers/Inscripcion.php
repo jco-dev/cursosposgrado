@@ -88,9 +88,9 @@ class Inscripcion extends CI_Controller
                             [
                                 'ci' => $ci,
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(strtolower(trim($nombre))),
-                                'paterno' => ucwords(strtolower(trim($paterno))),
-                                'materno' => ucwords(strtolower(trim($materno))),
+                                'nombre' => ucwords(strtoupper(trim($nombre))),
+                                'paterno' => ucwords(strtoupper(trim($paterno))),
+                                'materno' => ucwords(strtoupper(trim($materno))),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -153,9 +153,9 @@ class Inscripcion extends CI_Controller
                             'mdl_participante',
                             [
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(strtolower(trim($nombre))),
-                                'paterno' => ucwords(strtolower(trim($paterno))),
-                                'materno' => ucwords(strtolower(trim($materno))),
+                                'nombre' => ucwords(strtoupper(trim($nombre))),
+                                'paterno' => ucwords(strtoupper(trim($paterno))),
+                                'materno' => ucwords(strtoupper(trim($materno))),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -303,15 +303,22 @@ class Inscripcion extends CI_Controller
     public function enviar_correo_personal()
     {
         $id = $this->input->post('id');
-
         $respuesta1 = $this->inscripcion_model->get_data_informacion($id);
 
         $send = new SendEmail();
         $res = $send->enviar_correo_personal($respuesta1);
         if ($res) {
+
+            $respuesta = $this->sql_ssl->modificar_tabla(
+                'mdl_preinscripcion_curso',
+                ['estado_correo' => 1],
+                ['id_preinscripcion_curso' => $id]
+            );
+            
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['exito' => "Correo enviado correctamente"])
             );
+
         } else {
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['error' => "Error al enviar el correo"])
