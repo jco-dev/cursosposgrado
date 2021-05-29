@@ -77,32 +77,33 @@ class Configuracion extends PSG_Controller
                     }
                 }),
                 array('dt' => 25, 'db' => 'detalle_curso'),
-                array('dt' => 26, 'db' => 'url_pdf'),
-                array('dt' => 27, 'db' => 'banner_curso', 'formatter' => function ($banner) {
+                array('dt' => 26, 'db' => 'horario'),
+                array('dt' => 27, 'db' => 'url_pdf'),
+                array('dt' => 28, 'db' => 'banner_curso', 'formatter' => function ($banner) {
                     if ($banner == "") {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                     } else {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$banner") . '" alt="foto curso" />';
                     }
                 }),
-                array('dt' => 28, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
+                array('dt' => 29, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
                     return '<span class="label label-light-success label-inline font-weight-bolder mr-2">' . $celular . '</span>';
                 }),
-                array('dt' => 29, 'db' => 'inversion', 'formatter' => function ($inversion) {
+                array('dt' => 30, 'db' => 'inversion', 'formatter' => function ($inversion) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
                 }),
-                array('dt' => 30, 'db' => 'descuento', 'formatter' => function ($des) {
+                array('dt' => 31, 'db' => 'descuento', 'formatter' => function ($des) {
                     if ($des == "") {
                         $des = 0;
                     }
                     return '<span class="label label-warning label-inline font-weight-bolder mr-2">' . $des . ' %</span>';
                 }),
-                array('dt' => 31, 'db' => 'fecha_inicio_descuento'),
-                array('dt' => 32, 'db' => 'fecha_fin_descuento'),
-                array('dt' => 33, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                array('dt' => 32, 'db' => 'fecha_inicio_descuento'),
+                array('dt' => 33, 'db' => 'fecha_fin_descuento'),
+                array('dt' => 34, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 34, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                array('dt' => 35, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
                     return "
                         <a id='btn_editar_conf' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
                         <i class='nav-icon la la-edit'></i>
@@ -194,6 +195,7 @@ class Configuracion extends PSG_Controller
             $tamano_subtitulo = $this->input->post('tamano_subtitulo');
             $tamano_texto = $this->input->post('tamano_texto');
             $detalle_curso = $this->input->post('detalle_curso');
+            $horario = mb_convert_case(preg_replace('/\s+/', ' ', trim($this->input->post('horario'))), MB_CASE_UPPER);
             $celular_referencia = $this->input->post('celular_referencia');
             $inversion = $this->input->post('inversion');
             $descuento = $this->input->post('descuento');
@@ -278,6 +280,7 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
+                        'horario' => $horario,
                         'celular_referencia' => $celular_referencia,
                         'inversion' => $inversion,
                         'descuento' => $descuento,
@@ -331,6 +334,7 @@ class Configuracion extends PSG_Controller
                         'color_subtitulo' => $color_subtitulo,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
+                        'horario' => $horario,
                         'banner_curso' => $ruta1,
                         'celular_referencia' => $celular_referencia,
                         'inversion' => $inversion,
@@ -383,6 +387,7 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
+                        'horario' => $horario,
                         'banner_curso' => $ruta1,
                         'celular_referencia' => $celular_referencia,
                         'inversion' => $inversion,
@@ -436,6 +441,7 @@ class Configuracion extends PSG_Controller
                         'color_nombre_participante' => $color_nombre_participante,
                         'color_subtitulo' => $color_subtitulo,
                         'detalle_curso' => $detalle_curso,
+                        'horario' => $horario,
                         'celular_referencia' => $celular_referencia,
                         'inversion' => $inversion,
                         'descuento' => $descuento,

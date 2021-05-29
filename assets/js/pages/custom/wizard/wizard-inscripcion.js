@@ -66,14 +66,14 @@ var KTWizard3 = (function () {
 							},
 							stringLength: {
 								max: 11,
-								message: "El CI celular debe tener al menos 11 dígitos",
+								message: "El CI puede tener hasta 11 dígitos",
 							},
 						},
 					},
 					paterno: {
 						validators: {
 							regexp: {
-								regexp: /^[A-Za-zs]+$/i,
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
 								message:
 									"El apellido paterno puede constar de caracteres alfabéticos y solo espacios",
 							},
@@ -82,7 +82,7 @@ var KTWizard3 = (function () {
 					materno: {
 						validators: {
 							regexp: {
-								regexp: /^[A-Za-zs]+$/i,
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
 								message:
 									"El apellidos materno puede constar de caracteres alfabéticos y solo espacios",
 							},
@@ -104,7 +104,7 @@ var KTWizard3 = (function () {
 								message: "Esta pregunta es obligatoria",
 							},
 							regexp: {
-								regexp: /^[A-Za-zs ]+$/i,
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
 								message:
 									"El nombre puede constar de caracteres alfabéticos y solo espacios",
 							},
@@ -117,15 +117,15 @@ var KTWizard3 = (function () {
 							},
 							regexp: {
 								regexp: /^(7|6)?[0-9]{7}$/i,
-								message: "El número celular debe empezar por 6 o 7",
+								message: "El número de celular debe empezar por 6 o 7",
 							},
 							integer: {
-								message: "El número celular no es válido",
+								message: "El número de celular no es válido",
 							},
 							stringLength: {
 								max: 8,
 								min: 8,
-								message: "El número celular debe tener 8 dígitos",
+								message: "El número de celular debe tener 8 dígitos",
 							},
 						},
 					},

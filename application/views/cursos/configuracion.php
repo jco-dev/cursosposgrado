@@ -879,6 +879,7 @@
                         <th>Color Nombre Participante</th>
                         <th>Color Subtitulo</th>
                         <th>Detalle Curso</th>
+                        <th>Horarios</th>
                         <th>url_pdf</th>
                         <th>Banner Curso</th>
                         <th>N&uacute;mero Referencia</th>
@@ -1073,7 +1074,14 @@
                             <textarea name="detalle_curso" id="detalle_curso" rows="2" class="form-control"></textarea>
                             <span class="form-text text-muted">Ingrese detalle del curso</span>
                         </div>
+                    </div>
 
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <label for="horario">Horarios <span class="text-danger">(*)</span>:</label>
+                            <textarea name="horario" id="horario" rows="1" class="form-control" placeholder="LUNES, MARTES Y MIERCOLES 7P.M."></textarea>
+                            <span class="form-text text-muted">Ingrese los horarios de clases</span>
+                        </div>
                     </div>
 
                     <div class="form-group row">

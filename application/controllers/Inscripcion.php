@@ -20,6 +20,7 @@ class Inscripcion extends CI_Controller
         $this->data['municipios'] = $this->inscripcion_model->listar_municipios();
         $this->data['curso'] = $id;
         if (isset($this->data['data'])) {
+            $this->data['datos'] = $this->inscripcion_model->get_config_curso($id_curso);
             $this->load->view("inscripcion/curso", $this->data);
         } else {
             $this->data['data'] = null;

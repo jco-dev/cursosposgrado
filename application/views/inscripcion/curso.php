@@ -27,37 +27,41 @@
                     <?= $data[0]->detalle_curso ?>
                 </h2>
                 <br>
-                <!-- <?= var_dump($data) ?> -->
                 <h5 class="text-justify font-size-lg font-weight-normal">
-                    EL PLAZO DE INSCRIPCIÓN DEL CURSO DE GESTIÓN Y ADMINISTRACIÓN DE HERRAMIENTAS PARA LA EDUCACIÓN VIRTUAL, ES HASTA EL SABADO 10 DE ABRIL
+                    EL PLAZO DE INSCRIPCIÓN DEL CURSO DE GESTIÓN Y ADMINISTRACIÓN DE HERRAMIENTAS PARA LA 
+                    EDUCACIÓN VIRTUAL ES HASTA EL <?= isset($datos)? mb_convert_case(preg_replace('/\s+/', ' ', trim($datos[0]->nombre_dia)), MB_CASE_UPPER) :" " ;?>, <?= isset($datos)? $datos[0]->fecha_inicial_literal :"" ;?>.
                 </h5>
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
                     💰 OPCIONES DE PAGO:<br>&nbsp;
                     <ol>
-                        <li>TRANSFERENCIA BANCARIA O DEPÓSITO DE 100 Bs AL SIGUIENTE NÚMERO DE CUENTA:
+                        <li>TRANSFERENCIA BANCARIA O DEPÓSITO DE <?= isset($datos)? $datos[0]->inversion : '0 ' ;?> Bs AL SIGUIENTE NÚMERO DE CUENTA:
                             10000029978464 (SERGIO AUGUSTO PÉREZ GIRONDA - 6046358 LP) - BANCO UNIÓN</li>
-                        <li>TRANSFERENCIA A TIGO MONEY DE 100 Bs AL NÚMERO (INCLUIR COMISIÓN 4 Bs):
+                        <li>TRANSFERENCIA A TIGO MONEY DE <?= isset($datos)? $datos[0]->inversion : '0 ' ;?> Bs AL NÚMERO (INCLUIR COMISIÓN 4 Bs):
                             📲 76209205 (BRAYAN CONDORI CHOQUE)</li>
                         <li>HACIENDO EL PAGO DIRECTAMENTE EN NUESTRA OFICINA: EDIFICIO EMBLEMÁTICO UPEA, 3ER PISO, OFICINA 3 DE POSGRADO - AV. SUCRE S/N ZONA VILLA ESPERANZA :: CIUDAD DE EL ALTO - BOLIVIA</li>
                     </ol>
                 </h5>
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
-                    POSTERIORMENTE 👉 ACCEDER AL FORMULARIO DE INSCRIPCIÓN, ✍️ REGISTRAR SUS DATOS PERSONALES Y SUBIR EL COMPROBANTE DE SU PAGO (FOTOGRAFÍA O CAPTURA DE PANTALLA) 🏞️
+                    POSTERIORMENTE 👉 ACCEDER AL FORMULARIO DE INSCRIPCIÓN, ✍️ REGISTRAR SUS DATOS PERSONALES Y 
+                    SUBIR EL COMPROBANTE DE SU PAGO (FOTOGRAFÍA O CAPTURA DE PANTALLA) 🏞️
                 </h5>
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
-                    EL CURSO INICIA EL SÁBADO 10 DE ABRIL 2021 - DURARÁ DOS SEMANAS. <br><br>
+                    EL CURSO INICIA EL <?= isset($datos)? mb_convert_case(preg_replace('/\s+/', ' ', trim($datos[0]->nombre_dia)), MB_CASE_UPPER)  : '0 ' ;?> <?= isset($datos)? $datos[0]->fecha_inicial_literal : ' ' ;?> - DURARÁ <?= isset($datos)? intval($datos[0]->semanas) : '2 ' ;?> SEMANAS. <br><br>
 
-                    LA MODALIDAD DEL CURSO SERÁ TOTALMENTE VIRTUAL, LOS CONTENIDOS ESTARÁN COLGADOS EN NUESTRA PLATAFORMA MOODLE PARA QUE USTED PUEDA DESARROLLARLO SEGÚN SU DISPONIBILIDAD DE TIEMPO, TAMBIÉN HABRÁ ACOMPAÑAMIENTO AL PROCESO DE FORMACIÓN CON DOCENTE EN VIVO VÍA ZOOM, DOS VECES POR SEMANA <br><br>
+                    LA MODALIDAD DEL CURSO SERÁ TOTALMENTE VIRTUAL, LOS CONTENIDOS ESTARÁN COLGADOS EN 
+                    NUESTRA PLATAFORMA MOODLE PARA QUE USTED PUEDA DESARROLLARLO SEGÚN SU DISPONIBILIDAD DE TIEMPO, 
+                    TAMBIÉN HABRÁ ACOMPAÑAMIENTO AL PROCESO DE FORMACIÓN CON DOCENTE EN VIVO VÍA ZOOM, DOS VECES POR SEMANA <br><br>
 
-                    🕛 HORARIO DE LAS SESIONES EN VIVO: SÁBADO Y DOMINGO DESDE LAS 7 P.M.
+                    🕛 HORARIO DE LAS SESIONES EN VIVO: <?= isset($datos)? $datos[0]->horario : '0 ' ;?>
                 </h5>
 
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
-                    📃EL CERTIFICADO SERÁ EMITIDO POR LA DIRECCIÓN DE POSGRADO DE LA UNIVERSIDAD PÚBLICA DE EL ALTO, CON UNA CARGA HORARIA DE 180 ACADÉMICAS.<br><br>
+                    📃EL CERTIFICADO SERÁ EMITIDO POR LA DIRECCIÓN DE POSGRADO DE LA UNIVERSIDAD PÚBLICA DE EL ALTO, 
+                    CON UNA CARGA HORARIA DE <?= isset($datos)? $datos[0]->carga_horaria : '180 ' ;?> HORAS ACADÉMICAS.<br><br>
 
                     PODEMOS ENVIARLE SU CERTIFICADO VIA DIGITAL O FÍSICA.<br><br>
 
@@ -66,7 +70,6 @@
                     *Este formulario servirá tanto para la inscripción al curso y posterior para la elaboración de los certificados, por lo que todos los datos deben ser ingresados de manera correcta. <br><br>
 
                     **La institución no se hará responsable si se registraron los datos de manera incorrecta.
-                    El nombre y la foto asociados a tu cuenta de Google se registrarán cuando subas archivos y envíes este formulario
                 </h5>
                 <br>
                 <span class="text-danger">(*) Obligatorio</span>

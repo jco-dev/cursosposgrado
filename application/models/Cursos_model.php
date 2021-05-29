@@ -308,4 +308,5 @@ class Cursos_model extends PSG_Model
 			return null;
 		}
 	}
+
 }

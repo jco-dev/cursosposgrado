@@ -80,4 +80,68 @@ class Inscripcion_model extends PSG_Model
 			return null;
 		}
 	}
+
+
+	public function get_config_curso($idcurso)
+	{
+		if ($idcurso != null) {
+			$sql = "SELECT
+			cc.fecha_inicial,
+			cc.fecha_final,
+			cc.carga_horaria,
+			cc.inversion,
+			cc.horario,
+			CONCAT (
+			CASE DAYOFWEEK(cc.fecha_inicial)
+			WHEN 1 THEN 'Domingo'
+			WHEN 2 THEN 'Lunes'
+			WHEN 3 THEN 'Martes'
+			WHEN 4 THEN 'Miércoles'
+			WHEN 5 THEN 'Jueves'
+			WHEN 6 THEN 'Viernes'
+			WHEN 7 THEN 'Sábado' END)as nombre_dia,
+			datediff(cc.fecha_final , cc.fecha_inicial)/7 AS semanas,
+			CONCAT(DATE_FORMAT(cc.fecha_inicial, '%d'), ' DE ',
+			CASE MONTH(cc.fecha_inicial)
+			WHEN 1 THEN 'ENERO'
+			WHEN 2 THEN 'FEBRERO'
+			WHEN 3 THEN 'MARZO'
+			WHEN 4 THEN 'ABRIL'
+			WHEN 5 THEN 'MAYO'
+			WHEN 6 THEN 'JUNIO'
+			WHEN 7 THEN 'JULIO'
+			WHEN 8 THEN 'AGOSTO'
+			WHEN 9 THEN 'SEPTIEMBRE'
+			WHEN 10 THEN 'OCTUBRE'
+			WHEN 11 THEN 'NOVIEMBRE'
+			WHEN 12 THEN 'DICIEMBRE'
+			END, ' DE ', DATE_FORMAT(cc.fecha_inicial, '%Y')
+			) AS fecha_inicial_literal ,
+			CONCAT(DATE_FORMAT(cc.fecha_final, '%d'), ' DE ',
+			CASE MONTH(cc.fecha_final)
+			WHEN 1 THEN 'ENERO'
+			WHEN 2 THEN 'FEBRERO'
+			WHEN 3 THEN 'MARZO'
+			WHEN 4 THEN 'ABRIL'
+			WHEN 5 THEN 'MAYO'
+			WHEN 6 THEN 'JUNIO'
+			WHEN 7 THEN 'JULIO'
+			WHEN 8 THEN 'AGOSTO'
+			WHEN 9 THEN 'SEPTIEMBRE'
+			WHEN 10 THEN 'OCTUBRE'
+			WHEN 11 THEN 'NOVIEMBRE'
+			WHEN 12 THEN 'DICIEMBRE'
+			END, ' DE ', DATE_FORMAT(cc.fecha_final, '%Y')
+			) AS fecha_final_literal 
+			from mdl_configuracion_curso cc WHERE cc.id_course_moodle = $idcurso AND cc.estado_curso='REGISTRADO'";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 }

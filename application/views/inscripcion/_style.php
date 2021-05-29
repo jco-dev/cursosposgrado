@@ -22,8 +22,8 @@
 
     @media (min-width: 1200px) {
         #padding-container {
-            padding-right: 310px;
-            padding-left: 310px;
+            padding-right: 340px;
+            padding-left: 340px;
         }
     }
 </style>
