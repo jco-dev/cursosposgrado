@@ -285,9 +285,24 @@ class Inscripcionadmin extends PSG_Controller
                     }),
                     array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
                         if ($img == "") {
-                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                            return '<img id="imagen-ver" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                         } else {
-                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
+                            return '<a class="image-popup-vertical-fit" href="'. base_url($img)  .'">
+                                <img class="img img-thumbnail" src="'.base_url($img).'" width="120" id="img-preview" height="120"> &nbsp;
+                                <i class="fa fa-eye text-info"></i>
+                            </a><script>$(".image-popup-vertical-fit").magnificPopup({
+                                type: "image",
+                                closeOnContentClick: true,
+                                closeBtnInside: false,
+                                fixedContentPos: true,
+                                mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
+                                image: {
+                                    verticalFit: true,
+                                },
+                                zoom: {
+                                    enabled: true
+                                },
+                            });</script>';
                         }
                     }),
                     array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
@@ -362,7 +377,22 @@ class Inscripcionadmin extends PSG_Controller
                         if ($img == "") {
                             return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                         } else {
-                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto respaldo" />';
+                            return '<a class="image-popup-vertical-fit" href="'. base_url($img)  .'">
+                                <img class="img img-thumbnail" src="'.base_url($img).'" width="120" id="img-preview" height="120"> &nbsp;
+                                <i class="fa fa-eye text-info"></i>
+                            </a><script>$(".image-popup-vertical-fit").magnificPopup({
+                                type: "image",
+                                closeOnContentClick: true,
+                                closeBtnInside: false,
+                                fixedContentPos: true,
+                                mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
+                                image: {
+                                    verticalFit: true,
+                                },
+                                zoom: {
+                                    enabled: true
+                                },
+                            });</script>';
                         }
                     }),
                     array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {

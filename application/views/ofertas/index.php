@@ -3,20 +3,19 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>CURSOS POSGRADO | PSG</title>
+    <title>Cursos Posgrado | PSG</title>
     <meta name="description" content="No aside layout examples" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-
-    <link href="assets/css/themes/layout/header/base/dark.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/plugins/global/plugins.bundle.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/style.bundle.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/themes/layout/header/base/dark.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/themes/layout/header/menu/dark.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/themes/layout/brand/dark.css') ?>" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url('assets/css/themes/layout/aside/dark.css') ?>" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="<?= base_url('assets/img/posgrado.ico') ?>" />
 </head>
 
@@ -62,21 +61,21 @@
                     </div>
                 </div>
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
-							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-								<!--begin::Info-->
-								<div class="d-flex align-items-center flex-wrap mr-2">
-									<!--begin::Page Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Nuestros Cursos</h5>
-									<!--end::Page Title-->
-									<!--begin::Actions-->
-									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-									<span class="text-muted font-weight-bold mr-4">Bienvenido</span>
-									<!--end::Actions-->
-								</div>
-								<!--end::Info-->
-							</div>
-						</div>
+                    <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+                        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                            <!--begin::Info-->
+                            <div class="d-flex align-items-center flex-wrap mr-2">
+                                <!--begin::Page Title-->
+                                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Nuestros Cursos</h5>
+                                <!--end::Page Title-->
+                                <!--begin::Actions-->
+                                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+                                <span class="text-muted font-weight-bold mr-4">Bienvenido</span>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                    </div>
 
                     <div class="d-flex flex-column-fluid">
                         <div class="container-fluid px-lg-30">
@@ -164,14 +163,13 @@
             "font-family": "Poppins"
         };
     </script>
-    <script src="assets/plugins/global/plugins.bundle.js"></script>
-    <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-    <script src="assets/js/scripts.bundle.js"></script>
-    <script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-    <script src="assets/plugins/custom/gmaps/gmaps.js"></script>
-
-    <script src="assets/js/pages/widgets.js"></script>
-    <script src="assets/js/oferta/oferta.js"></script>
+    <script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
+    <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/custom/gmaps/gmaps.js') ?>"></script>
+    <script src="<?= base_url('assets/js/pages/widgets.js') ?>"></script>
+    <script src="<?= base_url('assets/js/oferta/oferta.js') ?>"></script>
 </body>
 
 </html>

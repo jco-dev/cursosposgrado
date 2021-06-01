@@ -248,9 +248,9 @@ jQuery(document).ready(function () {
 				"¡La imagen debe estar en formato JPG o PNG!",
 				"error"
 			);
-		} else if (imagen["size"] > 2000000) {
+		} else if (imagen["size"] > 7000000) {
 			$("#respaldo_transaccion").val("");
-			Swal.fire("error", "La imagen no debe pesar más de 2MB!", "error");
+			Swal.fire("error", "La imagen no debe pesar más de 7MB!", "error");
 		} else {
 			var datosImagen = new FileReader();
 			datosImagen.readAsDataURL(imagen);
@@ -258,29 +258,16 @@ jQuery(document).ready(function () {
 			$(datosImagen).on("load", function (event) {
 				var rutaImagen = event.target.result;
 				$("#img-preview").attr("src", rutaImagen);
-				$("a.image-popup-no-margins").attr("href", rutaImagen);
+				$("#img-preview").attr("data-original", rutaImagen);
+				// $("a.image-popup-no-margins").attr("href", rutaImagen);
 			});
 		}
 		//ocultar la imagen y visualiar
 		if ($(this).val() != "") {
-			$("a.image-popup-no-margins").removeClass("d-none");
+			$(".container").removeClass("d-none");
 		} else {
-			$("a.image-popup-no-margins").addClass("d-none");
+			$(".container").addClass("d-none");
 		}
-	});
-
-	$(".image-popup-no-margins").magnificPopup({
-		type: "image",
-		closeOnContentClick: true,
-		closeBtnInside: false,
-		fixedContentPos: true,
-		mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
-		image: {
-			verticalFit: true,
-		},
-		zoom: {
-			enabled: true, // don't foget to change the duration also in CSS
-		},
 	});
 
 	KTWizard3.init();

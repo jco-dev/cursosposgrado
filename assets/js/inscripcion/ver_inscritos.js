@@ -146,8 +146,6 @@ var KTDatatablesVerInscritos = (function () {
 						}
 					}
 				);
-
-				// console.log(id + " confirmar inscripcion");
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {

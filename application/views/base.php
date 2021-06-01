@@ -20,6 +20,7 @@
 	<link href="<?= base_url('assets/css/themes/layout/header/menu/light.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/themes/layout/brand/dark.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/themes/layout/aside/dark.css') ?>" rel="stylesheet" type="text/css" />
+	<link href="<?= base_url('assets/css/viewerjs/css/viewer.css') ?>" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="https://plataformavirtual.upea.bo/theme/image.php/boost/theme/1608126776/favicon" />
 
 </head>
@@ -600,7 +601,7 @@
 	<script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/js/magnific-popup/jquery.magnific-popup.min.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
-
+	<script src="<?= base_url('assets/js/viewerjs/js/viewer.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>

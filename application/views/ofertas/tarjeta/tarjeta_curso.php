@@ -98,8 +98,8 @@
                     </a> -->
 
                     <a href="<?= base_url('informacion/index/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold" target="_blank">
-                        <i class="fa fa-th-list icon-sm"></i>
-                        Informaci&oacute;n
+                        <i class="fa fa-info-circle"></i>
+                        Me interesa
                     </a>
 
                     <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-success btn-shadow-hover font-size-sm btn-sm font-weight-bold px-4" target="_blank">

@@ -59,22 +59,22 @@
     <!--end::Search-->
     <!--begin::Facebook-->
     <div class="topbar-item">
-        <a href="#" class="btn btn-icon btn-clean btn-lg mr-1">
+        <a href="https://www.facebook.com/cursosposgradoupea" target="_blank" class="btn btn-icon btn-clean btn-lg mr-1">
             <i class="socicon-facebook"></i>
         </a>
     </div>
     <!--end::Facebook-->
     <!--begin::Youtube-->
     <div class="topbar-item">
-        <a href="#" class="btn btn-icon btn-clean btn-lg mr-1">
+        <a href="https://youtube.com/channel/UCoLezWEvas_loXlb7hivXRQ" target="_blank" class="btn btn-icon btn-clean btn-lg mr-1">
             <i class="socicon-youtube"></i>
         </a>
     </div>
     <!--end::Youtube-->
     <!--begin::Twitter-->
     <div class="topbar-item">
-        <a href="#" class="btn btn-icon btn-clean btn-lg mr-1">
-            <i class="socicon-twitter"></i>
+        <a href="https://t.me/joinchat/jeMsyzXxHDg4N2Ix" target="_blank" class="btn btn-icon btn-clean btn-lg mr-1">
+            <i class="socicon-telegram"></i>
         </a>
     </div>
     <!--end::Twitter-->
