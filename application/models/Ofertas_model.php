@@ -22,7 +22,7 @@ class Ofertas_model extends PSG_Model
 			mcc.url_pdf,
 			mcc.celular_referencia,
 			mcc.descuento,
-			mcc.fecha_inicio_descuento,
+			DATE_FORMAT(mcc.fecha_inicio_descuento, '%d-%m-%Y') as fecha_inicio_descuento,
 			DATE_FORMAT(mcc.fecha_fin_descuento, '%d-%m-%Y') as fecha_fin_descuento
 			from mdl_configuracion_curso mcc
 			inner join mdl_course mc on mcc.id_course_moodle = mc.id 

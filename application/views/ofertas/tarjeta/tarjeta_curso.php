@@ -50,7 +50,11 @@
                                 <i class="flaticon-price-tag"></i>
                             </span>
                             <span class="font-size-lg font-weight-bold">Inversi&oacute;n: &nbsp;</span>
-                            <span class="font-size-md font-weight-normal">Bs. <?= $curso->inversion ?></span>
+                            <?php if (strtotime(date('d-m-Y')) >= strtotime($curso->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($curso->fecha_fin_descuento) && $curso->descuento > 0) { ?>
+                                <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= $curso->inversion ?></del> &nbsp; <span class="font-weight-bold">Bs. <?= ($curso->inversion) - ($curso->inversion * $curso->descuento/ 100) ?></span> </span>
+                            <?php }else{ ?>
+                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= $curso->inversion ?></span> </span>
+                            <?php } ?>
                         </a>
                     </li>
 
@@ -63,14 +67,14 @@
                             <span class="font-size-md font-weight-normal"><?= $curso->celular_referencia ?></span>
                         </a>
                     </li>
-                    <?php if (date('d-m-Y') <= $curso->fecha_fin_descuento && $curso->descuento > 0) { ?>
+                    <?php if (strtotime(date('d-m-Y')) >= strtotime($curso->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($curso->fecha_fin_descuento) && $curso->descuento > 0) { ?>
                         <li class="navi-item">
                             <a href="#" class="navi-link py-1">
                                 <span class="navi-icon">
                                     <i class="navi-icon flaticon2-chronometer"></i>
                                 </span>
                                 <span class="font-size-lg font-weight-bold">Descuento: &nbsp;</span>
-                                <span class="font-size-md font-weight-normal"> <span class="label label-warning label-inline"><?= $curso->descuento ?>%</span> hasta <span class="label label-warning label-inline"><?= $curso->fecha_fin_descuento ?></span></span>
+                                <span class="font-size-md font-weight-normal"> <span class="label label-warning label-inline"><?= $curso->descuento ?>%</span> <span class="text-warning font-weight-boldest">hasta</span>  <span class="label label-warning label-inline"><?= $curso->fecha_fin_descuento ?></span></span>
                             </a>
                         </li>
                     <?php } ?>
