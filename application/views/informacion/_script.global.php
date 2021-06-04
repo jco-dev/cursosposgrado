@@ -70,4 +70,5 @@
 <script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 <script src="<?= base_url('assets/js/pages/crud/forms/widgets/select2.js') ?>"></script>
-<script src="<?= base_url('assets/js/magnific-popup/jquery.magnific-popup.min.js') ?>"></script>
+
+<script src="<?= base_url('assets/js/date.js') ?>"></script>

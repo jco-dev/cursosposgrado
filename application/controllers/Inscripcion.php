@@ -41,6 +41,9 @@ class Inscripcion extends CI_Controller
         $this->form_validation->set_rules('celular', 'celular', 'callback_validar_celular');
         $this->form_validation->set_rules('fecha_pago', 'fecha pago', 'required|callback_date_valid|callback_fecha_vacio');
         $this->form_validation->set_rules('monto_pago', 'monto pago', 'required|callback_monto_valid');
+        $this->form_validation->set_rules('anio1', 'año', 'required');
+		$this->form_validation->set_rules('mes1', 'mes', 'required');
+		$this->form_validation->set_rules('dia1', 'dia', 'required');
 
         if ($this->form_validation->run() == false) {
             // if(false){
@@ -59,7 +62,7 @@ class Inscripcion extends CI_Controller
                 $paterno = $this->input->post('paterno');
                 $materno = $this->input->post('materno');
                 $genero = $this->input->post('genero');
-                $fecha_nacimiento = $this->input->post('fecha_nacimiento');
+                $fecha_nacimiento = $this->input->post('anio1') . '-' . $this->input->post('mes1') . '-' . $this->format_dia(intval($this->input->post('dia1')));
                 $celular = $this->input->post('celular');
                 $id_municipio = $this->input->post('ciudad_residencia');
                 $modalidad_inscripcion = $this->input->post('modalidad_inscripcion');
@@ -229,6 +232,15 @@ class Inscripcion extends CI_Controller
         // var_dump($_FILES['respaldo_transaccion']);
 
     }
+
+    public function format_dia($dia)
+	{
+		if ($dia >= 1 && $dia <= 9) {
+			return "0" + $dia;
+		} else {
+			return $dia;
+		}
+	}
 
     public function buscar_por_ci()
     {

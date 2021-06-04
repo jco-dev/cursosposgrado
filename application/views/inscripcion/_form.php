@@ -102,13 +102,48 @@
         </div>
     </div>
 
-    <!-- <br>
+    <br>
     <div class="card card-custom">
-        <div class="card-body form-group pb-0">
-            <label for="fecha_nacimiento"> Fecha Nacimiento </label>
-            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" />
+        <div class="card-body form-group row pb-0" id="fecha">
+            <div class="col-lg-12">
+                <label for="celular"> Fecha de Nacimiento <span class="text-danger">(*)</span></label>
+            </div>
+            <div class="form-group col-lg-2 col-sm-12 col-md-2">
+                <select name="anio1" id="anio1" style="width: 100%;" required>
+                    <option value=""></option>
+                    <?php
+                    $anio = intval(date('Y')) - 10;
+                    for ($i = 0; $i < 100; $i++) {
+                        echo "<option value=" . $anio . ">" . $anio . "</option>";
+                        $anio--;
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group col-lg-3 col-sm-12 col-md-3">
+                <select name="mes1" id="mes1" style="width: 100%;" required>
+                    <option value=""></option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-2 col-sm-12 col-md-2">
+                <select name="dia1" id="dia1" style="width: 100%;" required>
+                    <option value=""></option>
+                </select>
+            </div>
         </div>
-    </div> -->
+    </div>
 
     <br>
     <div class="card card-custom">

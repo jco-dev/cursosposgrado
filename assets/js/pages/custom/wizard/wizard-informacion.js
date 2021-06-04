@@ -136,6 +136,27 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
+					anio: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					mes: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					dia: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -170,6 +191,42 @@ jQuery(document).ready(function () {
 	$("#profesion_oficio").select2({
 		placeholder: "Elige",
 	});
+
+	$("#anio").select2({
+		placeholder: "Año",
+	});
+	$("#anio").change(function () {
+		$("#mes").removeAttr("disabled");
+	});
+
+	$("#mes").select2({
+		placeholder: "Mes",
+	});
+	$("#mes").prop("disabled", "disabled");
+	$("#mes").change(function () {
+		$("#dia").removeAttr("disabled");
+	});
+
+	$("#dia").select2({
+		placeholder: "Dia",
+	});
+	$("#dia").prop("disabled", "disabled");
+
+	$("#fecha").on("change", "#anio,#mes", function (e) {
+		let anio = parseInt($("#anio").val());
+		let mes = parseInt($("#mes").val()) - 1;
+		let res = Date.getDaysInMonth(anio, mes);
+		llenar_dia(res);
+	});
+
+	const llenar_dia = (num) => {
+		$("#dia").children().remove();
+		let opcion = "";
+		for (let i = 1; i <= num; i++) {
+			opcion += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#dia").append(opcion);
+	};
 
 	KTWizard3.init();
 
@@ -225,6 +282,14 @@ jQuery(document).ready(function () {
 		});
 	});
 
+	function format_dia(dia) {
+		if (dia >= 1 && dia <= 9) {
+			return "0" + dia;
+		} else {
+			return dia;
+		}
+	}
+
 	// traer datos
 	$("#ci").on("change", function (e) {
 		let ci = $(this).val();
@@ -253,8 +318,15 @@ jQuery(document).ready(function () {
 
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
+				
+				if(response.datos[0].fecha_nacimiento != "")
+				{
+					let fecha = (response.datos[0].fecha_nacimiento).split("-");
+					$("#anio").val(fecha[0]).trigger("change");
+					$("#mes").val(fecha[1]).trigger("change");
+					$("#dia").val(parseInt(fecha[2])).trigger("change");
+				}
 
-				$("#fecha_nacimiento").val(response.datos[0].fecha_nacimiento);
 				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
 
 				$("#ciudad_residencia")
@@ -299,12 +371,14 @@ jQuery(document).ready(function () {
 	});
 
 	$('input[name=genero][type="radio"]').on("change", function () {
-		console.log($(this).val());
 		$("#m_genero").text($(this).val());
 	});
 
-	$("#fecha_nacimiento").on("change", function () {
-		$("#m_fecha_nacimiento").html($(this).val());
+	$("#fecha").on("change", "#anio,#mes, #dia", function (e) {
+		let anio = $("#anio").val()
+		let mes = $("#mes").val()
+		let dia = $('#dia').val();
+		$("#m_fecha_nacimiento").html(anio +'-'+mes+'-'+format_dia(dia));
 	});
 
 	$("#celular").on("change", function () {
@@ -318,4 +392,6 @@ jQuery(document).ready(function () {
 	$("#profesion_oficio").on("change", function () {
 		$("#m_profesion_oficio").html($("#profesion_oficio :selected").text());
 	});
+
+	
 });

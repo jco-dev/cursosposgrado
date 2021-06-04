@@ -31,7 +31,9 @@ class Informacion extends CI_Controller
 		$this->form_validation->set_rules('correo', 'correo', 'required|valid_email');
 		$this->form_validation->set_rules('nombre', 'nombre', 'required');
 		$this->form_validation->set_rules('paterno', 'paterno', 'required');
-		$this->form_validation->set_rules('fecha_nacimiento', 'fecha nacimiento', 'callback_date_valid|callback_fecha_vacio');
+		$this->form_validation->set_rules('anio', 'año', 'required');
+		$this->form_validation->set_rules('mes', 'mes', 'required');
+		$this->form_validation->set_rules('dia', 'dia', 'required');
 		$this->form_validation->set_rules('celular', 'celular', 'callback_validar_celular');
 
 		if ($this->form_validation->run() == false) {
@@ -52,7 +54,7 @@ class Informacion extends CI_Controller
 				$paterno = $this->input->post('paterno');
 				$materno = $this->input->post('materno');
 				$genero = $this->input->post('genero');
-				$fecha_nacimiento = $this->input->post('fecha_nacimiento');
+				$fecha_nacimiento = $this->input->post('anio') . '-' . $this->input->post('mes') . '-' . $this->format_dia(intval($this->input->post('dia')));
 				$celular = $this->input->post('celular');
 				$id_municipio = $this->input->post('ciudad_residencia');
 				$id_profesion_oficio = $this->input->post('profesion_oficio');
@@ -100,18 +102,15 @@ class Informacion extends CI_Controller
 						if (is_numeric($res)) {
 
 							$respuesta = $this->enviar_correo_personal($id_curso, $res);
-							if($respuesta)
-							{
+							if ($respuesta) {
 								$this->output->set_content_type('application/json')->set_output(
 									json_encode(['exito' => "Registrado correctamente y enviado la información a su correo ingresado"])
 								);
-							}else{
+							} else {
 								$this->output->set_content_type('application/json')->set_output(
 									json_encode(['exito' => "Registrado correctamente le enviaremos la información a su correo registrado"])
 								);
 							}
-
-							
 						} else {
 							$this->output->set_content_type('application/json')->set_output(
 								json_encode(['error' => "Error al registrarse por favor intente de nuevo"])
@@ -120,41 +119,10 @@ class Informacion extends CI_Controller
 					}
 				} else {
 
-					// actualizar datos en participante y insertar la preinscripcion
-					$respuesta = $this->sql_ssl->listar_tabla(
-						'mdl_participante',
-						['ci' => $ci]
+					$this->output->set_content_type('application/json')->set_output(
+						// json_encode(['exito' => "Datos actualizados correctamente"])
+						json_encode(['warning' => "Ya se encuentra registrado"])
 					);
-
-					$id_participante = $respuesta[0]->id_participante;
-					$respuesta = $this->sql_ssl->modificar_tabla(
-						'mdl_participante',
-						[
-							'expedido' => $expedido,
-							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
-							'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
-							'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
-							'genero' => $genero,
-							'id_municipio' => $id_municipio,
-							'id_profesion_oficio' => $id_profesion_oficio,
-							'fecha_nacimiento' => $fecha_nacimiento,
-							'correo' => $correo,
-							'celular' => $celular
-						],
-						['id_participante' => $id_participante]
-					);
-
-
-					if ($respuesta) {
-						$this->output->set_content_type('application/json')->set_output(
-							// json_encode(['exito' => "Datos actualizados correctamente"])
-							json_encode(['exito' => "Ya se encuentra registrado"])
-						);
-					} else {
-						$this->output->set_content_type('application/json')->set_output(
-							json_encode(['error' => "Error al registrarse al curso"])
-						);
-					}
 				}
 			} else {
 				$this->output->set_content_type('application/json')->set_output(
@@ -166,22 +134,22 @@ class Informacion extends CI_Controller
 
 	public function enviar_correo_personal($idcurso, $id_preinscripcion_curso)
 	{
-        $respuesta1 = $this->inscripcion_model->get_data_informacion($idcurso);
+		$respuesta1 = $this->inscripcion_model->get_data_informacion($idcurso);
 
-        $send = new SendEmail();
-        $res = $send->enviar_correo_personal($respuesta1);
-        if ($res) {  
-			if(is_numeric($id_preinscripcion_curso)){
+		$send = new SendEmail();
+		$res = $send->enviar_correo_personal($respuesta1);
+		if ($res) {
+			if (is_numeric($id_preinscripcion_curso)) {
 				$respuesta = $this->sql_ssl->modificar_tabla(
 					'mdl_preinscripcion_curso',
 					['estado_correo' => 1],
 					['id_preinscripcion_curso' => $id_preinscripcion_curso]
-				); 
-			}			         
-            return true;
-        } else {
-            return false;
-        }
+				);
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function getRecaptcha($secret_key)
@@ -283,6 +251,15 @@ class Informacion extends CI_Controller
 					]
 				));
 			}
+		}
+	}
+
+	public function format_dia($dia)
+	{
+		if ($dia >= 1 && $dia <= 9) {
+			return "0" + $dia;
+		} else {
+			return $dia;
 		}
 	}
 }

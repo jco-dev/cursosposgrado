@@ -85,3 +85,4 @@
         });
     });
 </script>
+<script src="<?= base_url('assets/js/date.js') ?>"></script>
