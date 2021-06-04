@@ -29,8 +29,8 @@ var KTWizard3 = (function () {
 					KTUtil.scrollTop();
 				} else {
 					Swal.fire({
-						text: "Lo sentimos, parece que se han detectado algunos errores. Vuelve a intentarlo.",
-						icon: "error",
+						text: "Por favor, llene los campos obligatorios.",
+						icon: "warning",
 						buttonsStyling: false,
 						confirmButtonText: "Ok",
 						customClass: {

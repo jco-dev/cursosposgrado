@@ -1,16 +1,15 @@
 <div class="col-lg-4 col-md-6 col-xs-12">
 
     <div class="card card-custom gutter-b">
-        <!--begin::Body-->
+
         <div class="card-body p-0 pb-3">
-            <!--begin::Image-->
+
             <div class="">
                 <img src="<?= base_url($curso->banner_curso) ?>" class="img-fluid rounded-top" alt="">
             </div>
-            <!--end::Image-->
 
             <div class="p-2">
-                <p class="text-dark-75 font-size-lg font-weight-boldest text-center mb-2">
+                <p class="text-dark-75 font-size-md font-weight-boldest text-center mb-2">
                     <?= mb_convert_case(preg_replace('/\s+/', ' ', trim($curso->detalle_curso)), MB_CASE_UPPER) ?>
                 </p>
 
@@ -51,9 +50,9 @@
                             </span>
                             <span class="font-size-lg font-weight-bold">Inversi&oacute;n: &nbsp;</span>
                             <?php if (strtotime(date('d-m-Y')) >= strtotime($curso->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($curso->fecha_fin_descuento) && $curso->descuento > 0) { ?>
-                                <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= $curso->inversion ?></del> &nbsp; <span class="font-weight-bold">Bs. <?= ($curso->inversion) - ($curso->inversion * $curso->descuento/ 100) ?></span> </span>
+                                <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($curso->inversion) ?></del> &nbsp; <span class="font-weight-bold">Bs. <?= intval(($curso->inversion) - ($curso->inversion * $curso->descuento/ 100)) ?></span> </span>
                             <?php }else{ ?>
-                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= $curso->inversion ?></span> </span>
+                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($curso->inversion) ?></span> </span>
                             <?php } ?>
                         </a>
                     </li>
@@ -94,7 +93,7 @@
                 <div class="d-flex justify-content-around">
                     <a href="<?= base_url($curso->url_pdf) ?>" target="_blank" class="btn btn-info btn-shadow-hover font-size-sm btn-sm font-weight-bold">
                         <i class="fa fa-eye icon-sm"></i>
-                        Detalles
+                        Contenido
                     </a>
                     <!-- <a href="javascript:;" data-id="<?= base64_encode($this->encryption->encrypt($curso->id_course_moodle)) ?>" id="descargar_pdf_curso" name="descargar_pdf_curso" class="btn btn-info btn-shadow-hover font-size-sm btn-sm font-weight-bold">
                         <i class="fa fa-eye icon-sm"></i>
@@ -102,8 +101,7 @@
                     </a> -->
 
                     <a href="<?= base_url('informacion/index/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold" target="_blank">
-                        <i class="fa fa-info-circle"></i>
-                        Me interesa
+                        M&aacute;s informaci&oacute;n
                     </a>
 
                     <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>" data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>" class="btn btn-success btn-shadow-hover font-size-sm btn-sm font-weight-bold px-4" target="_blank">

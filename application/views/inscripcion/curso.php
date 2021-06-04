@@ -23,14 +23,9 @@
         <br>
         <div class="card card-custom" style=" border-top: 7px solid #0F1761;">
             <div class="card-body">
-                <h2 class="card-label border-left-info text-justify text-uppercase">
+                <h4 class="card-label border-left-info text-justify text-uppercase">
                     <?= $data[0]->detalle_curso ?>
-                </h2>
-                <br>
-                <h5 class="text-justify font-size-lg font-weight-normal">
-                    EL PLAZO DE INSCRIPCIÓN DEL CURSO DE GESTIÓN Y ADMINISTRACIÓN DE HERRAMIENTAS PARA LA 
-                    EDUCACIÓN VIRTUAL ES HASTA EL <?= isset($datos)? mb_convert_case(preg_replace('/\s+/', ' ', trim($datos[0]->nombre_dia)), MB_CASE_UPPER) :" " ;?>, <?= isset($datos)? $datos[0]->fecha_inicial_literal :"" ;?>.
-                </h5>
+                </h4>
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
                     💰 OPCIONES DE PAGO:<br>&nbsp;
@@ -42,36 +37,6 @@
                         <li>HACIENDO EL PAGO DIRECTAMENTE EN NUESTRA OFICINA: EDIFICIO EMBLEMÁTICO UPEA, 3ER PISO, OFICINA 3 DE POSGRADO - AV. SUCRE S/N ZONA VILLA ESPERANZA :: CIUDAD DE EL ALTO - BOLIVIA</li>
                     </ol>
                 </h5>
-                <hr>
-                <h5 class="text-justify font-size-lg font-weight-normal">
-                    POSTERIORMENTE 👉 ACCEDER AL FORMULARIO DE INSCRIPCIÓN, ✍️ REGISTRAR SUS DATOS PERSONALES Y 
-                    SUBIR EL COMPROBANTE DE SU PAGO (FOTOGRAFÍA O CAPTURA DE PANTALLA) 🏞️
-                </h5>
-                <hr>
-                <h5 class="text-justify font-size-lg font-weight-normal">
-                    EL CURSO INICIA EL <?= isset($datos)? mb_convert_case(preg_replace('/\s+/', ' ', trim($datos[0]->nombre_dia)), MB_CASE_UPPER)  : '0 ' ;?> <?= isset($datos)? $datos[0]->fecha_inicial_literal : ' ' ;?> - DURARÁ <?= isset($datos)? intval($datos[0]->semanas) : '2 ' ;?> SEMANAS. <br><br>
-
-                    LA MODALIDAD DEL CURSO SERÁ TOTALMENTE VIRTUAL, LOS CONTENIDOS ESTARÁN COLGADOS EN 
-                    NUESTRA PLATAFORMA MOODLE PARA QUE USTED PUEDA DESARROLLARLO SEGÚN SU DISPONIBILIDAD DE TIEMPO, 
-                    TAMBIÉN HABRÁ ACOMPAÑAMIENTO AL PROCESO DE FORMACIÓN CON DOCENTE EN VIVO VÍA ZOOM, DOS VECES POR SEMANA <br><br>
-
-                    🕛 HORARIO DE LAS SESIONES EN VIVO: <?= isset($datos)? $datos[0]->horario : '0 ' ;?>
-                </h5>
-
-                <hr>
-                <h5 class="text-justify font-size-lg font-weight-normal">
-                    📃EL CERTIFICADO SERÁ EMITIDO POR LA DIRECCIÓN DE POSGRADO DE LA UNIVERSIDAD PÚBLICA DE EL ALTO, 
-                    CON UNA CARGA HORARIA DE <?= isset($datos)? $datos[0]->carga_horaria : '180 ' ;?> HORAS ACADÉMICAS.<br><br>
-
-                    PODEMOS ENVIARLE SU CERTIFICADO VIA DIGITAL O FÍSICA.<br><br>
-
-                    SI TUVIERA DUDAS NO DUDE EN ESCRIBIRNOS O LLAMARNOS.<br><br>
-
-                    *Este formulario servirá tanto para la inscripción al curso y posterior para la elaboración de los certificados, por lo que todos los datos deben ser ingresados de manera correcta. <br><br>
-
-                    **La institución no se hará responsable si se registraron los datos de manera incorrecta.
-                </h5>
-                <br>
                 <span class="text-danger">(*) Obligatorio</span>
             </div>
         </div>

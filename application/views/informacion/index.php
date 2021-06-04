@@ -15,19 +15,21 @@
         <div class="card card-custom p-0" style="border: 2px solid #000000;">
             <div class="card-body p-0">
                 <img src="<?= base_url($data[0]->banner_curso) ?>" alt="Banner del curso" class="img-fluid rounded" style="width: 900px;height: 157px;">
-            </div>
+            </div>            
         </div>
 
         <br>
         <div class="card card-custom" style=" border-top: 7px solid #0F1761;">
             <div class="card-body">
-                <h3 class="card-label border-left-info">
+                <h4 class="card-label border-left-info text-justify text-uppercase">
                     <?= $data[0]->detalle_curso ?>
-                </h3>
-                <!-- <button class="btn btn-success" id="imprimir">Imprimir</button> -->
+                </h4>
+                <center><span class=" h6 text-primary font-weight-bold">LLene el formulario para recibir m&aacute;s informaci&oacute;n del curso.</span></center>
+                <br>
                 <span class="text-danger">(*) Obligatorio</span>
             </div>
         </div>
+        
         <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
             <div class="wizard-nav d-none">
                 <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">

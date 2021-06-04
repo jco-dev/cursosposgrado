@@ -27,11 +27,14 @@
                         <th>Municipio</th>
                         <th>celular</th>
                         <th>curso</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Inscripci&oacute;n</th>
+                        <th>Estado</th>
                         <th>tipo pago</th>
                         <th>monto pago</th>
                         <th>transaccion</th>
                         <th>certificaci&oacute;n</th>
-                        <th>Estado</th>
                         <th>respaldo</th>
                         <th>Cambiar estado</th>
                     </tr>

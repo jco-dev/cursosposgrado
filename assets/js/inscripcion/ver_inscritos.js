@@ -57,6 +57,22 @@ var KTDatatablesVerInscritos = (function () {
 						width: 150,
 					},
 					{
+						field: "Inicio",
+						title: "Inicio",
+					},
+					{
+						field: "Fin",
+						title: "Fin",
+					},
+					{
+						field: "Inscripcion",
+						title: "Inscripcion",
+					},
+					{
+						field: "estado",
+						title: "estado",
+					},
+					{
 						field: "tipo_pago",
 						title: "tipo pago",
 					},
@@ -71,10 +87,6 @@ var KTDatatablesVerInscritos = (function () {
 					{
 						field: "tipo_certificacion",
 						title: "certificacion",
-					},
-					{
-						field: "estado",
-						title: "estado,",
 					},
 					{
 						field: "respaldo_pago",
@@ -235,6 +247,22 @@ jQuery(document).ready(function () {
 						width: 150,
 					},
 					{
+						field: "Inicio",
+						title: "Inicio",
+					},
+					{
+						field: "Fin",
+						title: "Fin",
+					},
+					{
+						field: "Inscripcion",
+						title: "Inscripcion",
+					},
+					{
+						field: "estado",
+						title: "estado",
+					},
+					{
 						field: "tipo_pago",
 						title: "tipo pago",
 					},
@@ -246,14 +274,9 @@ jQuery(document).ready(function () {
 						field: "id_transaccion",
 						title: "transaccion",
 					},
-
 					{
 						field: "tipo_certificacion",
 						title: "certificacion",
-					},
-					{
-						field: "estado",
-						title: "estado",
 					},
 					{
 						field: "respaldo_pago",
@@ -342,6 +365,22 @@ jQuery(document).ready(function () {
 						width: 150,
 					},
 					{
+						field: "Inicio",
+						title: "Inicio",
+					},
+					{
+						field: "Fin",
+						title: "Fin",
+					},
+					{
+						field: "Inscripcion",
+						title: "Inscripcion",
+					},
+					{
+						field: "estado",
+						title: "estado",
+					},
+					{
 						field: "tipo_pago",
 						title: "tipo pago",
 					},
@@ -356,10 +395,6 @@ jQuery(document).ready(function () {
 					{
 						field: "tipo_certificacion",
 						title: "certificacion",
-					},
-					{
-						field: "estado",
-						title: "estado",
 					},
 					{
 						field: "respaldo_pago",

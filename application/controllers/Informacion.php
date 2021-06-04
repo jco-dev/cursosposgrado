@@ -39,9 +39,10 @@ class Informacion extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode(array('warning' => validation_errors())));
 		} else {
 
-			$res = (array) $this->getRecaptcha($this->input->post('g-recaptcha-response'));
+			// $res = (array) $this->getRecaptcha($this->input->post('g-recaptcha-response'));
 
-			if (isset($res['success']) && $res['success'] == true && isset($res['score']) && $res['score'] > 0.5) {
+			// if (isset($res['success']) && $res['success'] == true && isset($res['score']) && $res['score'] > 0.5) {
+			if (true) {
 				// datos participante
 				$ci = $this->input->post('ci');
 				$expedido = $this->input->post('expedido');
@@ -73,9 +74,9 @@ class Informacion extends CI_Controller
 						[
 							'ci' => $ci,
 							'expedido' => $expedido,
-							'nombre' => ucwords(strtoupper(trim($nombre))),
-							'paterno' => ucwords(strtoupper(trim($paterno))),
-							'materno' => ucwords(strtoupper(trim($materno))),
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+							'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
 							'genero' => $genero,
 							'id_municipio' => $id_municipio,
 							'id_profesion_oficio' => $id_profesion_oficio,
@@ -97,9 +98,20 @@ class Informacion extends CI_Controller
 						);
 
 						if (is_numeric($res)) {
-							$this->output->set_content_type('application/json')->set_output(
-								json_encode(['exito' => "Registrado correctamente le enviaremos la información a su correo registrado"])
-							);
+
+							$respuesta = $this->enviar_correo_personal($id_curso, $res);
+							if($respuesta)
+							{
+								$this->output->set_content_type('application/json')->set_output(
+									json_encode(['exito' => "Registrado correctamente y enviado la información a su correo ingresado"])
+								);
+							}else{
+								$this->output->set_content_type('application/json')->set_output(
+									json_encode(['exito' => "Registrado correctamente le enviaremos la información a su correo registrado"])
+								);
+							}
+
+							
 						} else {
 							$this->output->set_content_type('application/json')->set_output(
 								json_encode(['error' => "Error al registrarse por favor intente de nuevo"])
@@ -119,9 +131,9 @@ class Informacion extends CI_Controller
 						'mdl_participante',
 						[
 							'expedido' => $expedido,
-							'nombre' => ucwords(strtoupper(trim($nombre))),
-							'paterno' => ucwords(strtoupper(trim($paterno))),
-							'materno' => ucwords(strtoupper(trim($materno))),
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+							'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
 							'genero' => $genero,
 							'id_municipio' => $id_municipio,
 							'id_profesion_oficio' => $id_profesion_oficio,
@@ -150,6 +162,26 @@ class Informacion extends CI_Controller
 				);
 			}
 		}
+	}
+
+	public function enviar_correo_personal($idcurso, $id_preinscripcion_curso)
+	{
+        $respuesta1 = $this->inscripcion_model->get_data_informacion($idcurso);
+
+        $send = new SendEmail();
+        $res = $send->enviar_correo_personal($respuesta1);
+        if ($res) {  
+			if(is_numeric($id_preinscripcion_curso)){
+				$respuesta = $this->sql_ssl->modificar_tabla(
+					'mdl_preinscripcion_curso',
+					['estado_correo' => 1],
+					['id_preinscripcion_curso' => $id_preinscripcion_curso]
+				); 
+			}			         
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	public function getRecaptcha($secret_key)

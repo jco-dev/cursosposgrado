@@ -92,6 +92,67 @@ var KTDatatablesVerInformacion = (function () {
 				);
 
 				// console.log(id + " confirmar inscripcion");
+			})
+			.on("change", "select#estado_contacto", function () {
+				let id = $(this).attr("data-id");
+				let data = $(this).val();
+				let nombre = "";
+				let curso = "";
+				// traer datos del estudiante y curso para mostrar
+				$.post(
+					"/inscripcion/datos_estudiante_curso",
+					{
+						id,
+					},
+					function (response) {
+						if (typeof response.exito != "undefined") {
+							nombre = response.exito[0].nombre_completo;
+							curso = response.exito[0].curso;
+							Swal.fire({
+								title:
+									"¿Si todo esta bien ?. Por favor confirme el cambio de estado!",
+								html: `<strong>NOMBRE: </strong> ${nombre} <br><strong>AL CURSO:</strong> ${curso}<br>¡Esta acción no se puede deshacer!`,
+								icon: "warning",
+								showCancelButton: true,
+								buttonsStyling: false,
+								confirmButtonText: "Si, confirmar!",
+								cancelButtonText: "No, cancelar",
+								customClass: {
+									confirmButton: "btn font-weight-bold btn-primary",
+									cancelButton: "btn font-weight-bold btn-default",
+								},
+							}).then(function (result) {
+								if (result.value) {
+									$.post(
+										"/inscripcionadmin/confirmar_cambio_estado_contacto",
+										{ id: id, data: data },
+										function (response) {
+											if (typeof response.exito != "undefined") {
+												Swal.fire("Exito!", response.exito, "success");
+												tbl_ver_informacion.DataTable().ajax.reload();
+											}
+											if (typeof response.error != "undefined") {
+												tbl_ver_informacion.DataTable().ajax.reload();
+												Swal.fire("Error!", response.error, "error");
+											}
+										}
+									);
+								} else if (result.dismiss === "cancel") {
+									tbl_ver_informacion.DataTable().ajax.reload();
+									Swal.fire({
+										text: "No se ha confirmado el cambio de estado!.",
+										icon: "error",
+										buttonsStyling: false,
+										confirmButtonText: "Ok",
+										customClass: {
+											confirmButton: "btn font-weight-bold btn-primary",
+										},
+									});
+								}
+							});
+						}
+					}
+				);
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {

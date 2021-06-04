@@ -70,7 +70,7 @@
 		<div class="d-flex flex-row flex-column-fluid page">
 			<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 				<div class="brand flex-column-auto" id="kt_brand">
-					<a href="index.html" class="brand-logo">
+					<a href="/" class="brand-logo">
 						<span class="text-white font-weight-boldest">PSG</span>
 					</a>
 					<button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">

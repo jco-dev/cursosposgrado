@@ -14,11 +14,15 @@
                     <tr>
                         <th>#</th>
                         <th>ci</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
+                        <th>Nombre</th>                        
                         <th>Profesi&oacute;n u Oficio</th>
                         <th>celular</th>
                         <th>curso</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Inscripci&oacute;n</th>
+                        <th>Contacto</th>
+                        <th>Correo</th>
                         <th>estado</th>
                         <th>Acciones</th>
                     </tr>

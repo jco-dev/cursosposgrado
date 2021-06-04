@@ -98,9 +98,9 @@ class Inscripcionadmin extends PSG_Controller
                     [
                         'ci' => $ci,
                         'expedido' => $expedido,
-                        'nombre' => ucwords(strtoupper(trim($nombre))),
-                        'paterno' => ucwords(strtoupper(trim($paterno))),
-                        'materno' => ucwords(strtoupper(trim($materno))),
+                        'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+                        'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+                        'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
                         'genero' => $genero,
                         'id_municipio' => $id_municipio,
                         'fecha_nacimiento' => $fecha_nacimiento,
@@ -162,9 +162,9 @@ class Inscripcionadmin extends PSG_Controller
                     'mdl_participante',
                     [
                         'expedido' => $expedido,
-                        'nombre' => ucwords(strtoupper(trim($nombre))),
-                        'paterno' => ucwords(strtoupper(trim($paterno))),
-                        'materno' => ucwords(strtoupper(trim($materno))),
+                        'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+                        'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+                        'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
                         'genero' => $genero,
                         'id_municipio' => $id_municipio,
                         'fecha_nacimiento' => $fecha_nacimiento,
@@ -266,13 +266,16 @@ class Inscripcionadmin extends PSG_Controller
                     array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
                         return "<small>$curso</small>";
                     }),
-                    array('dt' => 6, 'db' => 'tipo_pago'),
-                    array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
-                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    array('dt' => 6, 'db' => 'fecha_inicial', 'formatter' => function ($inicio) {
+                        return "<span class='label label-primary label-inline mr-2'>$inicio</span>";
                     }),
-                    array('dt' => 8, 'db' => 'id_transaccion'),
-                    array('dt' => 9, 'db' => 'tipo_certificacion'),
-                    array('dt' => 10, 'db' => 'estado', 'formatter' => function ($estado) {
+                    array('dt' => 7, 'db' => 'fecha_final', 'formatter' => function ($final) {
+                        return "<span class='label label-primary label-inline mr-2'>$final</span>";
+                    }),
+                    array('dt' => 8, 'db' => 'fecha_preinscripcion', 'formatter' => function ($final) {
+                        return "<small>$final</small>";
+                    }),
+                    array('dt' => 9, 'db' => 'estado', 'formatter' => function ($estado) {
                         if ($estado == "INTERESADO") {
                             return "<span class='label label-info label-inline mr-2'>INTERESADO</span>";
                         } elseif ($estado == "PREINSCRITO") {
@@ -283,12 +286,18 @@ class Inscripcionadmin extends PSG_Controller
                             return "<span class='label label-danger label-inline mr-2'>ANULADO</span>";
                         }
                     }),
-                    array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
+                    array('dt' => 10, 'db' => 'tipo_pago'),
+                    array('dt' => 11, 'db' => 'monto_pago', 'formatter' => function ($monto) {
+                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    }),
+                    array('dt' => 12, 'db' => 'id_transaccion'),
+                    array('dt' => 13, 'db' => 'tipo_certificacion'),
+                    array('dt' => 14, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
                         if ($img == "") {
-                            return '<img id="imagen-ver" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                            return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                         } else {
-                            return '<a class="image-popup-vertical-fit" href="'. base_url($img)  .'">
-                                <img class="img img-thumbnail" src="'.base_url($img).'" width="120" id="img-preview" height="120"> &nbsp;
+                            return '<a class="image-popup-vertical-fit" href="' . base_url($img)  . '">
+                                <img class="img img-thumbnail" src="' . base_url($img) . '" width="120" id="img-preview" height="120"> &nbsp;
                                 <i class="fa fa-eye text-info"></i>
                             </a><script>$(".image-popup-vertical-fit").magnificPopup({
                                 type: "image",
@@ -305,7 +314,7 @@ class Inscripcionadmin extends PSG_Controller
                             });</script>';
                         }
                     }),
-                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                    array('dt' => 15, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
                         $datos = '';
                         if ($row['estado'] == "PREINSCRITO") {
                             $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>
@@ -325,6 +334,7 @@ class Inscripcionadmin extends PSG_Controller
                         </select>";
                     })
                 );
+
                 $sql_details = array(
                     'driver' => $this->db->dbdriver,
                     'user' => $this->db->username,
@@ -356,13 +366,16 @@ class Inscripcionadmin extends PSG_Controller
                     array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
                         return "<small>$curso</small>";
                     }),
-                    array('dt' => 6, 'db' => 'tipo_pago'),
-                    array('dt' => 7, 'db' => 'monto_pago', 'formatter' => function ($monto) {
-                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    array('dt' => 6, 'db' => 'fecha_inicial', 'formatter' => function ($inicio) {
+                        return "<span class='label label-primary label-inline mr-2'>$inicio</span>";
                     }),
-                    array('dt' => 8, 'db' => 'id_transaccion'),
-                    array('dt' => 9, 'db' => 'tipo_certificacion'),
-                    array('dt' => 10, 'db' => 'estado', 'formatter' => function ($estado) {
+                    array('dt' => 7, 'db' => 'fecha_final', 'formatter' => function ($final) {
+                        return "<span class='label label-primary label-inline mr-2'>$final</span>";
+                    }),
+                    array('dt' => 8, 'db' => 'fecha_preinscripcion', 'formatter' => function ($final) {
+                        return "<small>$final</small>";
+                    }),
+                    array('dt' => 9, 'db' => 'estado', 'formatter' => function ($estado) {
                         if ($estado == "INTERESADO") {
                             return "<span class='label label-info label-inline mr-2'>INTERESADO</span>";
                         } elseif ($estado == "PREINSCRITO") {
@@ -373,12 +386,18 @@ class Inscripcionadmin extends PSG_Controller
                             return "<span class='label label-danger label-inline mr-2'>ANULADO</span>";
                         }
                     }),
-                    array('dt' => 11, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
+                    array('dt' => 10, 'db' => 'tipo_pago'),
+                    array('dt' => 11, 'db' => 'monto_pago', 'formatter' => function ($monto) {
+                        return '<span class="label label-info label-inline font-weight-bolder mr-2">Bs. ' . intval($monto) . '</span>';
+                    }),
+                    array('dt' => 12, 'db' => 'id_transaccion'),
+                    array('dt' => 13, 'db' => 'tipo_certificacion'),
+                    array('dt' => 14, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
                         if ($img == "") {
                             return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                         } else {
-                            return '<a class="image-popup-vertical-fit" href="'. base_url($img)  .'">
-                                <img class="img img-thumbnail" src="'.base_url($img).'" width="120" id="img-preview" height="120"> &nbsp;
+                            return '<a class="image-popup-vertical-fit" href="' . base_url($img)  . '">
+                                <img class="img img-thumbnail" src="' . base_url($img) . '" width="120" id="img-preview" height="120"> &nbsp;
                                 <i class="fa fa-eye text-info"></i>
                             </a><script>$(".image-popup-vertical-fit").magnificPopup({
                                 type: "image",
@@ -395,7 +414,7 @@ class Inscripcionadmin extends PSG_Controller
                             });</script>';
                         }
                     }),
-                    array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                    array('dt' => 15, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
                         $datos = '';
                         if ($row['estado'] == "PREINSCRITO") {
                             $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>
@@ -415,6 +434,7 @@ class Inscripcionadmin extends PSG_Controller
                         </select>";
                     })
                 );
+
                 $sql_details = array(
                     'driver' => $this->db->dbdriver,
                     'user' => $this->db->username,
@@ -465,6 +485,27 @@ class Inscripcionadmin extends PSG_Controller
         }
     }
 
+    public function confirmar_cambio_estado_contacto()
+    {
+        $id_preinscripcion_curso = $this->input->post('id');
+        $data = $this->input->post('data');
+        $respuesta = $this->sql_ssl->modificar_tabla(
+            'mdl_preinscripcion_curso',
+            ['estado_contacto' => $data],
+            ['id_preinscripcion_curso' => $id_preinscripcion_curso]
+        );
+
+        if ($respuesta) {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['exito' => "Cambio de estado realizado correctamente"])
+            );
+        } else {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['error' => "Error al realizar el cambio de estado"])
+            );
+        }
+    }
+
     public function ver_informacion()
     {
         $this->templater->view('inscripcion/ver_informacion', $this->data);
@@ -479,25 +520,52 @@ class Inscripcionadmin extends PSG_Controller
             $columns = array(
                 array('dt' => 0, 'db' => 'id_participante'),
                 array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
-                    return '' . $ci . '';
+                    return '<small>' . $ci . '</small>';
                 }),
                 array('dt' => 2, 'db' => 'nombre_completo', 'formatter' => function ($nombre) {
-                    return '' . $nombre . '';
+                    return '<small>' . $nombre . '</small>';
                 }),
-                array('dt' => 3, 'db' => 'correo'),
-                array('dt' => 4, 'db' => 'profesion_ocupacion'),
-                array('dt' => 5, 'db' => 'celular'),
-                array('dt' => 6, 'db' => 'curso', 'formatter' => function ($curso) {
+                array('dt' => 3, 'db' => 'profesion_ocupacion', 'formatter' => function ($profesion) {
+                    return '<small>' . $profesion . '</small>';
+                }),
+                array('dt' => 4, 'db' => 'celular', 'formatter' => function ($cel) {
+                    return '<span class="label label-primary label-inline">' . $cel . '</span>';
+                }),
+                array('dt' => 5, 'db' => 'curso', 'formatter' => function ($curso) {
                     return "<small>$curso</small>";
                 }),
-                array('dt' => 7, 'db' => 'estado_correo', 'formatter' => function ($estado) {
+                array('dt' => 6, 'db' => 'fecha_inicial'),
+                array('dt' => 7, 'db' => 'fecha_final'),
+                array('dt' => 8, 'db' => 'fecha_preinscripcion'),
+                array('dt' => 9, 'db' => 'estado_contacto', 'formatter' => function ($estado, $row) {
+                    $datos = '';
+                    if ($estado == "PENDIENTE" || $estado == NULL) {
+                        $datos .= "<option value='PENDIENTE' selected>PENDIENTE</option>
+                        <option value='CONFIRMADO'>CONFIRMADO</option>
+                        <option value='DESCARTADO'>DESCARTADO</option>";
+                    } elseif ($estado == "CONFIRMADO") {
+                        $datos .= "<option value='PENDIENTE'>PENDIENTE</option>
+                        <option value='CONFIRMADO' selected>CONFIRMADO</option>
+                        <option value='DESCARTADO'>DESCARTADO</option>";
+                    } else {
+                        $datos .= "<option value='PENDIENTE'>PENDIENTE</option>
+                        <option value='CONFIRMADO'>CONFIRMADO</option>
+                        <option value='DESCARTADO' selected>DESCARTADO</option>";
+                    }
+                    $id = $row['id_preinscripcion_curso'];
+                    return "<select data-id='" . $id . "' class='custom-select form-control bg-secondary' id='estado_contacto' name='estado_correo_" . $id . "' >
+                        $datos
+                    </select>";
+                }),
+                array('dt' => 10, 'db' => 'correo'),
+                array('dt' => 11, 'db' => 'estado_correo', 'formatter' => function ($estado) {
                     if ($estado == 0) {
                         return '<span class="text-xs label label-danger label-inline">FALTA</span>';
                     } else {
                         return '<span class="text-sm-center  label label-info label-inline">ENVIADO</span>';
                     }
                 }),
-                array('dt' => 8, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
+                array('dt' => 12, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id_preinscripcion_curso) {
                     return "<a id='btn_enviar_informacion' data-id=" . $id_preinscripcion_curso . " href='javascript:;' class='btn btn-light-success btn-sm font-weight-bold btn-clean' title='Enviar correo'>
                         <i class='nav-icon la la-send'></i>
                          Enviar

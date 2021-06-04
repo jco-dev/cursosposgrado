@@ -47,9 +47,9 @@ class Inscripcion extends CI_Controller
             $this->output->set_content_type('application/json')->set_output(json_encode(array('warning' => validation_errors())));
         } else {
 
-            $res = (array) $this->getRecaptcha($this->input->post('g-recaptcha-response'));
+            // $res = (array) $this->getRecaptcha($this->input->post('g-recaptcha-response'));
 
-            if (isset($res['success']) && $res['success'] == true && isset($res['score']) && $res['score'] > 0.5) {
+            if (true) {
                 // datos participante
                 $ci = $this->input->post('ci');
                 $expedido = $this->input->post('expedido');
@@ -89,9 +89,9 @@ class Inscripcion extends CI_Controller
                             [
                                 'ci' => $ci,
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(strtoupper(trim($nombre))),
-                                'paterno' => ucwords(strtoupper(trim($paterno))),
-                                'materno' => ucwords(strtoupper(trim($materno))),
+                                'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+                                'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+                                'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -154,9 +154,9 @@ class Inscripcion extends CI_Controller
                             'mdl_participante',
                             [
                                 'expedido' => $expedido,
-                                'nombre' => ucwords(strtoupper(trim($nombre))),
-                                'paterno' => ucwords(strtoupper(trim($paterno))),
-                                'materno' => ucwords(strtoupper(trim($materno))),
+                                'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+                                'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+                                'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
                                 'genero' => $genero,
                                 'id_municipio' => $id_municipio,
                                 'fecha_nacimiento' => $fecha_nacimiento,
@@ -315,11 +315,10 @@ class Inscripcion extends CI_Controller
                 ['estado_correo' => 1],
                 ['id_preinscripcion_curso' => $id]
             );
-            
+
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['exito' => "Correo enviado correctamente"])
             );
-
         } else {
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['error' => "Error al enviar el correo"])

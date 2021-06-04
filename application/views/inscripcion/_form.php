@@ -102,13 +102,13 @@
         </div>
     </div>
 
-    <br>
+    <!-- <br>
     <div class="card card-custom">
         <div class="card-body form-group pb-0">
             <label for="fecha_nacimiento"> Fecha Nacimiento </label>
             <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" />
         </div>
-    </div>
+    </div> -->
 
     <br>
     <div class="card card-custom">
@@ -250,7 +250,7 @@
     <div class="card card-custom">
         <div class="card-header bg-info-o-5 border-0">
             <div class="card-title p-3" id="card-title-inscripcion">
-                <h3 class="card-label">Completado. Revise sus datos antes de enviar</h3>
+                <h3 class="card-label">Revise sus datos antes de enviar</h3>
             </div>
             <!--begin::Body-->
             <div class="card-body">
