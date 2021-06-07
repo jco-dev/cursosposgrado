@@ -42,17 +42,33 @@ class Inscripcion extends CI_Controller
         $this->form_validation->set_rules('fecha_pago', 'fecha pago', 'required|callback_date_valid|callback_fecha_vacio');
         $this->form_validation->set_rules('monto_pago', 'monto pago', 'required|callback_monto_valid');
         $this->form_validation->set_rules('anio1', 'año', 'required');
-		$this->form_validation->set_rules('mes1', 'mes', 'required');
-		$this->form_validation->set_rules('dia1', 'dia', 'required');
+        $this->form_validation->set_rules('mes1', 'mes', 'required');
+        $this->form_validation->set_rules('dia1', 'dia', 'required');
+        $this->form_validation->set_rules($_FILES['respaldo_transaccion'], '', 'callback_validar_imagen_respaldo');
 
         if ($this->form_validation->run() == false) {
-            // if(false){
             $this->output->set_content_type('application/json')->set_output(json_encode(array('warning' => validation_errors())));
         } else {
+            $subir_imagen = false;
+            $mensaje = "";
+            $allowed_mime_type_arr = array('image/jpeg', 'image/jpg', 'image/png');
+            $mime = $this->get_mime_by_extension($_FILES['respaldo_transaccion']['name']);
+            if (isset($_FILES['respaldo_transaccion']['name']) && $_FILES['respaldo_transaccion']['name'] != "") {
+                if (in_array($mime, $allowed_mime_type_arr)) {
+                    $subir_imagen = true;
+                } else {
+                    $mensaje = 'Por favor, seleccione el respaldo de pago en formato jpg o png.';
+                    $subir_imagen = false;
+                }
+            } else {
+                $mensaje = 'Por favor suba la captura de respado de pago en el paso 2.';
+                $subir_imagen = false;
+            }
+
 
             // $res = (array) $this->getRecaptcha($this->input->post('g-recaptcha-response'));
 
-            if (true) {
+            if ($subir_imagen) {
                 // datos participante
                 $ci = $this->input->post('ci');
                 $expedido = $this->input->post('expedido');
@@ -220,12 +236,12 @@ class Inscripcion extends CI_Controller
                     }
                 } else {
                     $this->output->set_content_type('application/json')->set_output(
-                        json_encode(['warning' => "Ya se encuentra registrado en el curso"])
+                        json_encode(['info' => "Ya se encuentra registrado en el curso"])
                     );
                 }
             } else {
                 $this->output->set_content_type('application/json')->set_output(
-                    json_encode(['warning' => "No puede enviar muchas veces el formulario.!!!"])
+                    json_encode(['warning' => $mensaje])
                 );
             }
         }
@@ -234,13 +250,13 @@ class Inscripcion extends CI_Controller
     }
 
     public function format_dia($dia)
-	{
-		if ($dia >= 1 && $dia <= 9) {
-			return "0" + $dia;
-		} else {
-			return $dia;
-		}
-	}
+    {
+        if ($dia >= 1 && $dia <= 9) {
+            return "0" + $dia;
+        } else {
+            return $dia;
+        }
+    }
 
     public function buscar_por_ci()
     {
@@ -336,5 +352,45 @@ class Inscripcion extends CI_Controller
                 json_encode(['error' => "Error al enviar el correo"])
             );
         }
+    }
+
+    public function validar_imagen_respaldo($str)
+    {
+        $allowed_mime_type_arr = array('image/jpeg', 'image/jpg', 'image/png');
+        $mime = $this->get_mime_by_extension($_FILES['respaldo_transaccion']['name']);
+        if (isset($_FILES['respaldo_transaccion']['name']) && $_FILES['respaldo_transaccion']['name'] != "") {
+            if (in_array($mime, $allowed_mime_type_arr)) {
+                return false;
+            } else {
+                $this->form_validation->set_message('validar_imagen_respaldo', 'Por favor, seleccione el respaldo en formato jpg o png.');
+                return false;
+            }
+        } else {
+            $this->form_validation->set_message('validar_imagen_respaldo', 'Por favor seleccione la foto de respaldo.');
+            return false;
+        }
+    }
+
+    function get_mime_by_extension($filename)
+    {
+        static $mimes;
+
+        if (!is_array($mimes)) {
+            $mimes = get_mimes();
+
+            if (empty($mimes)) {
+                return FALSE;
+            }
+        }
+
+        $extension = strtolower(substr(strrchr($filename, '.'), 1));
+
+        if (isset($mimes[$extension])) {
+            return is_array($mimes[$extension])
+                ? current($mimes[$extension]) // Multiple mime types, just give the first one
+                : $mimes[$extension];
+        }
+
+        return FALSE;
     }
 }

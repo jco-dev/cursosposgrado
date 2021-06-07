@@ -93,7 +93,7 @@
             <div class="row justify-content-center py-10 py-lg-12">
                 <div class="col-lg-12">
                     <!--begin: Wizard Form-->
-                    <form class="form" id="frm_curso_inscripcion">
+                    <form class="form" id="frm_curso_inscripcion" enctype="multipart/form-data">
                         <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                         <?php include('_curso_id.php'); ?>
                         <?php include('_form.php'); ?>

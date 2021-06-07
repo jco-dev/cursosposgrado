@@ -279,7 +279,7 @@ jQuery(document).ready(function () {
 	});
 	$("#dia1").prop("disabled", "disabled");
 
-	$("#fecha").on("change", "#anio1,#mes1", function (e) {
+	$("#fecha").on("change", "#anio1,#mes1", function (e) {		
 		let anio = parseInt($("#anio1").val());
 		let mes = parseInt($("#mes1").val()) - 1;
 		let res = Date.getDaysInMonth(anio, mes);
@@ -293,7 +293,7 @@ jQuery(document).ready(function () {
 			opcion += "<option value='" + i + "'>" + i + "</option>";
 		}
 		$("#dia1").append(opcion);
-	};
+	}
 
 	$("#respaldo_transaccion").on("change", function () {
 		var imagen = this.files[0];
@@ -385,6 +385,15 @@ jQuery(document).ready(function () {
 						if (typeof response.warning != "undefined") {
 							Swal.fire({
 								title: response.warning,
+								icon: "warning",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							});
+						}
+
+						if (typeof response.info != "undefined") {
+							Swal.fire({
+								title: response.info,
 								icon: "info",
 								showCancelButton: false,
 								confirmButtonText: "Ok",
