@@ -181,232 +181,103 @@ var KTDatatablesVerInscritos = (function () {
 
 jQuery(document).ready(function () {
 	$("#cursos").select2({
-		placeholder: "-- Descargar CSV --",
-		minimumResultsForSearch: Infinity,
+		placeholder: "-- seleccione curso --",
+		width: '100%',
 	});
 
-	$("#cursos").on("change", function (e) {
-		if ($(this).val() != "all") {
-			let id = $(this).val();
-			tbl_ver_inscripcion.dataTable().fnClearTable();
-			tbl_ver_inscripcion.dataTable().fnDestroy();
+	$("#btn_descargar_csv").on("click", function () {
+		$("#modal_descargar_csv").modal({
+			backdrop: "static",
+			keyboard: false,
+		});
+	});
 
-			tbl_ver_inscripcion.DataTable({
-				processing: true,
-				serverSide: true,
-				ajax: {
-					url: "/inscripcionadmin/ajax_ver_inscritos",
-					data: { id },
-					type: "post",
-				},
-				lengthMenu: [
-					[10, 20, 30, 50, 100, -1],
-					[10, 20, 30, 50, 100, "Todos"],
-				],
-				iDisplayLength: -1,
-				responsive: true,
-				sortable: true,
-				// layout definition
-				layout: {
-					scroll: false,
-					footer: false,
-				},
-
-				// column sorting
-				sortable: true,
-				pagination: true,
-				columns: [
-					{
-						field: "id_participante",
-						title: "#",
-						width: 15,
-						textAlign: "center",
-					},
-					{
-						field: "ci",
-						title: "ci",
-						width: 70,
-					},
-					{
-						field: "nombre_completo",
-						title: "Nombres",
-						width: 250,
-					},
-					{
-						field: "municipio_enviar",
-						title: "Enviar a",
-						width: 150,
-					},
-					{
-						field: "celular",
-						title: "celular",
-					},
-					{
-						field: "curso",
-						title: "curso",
-						width: 150,
-					},
-					{
-						field: "Inicio",
-						title: "Inicio",
-					},
-					{
-						field: "Fin",
-						title: "Fin",
-					},
-					{
-						field: "Inscripcion",
-						title: "Inscripcion",
-					},
-					{
-						field: "estado",
-						title: "estado",
-					},
-					{
-						field: "tipo_pago",
-						title: "tipo pago",
-					},
-					{
-						field: "monto_pago",
-						title: "monto pago",
-					},
-					{
-						field: "id_transaccion",
-						title: "transaccion",
-					},
-					{
-						field: "tipo_certificacion",
-						title: "certificacion",
-					},
-					{
-						field: "respaldo_pago",
-						title: "respaldo pago",
-					},
-					{
-						field: "id_preinscripcion_curso",
-						title: "Cambiar estado",
-					},
-				],
+	$("#descagar_usuarios_moodle").on("click", function(){
+		let id = $("#cursos").val();
+		let estado = $("#estado").val();
+		if(id == ""){
+			Swal.fire({
+				title: "Por favor, seleccione un curso !!!",
+				icon: "warning",
+				showCancelButton: false,
+				confirmButtonText: "Ok",
 			});
-
-			// descargar csv
-			if (id != "") {
-				$.post(
-					"/inscripcionadmin/ver_estudiantes",
-					{ id: id },
-					function (response) {
-						if (response.data != null) {
-							if (parseInt(response.data) > 0) {
-								window.open("/inscripcionadmin/descargar_csv/" + id, "_blank");
-							}
-						}
+		}else if(estado == ""){
+			Swal.fire({
+				title: "Por favor, seleccione un estado !!!",
+				icon: "warning",
+				showCancelButton: false,
+				confirmButtonText: "Ok",
+			});
+		}else{
+			$.post(
+			"/inscripcionadmin/ver_estudiantes",
+			{ id, estado },
+			function (response) {
+				if (response.data > 0) {
+					if (parseInt(response.data) > 0) {
+						window.open("/inscripcionadmin/descargar_csv/?id=" + id + "&estado=" + estado, "_blank");
 					}
-				);
+				}else{
+					Swal.fire({
+						title: "No existe usuarios en el curso !!!",
+						icon: "warning",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					});
+				}
 			}
-
-			// console.log("Descargar csv: " + id);
-		} else {
-			tbl_ver_inscripcion.dataTable().fnClearTable();
-			tbl_ver_inscripcion.dataTable().fnDestroy();
-
-			tbl_ver_inscripcion.DataTable({
-				processing: true,
-				serverSide: true,
-				ajax: {
-					url: "/inscripcionadmin/ajax_ver_inscritos",
-					data: { id: null },
-					type: "post",
-				},
-				lengthMenu: [
-					[10, 20, 30, 50, 100, -1],
-					[10, 20, 30, 50, 100, "Todos"],
-				],
-				iDisplayLength: -1,
-				responsive: true,
-				sortable: true,
-				// layout definition
-				layout: {
-					scroll: false,
-					footer: false,
-				},
-
-				// column sorting
-				sortable: true,
-				pagination: true,
-				columns: [
-					{
-						field: "id_participante",
-						title: "#",
-						width: 15,
-						textAlign: "center",
-					},
-					{
-						field: "ci",
-						title: "ci",
-						width: 70,
-					},
-					{
-						field: "nombre_completo",
-						title: "Nombres",
-						width: 250,
-					},
-					{
-						field: "municipio_enviar",
-						title: "Enviar a",
-						width: 150,
-					},
-					{
-						field: "celular",
-						title: "celular",
-					},
-					{
-						field: "curso",
-						title: "curso",
-						width: 150,
-					},
-					{
-						field: "Inicio",
-						title: "Inicio",
-					},
-					{
-						field: "Fin",
-						title: "Fin",
-					},
-					{
-						field: "Inscripcion",
-						title: "Inscripcion",
-					},
-					{
-						field: "estado",
-						title: "estado",
-					},
-					{
-						field: "tipo_pago",
-						title: "tipo pago",
-					},
-					{
-						field: "monto_pago",
-						title: "monto pago",
-					},
-					{
-						field: "id_transaccion",
-						title: "transaccion",
-					},
-					{
-						field: "tipo_certificacion",
-						title: "certificacion",
-					},
-					{
-						field: "respaldo_pago",
-						title: "respaldo pago",
-					},
-					{
-						field: "id_preinscripcion_curso",
-						title: "Cambiar estado",
-					},
-				],
-			});
+		);
 		}
-	});
+		
+
+	})
+
+	$("#descargar_contactos_curso").on("click", function(){
+		let id = $("#cursos").val();
+		let estado = $("#estado").val();
+		if(id == ""){
+			Swal.fire({
+				title: "Por favor, seleccione un curso !!!",
+				icon: "warning",
+				showCancelButton: false,
+				confirmButtonText: "Ok",
+			});
+		}else if(estado == ""){
+			Swal.fire({
+				title: "Por favor, seleccione un estado !!!",
+				icon: "warning",
+				showCancelButton: false,
+				confirmButtonText: "Ok",
+			});
+		}else{
+			$.post(
+			"/inscripcionadmin/ver_estudiantes",
+			{ id, estado },
+			function (response) {
+				if (response.data > 0) {
+					if (parseInt(response.data) > 0) {
+						window.open("/inscripcionadmin/descargar_contacto/?id=" + id + "&estado=" + estado, "_blank");
+					}
+				}else{
+					Swal.fire({
+						title: "No existe usuarios en el curso !!!",
+						icon: "warning",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					});
+				}
+			}
+		);
+		}
+		
+
+	})
+	$("#cerrar_modal").on("click", function(){
+		$("#cursos").val('').trigger('change');
+		$("#estado").val('');
+	})
+
+	
 	KTDatatablesVerInscritos.init();
 });

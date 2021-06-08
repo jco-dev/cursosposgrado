@@ -588,12 +588,11 @@ class Inscripcionadmin extends PSG_Controller
         }
     }
 
-    public function descargar_csv($id)
+    public function descargar_csv()
     {
-        $data = $this->sql_ssl->listar_tabla(
-            'mdl_participante_preinscripcion_curso',
-            ['estado' => "INSCRITO", 'id_course_moodle' => $id]
-        );
+        $id = $_GET['id'];
+        $estado = $_GET['estado'];
+        $data = $this->listar_data_estudiantes($id, $estado);
 
         if (count($data) != 0) {
             $curso = $this->sql_ssl->listar_tabla("mdl_course", ["id" => $data[0]->id_course_moodle]);
@@ -604,10 +603,45 @@ class Inscripcionadmin extends PSG_Controller
         }
     }
 
+    public function descargar_contacto()
+    {
+        $id = $_GET['id'];
+        $estado = $_GET['estado'];
+        $data = $this->listar_data_estudiantes($id, $estado);
+       
+        if (count($data) != 0) {
+            $curso = $this->sql_ssl->listar_tabla("mdl_course", ["id" => $data[0]->id_course_moodle]);
+            if (count($curso) == 1) {
+                $rep = new Reporte_estudiantes_excel();
+                $rep->lista_estudiantes_contacto($data, $curso[0]->fullname);
+            }
+        }
+    }
+
+    public function listar_data_estudiantes($id, $estado)
+    {
+        $data = NULL;
+        if ($estado == "PREINSCRITO") {
+            $data = $this->sql_ssl->listar_tabla(
+                'mdl_participante_preinscripcion_curso',
+                ['estado' => "PREINSCRITO", 'id_course_moodle' => $id]
+            );
+        }elseif($estado == "INSCRITO"){
+            $data = $this->sql_ssl->listar_tabla(
+                'mdl_participante_preinscripcion_curso',
+                ['estado' => "INSCRITO", 'id_course_moodle' => $id]
+            );
+        }else{
+            $data = $this->inscripcion_model->listar_estudiantes_todos($id); 
+        }
+        return $data;
+    }
+
     public function ver_estudiantes()
     {
         $idcurso = $this->input->post('id');
-        $respuesta = $this->inscripcion_model->ver_estudiantes_confirmados($idcurso);
+        $estado = $this->input->post('estado');
+        $respuesta = $this->inscripcion_model->ver_estudiantes_curso($idcurso, $estado);
         if (count($respuesta) >= 1) {
             $this->output->set_content_type('application/json')->set_output(
                 json_encode(['data' => $respuesta[0]->total])

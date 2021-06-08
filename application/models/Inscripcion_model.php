@@ -70,9 +70,31 @@ class Inscripcion_model extends PSG_Model
 		}
 	}
 
-	public function ver_estudiantes_confirmados($idcurso)
+	public function ver_estudiantes_curso($idcurso, $estado)
 	{
-		$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  WHERE estado= 'INSCRITO' AND id_course_moodle = $idcurso";
+		$sql = "";
+		if($estado == "PREINSCRITO"){
+			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
+			        WHERE estado= 'PREINSCRITO' AND id_course_moodle = $idcurso";
+		}elseif($estado == "INSCRITO"){
+			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
+			        WHERE estado= 'INSCRITO' AND id_course_moodle = $idcurso";
+		}else{
+			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
+			        WHERE id_course_moodle = $idcurso";
+		}
+		
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
+
+	public function listar_estudiantes_todos($id)
+	{
+		$sql = "SELECT * from mdl_participante_preinscripcion_curso where id_course_moodle= $id AND estado != 'INTERESADO'";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
