@@ -13,7 +13,7 @@ var KTDatatablesVerInscritos = (function () {
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: -1,
+				iDisplayLength: 20,
 				responsive: true,
 				sortable: true,
 				// layout definition
