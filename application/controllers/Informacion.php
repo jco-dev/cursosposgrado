@@ -30,7 +30,6 @@ class Informacion extends CI_Controller
 		$this->form_validation->set_rules('expedido', 'expedido', 'required');
 		$this->form_validation->set_rules('correo', 'correo', 'required|valid_email');
 		$this->form_validation->set_rules('nombre', 'nombre', 'required');
-		$this->form_validation->set_rules('paterno', 'paterno', 'required');
 		$this->form_validation->set_rules('anio', 'año', 'required');
 		$this->form_validation->set_rules('mes', 'mes', 'required');
 		$this->form_validation->set_rules('dia', 'dia', 'required');
@@ -234,7 +233,7 @@ class Informacion extends CI_Controller
 							$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
 							$send = new SendEmail();
 							$res = $send->enviar_correos($respuesta1);
-							var_dump($res);
+							// var_dump($res);
 						}
 					}
 				} else {

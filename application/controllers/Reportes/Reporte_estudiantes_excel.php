@@ -13,7 +13,6 @@ class Reporte_estudiantes_excel extends Spreadsheet
 
     public function lista_estudiantes($data, $curso)
     {
-
         $file = new Spreadsheet();
 
         $active_sheet = $file->getActiveSheet();
@@ -29,7 +28,7 @@ class Reporte_estudiantes_excel extends Spreadsheet
         $contador = 2;
         if (count($data) != 0) {
             foreach ($data as $value) {
-                $active_sheet->setCellValue("A" . $contador, strtolower(explode(" ", trim($value->nombre))[0]) . $value->celular);
+                $active_sheet->setCellValue("A" . $contador, strtolower(explode(" ", trim($value->nombre))[0]) . $value->ci);
                 $active_sheet->setCellValue("B" . $contador, $value->celular ."_Bolivia");
                 $active_sheet->setCellValue("C" . $contador, $value->nombre);
                 $active_sheet->setCellValue("D" . $contador, $value->paterno . " " . $value->materno);
