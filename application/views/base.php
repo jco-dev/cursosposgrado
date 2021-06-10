@@ -147,6 +147,16 @@
 												<span class="menu-text">Ver informaci&oacute;n</span>
 											</a>
 										</li>
+
+										<li class="menu-item" aria-haspopup="true">
+											<a href="<?= base_url('modulos') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-dot">
+													<span></span>
+												</i>
+												<span class="menu-text">Agregar M&oacute;dulos</span>
+											</a>
+										</li>
+
 									</ul>
 								</div>
 							</li>
@@ -608,6 +618,7 @@
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>
+	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 
 </body>
 <!--end::Body-->

@@ -269,7 +269,18 @@ class Cursos extends PSG_Controller
 				array('dt' => 11, 'db' => 'observacion_entrega'),
 				array('dt' => 12, 'db' => 'fecha_registro'),
 				array('dt' => 13, 'db' => 'tipo_certificacion_solicitado'),
-				array('dt' => 14, 'db' => 'estado_inscripcion_curso', 'formatter' => function ($estado, $row) {
+				array('dt' => 14, 'db' => 'certificacion_unica', 'formatter' => function ($cert, $row) {
+					$opcion = '';
+					foreach (['', 'CURSO', 'MODULO', 'AMBOS'] as $key => $value) {
+						$opcion .= "<option value='" . $value . "' " . ($cert == $value ? 'selected' : '') . " >$value</option>";
+					}
+
+					return '<select id="certificacion_unica" data-id=' . $row["id_inscripcion_curso"] . '  name="certificacion_unica" class="form-control">
+						' . $opcion . '
+					</select>';
+				}),
+
+				array('dt' => 15, 'db' => 'estado_inscripcion_curso', 'formatter' => function ($estado, $row) {
 					$opcion = '';
 					if ($estado == "REGISTRADO") {
 						$opcion .= '<option selected value="REGISTRADO">REGISTRADO</option>
@@ -288,8 +299,7 @@ class Cursos extends PSG_Controller
 						' . $opcion . '
 					</select>';
 				}),
-
-				array('dt' => 15, 'db' => 'id_inscripcion_curso', 'formatter' => function ($id, $row) {
+				array('dt' => 16, 'db' => 'id_inscripcion_curso', 'formatter' => function ($id, $row) {
 					return "<a data-id='" . $id . "' id='editar_inscripcion_curso' data-nombre='" . $row['usuario'] . "' href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar datos del estudiante'>
 					<i class='nav-icon la la-edit'></i>
 					</a>
@@ -440,6 +450,39 @@ class Cursos extends PSG_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode(
 				[
 					'error' => 'Error al cambiar de estado a la inscripcion'
+				]
+			));
+		}
+	}
+
+	public function certificacion_unica()
+	{
+		$id = $this->input->post('id');
+		$valor = $this->input->post('valor');
+		if ($valor != "") {
+			$respuesta = $this->sql_ssl->modificar_tabla(
+				'inscripcion_curso',
+				['certificacion_unica' => $valor],
+				['id_inscripcion_curso' => $id]
+			);
+
+			if ($respuesta) {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'exito' => 'Inscripcion cambiado de estado correctamente'
+					]
+				));
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'error' => 'Error al cambiar de estado a la inscripcion'
+					]
+				));
+			}
+		}else{
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => 'El estado no puede ser vacio'
 				]
 			));
 		}

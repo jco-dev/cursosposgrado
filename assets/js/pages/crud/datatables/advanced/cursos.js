@@ -203,7 +203,45 @@ var KTDatatablesCursos = (function () {
 								}
 							}
 						);
-					});
+					})
+					.on("change", "#certificacion_unica", function () {
+						let id = $(this).attr("data-id");
+						let valor = $(this).val();
+						Swal.fire({
+							title: "Estas seguro de cambiar de estado de certificacion unica?",
+							text: "Esta accion no puede ser revertido",
+							icon: "warning",
+							showCancelButton: true,
+							confirmButtonText: "Si, Cambiar!",
+							cancelButtonText: "No, Cancelar!",
+							reverseButtons: true,
+						}).then(function (result) {
+							if (result.value) {
+								$.post(
+									"/cursos/certificacion_unica",
+									{
+										id,
+										valor,
+									},
+									function (response) {
+										if (typeof response.exito != "undefined") {
+											Swal.fire("Exito!", response.exito, "success");
+											// inscripcion_curso.DataTable().ajax.reload();
+										}
+										if (typeof response.error != "undefined") {
+											Swal.fire("Error!", response.error, "error");
+										}
+									}
+								);
+							} else if (result.dismiss === "cancel") {
+								Swal.fire(
+									"Cancelado",
+									"No se ha cambiado el estado de certificacion unica :)",
+									"error"
+								);
+							}
+						});
+					})
 
 				//mostrar modal
 				$("#modal_inscripcion").modal({
