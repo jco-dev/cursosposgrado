@@ -137,10 +137,19 @@ class ImprimirCertificado extends Fpdf_psg
         $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
         $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
         $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
-        foreach ($datos_estudiante as $key => $estudiante) {
-            // var_dump($estudiante);
+        foreach ($datos_estudiante as $estudiante) {
+            $est = array();
+            $valor = ['id_inscripcion_curso', 'usuario', 'calificacion_final', 'tipo_participacion', 'nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'fecha_certificacion'];
+            for ($i = 0; $i < count($estudiante); $i++) {
+
+                $est[$valor[$i]] = $estudiante[$i];
+            }
+
             $this->AddPage("L", "letter");
-            $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
+
+            if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
+                $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
+            }
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -148,28 +157,28 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
             $this->AddFont('Parisienne-Regular', '', 'Parisienne-Regular.php');
             $this->SetFont('Parisienne-Regular', '', $datos_curso[0]->tamano_titulo + 10);
-            $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
+            // $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
             $this->SetFont('Arial', 'B', $datos_curso[0]->tamano_titulo);
             $this->SetXY($datos_curso[0]->posx_nombre_participante + 15, $datos_curso[0]->posy_nombre_participante);
-            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER)), 0, 1, 'C');
+            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['usuario'])), MB_CASE_UPPER)), 0, 1, 'C');
 
             // TIPO PARTICIPACION
             $this->SetTextColor(0, 0, 0);
-            if ($estudiante->tipo_participacion == "PARTICIPANTE") {
+            if ($est['tipo_participacion'] == "PARTICIPANTE") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
                 $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode($this->verificar_aprobacion($datos_curso[0]->nota_aprobacion, $estudiante->calificacion_final)), 0, 1, '');
-            } elseif ($estudiante->tipo_participacion == "EXPOSITOR") {
+                $this->Cell(190, 11, utf8_decode($this->verificar_aprobacion($datos_curso[0]->nota_aprobacion, $est['calificacion_final'])), 0, 1, '');
+            } elseif ($est['tipo_participacion'] == "EXPOSITOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
                 $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
                 $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso:"), 0, 1, '');
-            } elseif ($estudiante->tipo_participacion == "ORGANIZADOR") {
+            } elseif ($est['tipo_participacion'] == "ORGANIZADOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
                 $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
@@ -191,24 +200,24 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
             $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
-            $this->MultiCell(214, 9, utf8_decode($datos_curso[0]->nombre_curso), 0, 'C');
+            $this->MultiCell(214, 9, utf8_decode($est['nombre_curso']), 0, 'C');
 
             //bloque de texto
             $this->SetTextColor(0, 0, 0);
             $this->SetXY($datos_curso[0]->posx_bloque_texto, $datos_curso[0]->posy_bloque_texto);
-            $dia = date("d", strtotime($datos_curso[0]->fecha_inicial));
-            $mes = $this->mes_literal(date("m", strtotime($datos_curso[0]->fecha_inicial)));
-            $fecha_final = fecha_literal($datos_curso[0]->fecha_final);
-            $carga_horaria = $datos_curso[0]->carga_horaria;
+            $dia = date("d", strtotime($est['fecha_inicial']));
+            $mes = $this->mes_literal(date("m", strtotime($est['fecha_inicial'])));
+            $fecha_final = fecha_literal($est['fecha_final']);
+            $carga_horaria = $est['carga_horaria'];
             $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
             $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
             $this->multiCelda(210, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
-            $fecha_certificacion = "El Alto, " . fecha_literal($datos_curso[0]->fecha_certificacion);
+            $fecha_certificacion = "El Alto, " . fecha_literal($est['fecha_certificacion']);
             $this->SetX($datos_curso[0]->posx_bloque_texto);
             $this->multiCelda(210, 8, utf8_decode($fecha_certificacion) . "     ", 0, 'R');
 
             //qr
-            $code = md5('CERTIFICADO_' . $estudiante->id_inscripcion_curso);
+            $code = md5('CERTIFICADO_' . $est['id_inscripcion_curso']);
             $this->Image("http://localhost/generar_qr/qr_generator.php?code=" . $code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36, "png");
             // $this->Image("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=$url&.png", $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36);
             // texto de verificacion qr
@@ -217,6 +226,7 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetTextColor(0, 0, 0);
             $this->MultiCell(36, 3.5, utf8_decode("Código QR de verificación del certificado"), 0, "C");
         }
+
 
         $name = "doc_" . date('Y_m_d_H_s_i') . ".pdf";
         $this->Output("F", "assets/pdf_temp/$name");
@@ -351,49 +361,63 @@ class ImprimirCertificado extends Fpdf_psg
         echo base64_encode($this->Output('S'));
     }
 
-    public function imprimir_blanco($datos_curso = null)
+    public function imprimir_blanco($datos = null, $datos_curso = null)
     {
         // for ($i = 0; $i < 10; $i++) {
-        $this->AddPage("L", "letter");
-        $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
 
-        // var_dump($datos_estudiante);
-        // Nombre estudiante
-        $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
-        $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
-        $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
-        $this->AddFont('Parisienne-Regular', '', 'Parisienne-Regular.php');
-        $this->SetFont('Parisienne-Regular', '', $datos_curso[0]->tamano_titulo + 10);
-        $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
 
-        // TIPO DE PARTICIPACION
-        $this->SetTextColor(0, 0, 0);
-        $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-        $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
-        $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-        $this->Cell(190, 11, utf8_decode("Por haber PARTICIPADO  del curso:"), 0, 1, '');
+        $valor = ['nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'fecha_certificacion', 'imagen_curso', 'tipo_participacion'];
 
-        // titulo del curso
-        $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
-        $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
-        $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
-        $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
-        $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
-        $this->multiCelda(214, 9, utf8_decode($datos_curso[0]->nombre_curso), 0, 'C');
 
-        //bloque de texto
-        $this->SetTextColor(0, 0, 0);
-        $this->SetXY($datos_curso[0]->posx_bloque_texto, $datos_curso[0]->posy_bloque_texto);
-        $dia = date("d", strtotime($datos_curso[0]->fecha_inicial));
-        $mes = $this->mes_literal(date("m", strtotime($datos_curso[0]->fecha_inicial)));
-        $fecha_final = fecha_literal($datos_curso[0]->fecha_final);
-        $carga_horaria = $datos_curso[0]->carga_horaria;
-        $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
-        $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-        $this->multiCelda(210, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
-        $fecha_certificacion = "El Alto, " . fecha_literal($datos_curso[0]->fecha_certificacion);
-        $this->SetX($datos_curso[0]->posx_bloque_texto);
-        $this->multiCelda(210, 8, utf8_decode($fecha_certificacion) . "     ", 0, 'R');
+        foreach ($datos as $key => $curso) {
+            $cur = array();
+            for ($i = 0; $i < count($curso); $i++) {
+
+                $cur[$valor[$i]] = $curso[$i];
+            }
+
+            $this->AddPage("L", "letter");
+            if ($cur['imagen_curso'] != "" || $cur['imagen_curso'] != NULL) {
+                $this->Image($cur['imagen_curso'], 0, 0, 279.4, 215.9);
+            }
+
+            // Nombre estudiante
+            $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
+            $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
+            $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
+            $this->AddFont('Parisienne-Regular', '', 'Parisienne-Regular.php');
+            $this->SetFont('Parisienne-Regular', '', $datos_curso[0]->tamano_titulo + 10);
+            // $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
+
+            // TIPO DE PARTICIPACION
+            $this->SetTextColor(0, 0, 0);
+            $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+            $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+            $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+            $this->Cell(190, 11, utf8_decode("Por haber {$cur['tipo_participacion']} el curso:"), 0, 1, '');
+
+            // titulo del curso
+            $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+            $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+            $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
+            $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
+            $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
+            $this->multiCelda(214, 9, utf8_decode($cur['nombre_curso']), 0, 'C');
+
+            // bloque de texto
+            $this->SetTextColor(0, 0, 0);
+            $this->SetXY($datos_curso[0]->posx_bloque_texto, $datos_curso[0]->posy_bloque_texto);
+            $dia = date("d", strtotime($cur['fecha_inicial']));
+            $mes = $this->mes_literal(date("m", strtotime($cur['fecha_inicial'])));
+            $fecha_final = fecha_literal($cur['fecha_final']);
+            $carga_horaria = $cur['carga_horaria'];
+            $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
+            $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
+            $this->multiCelda(210, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
+            $fecha_certificacion = "El Alto, " . fecha_literal($cur['fecha_certificacion']);
+            $this->SetX($datos_curso[0]->posx_bloque_texto);
+            $this->multiCelda(210, 8, utf8_decode($fecha_certificacion) . "     ", 0, 'R');
+        }
 
         echo base64_encode($this->Output('S'));
     }

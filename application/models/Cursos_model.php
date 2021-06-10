@@ -255,6 +255,7 @@ class Cursos_model extends PSG_Model
 			ic.tipo_participacion,
 			ic.fecha_entrega,
 			ic.fecha_registro,
+			ic.certificacion_unica,
 			ic.estado_inscripcion_curso
 			from mdl_inscripcion_curso ic inner join mdl_user u on ic.id_user_moodle = u.id
 			inner join mdl_course c on ic.id_course_moodle = c.id AND c.id = '$id'";
@@ -262,10 +263,10 @@ class Cursos_model extends PSG_Model
 			if ($query->num_rows() > 0) {
 				return ($query->result());
 			} else {
-				return null;
+				return array();
 			}
 		} else {
-			return null;
+			return array();
 		}
 	}
 
@@ -306,6 +307,21 @@ class Cursos_model extends PSG_Model
 			}
 		} else {
 			return null;
+		}
+	}
+
+	public function contar_modulos($id)
+	{
+		if ($id != null) {
+			$sql = "SELECT COUNT(*) as cantidad FROM mdl_certificacion WHERE id_course='$id' AND estado='REGISTRADO'" ;
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
 		}
 	}
 
