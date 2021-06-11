@@ -71,6 +71,12 @@ class Cursos extends PSG_Controller
 		$this->templater->view('cursos/cursos', $this->data);
 	}
 
+	public function ver_estudiantes($id)
+	{
+		$this->data['id'] = $id;
+		$this->templater->view('cursos/estudiantes', $this->data);
+	}
+
 	public function ajax_listado_cursos()
 	{
 		if ($this->input->is_ajax_request()) {
@@ -110,7 +116,7 @@ class Cursos extends PSG_Controller
 					<a id="btn_inscripcion" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Inscripcion de estudiantes">
 						<i class="nav-icon la la-list"></i>
 					</a>
-					<a id="btn_ver_inscritos" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Listado estudiantes inscritos en el Curso">
+					<a id="btn_ver_inscritos" data-id=' . $id . ' href="' . base_url('cursos/ver_estudiantes/' . $id) . '" class="btn btn-sm btn-clean btn-icon" title="Listado estudiantes inscritos en el Curso">
 						<i class="la la-users"></i>
 					</a>
 					<a id="btn_imprimir_todos" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Imprimir todos los certificados del Curso">
@@ -498,7 +504,15 @@ class Cursos extends PSG_Controller
 	{
 		$id = $this->input->post('id');
 		$idcurso = $this->input->post('idcurso');
+		$tipo = $this->input->post('tipo');
+
 		$datos_curso = $this->cursos_model->get_datos_curso($idcurso);
+
+		$modulos = $this->sql_ssl->listar_tabla(
+			'mdl_certificacion',
+			['id_course' => $idcurso, 'estado' => 'REGISTRADO']
+		);
+
 		if ($datos_curso == NULL) {
 			$this->output->set_content_type('application/json')->set_output(json_encode(
 				[
@@ -506,23 +520,48 @@ class Cursos extends PSG_Controller
 				]
 			));
 		} else {
-			if ($datos_curso[0]->imagen_curso == NULL) {
-				$this->output->set_content_type('application/json')->set_output(json_encode(
-					[
-						'error' => 'Por favor suba la imagen del certificado del curso'
-					]
-				));
-			} else {
-				$datos_estudiante = $this->cursos_model->get_datos_estudiante($id);
-				$rep = new ImprimirCertificado();
-				$rep->imprimir($datos_curso, $datos_estudiante);
+
+			$data = array();
+			$estudiante = $this->cursos_model->get_datos_estudiante($id);
+
+			if (count($estudiante) > 0) {
+				$fila = array();
+				array_push($fila, $estudiante[0]->id_inscripcion_curso);
+				array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante[0]->usuario)), MB_CASE_UPPER));
+				array_push($fila, $estudiante[0]->calificacion_final);
+				array_push($fila, $estudiante[0]->tipo_participacion);
+				array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($datos_curso[0]->nombre_curso)), MB_CASE_UPPER));
+				array_push($fila, $datos_curso[0]->fecha_inicial);
+				array_push($fila, $datos_curso[0]->fecha_final);
+				array_push($fila, $datos_curso[0]->carga_horaria);
+				array_push($fila, $datos_curso[0]->fecha_certificacion);
+
+				array_push($data, $fila);
 			}
+
+			foreach ($modulos as $key => $r) {
+				$modulo = array();
+				array_push($modulo, $estudiante[0]->id_inscripcion_curso);
+				array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante[0]->usuario)), MB_CASE_UPPER));
+				array_push($modulo, $estudiante[0]->calificacion_final);
+				array_push($modulo, $estudiante[0]->tipo_participacion);
+				array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
+				array_push($modulo, $r->fecha_inicial);
+				array_push($modulo, $r->fecha_final);
+				array_push($modulo, $r->carga_horaria);
+				array_push($modulo, $r->fecha_certificacion);
+				array_push($data, $modulo);
+			}
+
+			$rep = new ImprimirCertificado();
+			$rep->imprimir($datos_curso, $data, $tipo);
 		}
 	}
 
 	public function imprimir_certificado_todos()
 	{
 		$id = $this->input->post('id');
+		$value = $this->input->post('value');
 		$estudiantes = $this->cursos_model->get_estudiantes_curso($id);
 		$data = array();
 
@@ -535,8 +574,6 @@ class Cursos extends PSG_Controller
 					]
 				));
 			} else {
-
-				$imagen = null;
 
 				if (count($estudiantes) > 0) {
 
@@ -619,7 +656,7 @@ class Cursos extends PSG_Controller
 				}
 
 				$rep = new ImprimirCertificado();
-				$rep->imprimir_todos($datos_curso, $data);
+				$rep->imprimir_todos($datos_curso, $data, $value);
 			}
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode(
@@ -634,12 +671,13 @@ class Cursos extends PSG_Controller
 	{
 		$id = $this->input->post('id');
 		$value = $this->input->post('value');
+		$tipo = $this->input->post('tipo');
 		$datos_curso = $this->cursos_model->get_datos_curso($id);
 		$respuesta = $this->sql_ssl->listar_tabla(
 			'mdl_certificacion',
 			['id_course' => $id, 'estado' => 'REGISTRADO']
 		);
-		// var_dump($datos_curso);
+		//
 		if ($datos_curso == NULL) {
 			$this->output->set_content_type('application/json')->set_output(json_encode(
 				[
@@ -648,7 +686,6 @@ class Cursos extends PSG_Controller
 			));
 		} else {
 			$curso_data = array();
-			// var_dump($datos_curso);
 			foreach ($datos_curso as $key => $curso) {
 				$d = array();
 				array_push($d, $curso->nombre_curso);
@@ -660,7 +697,7 @@ class Cursos extends PSG_Controller
 				array_push($d, $value);
 				array_push($curso_data, $d);
 			}
-			// var_dump($curso_data);
+			//
 			foreach ($respuesta as $key => $r) {
 				$d = array();
 				array_push($d, $r->nombre);
@@ -675,7 +712,7 @@ class Cursos extends PSG_Controller
 			}
 
 			$rep = new ImprimirCertificado();
-			$rep->imprimir_blanco($curso_data, $datos_curso);
+			$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
 		}
 	}
 
