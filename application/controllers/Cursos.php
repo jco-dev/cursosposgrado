@@ -828,7 +828,8 @@ class Cursos extends PSG_Controller
 				<th scope="col">Nombre</th>
 				<th scope="col">Curso</th>
 				<th scope="col">Tipo Participacion</th>
-				<th scope="col">Fecha</th>
+				<th scope="col">Fecha Inicio</th>
+				<th scope="col">Fecha Final</th>
 			</tr>
 		</thead>';
 
@@ -845,7 +846,8 @@ class Cursos extends PSG_Controller
 								PARTICIPANTE
 							</span>
 						</td>
-						<td>12-12-2021</td>
+						<td>'.$value->fecha_inicial.'</td>
+						<td>'.$value->fecha_final.'</td>
 					</tr>
 				</tbody>';
 				$cn++;
@@ -853,7 +855,7 @@ class Cursos extends PSG_Controller
 		} else {
 			$res .= '<tbody>
 				<tr>
-					<td colspan="5" class="text-center">No existe registros con el ci: ' . $id . '</td>
+					<td colspan="6" class="text-center">No existe registros con el ci: ' . $id . '</td>
 				</tr>
 			</tbody>';
 		}
