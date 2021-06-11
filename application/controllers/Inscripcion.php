@@ -359,7 +359,7 @@ class Inscripcion extends CI_Controller
         $mime = $this->get_mime_by_extension($_FILES['respaldo_transaccion']['name']);
         if (isset($_FILES['respaldo_transaccion']['name']) && $_FILES['respaldo_transaccion']['name'] != "") {
             if (in_array($mime, $allowed_mime_type_arr)) {
-                return false;
+                return true;
             } else {
                 $this->form_validation->set_message('validar_imagen_respaldo', 'Por favor, seleccione el respaldo en formato jpg o png.');
                 return false;

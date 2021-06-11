@@ -103,12 +103,14 @@ class Cursos extends PSG_Controller
 					return "<span class='label label-light-$estado label-inline mr-2'>" . $shortname . "</span>";
 				}),
 				array('dt' => 3, 'db' => 'id', 'formatter' => function ($id) {
-					// var_dump($id)
-					$respuesta = $this->cursos_model->contar_modulos($id);
-					// var_dump($respuesta);
-					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
+					$respuesta = $this->cursos_model->contar_estudiantes($id);
+					return "<span class='label label-info label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
 				array('dt' => 4, 'db' => 'id', 'formatter' => function ($id) {
+					$respuesta = $this->cursos_model->contar_modulos($id);
+					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
+				}),
+				array('dt' => 5, 'db' => 'id', 'formatter' => function ($id) {
 					return '
 					<a id="btn_configuracion" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Configuracion del curso para el certificado">
 						<i class="nav-icon la la-cog"></i>

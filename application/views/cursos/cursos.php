@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>Nombre del Curso</th>
                         <th>Nombre corto</th>
+                        <th>Estudiantes</th>
                         <th>M&oacute;dulos</th>
                         <th>Acciones</th>
                     </tr>
