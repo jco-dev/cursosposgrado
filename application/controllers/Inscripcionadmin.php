@@ -6,11 +6,17 @@ require_once APPPATH . 'controllers/Reportes/Reporte_estudiantes_excel.php';
 class Inscripcionadmin extends PSG_Controller
 {
     protected $id = null;
+    public $cn = 1;
+    public $cn1 = 1; 
+    public $cninf = 1;
     // protected $data;
     public function __construct()
     {
         parent::__construct();
         $this->load->model('inscripcion_model');
+        $this->cn = 1;
+        $this->cn1 = 1;
+        $this->cninf = 1;
     }
 
     public function index()
@@ -227,7 +233,6 @@ class Inscripcionadmin extends PSG_Controller
                 json_encode(['warning' => "Ya se encuentra registrado en el curso"])
             );
         }
-        // var_dump($_FILES['respaldo_transaccion']);
 
     }
 
@@ -254,7 +259,9 @@ class Inscripcionadmin extends PSG_Controller
                 $primaryKey = 'id_participante';
                 $condicion = "id_course_moodle= $id";
                 $columns = array(
-                    array('dt' => 0, 'db' => 'id_participante'),
+                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                        return $this->cn1++;
+                    }),
                     array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
                         return '' . $ci . '';
                     }),
@@ -354,7 +361,9 @@ class Inscripcionadmin extends PSG_Controller
                 $table = "mdl_ver_inscritos";
                 $primaryKey = 'id_participante';
                 $columns = array(
-                    array('dt' => 0, 'db' => 'id_participante'),
+                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                        return $this->cn++;
+                    }),
                     array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
                         return '' . $ci . '';
                     }),
@@ -461,7 +470,6 @@ class Inscripcionadmin extends PSG_Controller
             null,
             'row'
         );
-        // var_dump($datos);
     }
 
     public function confirmar_cambio_estado()
@@ -518,7 +526,9 @@ class Inscripcionadmin extends PSG_Controller
             $table = "mdl_ver_informacion";
             $primaryKey = 'id_participante';
             $columns = array(
-                array('dt' => 0, 'db' => 'id_participante'),
+                array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                    return $this->cninf++;
+                }),
                 array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
                     return '<small>' . $ci . '</small>';
                 }),

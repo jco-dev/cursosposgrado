@@ -4,10 +4,14 @@ require_once APPPATH . '/controllers/Reportes/ImprimirCertificado.php';
 require_once APPPATH . '/controllers/SendEmail.php';
 class Cursos extends PSG_Controller
 {
+	public $cn = 1;
+	public $cnest = 1;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('cursos_model');
+		$this->cn = 1;
+		$this->cnest=1;
 	}
 
 	public function index()
@@ -83,7 +87,9 @@ class Cursos extends PSG_Controller
 			$table = "mdl_listado_cursos";
 			$primaryKey = 'id';
 			$columns = array(
-				array('dt' => 0, 'db' => 'id'),
+				array('dt' => 0, 'db' => 'id', 'formatter' => function($id){
+					return $this->cn++;
+				}),
 				array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
 					return '' . $fullname . '';
 				}),
@@ -249,7 +255,9 @@ class Cursos extends PSG_Controller
 			$primaryKey = 'id_inscripcion_curso';
 			$condicion = 'id=' . $id;
 			$columns = array(
-				array('dt' => 0, 'db' => 'id_inscripcion_curso'),
+				array('dt' => 0, 'db' => 'id_inscripcion_curso', 'formatter' => function($id){
+					return $this->cnest++;
+				}),
 				array('dt' => 1, 'db' => 'usuario'),
 				array('dt' => 2, 'db' => 'id'),
 				array('dt' => 3, 'db' => 'calificacion_final', 'formatter' => function ($nota) {

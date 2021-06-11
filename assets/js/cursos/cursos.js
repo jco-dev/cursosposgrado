@@ -3,7 +3,6 @@ var KTDatatablesAdvancedColumnRendering = (function () {
 	var init = function () {
 		var tbl_cursos = $("#tbl_cursos");
 
-		// begin first tbl_cursos
 		tbl_cursos
 			.DataTable({
 				processing: true,
@@ -13,7 +12,7 @@ var KTDatatablesAdvancedColumnRendering = (function () {
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: -1,
+				iDisplayLength: 20,
 				columnDefs: [
 					{
 						searchable: true,

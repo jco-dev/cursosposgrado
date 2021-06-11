@@ -4,10 +4,12 @@ date_default_timezone_set('America/La_Paz');
 
 class Configuracion extends PSG_Controller
 {
+    public $cn = 1;
     public function __construct()
     {
         parent::__construct();
         $this->load->model('configuracion_model');
+        $this->cn = 1;
     }
 
     public function index()
@@ -21,7 +23,9 @@ class Configuracion extends PSG_Controller
             $table = "mdl_cursos_configuracion";
             $primaryKey = 'id_configuracion_curso';
             $columns = array(
-                array('dt' => 0, 'db' => 'id_configuracion_curso'),
+                array('dt' => 0, 'db' => 'id_configuracion_curso', 'formatter' => function($id){
+                    return $this->cn++;
+                }),
                 array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
                     return '<small>' . $fullname . '</small>';
                 }),

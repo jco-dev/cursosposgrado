@@ -2,11 +2,13 @@
 
 class Modulos extends PSG_Controller
 {
+	public $cn = 1;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('modulos_model');
 		$this->load->model('cursos_model');
+		$this->cn = 1;
 	}
 
 	public function index()
@@ -23,7 +25,9 @@ class Modulos extends PSG_Controller
 			$table = "mdl_ver_modulos";
 			$primaryKey = 'id_certificacion';
 			$columns = array(
-				array('dt' => 0, 'db' => 'id_certificacion'),
+				array('dt' => 0, 'db' => 'id_certificacion', 'formatter' => function($id){
+					return $this->cn++;
+				}),
 				array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
 					return '' . $fullname . '';
 				}),
