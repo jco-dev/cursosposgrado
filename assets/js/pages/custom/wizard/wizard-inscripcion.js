@@ -186,7 +186,7 @@ var KTWizard3 = (function () {
 					respaldo_transaccion: {
 						validators: {
 							notEmpty: {
-								message: "Esta pregunta es obligatoria",
+								message: "La imagen de respaldo de pago es obligatoria",
 							},
 						},
 					},
@@ -335,11 +335,11 @@ jQuery(document).ready(function () {
 			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
 		} else {
 			Swal.fire({
-				text: "Si todo esta bien! Por favor confirme sus datos para enviar.",
+				text: "¿Si todo esta bien?. Por favor confirme sus datos para enviar.",
 				icon: "success",
 				showCancelButton: true,
 				buttonsStyling: false,
-				confirmButtonText: "Si, enviar!",
+				confirmButtonText: "Si, enviar",
 				cancelButtonText: "No, cancelar",
 				customClass: {
 					confirmButton: "btn font-weight-bold btn-primary",
