@@ -604,7 +604,7 @@ class Cursos extends PSG_Controller
 							array_push($fila, $datos_curso[0]->fecha_certificacion);
 
 							array_push($data, $fila);
-						} elseif ($estudiante->certificacion_unica == "MODULO") {
+						} elseif ($estudiante->certificacion_unica == "MODULO" || $estudiante->certificacion_unica == "" || $estudiante->certificacion_unica == NULL) {
 							// Listado de modulos de un curso
 
 							$respuesta = $this->sql_ssl->listar_tabla(
@@ -625,7 +625,8 @@ class Cursos extends PSG_Controller
 								array_push($modulo, $r->fecha_certificacion);
 								array_push($data, $modulo);
 							}
-						} else { // para ambos
+
+						} elseif($estudiante->certificacion_unica == "AMBOS") { // para ambos
 							// Agregar del curso
 							$fila = array();
 							array_push($fila, $estudiante->id_inscripcion_curso);
@@ -660,6 +661,7 @@ class Cursos extends PSG_Controller
 								array_push($modulo, $r->fecha_certificacion);
 								array_push($data, $modulo);
 							}
+
 						}
 					}
 					// var_dump($data);
