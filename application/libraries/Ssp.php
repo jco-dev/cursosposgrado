@@ -417,6 +417,7 @@ class Ssp
                 $sql_details['pass'],
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
+            $db->exec("set names utf8");
         } catch (PDOException $e) {
             self::fatal(
                 "An error occurred while connecting to the database. " .

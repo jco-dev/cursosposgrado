@@ -126,7 +126,7 @@ class Configuracion extends PSG_Controller
                 'host' => $this->db->hostname
             );
             $this->output->set_content_type('application/json')->set_output(json_encode(
-                mb_convert_encoding(SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL), 'UTF-8', 'ISO-8859-2')
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL)
             ));
             return;
         }
