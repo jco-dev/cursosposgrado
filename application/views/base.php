@@ -106,6 +106,17 @@
 								</a>
 							</li>
 							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('modulos') ?>" class="menu-link">
+									<i class="menu-icon fa fa-plus-circle"></i>
+									<span class="menu-text">Agregar M&oacute;dulos</span>
+								</a>
+							</li>
+
+							<li class="menu-section">
+								<h4 class="menu-text">CONFIGURACI&Oacute;N</h4>
+								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+							</li>
+							<li class="menu-item" aria-haspopup="true">
 								<a href="<?= base_url('configuracion') ?>" class="menu-link">
 									<i class="menu-icon flaticon2-gear"></i>
 									<span class="menu-text">Configuraci&oacute;n</span>
@@ -147,16 +158,6 @@
 												<span class="menu-text">Ver informaci&oacute;n</span>
 											</a>
 										</li>
-
-										<li class="menu-item" aria-haspopup="true">
-											<a href="<?= base_url('modulos') ?>" class="menu-link">
-												<i class="menu-bullet menu-bullet-dot">
-													<span></span>
-												</i>
-												<span class="menu-text">Agregar M&oacute;dulos</span>
-											</a>
-										</li>
-
 									</ul>
 								</div>
 							</li>
@@ -628,7 +629,7 @@
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
-	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>	
+	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/estudiantes.js') ?>"></script>
 	<script src="<?= base_url('assets/js/contactos/index.js') ?>"></script>
