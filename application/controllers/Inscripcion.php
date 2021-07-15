@@ -70,7 +70,7 @@ class Inscripcion extends CI_Controller
 
                 if ($subir_imagen) {
                     // datos participante
-                    $ci = $this->input->post('ci');
+                    $ci = trim($this->input->post('ci'));
                     $expedido = $this->input->post('expedido');
                     $correo = $this->input->post('correo');
                     $id_curso = $this->encryption->decrypt(base64_decode($this->input->post('id')));

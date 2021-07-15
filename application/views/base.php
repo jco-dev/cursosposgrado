@@ -172,6 +172,17 @@
 									<span class="menu-text">Verificar</span>
 								</a>
 							</li>
+
+							<li class="menu-section">
+								<h4 class="menu-text">CONTACTOS</h4>
+								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+							</li>
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('contactos') ?>" class="menu-link">
+									<i class="menu-icon flaticon2-phone"></i>
+									<span class="menu-text">Contactos</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -620,6 +631,7 @@
 	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>	
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/estudiantes.js') ?>"></script>
+	<script src="<?= base_url('assets/js/contactos/index.js') ?>"></script>
 
 </body>
 <!--end::Body-->

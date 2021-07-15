@@ -21,9 +21,6 @@ var KTDatatablesVerModulos = (function () {
 					scroll: false,
 					footer: false,
 				},
-
-				// column sorting
-				sortable: true,
 				pagination: true,
 			})
 			.on("click", "a#btn_editar", function (e) {

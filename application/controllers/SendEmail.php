@@ -10,43 +10,65 @@ class SendEmail extends PSG_Controller
     {
         $this->CI = &get_instance();
     }
-    public function enviar_correos($estudiantes)
+    public function send_certificates($estudiantes, $course_data)
     {
+        $envied = 0;
+        $not_envied = 0;
         $cn = 0;
-        $correo = '';
-        // foreach ($estudiantes as $estudiante) {
-        //     $this->data['nombre'] = utf8_decode($estudiante->nombre_completo);
-        //     $this->data['email'] = $estudiante->email;
-        //     $this->data['curso'] = utf8_decode($estudiante->fullname);
-        //     $this->data['ap'] = $this->tipo_participacion($estudiante->tipo_participacion, $estudiante->calificacion_final);
-        //     $mensaje = $this->CI->load->view('correo/email', $this->data, TRUE);
-        //     $mail = new \PHPMailer\PHPMailer\PHPMailer();
-        //     $mail->IsSMTP();
-        //     $mail->isHTML(true);
-        //     $mail->SMTPDebug = 0;
-        //     $mail->SMTPAuth = true;
-        //     $mail->SMTPSecure = "ssl";
-        //     $mail->Host = "mail.upea.bo";
-        //     $mail->Port = 465;
-        //     $mail->Username = "posgrado@upea.bo";
-        //     $mail->Password = "Posgrado#1";
-        //     $mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
-        //     $mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
-        //     $mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
-        //     $mail->addAddress($this->data['email'], $this->data['nombre']);
-        //     $mail->Subject = 'CERTIFICADO DIGITAL DEL CURSO';
-        //     $mail->Body = $mensaje;
-        //     $mail->AltBody = 'CERTIFICADO DIGITAL DEL CURSO: ' . $this->data['curso'];
-        //     $mail->addAttachment("assets/certificados_enviar/$estudiante->id/$estudiante->id_inscripcion_curso" . ".pdf");
-        //     if (!$mail->send()) {
-        //         return null;
-        //         echo 'Error: ' . $mail->ErrorInfo;
-        //     } else {
-        //         echo 'Mensaje Enviado correctamente.';
-        //         $cn++;
-        //     }
-        // }
-        return $cn;
+        // banner curso
+		if(isset($course_data[0]->banner_curso)) {
+			$this->data['banner_curso'] = $course_data[0]->banner_curso;
+		}else {
+			$this->data['banner_curso'] = NULL;
+		}
+		foreach ($estudiantes as $estudiante) {
+			$this->data['nombre'] = utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->nombre_completo)), MB_CASE_UPPER));
+		    $this->data['email'] = $estudiante->email;
+			// $this->data['email'] = "condorizapanajuancarlos@gmail.com";
+			if($this->data['email'] != "" && $this->data['email'] != NULL){
+				$this->data['curso'] = utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->fullname)), MB_CASE_UPPER));
+				$this->data['ap'] = $this->tipo_participacion($estudiante->tipo_participacion, $estudiante->calificacion_final);
+				$message = $this->CI->load->view('correo/enviar_certificado', $this->data, TRUE);
+				$mail = new \PHPMailer\PHPMailer\PHPMailer();
+				$mail->IsSMTP();
+				$mail->isHTML(true);
+				$mail->SMTPDebug = 0;
+				$mail->SMTPAuth = true;
+				// $mail->SMTPSecure = "tls";
+				$mail->SMTPSecure = "ssl";
+					// $mail->Host = "smtp.mailtrap.io";
+				$mail->Host = "smtp.gmail.com";
+					// $mail->Port = 25;
+				$mail->Port = 465;
+					// $mail->Username = "c177e9965bd0d9";
+				$mail->Username = "psg.upea@gmail.com";
+					// $mail->Password = "76499092bb5e36";
+				$mail->Password = "Psg2020#";
+				$mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
+				$mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
+				$mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
+				$mail->addAddress($this->data['email'], $this->data['nombre']);
+				$mail->Subject = 'CERTIFICADO DIGITAL DEL CURSO';
+				$mail->Body = $message;
+				$mail->AltBody = 'CERTIFICADO DIGITAL DEL CURSO: ' . $this->data['curso'];
+				$mail->addAttachment("assets/certificados_enviar/enviar_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf");
+
+				if (!$mail->send()) {
+					echo 'Error: ' . $mail->ErrorInfo;
+					$not_envied++;
+				} else {
+					$envied++;
+					$cn++;
+				}
+			}
+			// var_dump($this->data['email']);
+			// if ($cn == 2) {
+			// 	return 1;
+			// }
+		}
+		$data[0] = $envied;
+		$data[1] = $not_envied;
+		return $data;
     }
 
     public function tipo_participacion($tipo, $calificacion)
@@ -127,4 +149,57 @@ class SendEmail extends PSG_Controller
             return false;
         }
     }
+
+    public function send_email_course($data_course = null, $data_contacts = null)
+	{
+		$cn = 0;
+		$nc = 0;
+		$no_email = 0;
+		foreach ($data_contacts as $contact) {
+			if($contact->email == "" || $contact->email == NULL)
+			{
+				$no_email++;
+			}else{
+				$this->data['nombre'] = utf8_decode($contact->nombre . " " . $contact->paterno . " " . $contact->materno);
+				$this->data['email'] = $contact->email;
+				$this->data['curso'] = utf8_decode($data_course[0]->nombre_curso);
+				//$mensaje = $this->CI->load->view('correo/email', $this->data, TRUE);
+				$mensaje = "Eso es una prueba de correo: " . $this->data['curso'];
+				$mail = new \PHPMailer\PHPMailer\PHPMailer();
+				$mail->IsSMTP();
+				$mail->isHTML(true);
+				$mail->SMTPDebug = 0;
+				$mail->SMTPAuth = true;
+				$mail->SMTPSecure = "tls";
+				// $mail->SMTPSecure = "ssl";
+				$mail->Host = "smtp.mailtrap.io";
+				// $mail->Host = "mail.upea.bo";
+				$mail->Port = 25;
+				// $mail->Port = 465;
+				$mail->Username = "c177e9965bd0d9";
+				// $mail->Username = "posgrado@upea.bo";
+				$mail->Password = "76499092bb5e36";
+				// $mail->Password = "Posgrado#1";
+				$mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
+				$mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
+				$mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
+				$mail->addAddress($this->data['email'], $this->data['nombre']);
+				$mail->Subject = 'CERTIFICADO DIGITAL DEL CURSO';
+				$mail->Body = $mensaje;
+				$mail->AltBody = 'CERTIFICADO DIGITAL DEL CURSO: ' . $this->data['curso'];
+				//mail->addAttachment("assets/certificados_enviar/$estudiante->id/$estudiante->id_inscripcion_curso" . ".pdf");
+				if (!$mail->send()) {
+					$nc = 0;
+				} else {
+					$cn++;
+				}
+			}
+
+		 }
+		$data[0] = $cn;
+		$data[1] = $nc;
+		$data[2] = $no_email;
+		return $data;
+	}
+
 }

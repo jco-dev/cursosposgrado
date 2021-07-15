@@ -203,6 +203,7 @@ class Cursos_model extends PSG_Model
 			mcc.tamano_texto,
 			mcc.color_nombre_participante,
 			mcc.color_subtitulo,
+       		mcc.banner_curso,
 			mcc.estado_curso
 			FROM mdl_configuracion_curso mcc 
 			INNER JOIN mdl_course mc ON mcc.id_course_moodle = mc.id AND mcc.id_course_moodle = '$id' AND mcc.estado_curso <> 'ELIMINADO'

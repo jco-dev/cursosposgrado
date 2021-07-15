@@ -138,6 +138,10 @@ class Cursos extends PSG_Controller
 					<a id="btn_enviar_por_correo" data-id=' . $id . ' href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Enviar certificados">
 						<i class="nav-icon la la-send"></i>
 					</a>
+					
+					<a id="btn_enviar_a_contactos"  href="' . base_url('contactos/enviar/' . $id) . '" class="btn btn-sm btn-clean btn-icon" title="Enviar Correos Masivos del Curso">
+						<i class="nav-icon flaticon-mail-1"></i>
+					</a>
 					';
 				})
 			);
@@ -255,9 +259,10 @@ class Cursos extends PSG_Controller
 			$primaryKey = 'id_inscripcion_curso';
 			$condicion = 'id=' . $id;
 			$columns = array(
-				array('dt' => 0, 'db' => 'id_inscripcion_curso', 'formatter' => function($id){
-					return $this->cnest++;
-				}),
+				// array('dt' => 0, 'db' => 'id_inscripcion_curso', 'formatter' => function($id){
+				// 	return $this->cnest++;
+				// }),
+				array('dt' => 0, 'db' => 'id_inscripcion_curso'),
 				array('dt' => 1, 'db' => 'usuario'),
 				array('dt' => 2, 'db' => 'id'),
 				array('dt' => 3, 'db' => 'calificacion_final', 'formatter' => function ($nota) {
@@ -628,39 +633,39 @@ class Cursos extends PSG_Controller
 
 						} elseif($estudiante->certificacion_unica == "AMBOS") { // para ambos
 							// Agregar del curso
-							$fila = array();
-							array_push($fila, $estudiante->id_inscripcion_curso);
-							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
-							array_push($fila, $estudiante->calificacion_final);
-							array_push($fila, $estudiante->tipo_participacion);
-							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($datos_curso[0]->nombre_curso)), MB_CASE_UPPER));
-							array_push($fila, $datos_curso[0]->fecha_inicial);
-							array_push($fila, $datos_curso[0]->fecha_final);
-							array_push($fila, $datos_curso[0]->carga_horaria);
-							array_push($fila, $datos_curso[0]->fecha_certificacion);
+							// $fila = array();
+							// array_push($fila, $estudiante->id_inscripcion_curso);
+							// array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
+							// array_push($fila, $estudiante->calificacion_final);
+							// array_push($fila, $estudiante->tipo_participacion);
+							// array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($datos_curso[0]->nombre_curso)), MB_CASE_UPPER));
+							// array_push($fila, $datos_curso[0]->fecha_inicial);
+							// array_push($fila, $datos_curso[0]->fecha_final);
+							// array_push($fila, $datos_curso[0]->carga_horaria);
+							// array_push($fila, $datos_curso[0]->fecha_certificacion);
 
-							array_push($data, $fila);
+							// array_push($data, $fila);
 
 							// agregar modulos
 
-							$respuesta = $this->sql_ssl->listar_tabla(
-								'mdl_certificacion',
-								['id_course' => $estudiante->id, 'estado' => 'REGISTRADO']
-							);
+							// $respuesta = $this->sql_ssl->listar_tabla(
+							// 	'mdl_certificacion',
+							// 	['id_course' => $estudiante->id, 'estado' => 'REGISTRADO']
+							// );
 
-							foreach ($respuesta as $key => $r) {
-								$modulo = array();
-								array_push($modulo, $estudiante->id_inscripcion_curso);
-								array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
-								array_push($modulo, $estudiante->calificacion_final);
-								array_push($modulo, $estudiante->tipo_participacion);
-								array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
-								array_push($modulo, $r->fecha_inicial);
-								array_push($modulo, $r->fecha_final);
-								array_push($modulo, $r->carga_horaria);
-								array_push($modulo, $r->fecha_certificacion);
-								array_push($data, $modulo);
-							}
+							// foreach ($respuesta as $key => $r) {
+							// 	$modulo = array();
+							// 	array_push($modulo, $estudiante->id_inscripcion_curso);
+							// 	array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
+							// 	array_push($modulo, $estudiante->calificacion_final);
+							// 	array_push($modulo, $estudiante->tipo_participacion);
+							// 	array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
+							// 	array_push($modulo, $r->fecha_inicial);
+							// 	array_push($modulo, $r->fecha_final);
+							// 	array_push($modulo, $r->carga_horaria);
+							// 	array_push($modulo, $r->fecha_certificacion);
+							// 	array_push($data, $modulo);
+							// }
 
 						}
 					}
@@ -700,7 +705,7 @@ class Cursos extends PSG_Controller
 			$curso_data = array();
 			foreach ($datos_curso as $key => $curso) {
 				$d = array();
-				array_push($d, $curso->nombre_curso);
+				array_push($d, mb_convert_case(preg_replace('/\s+/', ' ', trim($curso->nombre_curso)), MB_CASE_UPPER));
 				array_push($d, $curso->fecha_inicial);
 				array_push($d, $curso->fecha_final);
 				array_push($d, $curso->carga_horaria);
@@ -712,7 +717,7 @@ class Cursos extends PSG_Controller
 			//
 			foreach ($respuesta as $key => $r) {
 				$d = array();
-				array_push($d, $r->nombre);
+				array_push($d, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
 				array_push($d, $r->fecha_inicial);
 				array_push($d, $r->fecha_final);
 				array_push($d, $r->carga_horaria);
@@ -731,46 +736,48 @@ class Cursos extends PSG_Controller
 	public function enviar_certificados()
 	{
 		$idcurso = $this->input->post('id');
-
 		// generar certificados del curso en el directorio  assets/certificados_enviar/ en la carpeta id_curso
-		$directorio = "assets/certificados_enviar/$idcurso/";
-		if (!is_dir($directorio)) {
-			if (mkdir($directorio, 0777, true)) {
-				chmod($directorio, 0777);
+		$directory = "assets/certificados_enviar/$idcurso/";
+		$directory1 = "assets/certificados_enviar/enviar_{$idcurso}/";
+		if (!is_dir($directory)) {
+			if (mkdir($directory, 0777, true)) {
+				chmod($directory, 0777);
 			}
 		}
 
+		if (!is_dir($directory1)) {
+			if (mkdir($directory1, 0777, true)) {
+				chmod($directory1, 0777);
+			}
+		}
 		// Enviar los correos
-		$estudiantes = $this->cursos_model->get_estudiantes_curso($idcurso);
-		if (!empty($estudiantes)) {
-			$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
-			if ($datos_curso == NULL) {
+		$students_course = $this->cursos_model->get_estudiantes_curso($idcurso);
+
+		if (!empty($students_course)) {
+			$course_data = $this->cursos_model->get_datos_curso($students_course[0]->id);
+			if ($course_data == NULL) {
 				$this->output->set_content_type('application/json')->set_output(json_encode(
 					[
 						'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
 					]
 				));
 			} else {
-				if ($datos_curso[0]->imagen_curso == NULL) {
-					$this->output->set_content_type('application/json')->set_output(json_encode(
-						[
-							'error' => 'Por favor suba la imagen del certificado del curso'
-						]
-					));
-				} else {
-					$rep = new ImprimirCertificado();
-					$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
-
-					if (is_int($respuesta)) {
-						// enviar por email 
-						$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
+				$total_images = count(glob("assets/certificados_enviar/$idcurso/{*.jpg}",GLOB_BRACE));
+				if($total_images == 10){
+					// Send course Certificates
+					$print = new ImprimirCertificado();
+					$response = $print->generate_certificates($course_data, $students_course);
+					if (is_int($response)) {
+						// send email
+//						var_dump($response);
+						$data = $this->cursos_model->get_estudiantes_send($idcurso);
 						$send = new SendEmail();
-						$res = $send->enviar_correos($respuesta1);
-						// var_dump($res);
-						if (is_int($res)) {
+						$response1 = $send->send_certificates($data, $course_data);
+						// var_dump($response1);
+						if (is_array($response1)) {
 							$this->output->set_content_type('application/json')->set_output(json_encode(
 								[
-									'exito' => 'Correos enviados correctamente'
+									'exito' => "{$response1[0]} Correos enviados correctamente y {$response1[1]} no se ha enviado"
 								]
 							));
 						} else {
@@ -780,8 +787,47 @@ class Cursos extends PSG_Controller
 								]
 							));
 						}
+					}else{
+						echo "no generado los certificados";
 					}
+				}else{
+					$this->output->set_content_type('application/json')->set_output(json_encode(
+						[
+							"error" => "Por favor suba los 10 certificados escaneados en la carpeta assets/certificados_enviar/$idcurso/ en la carpeta con el id del curso en formato .jpg"
+						]
+					));
 				}
+//				if ($course_data[0]->imagen_curso == NULL) {
+//					$this->output->set_content_type('application/json')->set_output(json_encode(
+//						[
+//							'error' => 'Por favor suba la imagen del certificado del curso'
+//						]
+//					));
+//				} else {
+//					$rep = new ImprimirCertificado();
+//					$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
+//
+//					if (is_int($respuesta)) {
+//						// enviar por email
+//						$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
+//						$send = new SendEmail();
+//						$res = $send->enviar_correos($respuesta1);
+//						// var_dump($res);
+//						if (is_int($res)) {
+//							$this->output->set_content_type('application/json')->set_output(json_encode(
+//								[
+//									'exito' => 'Correos enviados correctamente'
+//								]
+//							));
+//						} else {
+//							$this->output->set_content_type('application/json')->set_output(json_encode(
+//								[
+//									'error' => 'Error al enviar los correos'
+//								]
+//							));
+//						}
+//					}
+//				}
 			}
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode(

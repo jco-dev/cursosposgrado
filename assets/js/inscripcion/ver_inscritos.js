@@ -21,9 +21,6 @@ var KTDatatablesVerInscritos = (function () {
 					scroll: false,
 					footer: false,
 				},
-
-				// column sorting
-				sortable: true,
 				pagination: true,
 				columns: [
 					{

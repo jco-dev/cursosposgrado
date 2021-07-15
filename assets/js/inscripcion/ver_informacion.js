@@ -21,9 +21,6 @@ var KTDatatablesVerInformacion = (function () {
 					scroll: false,
 					footer: false,
 				},
-
-				// column sorting
-				sortable: true,
 				pagination: true,
 			})
 			.on("click", "#btn_enviar_informacion", function () {
