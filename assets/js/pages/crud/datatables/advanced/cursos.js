@@ -24,28 +24,16 @@ var KTDatatablesCursos = (function () {
 				],
 				responsive: true,
 			})
-			.on("click", "#btn_configuracion", function () {
-				let id = $(this).attr("data-id");
-				$.post(
-					"/cursos/ingresar_configuracion",
-					{
-						id,
-					},
-					function (response) {
-						if (typeof response.exito != "undefined") {
-							Swal.fire("Exito!", response.exito, "success");
-						}
-
-						if (typeof response.warning != "undefined") {
-							Swal.fire("Advertencia!", response.warning, "warning");
-						}
-
-						if (typeof response.error != "undefined") {
-							Swal.fire("Error!", response.error, "error");
-						}
-					}
-				);
-			})
+			.on(
+				"click",
+				".lista-opciones .navi-link a #btn_configuracion",
+				function () {
+					jQuery(".navi").toggleClass("visible");
+					console.log("entro aqui");
+					let id = $(this).attr("data-id");
+					
+				}
+			)
 			.on("click", "#btn_inscripcion", function (e) {
 				// console.log("inscripcion");
 				let id = $(this).attr("data-id");
@@ -155,7 +143,7 @@ var KTDatatablesCursos = (function () {
 											{
 												id,
 												value,
-												tipo
+												tipo,
 											},
 											function (response) {
 												if (typeof response.error != "undefined") {
@@ -211,6 +199,7 @@ var KTDatatablesCursos = (function () {
 		});
 
 		$("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker();
+		
 	};
 
 	return {
@@ -219,8 +208,37 @@ var KTDatatablesCursos = (function () {
 			init();
 		},
 	};
-})();
 
+})();
+var hola = 'hola';
+KTDatatablesCursos.init();
 jQuery(document).ready(function () {
-	KTDatatablesCursos.init();
+
+	jQuery(document).ready(function () {
+		// INGRESAR EL CURSO A LA CONFIGURACION
+		jQuery(".dropdown #btn_configuracion").click(function () {
+			jQuery(".navi").toggleClass("visible");
+			let id = $(this).attr("data-id");
+			$.post(
+				"/cursos/ingresar_configuracion",
+				{
+					id,
+				},
+				function (response) {
+					if (typeof response.exito != "undefined") {
+						Swal.fire("Exito!", response.exito, "success");
+					}
+
+					if (typeof response.warning != "undefined") {
+						Swal.fire("Advertencia!", response.warning, "warning");
+					}
+
+					if (typeof response.error != "undefined") {
+						Swal.fire("Error!", response.error, "error");
+					}
+				}
+			);
+		});
+	});
+	
 });

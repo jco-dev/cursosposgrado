@@ -29,7 +29,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
-            $this->Image('assets/img/moodle.jpg', 247, 119, 25,50);
+            $this->Image('assets/img/computacion.jpg', 247, 119, 25,50);
 //             if($cn == 0)
 //             {
 //                 $this->Image('assets/img/word.jpg', 247, 128, 26, 35);
@@ -202,17 +202,9 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
-            if($cn == 0)
-            {
-                $this->Image('assets/img/word.jpg', 247, 128, 26, 35);
-            }elseif($cn == 1)
-            {
-                $this->Image('assets/img/excel.jpg', 247, 128, 26, 35);
-            }else{
-                $this->Image('assets/img/point.jpg', 247, 128, 26, 35);
-            }
-            
-            // $this->Image('', 0, 0, 279.4, 215.9);
+
+
+            $this->Image('assets/img/computacion.jpg', 247, 119, 25, 35);
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -257,16 +249,16 @@ class ImprimirCertificado extends Fpdf_psg
             $excel = [0, 133, 68];
             $point = [210,28,0];
             // $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
-            if($cn == 0)
-            {
-                $this->SetTextColor($word[0], $word[1], $word[2]);
-            }elseif($cn == 1)
-            {
-                $this->SetTextColor($excel[0], $excel[1], $excel[2]);
-            }else{
-                $this->SetTextColor($point[0], $point[1], $point[2]);
-            }
-            
+            // if($cn == 0)
+            // {
+            //     $this->SetTextColor($word[0], $word[1], $word[2]);
+            // }elseif($cn == 1)
+            // {
+            //     $this->SetTextColor($excel[0], $excel[1], $excel[2]);
+            // }else{
+            //     $this->SetTextColor($point[0], $point[1], $point[2]);
+            // }
+            $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
             $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
