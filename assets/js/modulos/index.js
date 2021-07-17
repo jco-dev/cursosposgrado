@@ -169,5 +169,26 @@ jQuery(document).ready(function () {
 		$("#fecha_certificacion").val("");
 	};
 
+	var arrayfiles4 = [];
+	$(".multimediaFisica4").dropzone({
+		url: "/configuracion/subir_imagen_curso",
+		addRemoveLinks: true,
+		acceptedFiles: "image/jpeg, image/png",
+		maxFilesize: 10, //2mb
+		maxFiles: 1,
+		init: function () {
+			this.on("addedfile", function (file) {
+				arrayfiles4.push(file);
+				// console.log(arrayfiles4);
+			});
+
+			this.on("removedfile", function (file) {
+				var index = arrayfiles4.indexOf(file);
+				arrayfiles4.splice(index, 1);
+				// console.log(arrayfiles4);
+			});
+		},
+	});
+
 	KTDatatablesVerModulos.init();
 });

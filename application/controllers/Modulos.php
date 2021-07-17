@@ -31,18 +31,39 @@ class Modulos extends PSG_Controller
 				array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
 					return '' . $fullname . '';
 				}),
-				array('dt' => 2, 'db' => 'nombre'),
-				array('dt' => 3, 'db' => 'fecha_inicial'),
-				array('dt' => 4, 'db' => 'fecha_final'),
-				array('dt' => 5, 'db' => 'carga_horaria', 'formatter' => function($carga){
+				array('dt' => 2, 'db' => 'imagen_modulo', 'formatter' => function ($img) {
+					if ($img == "") {
+						return '<img class="img-thumbnail" width="60" heigth="60" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+					} else {
+						return '<img class="img-thumbnail" width="60" heigth="60" src="' . base_url("$img") . '" alt="foto curso" />';
+					}
+				}),
+				array('dt' => 3, 'db' => 'nombre'),
+				array('dt' => 4, 'db' => 'fecha_inicial'),
+				array('dt' => 5, 'db' => 'fecha_final'),
+				array('dt' => 6, 'db' => 'carga_horaria', 'formatter' => function($carga){
 					return "<span class='label label-light-success label-inline mr-2'>" . $carga . "</span>";
 				}),
-				array('dt' => 6, 'db' => 'fecha_certificacion'),
-				array('dt' => 7, 'db' => 'fecha_creacion'),
-				array('dt' => 8, 'db' => 'estado', 'formatter' => function ($estado) {
+				array('dt' => 7, 'db' => 'fecha_certificacion'),
+				array('dt' => 8, 'db' => 'color_titulo', 'formatter' => function ($color) {
+					if ($color != '') {
+						$datos = explode(", ", $color);
+						if (count($datos) == 3) {
+							return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html($datos[0], $datos[1], $datos[2]) . ";color:" . $this->rgb2html($datos[0], $datos[1], $datos[2]) . "'>colorcolorcolor</span>";
+						} else {
+							return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
+						}
+					} else {
+						return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
+					}
+				}),
+				array('dt' => 9, 'db' => 'posx_imagen_modulo'),
+				array('dt' => 10, 'db' => 'posy_imagen_modulo'),
+				array('dt' => 11, 'db' => 'fecha_creacion'),
+				array('dt' => 12, 'db' => 'estado', 'formatter' => function ($estado) {
 					return "<span class='label label-light-primary label-inline mr-2'>" . $estado . "</span>";
 				}),
-				array('dt' => 9, 'db' => 'id_certificacion', 'formatter' => function ($id) {
+				array('dt' => 13, 'db' => 'id_certificacion', 'formatter' => function ($id) {
 					return '
 					<a id="btn_editar" data-id=' . $id . ' href="javascript:;" class="btn btn-warning btn-sm btn-clean btn-icon" title="Editar">
 						<i class="nav-icon la la-edit"></i>
@@ -68,6 +89,25 @@ class Modulos extends PSG_Controller
 
 			return;
 		}
+	}
+
+	public function rgb2html($r, $g = -1, $b = -1)
+	{
+		if (is_array($r) && sizeof($r) == 3)
+			list($r, $g, $b) = $r;
+
+		$r = intval($r);
+		$g = intval($g);
+		$b = intval($b);
+
+		$r = dechex($r < 0 ? 0 : ($r > 255 ? 255 : $r));
+		$g = dechex($g < 0 ? 0 : ($g > 255 ? 255 : $g));
+		$b = dechex($b < 0 ? 0 : ($b > 255 ? 255 : $b));
+
+		$color = (strlen($r) < 2 ? '0' : '') . $r;
+		$color .= (strlen($g) < 2 ? '0' : '') . $g;
+		$color .= (strlen($b) < 2 ? '0' : '') . $b;
+		return '#' . $color;
 	}
 
 	public function guardar_modulo()
