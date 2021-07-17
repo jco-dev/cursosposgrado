@@ -26,63 +26,13 @@ var KTDatatablesCursos = (function () {
 				responsive: true,
 			})
 			.on("click", "#btn_configuracion", function () {
-				jQuery(".navi").toggleClass("visible");
-				console.log("entro aqui");
-				let id = $(this).attr("data-id");
 					
-			}).on("click", "#btn_inscripcion", function (e) {
-				// console.log("inscripcion");
-				
+			})
+			.on("click", "#btn_inscripcion", function (e) {
+
 			})
 			.on("click", "#btn_imprimir_todos", function (e) {
-				let id = $(this).attr("data-id");
-
-				Swal.fire({
-					title:
-						"Seleccione si para que lleve la letra A delante del nombre del participante",
-					input: "select",
-					inputOptions: {
-						tipo: {
-							SI: "SI",
-							NO: "NO",
-						},
-					},
-					showCancelButton: true,
-					inputValidator: (value) => {
-						return new Promise((resolve) => {
-							resolve();
-							$.post(
-								"/cursos/imprimir_certificado_todos",
-								{
-									id,
-									value,
-								},
-								function (response) {
-									if (typeof response.error != "undefined") {
-										Swal.fire("Error!", response.error, "error");
-									} else {
-										// console.log("ingreso");
-										let ruta =
-											location.origin +
-											"/assets/" +
-											response +
-											"#toolbar=0&navpanes=0&scrollbar=0";
-										$("#modal-body-certificado").children().remove();
-										$("#modal-body-certificado").html(
-											'<embed src="' +
-												ruta +
-												'" type="application/pdf" width="100%" height="600px" />'
-										);
-										$("#modal_imprimir_certificado").modal({
-											backdrop: "static",
-											keyboard: true,
-										});
-									}
-								}
-							);
-						});
-					},
-				});
+				
 			})
 			.on("click", "#btn_imprimir_blanco", function (e) {
 				let id = $(this).attr("data-id");
@@ -241,5 +191,58 @@ jQuery(document).ready(function () {
 			}
 		});
 	});
+
+	// IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
+	jQuery(".dropdown #btn_imprimir_todos").click(function () {
+		let id = $(this).attr("data-id");
+
+		Swal.fire({
+			title:
+				"Seleccione si para que lleve la letra A delante del nombre del participante",
+			input: "select",
+			inputOptions: {
+				tipo: {
+					SI: "SI",
+					NO: "NO",
+				},
+			},
+			showCancelButton: true,
+			inputValidator: (value) => {
+				return new Promise((resolve) => {
+					resolve();
+					$.post(
+						"/cursos/imprimir_certificado_todos",
+						{
+							id,
+							value,
+						},
+						function (response) {
+							if (typeof response.error != "undefined") {
+								Swal.fire("Error!", response.error, "error");
+							} else {
+								// console.log("ingreso");
+								let ruta =
+									location.origin +
+									"/assets/" +
+									response +
+									"#toolbar=0&navpanes=0&scrollbar=0";
+								$("#modal-body-certificado").children().remove();
+								$("#modal-body-certificado").html(
+									'<embed src="' +
+										ruta +
+										'" type="application/pdf" width="100%" height="600px" />'
+								);
+								$("#modal_imprimir_certificado").modal({
+									backdrop: "static",
+									keyboard: true,
+								});
+							}
+						}
+					);
+				});
+			},
+		});
+	});
+
 });
 

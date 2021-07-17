@@ -95,6 +95,7 @@
 									<span class="menu-text">Principal</span>
 								</a>
 							</li>
+
 							<li class="menu-section">
 								<h4 class="menu-text">CURSOS</h4>
 								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -106,6 +107,12 @@
 								</a>
 							</li>
 							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('configuracion') ?>" class="menu-link">
+									<i class="menu-icon flaticon2-gear"></i>
+									<span class="menu-text">Configuraci&oacute;n</span>
+								</a>
+							</li>
+							<li class="menu-item" aria-haspopup="true">
 								<a href="<?= base_url('modulos') ?>" class="menu-link">
 									<i class="menu-icon fa fa-plus-circle"></i>
 									<span class="menu-text">Agregar M&oacute;dulos</span>
@@ -113,16 +120,9 @@
 							</li>
 
 							<li class="menu-section">
-								<h4 class="menu-text">CONFIGURACI&Oacute;N</h4>
+								<h4 class="menu-text">INSCRIPCIONES</h4>
 								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 							</li>
-							<li class="menu-item" aria-haspopup="true">
-								<a href="<?= base_url('configuracion') ?>" class="menu-link">
-									<i class="menu-icon flaticon2-gear"></i>
-									<span class="menu-text">Configuraci&oacute;n</span>
-								</a>
-							</li>
-
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle">
 									<i class="menu-icon flaticon2-contract"></i>
