@@ -1,7 +1,8 @@
 "use strict";
+var tbl_cursos;
 var KTDatatablesCursos = (function () {
 	var init = function () {
-		var tbl_cursos = $("#tbl_cursos");
+		tbl_cursos = $("#tbl_cursos");
 
 		// begin first tbl_cursos
 		tbl_cursos
@@ -24,38 +25,14 @@ var KTDatatablesCursos = (function () {
 				],
 				responsive: true,
 			})
-			.on(
-				"click",
-				".lista-opciones .navi-link a #btn_configuracion",
-				function () {
-					jQuery(".navi").toggleClass("visible");
-					console.log("entro aqui");
-					let id = $(this).attr("data-id");
-					
-				}
-			)
-			.on("click", "#btn_inscripcion", function (e) {
-				// console.log("inscripcion");
+			.on("click", "#btn_configuracion", function () {
+				jQuery(".navi").toggleClass("visible");
+				console.log("entro aqui");
 				let id = $(this).attr("data-id");
-				$.ajax({
-					type: "POST",
-					url: "/cursos/inscribir_estudiantes",
-					data: {
-						id,
-					},
-					dataType: "JSON",
-				}).done(function (response) {
-					if (typeof response.exito != "undefined") {
-						Swal.fire("Exito!", response.exito, "success");
-					}
-					if (typeof response.error != "undefined") {
-						Swal.fire("Error!", response.error, "error");
-					}
-
-					if (typeof response.warning != "undefined") {
-						Swal.fire("Advertencia!", response.warning, "warning");
-					}
-				});
+					
+			}).on("click", "#btn_inscripcion", function (e) {
+				// console.log("inscripcion");
+				
 			})
 			.on("click", "#btn_imprimir_todos", function (e) {
 				let id = $(this).attr("data-id");
@@ -210,35 +187,59 @@ var KTDatatablesCursos = (function () {
 	};
 
 })();
-var hola = 'hola';
+
 KTDatatablesCursos.init();
+
 jQuery(document).ready(function () {
-
-	jQuery(document).ready(function () {
-		// INGRESAR EL CURSO A LA CONFIGURACION
-		jQuery(".dropdown #btn_configuracion").click(function () {
-			jQuery(".navi").toggleClass("visible");
-			let id = $(this).attr("data-id");
-			$.post(
-				"/cursos/ingresar_configuracion",
-				{
-					id,
-				},
-				function (response) {
-					if (typeof response.exito != "undefined") {
-						Swal.fire("Exito!", response.exito, "success");
-					}
-
-					if (typeof response.warning != "undefined") {
-						Swal.fire("Advertencia!", response.warning, "warning");
-					}
-
-					if (typeof response.error != "undefined") {
-						Swal.fire("Error!", response.error, "error");
-					}
+	// INGRESAR EL CURSO A LA CONFIGURACION
+	jQuery(".dropdown #btn_configuracion").click(function () {
+		jQuery(".navi").toggleClass("visible");
+		let id = $(this).attr("data-id");
+		$.post(
+			"/cursos/ingresar_configuracion",
+			{
+				id,
+			},
+			function (response) {
+				if (typeof response.exito != "undefined") {
+					Swal.fire("Exito!", response.exito, "success");
 				}
-			);
+
+				if (typeof response.warning != "undefined") {
+					Swal.fire("Advertencia!", response.warning, "warning");
+				}
+
+				if (typeof response.error != "undefined") {
+					Swal.fire("Error!", response.error, "error");
+				}
+			}
+		);
+	});
+
+	// INSCRIPCION DE ESTUDIANTES DESDE LA PLATAFORMA MOODLE
+	jQuery(".dropdown #btn_inscripcion").click(function () {
+		jQuery(".navi").toggleClass("visible");
+		let id = $(this).attr("data-id");
+		$.ajax({
+			type: "POST",
+			url: "/cursos/inscribir_estudiantes",
+			data: {
+				id,
+			},
+			dataType: "JSON",
+		}).done(function (response) {
+			if (typeof response.exito != "undefined") {
+				// tbl_cursos.draw("page");
+				Swal.fire("Exito!", response.exito, "success");
+			}
+			if (typeof response.error != "undefined") {
+				Swal.fire("Error!", response.error, "error");
+			}
+
+			if (typeof response.warning != "undefined") {
+				Swal.fire("Advertencia!", response.warning, "warning");
+			}
 		});
 	});
-	
 });
+
