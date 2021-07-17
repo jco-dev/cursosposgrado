@@ -104,11 +104,26 @@ class Configuracion extends PSG_Controller
                 }),
                 array('dt' => 32, 'db' => 'fecha_inicio_descuento'),
                 array('dt' => 33, 'db' => 'fecha_fin_descuento'),
-                array('dt' => 34, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                // array('dt' => 34, 'db' => 'imagen_personalizado', 'formatter' => function ($img) {
+                //     if ($img == "") {
+                //         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+                //     } else {
+                //         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto curso" />';
+                //     }
+                // }),
+                // array('dt' => 35, 'db' => 'posx_imagen_personalizado'),
+                // array('dt' => 36, 'db' => 'posy_imagen_personalizado'),
+                // array('dt' => 37, 'db' => 'imprimir_subtitulo'),
+                array('dt' => 34, 'db' => 'subtitulo'),
+                array('dt' => 35, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 35, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                array('dt' => 36, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
                     return "
+                        <a id='btn_agregar_img_sub' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-primary btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Agregar imagen personalizado del curso'>
+                        <i class='nav-icon la la-plus'></i>
+                        </a>
+
                         <a id='btn_editar_conf' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar la configuracion del curso'>
                         <i class='nav-icon la la-edit'></i>
                         </a>
@@ -498,5 +513,108 @@ class Configuracion extends PSG_Controller
 
     public function subir_imagen_curso()
     {
+    }
+
+    // agregar imagen personalizado
+    public function edit_agregar_imagen_personalizado()
+    {
+        $id = $this->input->post('id');
+        $respuesta = $this->sql_ssl->listar_tabla(
+            'configuracion_curso',
+            ['id_configuracion_curso' => $id]
+        );
+
+        if (count($respuesta) > 0) {
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                [
+                    'exito' => $respuesta
+                ]
+            ));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                [
+                    'error' => 'Error al editar la configuracion del curso'
+                ]
+            ));
+        }
+    }
+
+    public function update_agregar_imagen_personalizado()
+    {
+        if ($this->input->is_ajax_request()) {
+
+            $id_configuracion_curso = $this->input->post('id');
+            $posx_imagen_personalizado = $this->input->post('posx_imagen_personalizado');
+            $posy_imagen_personalizado = $this->input->post('posy_imagen_personalizado');
+            $subtitulo = $this->input->post('subtitulo');
+            $imprimir = $this->input->post('imprimir');
+
+            // subida de las imagen personalizado del curso
+            $ruta = '';
+            if ($this->input->post('imagen_personalizado')) {
+                if (preg_match('/^data:image\/(\w+);base64,/', $this->input->post('imagen_personalizado'), $formato)) {
+                    $imagen = substr($this->input->post('imagen_personalizado'), strpos($this->input->post('imagen_personalizado'), ',') + 1);
+                    $nombre = date('Y_m_d_H_i_s') . '.' . strtolower($formato[1]);
+                    $ruta = 'assets/img/imagen_personalizado_curso/' . $nombre;
+                    file_put_contents(FCPATH . 'assets/img/imagen_personalizado_curso/' . $nombre, base64_decode($imagen));
+                }
+            }
+
+            if ($ruta == '') {
+                $respuesta = $this->sql_ssl->modificar_tabla(
+                    'configuracion_curso',
+                    [
+                        'posx_imagen_personalizado' => $posx_imagen_personalizado,
+                        'posy_imagen_personalizado' => $posy_imagen_personalizado,
+                        'imprimir_subtitulo' => ($imprimir == '1')? true: false,
+                        'subtitulo' => $subtitulo
+                    ],
+                    ['id_configuracion_curso' => $id_configuracion_curso]
+
+                );
+
+                if ($respuesta) {
+                    $this->output->set_content_type('application/json')->set_output(json_encode(
+                        [
+                            'exito' => 'Agregado subtitulo del curso correctamente'
+                        ]
+                    ));
+                } else {
+                    $this->output->set_content_type('application/json')->set_output(json_encode(
+                        [
+                            'error' => 'Error al agregar el subtitulo del curso'
+                        ]
+                    ));
+                }
+            } elseif ($ruta != '') {
+                $respuesta = $this->sql_ssl->modificar_tabla(
+                    'configuracion_curso',
+                    [
+                        'imagen_personalizado' => $ruta,
+                        'posx_imagen_personalizado' => $posx_imagen_personalizado,
+                        'posy_imagen_personalizado' => $posy_imagen_personalizado,
+                        'imprimir_subtitulo' => ($imprimir == '1') ? true : false,
+                        'subtitulo' => $subtitulo
+
+                    ],
+                    ['id_configuracion_curso' => $id_configuracion_curso]
+
+                );
+
+                if ($respuesta) {
+                    $this->output->set_content_type('application/json')->set_output(json_encode(
+                        [
+                            'exito' => 'Agregado la imagen personalizado del curso correctamente'
+                        ]
+                    ));
+                } else {
+                    $this->output->set_content_type('application/json')->set_output(json_encode(
+                        [
+                            'error' => 'Error al agregar la imagen personalizado del curso'
+                        ]
+                    ));
+                }
+            } 
+        }
     }
 }

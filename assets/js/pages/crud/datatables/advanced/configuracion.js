@@ -14,7 +14,7 @@ var KTDatatablesConfiguracion = (function () {
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: -1,
+				iDisplayLength: 10,
 				columnDefs: [
 					{
 						searchable: true,
@@ -165,6 +165,54 @@ var KTDatatablesConfiguracion = (function () {
 						);
 					}
 				});
+			})
+			.on("click", "#btn_agregar_img_sub", function () {
+				let id = $(this).attr("data-id");
+				let titulo = $(this).attr("titulo");
+				
+				$.post(
+					"/configuracion/edit_agregar_imagen_personalizado",
+					{
+						id,
+					},
+					function (response) {
+						// console.log(response);
+						if (typeof response.exito != "undefined") {
+							$("#modal-title-agregar").html(
+								"Agregar Imagen Personalizado al curso: " + titulo
+							);
+							/** falta imagen */
+							$("#id").val(
+								response.exito[0].id_configuracion_curso
+							);
+							
+							$("#posx_imagen_personalizado").val(
+								response.exito[0].posx_imagen_personalizado
+							);
+							$("#posy_imagen_personalizado").val(
+								response.exito[0].posy_imagen_personalizado
+							);
+							
+							if (response.exito[0].imprimir_subtitulo == "1") {
+								$("#imprimir_subtitulo").prop("checked", true);
+								$("#subtitulo").val(response.exito[0].subtitulo);
+								$("#subtitulo").show();
+							} else {
+								$("#imprimir_subtitulo").prop("checked", false);
+								$("#subtitulo").val(response.exito[0].subtitulo);
+								$("#subtitulo").hide();
+							}
+							
+							$("#modal_agregar_imagen_per").modal({
+								backdrop: "static",
+								keyboard: false,
+							});
+
+						} else if (typeof response.error != "undefined") {
+							Swal.fire("Error!", response.error, "error");
+						}
+					}
+				);
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {
@@ -229,6 +277,27 @@ jQuery(document).ready(function () {
 		},
 	});
 
+	var arrayfiles3 = [];
+	let img3 = $(".multimediaFisica3").dropzone({
+		url: "/configuracion/subir_imagen_curso",
+		addRemoveLinks: true,
+		acceptedFiles: "image/jpeg, image/png",
+		maxFilesize: 10, //2mb
+		maxFiles: 1,
+		init: function () {
+			this.on("addedfile", function (file) {
+				arrayfiles3.push(file);
+				// console.log(arrayfiles3);
+			});
+
+			this.on("removedfile", function (file) {
+				var index = arrayfiles3.indexOf(file);
+				arrayfiles3.splice(index, 1);
+				// console.log(arrayfiles3);
+			});
+		},
+	});
+
 	$("#actualizar_configuracion").on("submit", function (e) {
 		e.preventDefault();
 		let formData = new FormData($("#actualizar_configuracion")[0]);
@@ -259,5 +328,61 @@ jQuery(document).ready(function () {
 			}
 		});
 	});
+
+	// cambio de imprimir checkbox
+	$("#subtitulo").hide();
+	let imp_sub = 0;
+	$("input[name=imprimir_subtitulo]").change(function () {
+		if ($(this).prop("checked")) {
+			$("#subtitulo").show();
+			imp_sub = 1;
+		} else {
+			$("#subtitulo").hide();
+			imp_sub = 0;
+		}
+	});
+
+	// GUARDAR IMG PERSONALIZADO
+	$("#agregar_img_personalizado").on("submit", function (e) {
+		e.preventDefault();
+		let formData = new FormData($("#agregar_img_personalizado")[0]);
+		formData.append("imprimir", imp_sub);
+		if (arrayfiles3.length == 1) {
+			formData.append("imagen_personalizado", arrayfiles3[0].dataURL);
+		}
+		
+
+		$.ajax({
+			type: "POST",
+			url: "/configuracion/update_agregar_imagen_personalizado",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			dataType: "JSON",
+		}).done(function (response) {
+			$("#modal_agregar_imagen_per").modal("hide");
+
+			if (typeof response.exito != "undefined") {
+				Swal.fire("Exito!", response.exito, "success");
+				limpiar2();
+				tbl_configuracion_curso.DataTable().ajax.reload();
+			}
+			if (typeof response.error != "undefined") {
+				Swal.fire("Error!", response.error, "error");
+			}
+		});
+	});
+
 	KTDatatablesConfiguracion.init();
+
+	const limpiar2 = () => {
+		$("#id").val('');
+		$("#posx_imagen_personalizado").val("");
+		$("#posy_imagen_personalizado").val("");
+		$("#imprimir_subtitulo").prop("checked", false);
+		$("#subtitulo").hide();
+		$("#subtitulo").val('');
+		arrayfiles3 = [];
+	}
 });

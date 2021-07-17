@@ -633,6 +633,7 @@
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/estudiantes.js') ?>"></script>
 	<script src="<?= base_url('assets/js/contactos/index.js') ?>"></script>
+	<script src="<?= base_url('assets/js/pages/crud/forms/widgets/bootstrap-switch.js') ?>"></script>
 
 </body>
 <!--end::Body-->
