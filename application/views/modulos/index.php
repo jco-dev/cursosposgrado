@@ -397,7 +397,7 @@
 
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <label for="nro_transaccion">Nombre M&oacute;dulo</label>
+                            <label for="nombre">Nombre M&oacute;dulo</label>
                             <textarea name="nombre" id="nombre" class="form-control" rows="1" required></textarea>
                             <span class="form-text text-muted">Ingrese el nombre del m&oacute;dulo</span>
                         </div>
@@ -439,7 +439,7 @@
 
                     <div class="form-group row">
                         <div class="col-lg-6">
-                            <label for="carga_horaria">Color título: </label>
+                            <label for="carga_horaria">Carga horaria: </label>
                             <input type="number" class="form-control" id="carga_horaria" name="carga_horaria" required />
                             <span class="form-text text-muted">Ingrese la carga horaria</span>
                         </div>

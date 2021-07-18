@@ -32,7 +32,30 @@ var KTDatatablesVerModulos = (function () {
 					$("#fecha_inicial").val(response[0].fecha_inicial);
 					$("#fecha_final").val(response[0].fecha_final);
 					$("#carga_horaria").val(response[0].carga_horaria);
+					$("#posx_imagen_modulo").val(response[0].posx_imagen_modulo);
+					$("#posy_imagen_modulo").val(response[0].posy_imagen_modulo);
 					$("#fecha_certificacion").val(response[0].fecha_certificacion);
+
+					if (response[0].color_titulo != null) {
+						let colores = response[0].color_titulo.split(", ");
+						$("#color_titulo").val(
+							RGB2Color(colores[0], colores[1], colores[2])
+						);
+					} else {
+						$("#color_titulo").val("#000000");
+					}
+
+					function RGB2Color(r, g, b) {
+						return "#" + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+					}
+
+					function byte2Hex(n) {
+						var nybHexString = "0123456789ABCDEF";
+						return (
+							String(nybHexString.substr((n >> 4) & 0x0f, 1)) +
+							nybHexString.substr(n & 0x0f, 1)
+						);
+					}
 
 					$("#title_modulo").html("Editar Módulo");
 					$("#btn_title").html("Editar");
@@ -116,9 +139,33 @@ jQuery(document).ready(function () {
 		});
 	});
 
+	var arrayfiles4 = [];
+	$(".multimediaFisica4").dropzone({
+		url: "/configuracion/subir_imagen_curso",
+		addRemoveLinks: true,
+		acceptedFiles: "image/jpeg, image/png",
+		maxFilesize: 10, //2mb
+		maxFiles: 1,
+		init: function () {
+			this.on("addedfile", function (file) {
+				arrayfiles4.push(file);
+				// console.log(arrayfiles4);
+			});
+
+			this.on("removedfile", function (file) {
+				var index = arrayfiles4.indexOf(file);
+				arrayfiles4.splice(index, 1);
+				// console.log(arrayfiles4);
+			});
+		},
+	});
+
 	$("#frm_agregar_modulo").submit(function (e) {
 		e.preventDefault();
 		let data = new FormData($(this)[0]);
+		if (arrayfiles4.length == 1) {
+			data.append("imagen_modulo", arrayfiles4[0].dataURL);
+		}
 		$.ajax({
 			type: "POST",
 			url: "/modulos/guardar_modulo",
@@ -167,28 +214,10 @@ jQuery(document).ready(function () {
 		$("#fecha_final").val("");
 		$("#carga_horaria").val("");
 		$("#fecha_certificacion").val("");
+		$("#posx_imagen_modulo").val("");
+		$("#posy_imagen_modulo").val("");
+		$("#color_titulo").val("");
 	};
-
-	var arrayfiles4 = [];
-	$(".multimediaFisica4").dropzone({
-		url: "/configuracion/subir_imagen_curso",
-		addRemoveLinks: true,
-		acceptedFiles: "image/jpeg, image/png",
-		maxFilesize: 10, //2mb
-		maxFiles: 1,
-		init: function () {
-			this.on("addedfile", function (file) {
-				arrayfiles4.push(file);
-				// console.log(arrayfiles4);
-			});
-
-			this.on("removedfile", function (file) {
-				var index = arrayfiles4.indexOf(file);
-				arrayfiles4.splice(index, 1);
-				// console.log(arrayfiles4);
-			});
-		},
-	});
 
 	KTDatatablesVerModulos.init();
 });

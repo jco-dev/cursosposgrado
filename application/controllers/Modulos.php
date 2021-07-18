@@ -133,20 +133,58 @@ class Modulos extends PSG_Controller
 			$fecha_final = $this->input->post('fecha_final');
 			$carga_horaria = $this->input->post('carga_horaria');
 			$fecha_certificacion = $this->input->post('fecha_certificacion');
+			$posx_imagen_modulo = $this->input->post('posx_imagen_modulo');
+			$posy_imagen_modulo = $this->input->post('posy_imagen_modulo');
 
-			if ($id_certificacion == "") { // insetar
-				// inscribir en participante y preinscripcion
-				$resp = $this->sql_ssl->insertar_tabla(
-					'mdl_certificacion',
-					[
-						'id_course' => $id_course,
-						'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
-						'fecha_inicial' => $fecha_inicial,
-						'fecha_final' => $fecha_final,
-						'carga_horaria' => $carga_horaria,
-						'fecha_certificacion' => $fecha_certificacion
-					]
-				);
+			// subida de las imagen de modulo del curso
+			$ruta = null;
+			if ($this->input->post('imagen_modulo')) {
+				if (preg_match('/^data:image\/(\w+);base64,/', $this->input->post('imagen_modulo'), $formato)) {
+					$imagen = substr($this->input->post('imagen_modulo'), strpos($this->input->post('imagen_modulo'), ',') + 1);
+					$nombre_imagen = date('Y_m_d_H_i_s') . '.' . strtolower($formato[1]);
+					$ruta = 'assets/img/imagen_modulo/' . $nombre_imagen;
+					file_put_contents(FCPATH . 'assets/img/imagen_modulo/' . $nombre_imagen, base64_decode($imagen));
+				}
+			}
+
+			list($r, $g, $b) = sscanf($this->input->post('color_titulo'), "#%02x%02x%02x");
+			$color_titulo = "$r, $g, $b";
+
+			if ($id_certificacion == "") { // insertar
+				if($ruta == null)
+				{
+					$resp = $this->sql_ssl->insertar_tabla(
+						'mdl_certificacion',
+						[
+							'id_course' => $id_course,
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'fecha_inicial' => $fecha_inicial,
+							'fecha_final' => $fecha_final,
+							'carga_horaria' => $carga_horaria,
+							'posx_imagen_modulo' => $posx_imagen_modulo,
+							'posy_imagen_modulo' => $posy_imagen_modulo,
+							'color_titulo' => $color_titulo,
+							'fecha_certificacion' => $fecha_certificacion
+						]
+					);
+				}else{
+					$resp = $this->sql_ssl->insertar_tabla(
+						'mdl_certificacion',
+						[
+							'id_course' => $id_course,
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'fecha_inicial' => $fecha_inicial,
+							'fecha_final' => $fecha_final,
+							'carga_horaria' => $carga_horaria,
+							'imagen_modulo' => $ruta,
+							'posx_imagen_modulo' => $posx_imagen_modulo,
+							'posy_imagen_modulo' => $posy_imagen_modulo,
+							'color_titulo' => $color_titulo,
+							'fecha_certificacion' => $fecha_certificacion
+						]
+					);
+				}
+				
 
 				if (is_numeric($resp)) {
 					$this->output->set_content_type('application/json')->set_output(
@@ -159,18 +197,43 @@ class Modulos extends PSG_Controller
 				}
 
 			} else { // editar
-				$respuesta = $this->sql_ssl->modificar_tabla(
-					'mdl_certificacion',
-					[
-						'id_course' => $id_course,
-						'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
-						'fecha_inicial' => $fecha_inicial,
-						'fecha_final' => $fecha_final,
-						'carga_horaria' => $carga_horaria,
-						'fecha_certificacion' => $fecha_certificacion
-					],
-					['id_certificacion' => $id_certificacion]
-				);
+
+				if($ruta == null)
+				{
+					$respuesta = $this->sql_ssl->modificar_tabla(
+						'mdl_certificacion',
+						[
+							'id_course' => $id_course,
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'fecha_inicial' => $fecha_inicial,
+							'fecha_final' => $fecha_final,
+							'carga_horaria' => $carga_horaria,
+							'posx_imagen_modulo' => $posx_imagen_modulo,
+							'posy_imagen_modulo' => $posy_imagen_modulo,
+							'color_titulo' => $color_titulo,
+							'fecha_certificacion' => $fecha_certificacion
+						],
+						['id_certificacion' => $id_certificacion]
+					);
+				}else{
+					$respuesta = $this->sql_ssl->modificar_tabla(
+						'mdl_certificacion',
+						[
+							'id_course' => $id_course,
+							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+							'fecha_inicial' => $fecha_inicial,
+							'fecha_final' => $fecha_final,
+							'carga_horaria' => $carga_horaria,
+							'imagen_modulo' => $ruta,
+							'posx_imagen_modulo' => $posx_imagen_modulo,
+							'posy_imagen_modulo' => $posy_imagen_modulo,
+							'color_titulo' => $color_titulo,
+							'fecha_certificacion' => $fecha_certificacion
+						],
+						['id_certificacion' => $id_certificacion]
+					);
+				}
+				
 
 				if ($respuesta) {
 					$this->output->set_content_type('application/json')->set_output(

@@ -40,7 +40,7 @@
                                 <i class="flaticon2-layers-1"></i>
                             </span>
                             <span class="font-size-lg font-weight-bold">Carga Horaria: &nbsp;</span>
-                            <span class="font-size-md font-weight-normal"><?= $curso->carga_horaria ?> Horas</span>
+                            <span class="font-size-md font-weight-normal"><?= $curso->carga_horaria ?> horas académicas</span>
                         </a>
                     </li>
                     <li class="navi-item">
