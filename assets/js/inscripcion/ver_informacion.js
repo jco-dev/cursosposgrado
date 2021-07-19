@@ -1,4 +1,5 @@
 "use strict";
+let id_ccc = $("#id_ccc").val();
 var KTDatatablesVerInformacion = (function () {
 	var init = function () {
 		var tbl_ver_informacion = $("#tbl_ver_informacion");
@@ -8,7 +9,11 @@ var KTDatatablesVerInformacion = (function () {
 			.DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "/inscripcionadmin/ajax_ver_informacion",
+				ajax: {
+					type: "POST",
+					url: "/inscripcionadmin/ajax_ver_informacion",
+					data: {id: id_ccc}
+				},
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],

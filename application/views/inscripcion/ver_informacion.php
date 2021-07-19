@@ -8,13 +8,14 @@
                 </h3>
             </div>
         </div>
+        <input type="hidden" id="id_ccc" name="id_ccc" value="<?= $id ?>">
         <div class="card-body">
             <table class="table table-separate table-head-custom table-checkable" id="tbl_ver_informacion">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>ci</th>
-                        <th>Nombre</th>                        
+                        <th>Nombre</th>
                         <th>Profesi&oacute;n u Oficio</th>
                         <th>celular</th>
                         <th>curso</th>

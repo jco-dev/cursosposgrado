@@ -514,8 +514,9 @@ class Inscripcionadmin extends PSG_Controller
         }
     }
 
-    public function ver_informacion()
+    public function ver_informacion($id = null)
     {
+        $this->data['id'] = $id;
         $this->templater->view('inscripcion/ver_informacion', $this->data);
     }
 
@@ -523,7 +524,14 @@ class Inscripcionadmin extends PSG_Controller
     {
 
         if ($this->input->is_ajax_request()) {
+            $id = $this->input->post('id');
             $table = "mdl_ver_informacion";
+            if($id != null){
+                $condicion = "id_course_moodle= $id";
+            }else{
+                $condicion = null;
+            }
+            
             $primaryKey = 'id_participante';
             $columns = array(
                 array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
@@ -591,7 +599,7 @@ class Inscripcionadmin extends PSG_Controller
             );
 
             $this->output->set_content_type('application/json')->set_output(json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, NULL, NULL)
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $condicion, NULL)
             ));
 
             return;

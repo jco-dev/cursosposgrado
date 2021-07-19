@@ -182,7 +182,7 @@ class Cursos extends PSG_Controller
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_ver_informacion" data-id=' . $id . ' class="navi-link" title="Listado de usuarios que pidieron información del curso">
+									<a href="' . base_url('inscripcionadmin/ver_informacion/' . $id) . '"  id="btn_ver_informacion" data-id=' . $id . ' class="navi-link" title="Listado de usuarios que pidieron información del curso">
 										<span class="navi-icon"><i class="la la-info-circle"></i></span>
 										<span class="navi-text">Información</span>
 									</a>
