@@ -429,8 +429,7 @@ class ImprimirCertificado extends Fpdf_psg
 
     public function imprimir_blanco($datos = null, $datos_curso = null, $tipo)
     {
-
-        $valor = ['nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'fecha_certificacion', 'imagen_curso', 'tipo_participacion'];
+        $valor = ['nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'imagen_personalizado', 'posx_imagen_personalizado', 'posy_imagen_personalizado', 'color_nombre_curso', 'fecha_certificacion', 'tipo_participacion','tipo'];
 
         foreach ($datos as $key => $curso) {
             $cur = array();
@@ -440,14 +439,14 @@ class ImprimirCertificado extends Fpdf_psg
             }
 
             $this->AddPage("L", "letter");
-            if ($cur['imagen_curso'] != "" || $cur['imagen_curso'] != NULL) {
-                $this->Image($cur['imagen_curso'], 0, 0, 279.4, 215.9);
+            if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
+                $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
             // Nombre estudiante
-            $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
             $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
+            $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
             $this->AddFont('Parisienne-Regular', '', 'Parisienne-Regular.php');
             $this->SetFont('Parisienne-Regular', '', $datos_curso[0]->tamano_titulo + 10);
             if ($tipo == "SI") {
@@ -459,19 +458,34 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
             $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
             $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-            $this->Cell(190, 11, utf8_decode("Por haber {$cur['tipo_participacion']} el curso:"), 0, 1, '');
+            $this->Cell(190, 11, utf8_decode($this->verificar_tipo_participacion($cur['tipo_participacion'])), 0, 1, '');
 
             // titulo del curso
-            $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
+            $color_s = explode(", ", $cur['color_nombre_curso']);
             $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
             $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
             $this->multiCelda(214, 9, utf8_decode($cur['nombre_curso']), 0, 'C');
+            //IMPRIMIR SUBITULO
+            $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
+            if ($cur['tipo'] == "CURSO") {
+                if ($datos_curso[0]->imprimir_subtitulo == "1") {
+                    $this->SetX($datos_curso[0]->posx_nombre_curso);
+                    $this->SetFont('Arial', 'B', 13);
+                    $this->Cell(214, 5, utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
+                    $posy_bt = $posy_bt + 4;
+                }
+            }
+
+            // imagen personalizado curso
+            if ($cur['imagen_personalizado'] != "" || $cur['imagen_personalizado'] != null) {
+                $this->Image($cur['imagen_personalizado'], $cur['posx_imagen_personalizado'], $cur['posy_imagen_personalizado']);
+            }
 
             // bloque de texto
             $this->SetTextColor(0, 0, 0);
-            $this->SetXY($datos_curso[0]->posx_bloque_texto, $datos_curso[0]->posy_bloque_texto);
+            $this->SetXY($datos_curso[0]->posx_bloque_texto, $posy_bt);
             $dia = date("d", strtotime($cur['fecha_inicial']));
             $mes = $this->mes_literal(date("m", strtotime($cur['fecha_inicial'])));
             $fecha_final = fecha_literal($cur['fecha_final']);
@@ -485,6 +499,20 @@ class ImprimirCertificado extends Fpdf_psg
         }
 
         echo base64_encode($this->Output('S'));
+    }
+
+    public function verificar_tipo_participacion($tipo)
+    {
+        if($tipo == "APROBADO"){
+            return "Por haber APROBADO SATISFACTORIAMENTE el curso: ";
+        }elseif($tipo == "EXPOSITOR")
+        {
+            return "Por haber participado en calidad de EXPOSITOR del curso especializado de:";
+        }elseif($tipo == "ORGANIZADOR"){
+            return "Por haber participado en calidad de ORGANIZADOR del curso especializado de:";
+        }elseif($tipo == "PARTICIPADO"){
+            return "Por haber PARTICIPADO del curso: ";
+        }
     }
 
     public function generate_certificates($datos_curso = null, $datos_estudiante = null)

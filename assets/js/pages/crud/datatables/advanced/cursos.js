@@ -35,66 +35,7 @@ var KTDatatablesCursos = (function () {
 				
 			})
 			.on("click", "#btn_imprimir_blanco", function (e) {
-				let id = $(this).attr("data-id");
-				Swal.fire({
-					title: "Seleccione tipo de participacion",
-					input: "select",
-					inputOptions: {
-						tipo: {
-							PARTICIPADO: "PARTICIPADO",
-							EXPUESTO: "EXPUESTO",
-							ORGANIZADO: "ORGANIZADO",
-							APROBADO: "APROBADO",
-						},
-					},
-					showCancelButton: true,
-					inputValidator: (value) => {
-						return new Promise((resolve) => {
-							resolve();
-							Swal.fire({
-								title:
-									"Seleccione si para que lleve la letra A delante del nombre del participante",
-								input: "select",
-								inputOptions: {
-									tipo: {
-										SI: "SI",
-										NO: "NO",
-									},
-								},
-								showCancelButton: true,
-								inputValidator: (tipo) => {
-									return new Promise((resolve) => {
-										resolve();
-										$.post(
-											"/cursos/imprimir_certificado_blanco",
-											{
-												id,
-												value,
-												tipo,
-											},
-											function (response) {
-												if (typeof response.error != "undefined") {
-													Swal.fire("Error!", response.error, "error");
-												} else {
-													$("#modal-body-certificado").children().remove();
-													$("#modal-body-certificado").html(
-														'<embed src="data:application/pdf;base64,' +
-															response +
-															'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="600px" style="border: none;"/>'
-													);
-													$("#modal_imprimir_certificado").modal({
-														backdrop: "static",
-														keyboard: true,
-													});
-												}
-											}
-										);
-									});
-								},
-							});
-						});
-					},
-				});
+				
 			})
 			.on("click", "#btn_enviar_por_correo", function (e) {
 				let id = $(this).attr("data-id");
@@ -239,6 +180,70 @@ jQuery(document).ready(function () {
 							}
 						}
 					);
+				});
+			},
+		});
+	});
+
+	// IMPRIMIR CERTIFICADOS EN BLANCO
+	jQuery(".dropdown #btn_imprimir_blanco").click(function () {
+		let id = $(this).attr("data-id");
+		Swal.fire({
+			title: "Seleccione tipo de participacion",
+			input: "select",
+			inputOptions: {
+				tipo: {
+					APROBADO: "APROBADO",
+					EXPOSITOR: "EXPOSITOR",
+					ORGANIZADOR: "ORGANIZADOR",
+					PARTICIPADO: "PARTICIPADO",
+				},
+			},
+			showCancelButton: true,
+			inputValidator: (value) => {
+				return new Promise((resolve) => {
+					resolve();
+					Swal.fire({
+						title:
+							"Seleccione si para que lleve la letra A delante del nombre del participante",
+						input: "select",
+						inputOptions: {
+							tipo: {
+								SI: "SI",
+								NO: "NO",
+							},
+						},
+						showCancelButton: true,
+						inputValidator: (tipo) => {
+							return new Promise((resolve) => {
+								resolve();
+								$.post(
+									"/cursos/imprimir_certificado_blanco",
+									{
+										id,
+										value,
+										tipo,
+									},
+									function (response) {
+										if (typeof response.error != "undefined") {
+											Swal.fire("Error!", response.error, "error");
+										} else {
+											$("#modal-body-certificado").children().remove();
+											$("#modal-body-certificado").html(
+												'<embed src="data:application/pdf;base64,' +
+													response +
+													'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="600px" style="border: none;"/>'
+											);
+											$("#modal_imprimir_certificado").modal({
+												backdrop: "static",
+												keyboard: true,
+											});
+										}
+									}
+								);
+							});
+						},
+					});
 				});
 			},
 		});

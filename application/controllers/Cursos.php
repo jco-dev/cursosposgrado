@@ -781,9 +781,14 @@ class Cursos extends PSG_Controller
 				array_push($d, $curso->fecha_inicial);
 				array_push($d, $curso->fecha_final);
 				array_push($d, $curso->carga_horaria);
+				array_push($d, $curso->imagen_personalizado);
+				array_push($d, $curso->posx_imagen_personalizado);
+				array_push($d, $curso->posy_imagen_personalizado);
+				array_push($d, $curso->color_subtitulo);
 				array_push($d, $curso->fecha_certificacion);
-				array_push($d, $curso->imagen_curso);
 				array_push($d, $value);
+				array_push($d, 'CURSO');
+
 				array_push($curso_data, $d);
 			}
 			//
@@ -793,9 +798,13 @@ class Cursos extends PSG_Controller
 				array_push($d, $r->fecha_inicial);
 				array_push($d, $r->fecha_final);
 				array_push($d, $r->carga_horaria);
+				array_push($d, $r->imagen_modulo);
+				array_push($d, $r->posx_imagen_modulo);
+				array_push($d, $r->posy_imagen_modulo);
+				array_push($d, $r->color_titulo);
 				array_push($d, $r->fecha_certificacion);
-				array_push($d, $datos_curso[0]->imagen_curso);
 				array_push($d, $value);
+				array_push($d, 'MODULO');
 
 				array_push($curso_data, $d);
 			}
