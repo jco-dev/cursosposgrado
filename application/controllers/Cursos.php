@@ -326,9 +326,9 @@ class Cursos extends PSG_Controller
 				array('dt' => 6, 'db' => 'monto_pago'),
 				array('dt' => 7, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
 					if ($img == "") {
-						return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
+						return '<img class="img-thumbnail" width="40" heigth="40" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
 					} else {
-						return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto curso" />';
+						return '<img class="img-thumbnail" width="40" heigth="40" src="' . base_url("$img") . '" alt="foto curso" />';
 					}
 				}),
 				array('dt' => 8, 'db' => 'tipo_participacion', 'formatter' => function ($tipo) {
@@ -629,6 +629,7 @@ class Cursos extends PSG_Controller
 
 		if (!empty($estudiantes)) {
 			$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
+			
 			if ($datos_curso == NULL) {
 				$this->output->set_content_type('application/json')->set_output(json_encode(
 					[
@@ -640,10 +641,10 @@ class Cursos extends PSG_Controller
 				if (count($estudiantes) > 0) {
 
 					$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
-					$imagen = $datos_curso[0]->imagen_curso;
+					
 					foreach ($estudiantes as $key => $estudiante) {
-						// var_dump($estudiante);
-						if ($estudiante->certificacion_unica == "CURSO") {
+						// CERTIFICACION DEL CURSO
+						if ($estudiante->certificacion_unica == "CURSO" || $estudiante->certificacion_unica == ""|| $estudiante->certificacion_unica == null) {
 							$fila = array();
 							array_push($fila, $estudiante->id_inscripcion_curso);
 							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
@@ -653,12 +654,19 @@ class Cursos extends PSG_Controller
 							array_push($fila, $datos_curso[0]->fecha_inicial);
 							array_push($fila, $datos_curso[0]->fecha_final);
 							array_push($fila, $datos_curso[0]->carga_horaria);
+							array_push($fila, $datos_curso[0]->imagen_personalizado);
+							array_push($fila, $datos_curso[0]->posx_imagen_personalizado);
+							array_push($fila, $datos_curso[0]->posy_imagen_personalizado);
+							array_push($fila, $datos_curso[0]->color_subtitulo);
 							array_push($fila, $datos_curso[0]->fecha_certificacion);
+							array_push($fila, "CURSO");
 
 							array_push($data, $fila);
-						} elseif ($estudiante->certificacion_unica == "MODULO" || $estudiante->certificacion_unica == "" || $estudiante->certificacion_unica == NULL) {
-							// Listado de modulos de un curso
 
+						} elseif ($estudiante->certificacion_unica == "MODULO") {
+							// CERTIFICACION POR MODULOS
+
+							// Listado de modulos de un curso
 							$respuesta = $this->sql_ssl->listar_tabla(
 								'mdl_certificacion',
 								['id_course' => $estudiante->id, 'estado' => 'REGISTRADO']
@@ -674,51 +682,68 @@ class Cursos extends PSG_Controller
 								array_push($modulo, $r->fecha_inicial);
 								array_push($modulo, $r->fecha_final);
 								array_push($modulo, $r->carga_horaria);
+								array_push($modulo, $r->imagen_modulo);
+								array_push($modulo, $r->posx_imagen_modulo);
+								array_push($modulo, $r->posy_imagen_modulo);
+								array_push($modulo, $r->color_titulo);
 								array_push($modulo, $r->fecha_certificacion);
+								array_push($modulo, "MODULO");
 								array_push($data, $modulo);
 							}
 
-						} elseif($estudiante->certificacion_unica == "AMBOS") { // para ambos
-							// Agregar del curso
-							// $fila = array();
-							// array_push($fila, $estudiante->id_inscripcion_curso);
-							// array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
-							// array_push($fila, $estudiante->calificacion_final);
-							// array_push($fila, $estudiante->tipo_participacion);
-							// array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($datos_curso[0]->nombre_curso)), MB_CASE_UPPER));
-							// array_push($fila, $datos_curso[0]->fecha_inicial);
-							// array_push($fila, $datos_curso[0]->fecha_final);
-							// array_push($fila, $datos_curso[0]->carga_horaria);
-							// array_push($fila, $datos_curso[0]->fecha_certificacion);
+						} elseif($estudiante->certificacion_unica == "AMBOS") { 
+							// CERTIFICACION POR CURSO Y MODULO (AMBOS)
 
-							// array_push($data, $fila);
+							// Agregar del curso
+							$fila = array();
+							array_push($fila, $estudiante->id_inscripcion_curso);
+							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
+							array_push($fila, $estudiante->calificacion_final);
+							array_push($fila, $estudiante->tipo_participacion);
+							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($datos_curso[0]->nombre_curso)), MB_CASE_UPPER));
+							array_push($fila, $datos_curso[0]->fecha_inicial);
+							array_push($fila, $datos_curso[0]->fecha_final);
+							array_push($fila, $datos_curso[0]->carga_horaria);
+							array_push($fila, $datos_curso[0]->imagen_personalizado);
+							array_push($fila, $datos_curso[0]->posx_imagen_personalizado);
+							array_push($fila, $datos_curso[0]->posy_imagen_personalizado);
+							array_push($fila, $datos_curso[0]->color_subtitulo);
+							array_push($fila, $datos_curso[0]->fecha_certificacion);
+							array_push($fila, "CURSO");
+
+							array_push($data, $fila);
 
 							// agregar modulos
+							$respuesta = $this->sql_ssl->listar_tabla(
+								'mdl_certificacion',
+								['id_course' => $estudiante->id, 'estado' => 'REGISTRADO']
+							);
 
-							// $respuesta = $this->sql_ssl->listar_tabla(
-							// 	'mdl_certificacion',
-							// 	['id_course' => $estudiante->id, 'estado' => 'REGISTRADO']
-							// );
+							foreach ($respuesta as $key => $r) {
+								$modulo = array();
+								array_push($modulo, $estudiante->id_inscripcion_curso);
+								array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
+								array_push($modulo, $estudiante->calificacion_final);
+								array_push($modulo, $estudiante->tipo_participacion);
+								array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
+								array_push($modulo, $r->fecha_inicial);
+								array_push($modulo, $r->fecha_final);
+								array_push($modulo, $r->carga_horaria);
+								array_push($modulo, $r->imagen_modulo);
+								array_push($modulo, $r->posx_imagen_modulo);
+								array_push($modulo, $r->posy_imagen_modulo);
+								array_push($modulo, $r->color_titulo);
+								array_push($modulo, $r->fecha_certificacion);
+								array_push($modulo, "MODULO");
 
-							// foreach ($respuesta as $key => $r) {
-							// 	$modulo = array();
-							// 	array_push($modulo, $estudiante->id_inscripcion_curso);
-							// 	array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
-							// 	array_push($modulo, $estudiante->calificacion_final);
-							// 	array_push($modulo, $estudiante->tipo_participacion);
-							// 	array_push($modulo, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
-							// 	array_push($modulo, $r->fecha_inicial);
-							// 	array_push($modulo, $r->fecha_final);
-							// 	array_push($modulo, $r->carga_horaria);
-							// 	array_push($modulo, $r->fecha_certificacion);
-							// 	array_push($data, $modulo);
-							// }
+								array_push($data, $modulo);
+							}
 
 						}
 					}
-					// var_dump($data);
+					// return var_dump($data);
 				}
-
+				
 				$rep = new ImprimirCertificado();
 				$rep->imprimir_todos($datos_curso, $data, $value);
 			}

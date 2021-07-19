@@ -181,16 +181,19 @@ class ImprimirCertificado extends Fpdf_psg
         return $m;
     }
 
+    // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
     public function imprimir_todos($datos_curso = null, $datos_estudiante = null, $value)
     {
         // var_dump($datos_estudiante);
         $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
-        $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
         $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
-        $cn = 0;
+
         foreach ($datos_estudiante as $estudiante) {
+
+            $valor = ['id_inscripcion_curso', 'nombre_estudiante', 'calificacion_final', 'tipo_participacion', 'nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'imagen_personalizado', 'posx_imagen_personalizado', 'posy_imagen_personalizado','color_nombre_curso', 'fecha_certificacion','tipo'];
+
             $est = array();
-            $valor = ['id_inscripcion_curso', 'usuario', 'calificacion_final', 'tipo_participacion', 'nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'fecha_certificacion'];
+           
             for ($i = 0; $i < count($estudiante); $i++) {
 
                 $est[$valor[$i]] = $estudiante[$i];
@@ -201,10 +204,6 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
-
-
-
-            $this->Image('assets/img/computacion.jpg', 247, 119, 25, 35);
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -218,7 +217,7 @@ class ImprimirCertificado extends Fpdf_psg
 
             $this->SetFont('Arial', 'B', $datos_curso[0]->tamano_titulo);
             $this->SetXY($datos_curso[0]->posx_nombre_participante + 15, $datos_curso[0]->posy_nombre_participante);
-            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['usuario'])), MB_CASE_UPPER)), 0, 1, 'C');
+            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 0, 1, 'C');
 
             // TIPO PARTICIPACION
             $this->SetTextColor(0, 0, 0);
@@ -245,28 +244,27 @@ class ImprimirCertificado extends Fpdf_psg
             }
 
             // titulo del curso
-            $word = [44, 51, 172];
-            $excel = [0, 133, 68];
-            $point = [210,28,0];
-            // $color_s = explode(", ", $datos_curso[0]->color_subtitulo);
-            // if($cn == 0)
-            // {
-            //     $this->SetTextColor($word[0], $word[1], $word[2]);
-            // }elseif($cn == 1)
-            // {
-            //     $this->SetTextColor($excel[0], $excel[1], $excel[2]);
-            // }else{
-            //     $this->SetTextColor($point[0], $point[1], $point[2]);
-            // }
+            $color_s = explode(", ", $est['color_nombre_curso']);
             $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BookmanOldStyle-Bold', '', 'BOOKOSB.php');
             $this->SetFont('BookmanOldStyle-Bold', '', $datos_curso[0]->tamano_subtitulo);
             $this->MultiCell(214, 9, utf8_decode($est['nombre_curso']), 0, 'C');
 
+            //IMPRIMIR SUBITULO
+            $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
+            if($est['tipo'] == "CURSO"){
+                if($datos_curso[0]->imprimir_subtitulo == "1"){
+                    $this->SetX($datos_curso[0]->posx_nombre_curso);
+                    $this->SetFont('Arial', 'B', 13);
+                    $this->Cell(214, 5,utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
+                    $posy_bt = $posy_bt + 4;
+                }
+            }
+
             //bloque de texto
             $this->SetTextColor(0, 0, 0);
-            $this->SetXY($datos_curso[0]->posx_bloque_texto, $datos_curso[0]->posy_bloque_texto);
+            $this->SetXY($datos_curso[0]->posx_bloque_texto, $posy_bt);
             $dia = date("d", strtotime($est['fecha_inicial']));
             $mes = $this->mes_literal(date("m", strtotime($est['fecha_inicial'])));
             $fecha_final = strtolower(fecha_literal($est['fecha_final']));
@@ -278,20 +276,21 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetX($datos_curso[0]->posx_bloque_texto);
             $this->multiCelda(210, 8, utf8_decode(($fecha_certificacion)) . "     ", 0, 'R');
 
+            // imagen personalizado curso
+            if($est['imagen_personalizado'] != "" || $est['imagen_personalizado'] != null)
+            {
+                $this->Image($est['imagen_personalizado'], $est['posx_imagen_personalizado'] , $est['posy_imagen_personalizado']);
+            }
+
             //qr
             $code = md5('CERTIFICADO_' . $est['id_inscripcion_curso']);
-            $this->Image("http://localhost/generar_qr/qr_generator.php?code=" . $code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36, "png");
-            // $this->Image("https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=$url&.png", $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36);
+            $this->Image("http://localhost/generar_qr/qr_generator.php?code=" . $code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 36, 36, "png");            
             // texto de verificacion qr
             $this->SetXY(intval($datos_curso[0]->posx_qr), intval($datos_curso[0]->posy_qr) + 36);
             $this->SetFont('Arial', '', 10);
             $this->SetTextColor(0, 0, 0);
             $this->MultiCell(36, 3.5, utf8_decode("Código QR de verificación del certificado"), 0, "C");
-            $cn++;
-            if($cn == 3)
-            {
-                $cn = 0;
-            }
+            
         }
 
 
