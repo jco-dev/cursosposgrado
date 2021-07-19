@@ -26,9 +26,9 @@ class Inscripcionadmin extends PSG_Controller
         $this->templater->view('inscripcion/index', $this->data);
     }
 
-    public function ver_inscritos()
+    public function ver_inscritos($id = NULL)
     {
-
+        $this->data['id'] = $id;
         $this->data['cursos'] = $this->inscripcion_model->listar_cursos();
         $this->templater->view('inscripcion/ver_inscritos', $this->data);
     }

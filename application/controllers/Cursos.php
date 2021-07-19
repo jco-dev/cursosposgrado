@@ -175,7 +175,7 @@ class Cursos extends PSG_Controller
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_ver_preinscritos" data-id=' . $id . ' class="navi-link" title="Listado de preinscritos del curso">
+									<a href="' . base_url('inscripcionadmin/ver_inscritos/' . $id) . '" id="btn_ver_preinscritos" data-id=' . $id . ' class="navi-link" title="Listado de preinscritos del curso">
 										<span class="navi-icon"><i class="la la-pen-square"></i></span>
 										<span class="navi-text">Preinscritos</span>
 									</a>

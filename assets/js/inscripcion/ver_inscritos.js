@@ -1,4 +1,5 @@
 "use strict";
+let id_c = $("#id_c").val();
 let tbl_ver_inscripcion;
 var KTDatatablesVerInscritos = (function () {
 	var init = function () {
@@ -8,12 +9,16 @@ var KTDatatablesVerInscritos = (function () {
 			.DataTable({
 				processing: true,
 				serverSide: true,
-				ajax: "/inscripcionadmin/ajax_ver_inscritos",
+				ajax: {
+					type: "POST",
+					url: "/inscripcionadmin/ajax_ver_inscritos",
+					data: {id: id_c}
+				},
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: 20,
+				iDisplayLength: -1,
 				responsive: true,
 				sortable: true,
 				// layout definition
@@ -188,6 +193,12 @@ jQuery(document).ready(function () {
 			keyboard: false,
 		});
 	});
+
+	let id_cc = $("#id_c").val();
+
+	if(id_cc != null){
+		$("#cursos").val(id_cc).trigger('change');
+	}
 
 	$("#descagar_usuarios_moodle").on("click", function(){
 		let id = $("#cursos").val();
