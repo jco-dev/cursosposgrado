@@ -38,24 +38,7 @@ var KTDatatablesCursos = (function () {
 				
 			})
 			.on("click", "#btn_enviar_por_correo", function (e) {
-				let id = $(this).attr("data-id");
-				$.post(
-					"/cursos/enviar_certificados",
-					{
-						id,
-					},
-					function (response) {
-						if (typeof response.error != "undefined") {
-							Swal.fire("Error!", response.error, "error");
-						}
-						if (typeof response.exito != "undefined") {
-							Swal.fire("Exito!", response.exito, "success");
-						}
-						if (typeof response.warning != "undefined") {
-							Swal.fire("Advertencia!", response.warning, "success");
-						}
-					}
-				);
+				
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {
@@ -247,6 +230,28 @@ jQuery(document).ready(function () {
 				});
 			},
 		});
+	});
+
+	// ENVIAR CORREO DE CERTIFICADOS
+	jQuery(".dropdown #btn_enviar_por_correo").click(function () {
+		let id = $(this).attr("data-id");
+		$.post(
+			"/cursos/enviar_certificados",
+			{
+				id,
+			},
+			function (response) {
+				if (typeof response.error != "undefined") {
+					Swal.fire("Error!", response.error, "error");
+				}
+				if (typeof response.exito != "undefined") {
+					Swal.fire("Exito!", response.exito, "success");
+				}
+				if (typeof response.warning != "undefined") {
+					Swal.fire("Advertencia!", response.warning, "success");
+				}
+			}
+		);
 	});
 
 });
