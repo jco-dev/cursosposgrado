@@ -1,5 +1,4 @@
 "use strict";
-let id_c = $("#id_c").val();
 let tbl_ver_inscripcion;
 var KTDatatablesVerInscritos = (function () {
 	var init = function () {
@@ -12,13 +11,13 @@ var KTDatatablesVerInscritos = (function () {
 				ajax: {
 					type: "POST",
 					url: "/inscripcionadmin/ajax_ver_inscritos",
-					data: {id: id_c}
+					data: {id: $("#id_c").val()}
 				},
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: -1,
+				iDisplayLength: 20,
 				responsive: true,
 				sortable: true,
 				// layout definition

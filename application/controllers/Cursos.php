@@ -126,14 +126,14 @@ class Cursos extends PSG_Controller
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_configuracion" data-id=' . $id . ' class="navi-link" title="Ingresar el curso a la configuración">
+									<a onclick="configuracion(' . $id . ')" type="button" id="btn_configuracion" class="navi-link" title="Ingresar el curso a la configuración">
 										<span class="navi-icon"><i class="la la-cog"></i></span>
 										<span class="navi-text">Configuración</span>
 									</a>
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_inscripcion" data-id=' . $id . ' class="navi-link" title="Inscripción de estudiantes de la plataforma moodle">
+									<a onclick="inscripcion_estudiantes(' . $id . ')" type="button" id="btn_inscripcion" data-id=' . $id . ' class="navi-link" title="Inscripción de estudiantes de la plataforma moodle">
 										<span class="navi-icon"><i class="la la-pen-alt"></i></span>
 										<span class="navi-text">Inscripción</span>
 									</a>
@@ -147,21 +147,21 @@ class Cursos extends PSG_Controller
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_imprimir_todos" data-id=' . $id . ' class="navi-link" title="Imprimir certificados del curso">
+									<a onclick="imprimir_certificados(' . $id . ')" type="button" id="btn_imprimir_todos" data-id=' . $id . ' class="navi-link" title="Imprimir certificados del curso">
 										<span class="navi-icon"><i class="la la-print"></i></span>
 										<span class="navi-text">Certificados</span>
 									</a>
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_imprimir_blanco" data-id=' . $id . ' class="navi-link" title="Imprimir certificado en blanco del curso">
+									<a onclick="imprimir_certificado_blanco('.$id.')" type="button" id="btn_imprimir_blanco" data-id=' . $id . ' class="navi-link" title="Imprimir certificado en blanco del curso">
 										<span class="navi-icon"><i class="la la-print"></i></span>
 										<span class="navi-text">Cert. Blanco</span>
 									</a>
 								</li>
 
 								<li class="navi-item">
-									<a type="button" id="btn_enviar_por_correo" data-id=' . $id . ' class="navi-link" title="Enviar certificados del curso por correo">
+									<a onclick="enviar_certificados_correo('.$id.')" type="button" id="btn_enviar_por_correo" data-id=' . $id . ' class="navi-link" title="Enviar certificados del curso por correo">
 										<span class="navi-icon"><i class="la la-mail-bulk"></i></span>
 										<span class="navi-text">Enviar cert.</span>
 									</a>
@@ -189,7 +189,7 @@ class Cursos extends PSG_Controller
 								</li>
 							</ul>
 						</div>
-					</div>';
+					</div><script>jQuery(".navi").toggleClass("visible")</script>';
 				})
 			);
 			$sql_details = array(
