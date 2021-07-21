@@ -562,6 +562,7 @@ class Cursos extends PSG_Controller
 		}
 	}
 
+	// IMPRIMIR CERTIFICADO POR ESTUDIANTE Y CURSO
 	public function imprimir_certificado()
 	{
 		$id = $this->input->post('id');
@@ -586,6 +587,7 @@ class Cursos extends PSG_Controller
 			$data = array();
 			$estudiante = $this->cursos_model->get_datos_estudiante($id);
 
+			// CURSO
 			if (count($estudiante) > 0) {
 				$fila = array();
 				array_push($fila, $estudiante[0]->id_inscripcion_curso);
@@ -596,11 +598,17 @@ class Cursos extends PSG_Controller
 				array_push($fila, $datos_curso[0]->fecha_inicial);
 				array_push($fila, $datos_curso[0]->fecha_final);
 				array_push($fila, $datos_curso[0]->carga_horaria);
+				array_push($fila, $datos_curso[0]->imagen_personalizado);
+				array_push($fila, $datos_curso[0]->posx_imagen_personalizado);
+				array_push($fila, $datos_curso[0]->posy_imagen_personalizado);
+				array_push($fila, $datos_curso[0]->color_subtitulo);
 				array_push($fila, $datos_curso[0]->fecha_certificacion);
+				array_push($fila, "CURSO");
 
 				array_push($data, $fila);
 			}
 
+			// MODULOS
 			foreach ($modulos as $key => $r) {
 				$modulo = array();
 				array_push($modulo, $estudiante[0]->id_inscripcion_curso);
@@ -611,12 +619,18 @@ class Cursos extends PSG_Controller
 				array_push($modulo, $r->fecha_inicial);
 				array_push($modulo, $r->fecha_final);
 				array_push($modulo, $r->carga_horaria);
+				array_push($modulo, $r->imagen_modulo);
+				array_push($modulo, $r->posx_imagen_modulo);
+				array_push($modulo, $r->posy_imagen_modulo);
+				array_push($modulo, $r->color_titulo);
 				array_push($modulo, $r->fecha_certificacion);
+				array_push($modulo, "MODULO");
+
 				array_push($data, $modulo);
 			}
 
 			$rep = new ImprimirCertificado();
-			$rep->imprimir($datos_curso, $data, $tipo);
+			$rep->imprimir_certificado_estudiante($datos_curso, $data, $tipo);
 		}
 	}
 
