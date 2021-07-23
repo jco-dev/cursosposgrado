@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'e4d49552baafac2cdcada8d3ea8c2b27a838f33a',
+    'reference' => 'd9df48851df0d670e501f1d7d42a56c2618d3d0d',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'e4d49552baafac2cdcada8d3ea8c2b27a838f33a',
+      'reference' => 'd9df48851df0d670e501f1d7d42a56c2618d3d0d',
     ),
     'camilord/qrcode' => 
     array (

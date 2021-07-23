@@ -456,12 +456,12 @@ class ImprimirCertificado extends Fpdf_psg
             $this->Cell(190, 11, utf8_decode($this->verificar_tipo_participacion($cur['tipo_participacion'])), 0, 1, '');
 
             // titulo del curso
-            if($est['color_nombre_curso'] == ""){
+            if($cur['color_nombre_curso'] == ""){
                 $color_s[0] = 0;
                 $color_s[1] = 0;
                 $color_s[2] = 0;
             }else{
-                $color_s = explode(", ", $est['color_nombre_curso']);
+                $color_s = explode(", ", $cur['color_nombre_curso']);
             }
 
             $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
