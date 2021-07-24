@@ -30,9 +30,24 @@
                 <h5 class="text-justify font-size-lg font-weight-normal">
                     💰 OPCIONES DE PAGO:<br>&nbsp;
                     <ol>
-                        <li>TRANSFERENCIA BANCARIA O DEPÓSITO DE <?= isset($datos)? $datos[0]->inversion : '0 ' ;?> Bs AL SIGUIENTE NÚMERO DE CUENTA:
+                        <li>TRANSFERENCIA BANCARIA O DEPÓSITO DE 
+                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                                <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($datos[0]->inversion) ?></del> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento/ 100)) ?></span> </span>
+                            <?php }else{ ?>
+                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                            <?php } ?>  
+                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                                <span class="font-size-md font-weight-normal text-primary"> (DESCUENTO DE <span class="text-primary font-weight-bold"><?= $datos[0]->descuento ?>% </span> HASTA <?= date('d-m-Y', strtotime($datos[0]->fecha_fin_descuento)) ?>) </span>
+                            <?php } ?>   
+                            AL SIGUIENTE NÚMERO DE CUENTA:
                             10000029978464 (SERGIO AUGUSTO PÉREZ GIRONDA - 6046358 LP) - BANCO UNIÓN</li>
-                        <li>TRANSFERENCIA A TIGO MONEY DE <?= isset($datos)? $datos[0]->inversion : '0 ' ;?> Bs AL NÚMERO (INCLUIR COMISIÓN 4 Bs):
+                        <li>TRANSFERENCIA A TIGO MONEY DE 
+                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                                <span class="font-size-md font-weight-normal"> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento/ 100)) ?></span> </span>
+                            <?php }else{ ?>
+                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                            <?php } ?> 
+                            AL NÚMERO (INCLUIR COMISIÓN 4 Bs):
                             📲 76209205 (BRAYAN CONDORI CHOQUE)</li>
                         <li>HACIENDO EL PAGO DIRECTAMENTE EN NUESTRA OFICINA: EDIFICIO EMBLEMÁTICO UPEA, 3ER PISO, OFICINA 3 DE POSGRADO - AV. SUCRE S/N ZONA VILLA ESPERANZA :: CIUDAD DE EL ALTO - BOLIVIA</li>
                     </ol>

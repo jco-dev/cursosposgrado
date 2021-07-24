@@ -113,6 +113,9 @@ class Inscripcion_model extends PSG_Model
 			cc.carga_horaria,
 			cc.inversion,
 			cc.horario,
+			cc.descuento,
+			cc.fecha_inicio_descuento,
+			cc.fecha_fin_descuento,
 			CONCAT (
 			CASE DAYOFWEEK(cc.fecha_inicial)
 			WHEN 1 THEN 'Domingo'
