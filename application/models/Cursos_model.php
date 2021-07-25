@@ -286,7 +286,8 @@ class Cursos_model extends PSG_Model
 			c.id,
 			c.fullname,
 			ic.calificacion_final,			
-			ic.tipo_participacion
+			ic.tipo_participacion,
+			ic.certificacion_unica
 			from mdl_inscripcion_curso ic inner join mdl_user u on ic.id_user_moodle = u.id
 			inner join mdl_course c on ic.id_course_moodle = c.id AND c.id = '$idcurso'";
 			$query = $this->db->query($sql);

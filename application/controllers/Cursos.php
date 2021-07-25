@@ -11,7 +11,7 @@ class Cursos extends PSG_Controller
 		parent::__construct();
 		$this->load->model('cursos_model');
 		$this->cn = 1;
-		$this->cnest=1;
+		$this->cnest = 1;
 	}
 
 	public function index()
@@ -87,7 +87,7 @@ class Cursos extends PSG_Controller
 			$table = "mdl_listado_cursos";
 			$primaryKey = 'id';
 			$columns = array(
-				array('dt' => 0, 'db' => 'id', 'formatter' => function($id){
+				array('dt' => 0, 'db' => 'id', 'formatter' => function ($id) {
 					return $this->cn++;
 				}),
 				array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
@@ -154,14 +154,14 @@ class Cursos extends PSG_Controller
 								</li>
 
 								<li class="navi-item">
-									<a onclick="imprimir_certificado_blanco('.$id.')" type="button" id="btn_imprimir_blanco" data-id=' . $id . ' class="navi-link" title="Imprimir certificado en blanco del curso">
+									<a onclick="imprimir_certificado_blanco(' . $id . ')" type="button" id="btn_imprimir_blanco" data-id=' . $id . ' class="navi-link" title="Imprimir certificado en blanco del curso">
 										<span class="navi-icon"><i class="la la-print"></i></span>
 										<span class="navi-text">Cert. Blanco</span>
 									</a>
 								</li>
 
 								<li class="navi-item">
-									<a onclick="enviar_certificados_correo('.$id.')" type="button" id="btn_enviar_por_correo" data-id=' . $id . ' class="navi-link" title="Enviar certificados del curso por correo">
+									<a onclick="enviar_certificados_correo(' . $id . ')" type="button" id="btn_enviar_por_correo" data-id=' . $id . ' class="navi-link" title="Enviar certificados del curso por correo">
 										<span class="navi-icon"><i class="la la-mail-bulk"></i></span>
 										<span class="navi-text">Enviar cert.</span>
 									</a>
@@ -643,7 +643,7 @@ class Cursos extends PSG_Controller
 
 		if (!empty($estudiantes)) {
 			$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
-			
+
 			if ($datos_curso == NULL) {
 				$this->output->set_content_type('application/json')->set_output(json_encode(
 					[
@@ -655,10 +655,10 @@ class Cursos extends PSG_Controller
 				if (count($estudiantes) > 0) {
 
 					$datos_curso = $this->cursos_model->get_datos_curso($estudiantes[0]->id);
-					
+
 					foreach ($estudiantes as $key => $estudiante) {
 						// CERTIFICACION DEL CURSO
-						if ($estudiante->certificacion_unica == "CURSO" || $estudiante->certificacion_unica == ""|| $estudiante->certificacion_unica == null) {
+						if ($estudiante->certificacion_unica == "CURSO" || $estudiante->certificacion_unica == "" || $estudiante->certificacion_unica == null) {
 							$fila = array();
 							array_push($fila, $estudiante->id_inscripcion_curso);
 							array_push($fila, mb_convert_case(preg_replace('/\s+/', ' ', trim($estudiante->usuario)), MB_CASE_UPPER));
@@ -676,7 +676,6 @@ class Cursos extends PSG_Controller
 							array_push($fila, "CURSO");
 
 							array_push($data, $fila);
-
 						} elseif ($estudiante->certificacion_unica == "MODULO") {
 							// CERTIFICACION POR MODULOS
 
@@ -704,8 +703,7 @@ class Cursos extends PSG_Controller
 								array_push($modulo, "MODULO");
 								array_push($data, $modulo);
 							}
-
-						} elseif($estudiante->certificacion_unica == "AMBOS") { 
+						} elseif ($estudiante->certificacion_unica == "AMBOS") {
 							// CERTIFICACION POR CURSO Y MODULO (AMBOS)
 
 							// Agregar del curso
@@ -752,12 +750,11 @@ class Cursos extends PSG_Controller
 
 								array_push($data, $modulo);
 							}
-
 						}
 					}
 					// return var_dump($data);
 				}
-				
+
 				$rep = new ImprimirCertificado();
 				$rep->imprimir_todos($datos_curso, $data, $value);
 			}
@@ -831,106 +828,131 @@ class Cursos extends PSG_Controller
 	public function enviar_certificados()
 	{
 		$idcurso = $this->input->post('id');
-		// generar certificados del curso en el directorio  assets/certificados_enviar/ en la carpeta id_curso
-		$directory = "assets/certificados_enviar/$idcurso/";
-		$directory1 = "assets/certificados_enviar/enviar_{$idcurso}/";
-		if (!is_dir($directory)) {
-			if (mkdir($directory, 0777, true)) {
-				chmod($directory, 0777);
-			}
-		}
 
-		if (!is_dir($directory1)) {
-			if (mkdir($directory1, 0777, true)) {
-				chmod($directory1, 0777);
-			}
-		}
-		// Enviar los correos
+		// verificamos si el directorio certificados_enviar existe
+		$path = "assets/certificados/certificados_{$idcurso}";
+
+		// Datos del curso y estudiantes
 		$students_course = $this->cursos_model->get_estudiantes_curso($idcurso);
+		$course_data = $this->cursos_model->get_datos_curso($students_course[0]->id);
 
-		if (!empty($students_course)) {
-			$course_data = $this->cursos_model->get_datos_curso($students_course[0]->id);
-			if ($course_data == NULL) {
-				$this->output->set_content_type('application/json')->set_output(json_encode(
-					[
-						'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
-					]
-				));
-			} else {
-				$total_images = count(glob("assets/certificados_enviar/$idcurso/{*.jpg}",GLOB_BRACE));
-				if($total_images == 10){
-					// Send course Certificates
-					$print = new ImprimirCertificado();
-					$response = $print->generate_certificates($course_data, $students_course);
-					if (is_int($response)) {
-						// send email
-//						var_dump($response);
-						$data = $this->cursos_model->get_estudiantes_send($idcurso);
-						$send = new SendEmail();
-						$response1 = $send->send_certificates($data, $course_data);
-						// var_dump($response1);
-						if (is_array($response1)) {
-							$this->output->set_content_type('application/json')->set_output(json_encode(
-								[
-									'exito' => "{$response1[0]} Correos enviados correctamente y {$response1[1]} no se ha enviado"
-								]
-							));
-						} else {
-							$this->output->set_content_type('application/json')->set_output(json_encode(
-								[
-									'error' => 'Error al enviar los correos'
-								]
-							));
-						}
-					}else{
-						echo "no generado los certificados";
+		if ($course_data == NULL) {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
+				]
+			));
+		} else {
+			if (file_exists($path)) {
+				// Verfificar que el directorio no este vacio
+				$carpeta = @scandir("assets/certificados/certificados_{$idcurso}");
+				if (count($carpeta) > 2) {
+
+					$send = new SendEmail();
+					$data = $this->cursos_model->get_estudiantes_send($idcurso);
+					$response1 = $send->send_certificates($data, $course_data);
+					// var_dump($response1);
+					if (is_array($response1)) {
+						$this->output->set_content_type('application/json')->set_output(json_encode(
+							[
+								'exito' => "{$response1[0]} Correos enviados correctamente y {$response1[1]} no se ha enviado"
+							]
+						));
+					} else {
+						$this->output->set_content_type('application/json')->set_output(json_encode(
+							[
+								'error' => 'Error al enviar los correos'
+							]
+						));
 					}
-				}else{
+				} else {
 					$this->output->set_content_type('application/json')->set_output(json_encode(
 						[
-							"error" => "Por favor suba los 10 certificados escaneados en la carpeta assets/certificados_enviar/$idcurso/ en la carpeta con el id del curso en formato .jpg"
+							"error" => "Por favor peque los certificados escaneados en la siguiente ruta  assets/certificados/certificados_{$idcurso}"
 						]
 					));
 				}
-//				if ($course_data[0]->imagen_curso == NULL) {
-//					$this->output->set_content_type('application/json')->set_output(json_encode(
-//						[
-//							'error' => 'Por favor suba la imagen del certificado del curso'
-//						]
-//					));
-//				} else {
-//					$rep = new ImprimirCertificado();
-//					$respuesta = $rep->guardar_certificados($datos_curso, $estudiantes);
-//
-//					if (is_int($respuesta)) {
-//						// enviar por email
-//						$respuesta1 = $this->cursos_model->get_estudiantes_send($idcurso);
-//						$send = new SendEmail();
-//						$res = $send->enviar_correos($respuesta1);
-//						// var_dump($res);
-//						if (is_int($res)) {
-//							$this->output->set_content_type('application/json')->set_output(json_encode(
-//								[
-//									'exito' => 'Correos enviados correctamente'
-//								]
-//							));
-//						} else {
-//							$this->output->set_content_type('application/json')->set_output(json_encode(
-//								[
-//									'error' => 'Error al enviar los correos'
-//								]
-//							));
-//						}
-//					}
-//				}
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						"error" => "Por favor crea la siguiente ruta assets/certificados/certificados_{$idcurso} y seguidamente pegue los certificados scaneados del curso"
+					]
+				));
 			}
-		} else {
-			$this->output->set_content_type('application/json')->set_output(json_encode(
-				[
-					'error' => 'No existen estudiantes inscritos en el curso'
-				]
-			));
 		}
+
+
+
+		// generar certificados del curso en el directorio  assets/certificados_enviar/ en la carpeta id_curso
+		// $directory = "assets/certificados_enviar/$idcurso/";
+		// $directory1 = "assets/certificados_enviar/enviar_{$idcurso}/";
+		// if (!is_dir($directory)) {
+		// 	if (mkdir($directory, 0777, true)) {
+		// 		chmod($directory, 0777);
+		// 	}
+		// }
+
+		// if (!is_dir($directory1)) {
+		// 	if (mkdir($directory1, 0777, true)) {
+		// 		chmod($directory1, 0777);
+		// 	}
+		// }
+		// Enviar los correos
+		// $students_course = $this->cursos_model->get_estudiantes_curso($idcurso);
+
+		// if (!empty($students_course)) {
+		// 	$course_data = $this->cursos_model->get_datos_curso($students_course[0]->id);
+		// 	if ($course_data == NULL) {
+		// 		$this->output->set_content_type('application/json')->set_output(json_encode(
+		// 			[
+		// 				'error' => 'Por favor Ingrese el curso a la configuracion para subir su imagen del certificado y la calibracion de las posiciones de los datos'
+		// 			]
+		// 		));
+		// 	} else {
+		// 		$total_images = count(glob("assets/certificados_enviar/$idcurso/{*.jpg}",GLOB_BRACE));
+		// 		if($total_images == 10){
+		// 			// Send course Certificates
+		// 			$print = new ImprimirCertificado();
+		// 			$response = $print->generate_certificates($course_data, $students_course);
+		// 			if (is_int($response)) {
+		// 				// send email
+		// 				// var_dump($response);
+		// 				$data = $this->cursos_model->get_estudiantes_send($idcurso);
+		// 				$send = new SendEmail();
+		// 				$response1 = $send->send_certificates($data, $course_data);
+		// 				// var_dump($response1);
+		// 				if (is_array($response1)) {
+		// 					$this->output->set_content_type('application/json')->set_output(json_encode(
+		// 						[
+		// 							'exito' => "{$response1[0]} Correos enviados correctamente y {$response1[1]} no se ha enviado"
+		// 						]
+		// 					));
+		// 				} else {
+		// 					$this->output->set_content_type('application/json')->set_output(json_encode(
+		// 						[
+		// 							'error' => 'Error al enviar los correos'
+		// 						]
+		// 					));
+		// 				}
+		// 			}else{
+		// 				echo "no generado los certificados";
+		// 			}
+		// 		}else{
+		// 			$this->output->set_content_type('application/json')->set_output(json_encode(
+		// 				[
+		// 					"error" => "Por favor suba los 10 certificados escaneados en la carpeta assets/certificados_enviar/$idcurso/ en la carpeta con el id del curso en formato .jpg"
+		// 				]
+		// 			));
+		// 		}
+
+		// 	}
+		// } else {
+		// 	$this->output->set_content_type('application/json')->set_output(json_encode(
+		// 		[
+		// 			'error' => 'No existen estudiantes inscritos en el curso'
+		// 		]
+		// 	));
+		// }
 	}
 
 	// Descargar pdf curso
@@ -989,8 +1011,8 @@ class Cursos extends PSG_Controller
 								PARTICIPANTE
 							</span>
 						</td>
-						<td>'.$value->fecha_inicial.'</td>
-						<td>'.$value->fecha_final.'</td>
+						<td>' . $value->fecha_inicial . '</td>
+						<td>' . $value->fecha_final . '</td>
 					</tr>
 				</tbody>';
 				$cn++;
