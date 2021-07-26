@@ -6,8 +6,7 @@ var KTDatatablesVerInformacion = (function () {
 		// begin first tbl_ver_informacion
 		tbl_ver_informacion
 			.DataTable({
-				processing: true,
-				serverSide: true,
+				paging: true,
 				ajax: {
 					type: "POST",
 					url: "/inscripcionadmin/ajax_ver_informacion",
