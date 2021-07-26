@@ -258,7 +258,7 @@ jQuery(document).ready(function () {
 				if (typeof response.exito != "undefined") {
 					Swal.fire({
 						title: response.exito,
-						text: "¡Gracias por inscribirse al curso!",
+						text: "¡Gracias por inscribirse!",
 						icon: "success",
 						showCancelButton: false,
 						confirmButtonText: "Ok",
