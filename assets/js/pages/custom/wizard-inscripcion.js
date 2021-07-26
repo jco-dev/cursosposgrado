@@ -1,10 +1,11 @@
 "use strict";
-let _wizard;
+
 // Class definition
 var KTWizard3 = (function () {
 	// Base elements
 	var _wizardEl;
 	var _formEl;
+	var _wizard;
 	var _validations = [];
 
 	// Private functions
@@ -48,7 +49,7 @@ var KTWizard3 = (function () {
 		});
 
 		_wizard.on("core.form.validating", function () {
-			alert("Validating ...");
+			// alert("Validating ...");
 		});
 	};
 
@@ -62,6 +63,28 @@ var KTWizard3 = (function () {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
+							},
+							stringLength: {
+								max: 11,
+								message: "El CI puede tener hasta 11 dígitos",
+							},
+						},
+					},
+					paterno: {
+						validators: {
+							regexp: {
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
+								message:
+									"El apellido paterno puede constar de caracteres alfabéticos y solo espacios",
+							},
+						},
+					},
+					materno: {
+						validators: {
+							regexp: {
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
+								message:
+									"El apellidos materno puede constar de caracteres alfabéticos y solo espacios",
 							},
 						},
 					},
@@ -80,6 +103,11 @@ var KTWizard3 = (function () {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
+							regexp: {
+								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
+								message:
+									"El nombre puede constar de caracteres alfabéticos y solo espacios",
+							},
 						},
 					},
 					celular: {
@@ -87,11 +115,17 @@ var KTWizard3 = (function () {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
+							regexp: {
+								regexp: /^(7|6)?[0-9]{7}$/i,
+								message: "El número de celular debe empezar por 6 o 7",
+							},
 							integer: {
-								message: "El número celular no es válido",
-								// The default separators
-								thousandsSeparator: "",
-								decimalSeparator: ".",
+								message: "El número de celular no es válido",
+							},
+							stringLength: {
+								max: 8,
+								min: 8,
+								message: "El número de celular debe tener 8 dígitos",
 							},
 						},
 					},
@@ -102,7 +136,21 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
-					id: {
+					anio: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					mes: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					dia: {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
@@ -138,7 +186,26 @@ var KTWizard3 = (function () {
 					respaldo_transaccion: {
 						validators: {
 							notEmpty: {
+								message: "La imagen de respaldo de pago es obligatoria",
+							},
+						},
+					},
+					fecha_pago: {
+						validators: {
+							notEmpty: {
 								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
+					monto_pago: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+							between: {
+								min: 100,
+								max: 1000,
+								message: "El monto de pago debe estar entre 100 y 1000",
 							},
 						},
 					},
@@ -173,8 +240,8 @@ var KTWizard3 = (function () {
 	return {
 		// public functions
 		init: function () {
-			_wizardEl = KTUtil.getById("kt_wizard_inscripcion");
-			_formEl = KTUtil.getById("frm_curso_inscripcion_local");
+			_wizardEl = KTUtil.getById("kt_wizard_v3");
+			_formEl = KTUtil.getById("frm_curso_inscripcion");
 
 			initWizard();
 			initValidation();
@@ -183,7 +250,51 @@ var KTWizard3 = (function () {
 })();
 
 jQuery(document).ready(function () {
-	$("#card-title-inscripcion").addClass("d-none");
+	$("#ciudad_residencia").select2({
+		placeholder: "Elige",
+	});
+
+	$("#expedido").select2({
+		placeholder: "Elige",
+		minimumResultsForSearch: Infinity,
+	});
+
+	$("#anio1").select2({
+		placeholder: "Año",
+	});
+	$("#anio1").change(function () {
+		$("#mes1").removeAttr("disabled");
+	});
+
+	$("#mes1").select2({
+		placeholder: "Mes",
+	});
+	$("#mes1").prop("disabled", "disabled");
+	$("#mes1").change(function () {
+		$("#dia1").removeAttr("disabled");
+	});
+
+	$("#dia1").select2({
+		placeholder: "Dia",
+	});
+	$("#dia1").prop("disabled", "disabled");
+
+	$("#fecha").on("change", "#anio1,#mes1", function (e) {		
+		let anio = parseInt($("#anio1").val());
+		let mes = parseInt($("#mes1").val()) - 1;
+		let res = Date.getDaysInMonth(anio, mes);
+		llenar_dia(res);
+	});
+
+	const llenar_dia = (num) => {
+		$("#dia1").children().remove();
+		let opcion = "";
+		for (let i = 1; i <= num; i++) {
+			opcion += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#dia1").append(opcion);
+	}
+
 	$("#respaldo_transaccion").on("change", function () {
 		var imagen = this.files[0];
 		// se valida el formato de la imagen png y jpeg
@@ -194,9 +305,9 @@ jQuery(document).ready(function () {
 				"¡La imagen debe estar en formato JPG o PNG!",
 				"error"
 			);
-		} else if (imagen["size"] > 2000000) {
+		} else if (imagen["size"] > 7000000) {
 			$("#respaldo_transaccion").val("");
-			Swal.fire("error", "La imagen no debe pesar más de 2MB!", "error");
+			Swal.fire("error", "La imagen no debe pesar más de 7MB!", "error");
 		} else {
 			var datosImagen = new FileReader();
 			datosImagen.readAsDataURL(imagen);
@@ -204,92 +315,104 @@ jQuery(document).ready(function () {
 			$(datosImagen).on("load", function (event) {
 				var rutaImagen = event.target.result;
 				$("#img-preview").attr("src", rutaImagen);
-				$("a.image-popup-no-margins").attr("href", rutaImagen);
+				$("#img-preview").attr("data-original", rutaImagen);
+				// $("a.image-popup-no-margins").attr("href", rutaImagen);
 			});
 		}
 		//ocultar la imagen y visualiar
 		if ($(this).val() != "") {
-			$("a.image-popup-no-margins").removeClass("d-none");
+			$(".container").removeClass("d-none");
 		} else {
-			$("a.image-popup-no-margins").addClass("d-none");
+			$(".container").addClass("d-none");
 		}
-	});
-
-	$(".image-popup-no-margins").magnificPopup({
-		type: "image",
-		closeOnContentClick: true,
-		closeBtnInside: false,
-		fixedContentPos: true,
-		mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
-		image: {
-			verticalFit: true,
-		},
-		zoom: {
-			enabled: true, // don't foget to change the duration also in CSS
-		},
-	});
-
-	$("#ciudad_residencia").select2({
-		placeholder: "Elige",
-	});
-
-	$("#expedido").select2({
-		placeholder: "Elige",
-		minimumResultsForSearch: Infinity,
 	});
 
 	KTWizard3.init();
 
-	$("#frm_curso_inscripcion_local").submit(function (e) {
+	$("#frm_curso_inscripcion").submit(function (e) {
 		e.preventDefault();
 		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
 			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
 		} else {
-			let data = new FormData($(this)[0]);
-			$.ajax({
-				type: "POST",
-				url: "/inscripcionadmin/guardar_preinscripcion",
-				data: data,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: "JSON",
-			}).done(function (response) {
-				if (typeof response.exito != "undefined") {
-					Swal.fire({
-						title: response.exito,
-						text: "¡Gracias por inscribirse!",
-						icon: "success",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
+			Swal.fire({
+				text: "¿Si todo esta bien?. Por favor confirme sus datos para enviar.",
+				icon: "success",
+				showCancelButton: true,
+				buttonsStyling: false,
+				confirmButtonText: "Si, enviar",
+				cancelButtonText: "No, cancelar",
+				customClass: {
+					confirmButton: "btn font-weight-bold btn-primary",
+					cancelButton: "btn font-weight-bold btn-default",
+				},
+			}).then(function (result) {
+				if (result.value) {
+					let data = new FormData($("#frm_curso_inscripcion")[0]);
+					$.ajax({
+						type: "POST",
+						url: "/inscripcion/guardar_preinscripcion",
+						data: data,
+						cache: false,
+						contentType: false,
+						processData: false,
+						dataType: "JSON",
+					}).done(function (response) {
+						if (typeof response.exito != "undefined") {
+							Swal.fire({
+								title: response.exito,
+								text: "¡Gracias por inscribirse al curso!",
+								icon: "success",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
+						}
+						if (typeof response.error != "undefined") {
+							Swal.fire({
+								title: response.error,
+								icon: "error",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
+						}
+						if (typeof response.warning != "undefined") {
+							Swal.fire({
+								title: response.warning,
+								icon: "warning",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							});
+						}
+
+						if (typeof response.info != "undefined") {
+							Swal.fire({
+								title: response.info,
+								icon: "info",
+								showCancelButton: false,
+								confirmButtonText: "Ok",
+							}).then(function (result) {
+								if (result.value) {
+									location.reload();
+								}
+							});
 						}
 					});
-				}
-				if (typeof response.error != "undefined") {
+				} else if (result.dismiss === "cancel") {
 					Swal.fire({
-						title: response.error,
+						text: "Tus datos no han sido enviado!.",
 						icon: "error",
-						showCancelButton: false,
+						buttonsStyling: false,
 						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
-						}
-					});
-				}
-				if (typeof response.warning != "undefined") {
-					Swal.fire({
-						title: response.warning,
-						icon: "info",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
-						}
+						customClass: {
+							confirmButton: "btn font-weight-bold btn-primary",
+						},
 					});
 				}
 			});
@@ -299,9 +422,8 @@ jQuery(document).ready(function () {
 	// traer datos
 	$("#ci").on("change", function (e) {
 		let ci = $(this).val();
-		$.post("/inscripcionadmin/buscar_por_ci", { ci: ci }, function (response) {
+		$.post("/inscripcion/buscar_por_ci", { ci: ci }, function (response) {
 			if (typeof response.datos != "undefined") {
-				//poner datos
 				//poner datos
 				$("#expedido").val(response.datos[0].expedido).trigger("change");
 
@@ -317,13 +439,21 @@ jQuery(document).ready(function () {
 				$("#materno").val(response.datos[0].materno);
 				$("#m_materno").text(response.datos[0].materno);
 
-				$("#genero").val(response.datos[0].genero);
+				$("input[name=genero][value='" + response.datos[0].genero + "']").prop(
+					"checked",
+					true
+				);
 				$("#m_genero").text(response.datos[0].genero);
 
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
 
-				$("#fecha_nacimiento").val(response.datos[0].fecha_nacimiento);
+				if (response.datos[0].fecha_nacimiento != "") {
+					let fecha = response.datos[0].fecha_nacimiento.split("-");
+					$("#anio1").val(fecha[0]).trigger("change");
+					$("#mes1").val(fecha[1]).trigger("change");
+					$("#dia1").val(parseInt(fecha[2])).trigger("change");
+				}
 				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
 
 				$("#ciudad_residencia")
@@ -367,8 +497,11 @@ jQuery(document).ready(function () {
 		$("#m_genero").text($(this).val());
 	});
 
-	$("#fecha_nacimiento").on("change", function () {
-		$("#m_fecha_nacimiento").html($(this).val());
+	$("#fecha").on("change", "#anio1,#mes1, #dia1", function (e) {
+		let anio = $("#anio1").val();
+		let mes = $("#mes1").val();
+		let dia = $("#dia1").val();
+		$("#m_fecha_nacimiento").html(anio + "-" + mes + "-" + format_dia(dia));
 	});
 
 	$("#celular").on("change", function () {
@@ -406,4 +539,12 @@ jQuery(document).ready(function () {
 			$("#m_tipo_certificado_solicitado").text($(this).val());
 		}
 	);
+
+	function format_dia(dia) {
+		if (dia >= 1 && dia <= 9) {
+			return "0" + dia;
+		} else {
+			return dia;
+		}
+	}
 });

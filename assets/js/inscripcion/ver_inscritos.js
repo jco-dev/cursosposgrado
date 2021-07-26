@@ -6,8 +6,7 @@ var KTDatatablesVerInscritos = (function () {
 		// begin first tbl_ver_inscripcion
 		tbl_ver_inscripcion
 			.DataTable({
-				processing: true,
-				serverSide: true,
+				paging: true,
 				ajax: {
 					type: "POST",
 					url: "/inscripcionadmin/ajax_ver_inscritos",
