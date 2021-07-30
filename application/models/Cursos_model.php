@@ -332,10 +332,25 @@ class Cursos_model extends PSG_Model
 		}
 	}
 
-	public function contar_estudiantes($id)
+	public function contar_estudiantes_inscritos($id)
 	{
 		if ($id != null) {
 			$sql = "SELECT COUNT(*) as cantidad FROM mdl_inscripcion_curso WHERE id_course_moodle = $id" ;
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+
+	public function contar_estudiantes_preinscritos($id)
+	{
+		if ($id != null) {
+			$sql = "SELECT COUNT(*) as cantidad FROM mdl_preinscripcion_curso WHERE id_course_moodle = $id" ;
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());

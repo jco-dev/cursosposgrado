@@ -109,14 +109,19 @@ class Cursos extends PSG_Controller
 					return "<span class='label label-light-$estado label-inline mr-2'>" . $shortname . "</span>";
 				}),
 				array('dt' => 3, 'db' => 'id', 'formatter' => function ($id) {
-					$respuesta = $this->cursos_model->contar_estudiantes($id);
+					$respuesta = $this->cursos_model->contar_estudiantes_inscritos($id);
 					return "<span class='label label-info label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
 				array('dt' => 4, 'db' => 'id', 'formatter' => function ($id) {
+					$respuesta = $this->cursos_model->contar_estudiantes_preinscritos($id);
+					return "<span class='label label-info label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
+				}),
+				array('dt' => 5, 'db' => 'id', 'formatter' => function ($id) {
 					$respuesta = $this->cursos_model->contar_modulos($id);
 					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
-				array('dt' => 5, 'db' => 'id', 'formatter' => function ($id) {
+				array('dt' => 6, 'db' => 'timecreated'),
+				array('dt' => 7, 'db' => 'id', 'formatter' => function ($id) {
 					return '<div class="dropdown dropdown-inline lista-opciones">
 						<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</a>
 						<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">

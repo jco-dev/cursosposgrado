@@ -14,7 +14,7 @@ var KTDatatablesCursos = (function () {
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: -1,
+				iDisplayLength: 10,
 				columnDefs: [
 					{
 						searchable: true,
@@ -24,22 +24,15 @@ var KTDatatablesCursos = (function () {
 					},
 				],
 				responsive: true,
+				order: [[0, "desc"]],
 			})
-			.on("click", ".dropdown", function () {
-
-			})
+			.on("click", ".dropdown", function () {})
 			.on("click", "#btn_inscripcion", function (e) {
 				jQuery(".navi").toggleClass("visible");
 			})
-			.on("click", "#btn_imprimir_todos", function (e) {
-				
-			})
-			.on("click", "#btn_imprimir_blanco", function (e) {
-				
-			})
-			.on("click", "#btn_enviar_por_correo", function (e) {
-				
-			});
+			.on("click", "#btn_imprimir_todos", function (e) {})
+			.on("click", "#btn_imprimir_blanco", function (e) {})
+			.on("click", "#btn_enviar_por_correo", function (e) {});
 
 		$("#kt_datatable_search_status").on("change", function () {
 			datatable.search($(this).val().toLowerCase(), "Status");
@@ -50,7 +43,6 @@ var KTDatatablesCursos = (function () {
 		});
 
 		$("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker();
-		
 	};
 
 	return {
@@ -59,7 +51,6 @@ var KTDatatablesCursos = (function () {
 			init();
 		},
 	};
-
 })();
 
 KTDatatablesCursos.init();
@@ -109,7 +100,7 @@ const inscripcion_estudiantes = (id) => {
 			Swal.fire("Advertencia!", response.warning, "warning");
 		}
 	});
-}
+};
 
 // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
 const imprimir_certificados = (id) => {
@@ -159,7 +150,7 @@ const imprimir_certificados = (id) => {
 			});
 		},
 	});
-}
+};
 
 // IMPRIMIR CERTIFICADOS EN BLANCO
 const imprimir_certificado_blanco = (id) => {
@@ -222,7 +213,7 @@ const imprimir_certificado_blanco = (id) => {
 			});
 		},
 	});
-}
+};
 
 // ENVIAR CORREO DE CERTIFICADOS
 const enviar_certificados_correo = (id) => {
@@ -243,9 +234,6 @@ const enviar_certificados_correo = (id) => {
 			}
 		}
 	);
-}
+};
 
-jQuery(document).ready(function () {
-
-});
-
+jQuery(document).ready(function () {});

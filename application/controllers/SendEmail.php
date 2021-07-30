@@ -10,6 +10,7 @@ class SendEmail extends PSG_Controller
 	{
 		$this->CI = &get_instance();
 	}
+	
 	public function send_certificates($estudiantes, $course_data)
 	{
 		// return var_dump($estudiantes[0]->certificacion_unica);

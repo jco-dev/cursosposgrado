@@ -15,8 +15,10 @@
                         <th>ID</th>
                         <th>Nombre del Curso</th>
                         <th>Nombre corto</th>
-                        <th>Estudiantes</th>
+                        <th>Inscritos</th>
+                        <th>Preinscritos</th>
                         <th>M&oacute;dulos</th>
+                        <th>Fecha Registro</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
