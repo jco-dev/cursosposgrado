@@ -182,6 +182,7 @@ class Cursos_model extends PSG_Model
 			$sql = "SELECT
 			mcc.imagen_curso,
 			mc.fullname as nombre_curso,
+			mc.shortname,
 			mcc.nota_aprobacion,
 			DATE_FORMAT(mcc.fecha_certificacion, '%Y-%m-%d') as fecha_certificacion,
 			DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') as fecha_inicial,
@@ -368,6 +369,7 @@ class Cursos_model extends PSG_Model
 			$sql = "SELECT
 			CONCAT_WS(' ', mp.ci, mp.expedido) as ci,
 			CONCAT_WS(' ', mp.nombre, mp.paterno, mp.materno) as nombre_completo,
+			mp.celular,
 			mpc.tipo_pago, 
 			mpc.id_transaccion, 
 			mpc.monto_pago, 
@@ -382,6 +384,7 @@ class Cursos_model extends PSG_Model
 			SELECT
 			CONCAT_WS(' ', mp.ci, mp.expedido) as ci,
 			CONCAT_WS(' ', mp.nombre, mp.paterno, mp.materno) as nombre_completo,
+			mp.celular,
 			mpc.tipo_pago, 
 			mpc.id_transaccion, 
 			mpc.monto_pago, 
@@ -389,7 +392,7 @@ class Cursos_model extends PSG_Model
 			mpc.fecha_preinscripcion, 
 			mpc.estado 
 			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
-			and mpc.estado = 'PREINSCRITO' ORDER BY 8, 2";
+			and mpc.estado = 'PREINSCRITO' ORDER BY 9, 2";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());
