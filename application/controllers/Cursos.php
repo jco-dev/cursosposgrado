@@ -2,6 +2,7 @@
 date_default_timezone_set('America/La_Paz');
 require_once APPPATH . '/controllers/Reportes/ImprimirCertificado.php';
 require_once APPPATH . '/controllers/SendEmail.php';
+require_once APPPATH . 'controllers/Reportes/Reporte_economico_excel.php';
 class Cursos extends PSG_Controller
 {
 	public $cn = 1;
@@ -192,6 +193,14 @@ class Cursos extends PSG_Controller
 										<span class="navi-text">Información</span>
 									</a>
 								</li>
+
+								<li class="navi-item">
+									<a onclick="reporte_economico(' . $id . ')" type="button" id="btn_reporte_economico" data-id=' . $id . ' class="navi-link" title="Reporte económico del curso">
+										<span class="navi-icon"><i class="la la-print"></i></span>
+										<span class="navi-text">Económico</span>
+									</a>
+								</li>
+
 							</ul>
 						</div>
 					</div><script>jQuery(".navi").toggleClass("visible")</script>';
@@ -1034,5 +1043,18 @@ class Cursos extends PSG_Controller
 
 		$res .= '</table>';
 		echo $res;
+	}
+
+	// REPORTE ECONOMICO DEL CURSO
+	public function reporte_economico($id)
+	{
+		$data_course = $this->cursos_model->get_datos_curso($id);
+		$data_students = $this->cursos_model->get_inscritos_preinscritos($id);
+		$total_inscrito = $this->cursos_model->total_recaudacion($id, 'INSCRITO');
+		$total_i = ($total_inscrito[0]->monto_total != null) ? intval($total_inscrito[0]->monto_total) : 0; 
+		$total_preinscrito = $this->cursos_model->total_recaudacion($id, 'PREINSCRITO');
+		$total_p = ($total_preinscrito[0]->monto_total != null) ? intval($total_preinscrito[0]->monto_total) : 0; 
+        $rep = new Reporte_economico_excel();
+        $rep->reporte_economico_curo($data_course, $data_students, $total_i, $total_p);
 	}
 }

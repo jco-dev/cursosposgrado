@@ -236,4 +236,17 @@ const enviar_certificados_correo = (id) => {
 	);
 };
 
+const reporte_economico = (id) => {
+	if (id != null || id != "") {
+		window.open("/cursos/reporte_economico/" + id, "_blank");
+	} else {
+		swal({
+			html: true,
+			title: "Adventencia!!!",
+			text: "Error al imprimir el reporte económico del curso",
+			type: "warning",
+		});
+	}
+};
+
 jQuery(document).ready(function () {});

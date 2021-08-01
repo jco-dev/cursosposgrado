@@ -362,4 +362,61 @@ class Cursos_model extends PSG_Model
 		}
 	}
 
+	public function get_inscritos_preinscritos($id = null)
+	{
+		if ($id != null) {
+			$sql = "SELECT
+			CONCAT_WS(' ', mp.ci, mp.expedido) as ci,
+			CONCAT_WS(' ', mp.nombre, mp.paterno, mp.materno) as nombre_completo,
+			mpc.tipo_pago, 
+			mpc.id_transaccion, 
+			mpc.monto_pago, 
+			mpc.fecha_pago, 
+			mpc.fecha_preinscripcion,
+			mpc.estado
+			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
+			and mpc.estado = 'INSCRITO'
+			
+			UNION
+			
+			SELECT
+			CONCAT_WS(' ', mp.ci, mp.expedido) as ci,
+			CONCAT_WS(' ', mp.nombre, mp.paterno, mp.materno) as nombre_completo,
+			mpc.tipo_pago, 
+			mpc.id_transaccion, 
+			mpc.monto_pago, 
+			mpc.fecha_pago, 
+			mpc.fecha_preinscripcion, 
+			mpc.estado 
+			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
+			and mpc.estado = 'PREINSCRITO' ORDER BY 8, 2";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	public function total_recaudacion($id, $tipo)
+	{
+		if ($id != null) {
+			$sql = "SELECT
+			SUM(mpc.monto_pago) AS monto_total
+			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
+			and mpc.estado = '$tipo'";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
 }
