@@ -286,9 +286,10 @@ class Cursos extends PSG_Controller
 		} else {
 			// INSCRIBIR ESTUDIANTES
 			$cn = 0;
+			$cn1 = 1;
 			foreach ($respuesta as $key => $valor) {
 				$res = $this->sql_ssl->listar_tabla('inscripcion_curso', ['id_user_moodle' => $valor->id_user_moodle, 'id_course_moodle' => $valor->id_course_moodle]);
-				// var_dump($res);
+				// return var_dump($res);
 				if (count($res) == 0) {
 					$resp = $this->sql_ssl->insertar_tabla(
 						'inscripcion_curso',
@@ -301,12 +302,25 @@ class Cursos extends PSG_Controller
 					if (is_numeric($resp)) {
 						$cn++;
 					}
+				}else{
+					$response = $this->sql_ssl->modificar_tabla(
+						'inscripcion_curso',
+						[
+							'calificacion_final' => $valor->nota
+						],
+						[
+							'id_inscripcion_curso' => $res[0]->id_inscripcion_curso
+						]
+					);
+					if ($response) {
+						$cn1++;
+					}
 				}
 			}
 
 			$this->output->set_content_type('application/json')->set_output(json_encode(
 				[
-					'exito' => 'Cantidad de estudiantes incritos en el curso ' . $cn
+					'exito' => 'Cantidad de estudiantes incritos en el curso ' . $cn . ' y ' . $cn1 . ' notas actualizados'
 				]
 			));
 		}
