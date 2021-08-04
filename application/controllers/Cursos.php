@@ -286,7 +286,7 @@ class Cursos extends PSG_Controller
 		} else {
 			// INSCRIBIR ESTUDIANTES
 			$cn = 0;
-			$cn1 = 1;
+			$cn1 = 0;
 			foreach ($respuesta as $key => $valor) {
 				$res = $this->sql_ssl->listar_tabla('inscripcion_curso', ['id_user_moodle' => $valor->id_user_moodle, 'id_course_moodle' => $valor->id_course_moodle]);
 				// return var_dump($res);
