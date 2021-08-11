@@ -1,0 +1,23 @@
+#kt_header_mobile {
+    background: #fff url("/assets/img/cinta.jpg") no-repeat -10px/cover;
+}
+#kt_header_mobile .header-logo {
+    background-color: rgba(0,64,128,0.3);
+    border-radius: 8px;
+}
+#kt_header {
+    background: #fff url("/assets/img/cinta.jpg") no-repeat -10px/cover;
+}
+#kt_header .header-logo {
+    background-color: rgba(0,64,128,0.3);
+    border-radius: 8px;
+}
+
+.topbar {
+    background-color: rgba(250, 250, 250, 0.6);
+    border-radius: 8px;
+}
+
+#kt_content {
+    background: #fff url("/assets/img/bk.jpg") no-repeat center/contain;
+}

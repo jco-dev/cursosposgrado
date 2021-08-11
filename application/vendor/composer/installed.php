@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd9df48851df0d670e501f1d7d42a56c2618d3d0d',
+    'reference' => '6fbc156f4b6e8b26641004c44eb40a0d36583c3f',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd9df48851df0d670e501f1d7d42a56c2618d3d0d',
+      'reference' => '6fbc156f4b6e8b26641004c44eb40a0d36583c3f',
     ),
     'camilord/qrcode' => 
     array (
@@ -148,12 +148,12 @@
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
+      'pretty_version' => 'v1.23.1',
+      'version' => '1.23.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2df51500adbaebdc4c38dea4c89a2e131c45c8a1',
+      'reference' => '9174a3d80210dca8daa7f31fec659150bbeabfc6',
     ),
   ),
 );
