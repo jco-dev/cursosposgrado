@@ -170,6 +170,10 @@
     <script src="<?= base_url('assets/plugins/custom/gmaps/gmaps.js') ?>"></script>
     <script src="<?= base_url('assets/js/pages/widgets.js') ?>"></script>
     <script src="<?= base_url('assets/js/oferta/oferta.js') ?>"></script>
+
+    <script src="<?= base_url('assets/js/chili-1.8.js') ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.expander.js') ?>"></script>
+
 </body>
 
 </html>

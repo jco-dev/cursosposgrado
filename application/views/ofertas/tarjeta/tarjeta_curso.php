@@ -1,3 +1,8 @@
+<style>
+    .less-link {
+        margin-bottom: 20px;
+    }
+</style>
 <div class="col-lg-4 col-md-6 col-xs-12">
     <!--begin::Nav Panel Widget 3-->
     <div class="card card-custom gutter-b">
@@ -7,7 +12,7 @@
         <div class="d-flex justify-content-between flex-column h-100">
             <!--begin::Container-->
             <!--begin::Image-->
-            <img class="img-fluid" style="height: 200px" src="assets/media/stock-600x400/prueba1.jpeg" alt="">
+            <img class="img-fluid" style="height: 180px; border-radius: 7px 7px 0px 0px;" src="assets/media/stock-600x400/prueba1.jpeg" alt="">
             <!--end::Image-->
             <div class="p-3">
                 <div class="h-100">
@@ -15,9 +20,10 @@
                     <div class="d-flex flex-column flex-center">
                     <div></div>
                     <!--begin::Text-->
-                    <div style=" overflow: hidden;  line-height: 1.2em;overflow:hidden;white-space: wrap; height: 110px;" class="font-weight-bold text-dark-50 text-center">
-                        <?= mb_convert_case(preg_replace('/\s+/', ' ', trim($curso->detalle_curso)), MB_CASE_UPPER) ?>
-                    </div>
+                    <div class="expander">
+                        <p class="text-justify"><?= mb_convert_case(preg_replace('/\s+/', ' ', trim($curso->detalle_curso)), MB_CASE_UPPER) ?></p>
+                    </div>   
+				
                     <!--end::Text-->
                     </div>
                     <!--end::Header-->
@@ -186,7 +192,7 @@
                         <!--begin::Symbol-->
                         <div class="symbol symbol-30 symbol-light mr-4">
                             <span class="symbol-label">
-                                <span class="svg-icon svg-icon-1x svg-icon-dark-50"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Box.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <span class="svg-icon svg-icon-danger svg-icon-1x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Home\Box.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <rect x="0" y="0" width="24" height="24"/>
                                         <path d="M4,7 L20,7 L20,19.5 C20,20.3284271 19.3284271,21 18.5,21 L5.5,21 C4.67157288,21 4,20.3284271 4,19.5 L4,7 Z M10,10 C9.44771525,10 9,10.4477153 9,11 C9,11.5522847 9.44771525,12 10,12 L14,12 C14.5522847,12 15,11.5522847 15,11 C15,10.4477153 14.5522847,10 14,10 L10,10 Z" fill="#000000"/>
@@ -198,11 +204,11 @@
                         <!--end::Symbol-->
                         <!--begin::Text-->
                         <div class="d-flex flex-column flex-grow-1">
-                            <a href="#" class="text-dark-75 text-danger text-hover-primary mb-1 font-size-lg font-weight-bolder">L&iacute;mite de Inscripci&oacute;n: &nbsp;</a>
+                            <a href="#" class="text-danger mb-1 font-size-lg font-weight-bolder">L&iacute;mite de Inscripci&oacute;n: &nbsp;</a>
                         </div>
                         <!--end::Text-->
                         <!--begin::label-->
-                        <span class="text-muted font-weight-bold min-w-45px"><span class="label label-danger label-inline">12-12-2021</span>
+                        <span class="text-danger font-weight-bold min-w-45px"><span>12-12-2021</span>
                         <!--end::label-->
                     </div>
                     <!--end::Item-->
@@ -233,4 +239,27 @@
     </div>
     <!--end::Nav Panel Widget 3-->
 </div>
+<script>
+    var opts = {
+    collapseTimer: 4000,
+    expandEffect: 'fadeIn',
+    collapseEffect: 'fadeOut',
+  };
 
+  $.each(['beforeExpand', 'afterExpand', 'onCollapse'], function(i, callback) {
+    opts[callback] = function(byUser) {
+      var msg = '<div class="success">' + callback;
+
+      if (callback === 'onCollapse') {
+        msg += ' (' + (byUser ? 'user' : 'timer') + ')';
+      }
+      msg += '</div>';
+
+      $(this).parent().parent().append(msg);
+    };
+  });
+
+  $('div.expander').expander();
+</script>
+
+			
