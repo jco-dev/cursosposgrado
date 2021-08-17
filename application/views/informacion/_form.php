@@ -37,7 +37,7 @@
          </div>
      </div>
 
-
+    <input type="hidden" name="estado" id="estado" value="<?= $estado; ?>">
      <br>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">

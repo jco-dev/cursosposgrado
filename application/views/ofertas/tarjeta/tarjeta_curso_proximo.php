@@ -43,14 +43,14 @@
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1">
                                     <a href="#"
-                                        class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Inicio:</a>
+                                        class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Fecha de Lanzamiento:</a>
                                 </div>
                                 <span class="font-weight-bold min-w-45px"><?= $curso->fecha_inicial ?></span>
                             </div>
                             <!--end:: Fecha Inicio -->
 
                             <!--begin::Horarios -->
-                            <div class="d-flex align-items-center pb-2">
+                            <!-- <div class="d-flex align-items-center pb-2">
                                 <div class="symbol symbol-30 symbol-light mr-4">
                                     <span class="symbol-label">
                                         <span class="svg-icon svg-icon-1x svg-icon-dark-50">
@@ -77,7 +77,7 @@
                                         class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Horarios:</a>
                                 </div>
                                 <span class="font-weight-bold min-w-45px">Plataforma habilitado 24/7</span>
-                            </div>
+                            </div> -->
                             <!--end::Horarios-->
 
                             <!--begin::Carga Horaria-->
@@ -213,7 +213,7 @@
                             <!--end::Descuento-->
 
                             <!--begin::Límite de inscripción-->
-                            <div class="d-flex align-items-center pb-2">
+                            <!-- <div class="d-flex align-items-center pb-2">
                                 <div class="symbol symbol-30 symbol-light mr-4">
                                     <span class="symbol-label">
                                         <span class="svg-icon svg-icon-danger svg-icon-1x">
@@ -239,7 +239,7 @@
                                     </a>
                                 </div>
                                 <span class="text-danger font-weight-bold min-w-45px"><span><?= $curso->fecha_inicial ?></span>
-                            </div>
+                            </div> -->
                             <!--end::Límite de inscripción-->
 
                         </div>
@@ -253,19 +253,20 @@
                             <i class="fa fa-eye icon-sm"></i>
                             Contenido
                         </a>
-                        <a href="<?= base_url('informacion/index/?id=' . base64_encode($this->encryption->encrypt($curso->id_course_moodle)) . "&uijkikij=jfadskjl") ?>"
+                        <a href="<?= base_url('informacion/index/?id=' . base64_encode($this->encryption->encrypt($curso->id_course_moodle)) . "&uijkikij=rpjfdaskf") ?>"
                             data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>"
                             class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold"
                             target="_blank">
-                            M&aacute;s informaci&oacute;n
+                            <i class="fa fa-check icon-sm"></i>
+                            Estoy interesado
                         </a>
-                        <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>"
+                        <!-- <a href="<?= base_url('inscripcion/curso/' . base64_encode($this->encryption->encrypt($curso->id_course_moodle))) ?>"
                             data-id="<?= $this->encryption->encrypt($curso->id_course_moodle) ?>"
                             class="btn btn-primary btn-shadow-hover font-size-sm btn-sm font-weight-bold px-4"
                             target="_blank">
                             <i class="fa fa-check icon-sm"></i>
                             Inscribirse
-                        </a>
+                        </a> -->
                     </div>
                     <!-- Fin acciones -->
                 </div>

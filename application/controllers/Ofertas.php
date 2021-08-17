@@ -13,7 +13,9 @@ class Ofertas extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('ofertas/index', null);
+		$this->data['proximo_curso'] = $this->ofertas_model->verificar_proximos_cursos(); 
+		
+		$this->load->view('ofertas/index', $this->data);
 	}
 
 	public function cursos()
@@ -29,5 +31,27 @@ class Ofertas extends CI_Controller
 		} else {
 			echo "No existen cursos";
 		}
+	}
+
+	public function proximos_cursos($data)
+	{
+		$tarjeta = '';
+		$cursos = $this->ofertas_model->verificar_proximos_cursos();
+		if ($cursos != NULL) {
+			foreach ($cursos as $key => $curso) {
+				$this->data['curso'] = $curso;
+				$tarjeta .= $this->load->view('ofertas/tarjeta/tarjeta_curso_proximo', $this->data, true);
+			}
+			echo $tarjeta;
+		} else {
+			echo "No existen cursos próximos";
+		}
+	}
+
+	public function cursos_proximos()
+	{
+		$this->data['proximo_curso'] = $this->ofertas_model->verificar_proximos_cursos(); 
+		$card_proximo = $this->proximos_cursos($this->data['proximo_curso']);
+		echo $card_proximo;
 	}
 }

@@ -6,11 +6,23 @@ jQuery(document).ready(function () {
 			contentType: "html",
 		}).done(function (response) {
 			$("#contenido_cursos").children().remove();
-			 $("#contenido_cursos").append(response);
+			$("#contenido_cursos").append(response);
 		});
 	};
 
 	listado_cursos();
+
+	const listado_cursos_proximos = () => {
+		$.ajax({
+			type: "POST",
+			url: "/ofertas/cursos_proximos",
+			contentType: "html",
+		}).done(function (response) {
+			$("#contenido_cursos_proximos").children().remove();
+			$("#contenido_cursos_proximos").append(response);
+		});
+	};
+	listado_cursos_proximos();
 
 	// $("#kt_content").on("click", "a#descargar_pdf_curso", function () {
 	// 	let id = $(this).attr("data-id");
