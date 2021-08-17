@@ -1430,6 +1430,17 @@
                     </div>
 
                     <div class="form-group row">
+                        <div class="col-lg-4">
+                            <label for="proximo_curso">Próximo curso <span class="text-danger">(*)</span>:</label>
+                            <select name="proximo_curso" id="proximo_curso" class="form-control">
+                                <option value="no">no</option>
+                                <option value="si">si</option>
+                            </select>
+                            <span class="form-text text-muted">Seleccione si, si es el próximo curso</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-lg-3">
                             <button type="submit" class="btn btn-info btn-block">
                                 <i class="nav-icon la la-edit"></i>

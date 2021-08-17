@@ -77,6 +77,7 @@ var KTDatatablesConfiguracion = (function () {
 							$("#horario").val(response.exito[0].horario);
 							$("#inversion").val(response.exito[0].inversion);
 							$("#descuento").val(response.exito[0].descuento);
+							$("#proximo_curso").val(response.exito[0].proximo_curso);
 							$("#fecha_inicio_descuento").val(
 								response.exito[0].fecha_inicio_descuento
 							);
@@ -169,7 +170,7 @@ var KTDatatablesConfiguracion = (function () {
 			.on("click", "#btn_agregar_img_sub", function () {
 				let id = $(this).attr("data-id");
 				let titulo = $(this).attr("titulo");
-				
+
 				$.post(
 					"/configuracion/edit_agregar_imagen_personalizado",
 					{
@@ -182,17 +183,15 @@ var KTDatatablesConfiguracion = (function () {
 								"Agregar Imagen Personalizado al curso: " + titulo
 							);
 							/** falta imagen */
-							$("#id").val(
-								response.exito[0].id_configuracion_curso
-							);
-							
+							$("#id").val(response.exito[0].id_configuracion_curso);
+
 							$("#posx_imagen_personalizado").val(
 								response.exito[0].posx_imagen_personalizado
 							);
 							$("#posy_imagen_personalizado").val(
 								response.exito[0].posy_imagen_personalizado
 							);
-							
+
 							if (response.exito[0].imprimir_subtitulo == "1") {
 								$("#imprimir_subtitulo").prop("checked", true);
 								$("#subtitulo").val(response.exito[0].subtitulo);
@@ -202,12 +201,11 @@ var KTDatatablesConfiguracion = (function () {
 								$("#subtitulo").val(response.exito[0].subtitulo);
 								$("#subtitulo").hide();
 							}
-							
+
 							$("#modal_agregar_imagen_per").modal({
 								backdrop: "static",
 								keyboard: false,
 							});
-
 						} else if (typeof response.error != "undefined") {
 							Swal.fire("Error!", response.error, "error");
 						}
@@ -350,7 +348,6 @@ jQuery(document).ready(function () {
 		if (arrayfiles3.length == 1) {
 			formData.append("imagen_personalizado", arrayfiles3[0].dataURL);
 		}
-		
 
 		$.ajax({
 			type: "POST",
@@ -377,12 +374,12 @@ jQuery(document).ready(function () {
 	KTDatatablesConfiguracion.init();
 
 	const limpiar2 = () => {
-		$("#id").val('');
+		$("#id").val("");
 		$("#posx_imagen_personalizado").val("");
 		$("#posy_imagen_personalizado").val("");
 		$("#imprimir_subtitulo").prop("checked", false);
 		$("#subtitulo").hide();
-		$("#subtitulo").val('');
+		$("#subtitulo").val("");
 		arrayfiles3 = [];
-	}
+	};
 });
