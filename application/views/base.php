@@ -118,6 +118,12 @@
 									<span class="menu-text">Agregar M&oacute;dulos</span>
 								</a>
 							</li>
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('entrega') ?>" class="menu-link">
+									<i class="menu-icon fa fa-file-alt"></i>
+									<span class="menu-text">Entrega de Certificado</span>
+								</a>
+							</li>
 
 							<li class="menu-section">
 								<h4 class="menu-text">INSCRIPCIONES</h4>
@@ -634,7 +640,7 @@
 	<script src="<?= base_url('assets/js/cursos/estudiantes.js') ?>"></script>
 	<script src="<?= base_url('assets/js/contactos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/forms/widgets/bootstrap-switch.js') ?>"></script>
-
+	<script src="<?= base_url('assets/js/entrega/index.js') ?>"></script>
 </body>
 <!--end::Body-->
 
