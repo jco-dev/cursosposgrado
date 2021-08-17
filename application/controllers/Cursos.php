@@ -340,7 +340,8 @@ class Cursos extends PSG_Controller
 				array('dt' => 0, 'db' => 'id_inscripcion_curso'),
 				array('dt' => 1, 'db' => 'usuario'),
 				array('dt' => 2, 'db' => 'id'),
-				array('dt' => 3, 'db' => 'calificacion_final', 'formatter' => function ($nota) {
+				array('dt' => 3, 'db' => 'fullname'),
+				array('dt' => 4, 'db' => 'calificacion_final', 'formatter' => function ($nota) {
 					if ($nota <= 60) {
 						return '<span class="label label-rounded label-danger mr-2">' . $nota . '</span>';
 					} elseif ($nota > 60 && $nota <= 80) {
@@ -349,8 +350,8 @@ class Cursos extends PSG_Controller
 						return '<span class="label label-rounded label-success mr-2">' . $nota . '</span>';
 					}
 				}),
-				array('dt' => 4, 'db' => 'tipo_pago'),
-				array('dt' => 5, 'db' => 'nro_transaccion'),
+				array('dt' => 5, 'db' => 'tipo_pago'),
+				
 				array('dt' => 6, 'db' => 'monto_pago'),
 				array('dt' => 7, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
 					if ($img == "") {
@@ -366,12 +367,13 @@ class Cursos extends PSG_Controller
 						return '<span class="label label-success label-inline mr-2">' . $tipo . '</span>';
 					}
 				}),
-				array('dt' => 9, 'db' => 'fecha_entrega'),
-				array('dt' => 10, 'db' => 'entregado_a'),
-				array('dt' => 11, 'db' => 'observacion_entrega'),
-				array('dt' => 12, 'db' => 'fecha_registro'),
-				array('dt' => 13, 'db' => 'tipo_certificacion_solicitado'),
-				array('dt' => 14, 'db' => 'certificacion_unica', 'formatter' => function ($cert, $row) {
+				array('dt' => 9, 'db' => 'certificado_recogido'),
+				array('dt' => 10, 'db' => 'fecha_entrega'),
+				array('dt' => 11, 'db' => 'entregado_a'),
+				array('dt' => 12, 'db' => 'observacion_entrega'),
+				array('dt' => 13, 'db' => 'fecha_registro'),
+				array('dt' => 14, 'db' => 'tipo_certificacion_solicitado'),
+				array('dt' => 15, 'db' => 'certificacion_unica', 'formatter' => function ($cert, $row) {
 					$opcion = '';
 					foreach (['', 'CURSO', 'MODULO', 'AMBOS'] as $key => $value) {
 						$opcion .= "<option value='" . $value . "' " . ($cert == $value ? 'selected' : '') . " >$value</option>";
@@ -382,7 +384,7 @@ class Cursos extends PSG_Controller
 					</select>';
 				}),
 
-				array('dt' => 15, 'db' => 'estado_inscripcion_curso', 'formatter' => function ($estado, $row) {
+				array('dt' => 16, 'db' => 'estado_inscripcion_curso', 'formatter' => function ($estado, $row) {
 					$opcion = '';
 					if ($estado == "REGISTRADO") {
 						$opcion .= '<option selected value="REGISTRADO">REGISTRADO</option>
@@ -401,7 +403,7 @@ class Cursos extends PSG_Controller
 						' . $opcion . '
 					</select>';
 				}),
-				array('dt' => 16, 'db' => 'id_inscripcion_curso', 'formatter' => function ($id, $row) {
+				array('dt' => 17, 'db' => 'id_inscripcion_curso', 'formatter' => function ($id, $row) {
 					return "<a data-id='" . $id . "' id='editar_inscripcion_curso' data-nombre='" . $row['usuario'] . "' href='javascript:;' class='btn btn-light-warning btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Editar datos del estudiante'>
 					<i class='nav-icon la la-edit'></i>
 					</a>
@@ -437,6 +439,7 @@ class Cursos extends PSG_Controller
 
 	public function actualizar_conf_curso()
 	{
+		date_default_timezone_set('America/La_Paz');
 		$id_inscripcion_curso = $this->input->post('id_inscripcion_curso');
 		$calificacion_final = $this->input->post('calificacion_final');
 		$tipo_pago = $this->input->post('tipo_pago');
@@ -445,9 +448,10 @@ class Cursos extends PSG_Controller
 		$respaldo_pago = $this->input->post('respaldo_pago');
 		$tipo_participacion = $this->input->post('tipo_participacion');
 		$fecha_entrega = $this->input->post('fecha_entrega');
-		$entregado_a = $this->input->post('entregado_a');
-		$observacion_entrega = $this->input->post('observacion_entrega');
+		$entregado_a = trim($this->input->post('entregado_a'));
+		$observacion_entrega = trim($this->input->post('observacion_entrega'));
 		$tipo_certificacion_solicitado = $this->input->post('tipo_certificacion_solicitado');
+		$certificado_recogido = $this->input->post('certificado_recogido');
 		$ruta = "";
 
 		if (isset($_FILES["respaldo_pago"]) && $_FILES["respaldo_pago"]['name'] != "") {
@@ -476,7 +480,8 @@ class Cursos extends PSG_Controller
 						'nro_transaccion' => $nro_transaccion,
 						'monto_pago' => $monto_pago,
 						'tipo_participacion' => $tipo_participacion,
-						'fecha_entrega' => $fecha_entrega,
+						'fecha_entrega' => $fecha_entrega . date(' h:i:s'),
+						'certificado_recogido' => $certificado_recogido,
 						'respaldo_pago' => $ruta,
 						'entregado_a' => $entregado_a,
 						'observacion_entrega' => $observacion_entrega,
@@ -508,7 +513,8 @@ class Cursos extends PSG_Controller
 					'nro_transaccion' => $nro_transaccion,
 					'monto_pago' => $monto_pago,
 					'tipo_participacion' => $tipo_participacion,
-					'fecha_entrega' => $fecha_entrega,
+					'certificado_recogido' => $certificado_recogido,
+					'fecha_entrega' => $fecha_entrega. date(' h:i:s'),
 					'entregado_a' => $entregado_a,
 					'observacion_entrega' => $observacion_entrega,
 					'tipo_certificacion_solicitado' => $tipo_certificacion_solicitado

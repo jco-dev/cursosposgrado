@@ -163,6 +163,7 @@ class Cursos_model extends PSG_Model
 			ic.observacion_entrega,
 			ic.fecha_registro,
 			ic.tipo_certificacion_solicitado,
+			ic.certificado_recogido,
 			ic.estado_inscripcion_curso
 			from mdl_inscripcion_curso ic inner join mdl_user u on ic.id_user_moodle = u.id AND ic.id_inscripcion_curso = '$id'
 			inner join mdl_course c on ic.id_course_moodle = c.id order by u.lastname, u.firstname";

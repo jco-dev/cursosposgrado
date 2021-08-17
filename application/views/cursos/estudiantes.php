@@ -28,16 +28,17 @@
                     <tr>
                         <th>id</th>
                         <th>nombre</th>
+                        <th>id curso</th>
                         <th>curso</th>
                         <th>nota</th>
                         <th>tipo pago</th>
-                        <th>nro transaccion</th>
                         <th>monto pago</th>
                         <th>respaldo pago</th>
                         <th>tipo participacion</th>
+                        <th>Recogido</th>
                         <th>fecha entrega</th>
                         <th>entregado a</th>
-                        <th>Observacion</th>
+                        <th>Observacion entrega</th>
                         <th>fecha registro</th>
                         <th>Tipo Certificaci&oacute;n</th>
                         <th>Certificaci&oacute;n Curso</th>
@@ -87,17 +88,32 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <label for="nro_transaccion">N&uacute;mero transacci&oacute;n: </label>
                             <input type="text" class="form-control" id="nro_transaccion" name="nro_transaccion" />
                             <span class="form-text text-muted">Nota Final</span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <label for="monto_pago">Monto pago: </label>
                             <input type="number" class="form-control" id="monto_pago" name="monto_pago" />
                             <span class="form-text text-muted">Monto pago</span>
                         </div>
-                        <div class="col-lg-4">
+                        
+                    </div>
+                    <input type="hidden" id="id_inscripcion_curso" name="id_inscripcion_curso">
+
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <label for="tipo_certificacion_solicitado">Tipo certificacion solicitado: </label>
+                            <select id="tipo_certificacion_solicitado" name="tipo_certificacion_solicitado" class="form-control">
+                                <option value="">-- Seleccione --</option>
+                                <option value="FISICO">FISICO</option>
+                                <option value="DIGITAL">DIGITAL</option>
+                                <option value="AMBOS">AMBOS</option>
+                            </select>
+                            <span class="form-text text-muted">Selecciones tipo de certificaci&oacute;n solicitado</span>
+                        </div>
+                        <div class="col-lg-6">
                             <label for="tipo_participacion">Tipo participante: </label>
                             <select id="tipo_participacion" name="tipo_participacion" class="form-control">
                                 <option value="PARTICIPANTE">PARTICIPANTE</option>
@@ -108,12 +124,11 @@
                             <span class="form-text text-muted">Selecciones tipo de participaci&oacute;n</span>
                         </div>
                     </div>
-                    <input type="hidden" id="id_inscripcion_curso" name="id_inscripcion_curso">
 
                     <div class="form-group row">
                         <div class="col-xs-12 text-center">
                             <label for="respaldo_pago">Respaldo pago: </label><br>
-                            <img class="img-thumbnail" id="img-preview" width="250" height="250" />
+                            <img class="img-thumbnail" id="img-preview" width="200" height="200" />
                             <div class="text-center" style="margin-top: 10px;">
                                 <input type="file" id="respaldo_pago" name="respaldo_pago" accept="image/*" />
                             </div>
@@ -121,26 +136,27 @@
                     </div>
 
                     <div class="form-group row">
+                        
                         <div class="col-lg-4">
-                            <label for="tipo_certificacion_solicitado">Tipo certificacion solicitado: </label>
-                            <select id="tipo_certificacion_solicitado" name="tipo_certificacion_solicitado" class="form-control">
-                                <option value="">-- Seleccione --</option>
-                                <option value="FISICO">FISICO</option>
-                                <option value="DIGITAL">DIGITAL</option>
-                                <option value="AMBOS">AMBOS</option>
-                            </select>
-                            <span class="form-text text-muted">Selecciones tipo de certificaci&oacute;n solicitado</span>
-                        </div>
-                        <div class="col-lg-3">
                             <label for="fecha_entrega">Fecha Entrega: </label>
                             <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" />
                             <span class="form-text text-muted">Ingrese la fecha de la entrega</span>
                         </div>
-                        <div class="col-lg-5">
+
+                        <div class="col-lg-4">
+                            <label for="entregado_a">Certificado recogido: </label>
+                            <select name="certificado_recogido" id="certificado_recogido" class="form-control" >
+                                <option value="no">no</option>
+                                <option value="si">si</option>
+                            </select>
+                            <span class="form-text text-muted">Ingrese a la persona entregado</span>
+                        </div>
+                        <div class="col-lg-4">
                             <label for="entregado_a">entregado a: </label>
                             <input type="text" class="form-control" id="entregado_a" name="entregado_a" />
                             <span class="form-text text-muted">Ingrese a la persona entregado</span>
                         </div>
+                        
                     </div>
 
                     <div class="form-group row">

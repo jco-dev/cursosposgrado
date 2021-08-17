@@ -175,7 +175,7 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="card-footer p-5 bg-dark">
+                                                <div class="card-footer p-5">
                                                     <div class="d-flex justify-content-center">
                                                         <a class="" href="https://www.facebook.com/cursosposgradoupea" style="text-decoration: none;">
                                                             <img mc:edit="111" class="hover" src="assets/img/facebook1.png" alt="" width="20" border="0" />

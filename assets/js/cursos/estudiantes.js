@@ -20,6 +20,13 @@ var KTDatatablesEstudiantes = (function () {
 				],
 				iDisplayLength: 10,
 				order: [[1, "asc"]],
+				columnDefs: [
+					{
+						targets: [2],
+						visible: false,
+						searchable: false,
+					},
+				],
 			})
 			.on("click", "#editar_inscripcion_curso", function () {
 				let id = $(this).attr("data-id");
@@ -40,6 +47,9 @@ var KTDatatablesEstudiantes = (function () {
 						$("#tipo_pago").val(response.exito[0].tipo_pago);
 						$("#nro_transaccion").val(response.exito[0].nro_transaccion);
 						$("#monto_pago").val(response.exito[0].monto_pago);
+						$("#certificado_recogido").val(
+							response.exito[0].certificado_recogido
+						);
 						$("#tipo_certificacion_solicitado").val(
 							response.exito[0].tipo_certificacion_solicitado
 						);
@@ -126,7 +136,7 @@ var KTDatatablesEstudiantes = (function () {
 								{
 									id,
 									idcurso,
-									tipo
+									tipo,
 								},
 								function (resp) {
 									if (typeof resp.error != "undefined") {
@@ -230,6 +240,7 @@ jQuery(document).ready(function () {
 			if (typeof response.exito != "undefined") {
 				Swal.fire("Exito!", response.exito, "success");
 				inscripcion_curso.DataTable().ajax.reload();
+				limpiar_campos();
 			}
 			if (typeof response.error != "undefined") {
 				Swal.fire("Error!", response.error, "error");
@@ -249,6 +260,22 @@ jQuery(document).ready(function () {
 			URL.revokeObjectURL(output.src); // free memory
 		};
 	});
+
+	const limpiar_campos = () => {
+		$("#id_inscripcion_curso").val("");
+		$("#usuario").val("");
+		$("#calificacion_final").val("");
+		$("#tipo_pago").val("");
+		$("#nro_transaccion").val("");
+		$("#monto_pago").val("");
+		$("#certificado_recogido").val("");
+		$("#tipo_certificacion_solicitado").val("");
+		$("#respaldo_pago").val("");
+		$("#tipo_participacion").val("");
+		$("#fecha_entrega").val("");
+		$("#entregado_a").val("");
+		$("#observacion_entrega").val("");
+	};
 
 	KTDatatablesEstudiantes.init();
 });
