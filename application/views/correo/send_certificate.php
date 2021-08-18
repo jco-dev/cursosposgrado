@@ -162,7 +162,7 @@
       }
 
       body .icon18 img {
-         width: 22px;
+         width: 27px;
          height: auto;
       }
 
@@ -903,7 +903,7 @@
                                                             </td>
                                                          </tr>
                                                          <tr>
-                                                            <td width="100%" height="30"></td>
+                                                            <td width="100%" height="5"></td>
                                                          </tr>
                                                       </tbody>
                                                    </table>
@@ -916,7 +916,7 @@
                                           class="full">
                                           <tbody>
                                              <tr>
-                                                <td width="100%" height="20"></td>
+                                                <td width="100%" height="5"></td>
                                              </tr>
                                              <tr>
                                                 <td width="100%" height="1" bgcolor="#e7ecf2"
@@ -946,7 +946,7 @@
                                           class="full">
                                           <tbody>
                                              <tr>
-                                                <td width="100%" height="30">&nbsp;
+                                                <td width="100%" height="5">&nbsp;
                                                 </td>
                                              </tr>
                                              <tr>
@@ -1017,7 +1017,7 @@
                                                          <tr>
                                                             <td style="text-align: left; font-family: Helvetica, Arial, sans-serif, 'Poppins'; font-size:16px; color: #457ad1; line-height: 36px; vertical-align: middle;font-weight:600;"
                                                                class="fullCenter" mc:edit="35">
-                                                               Nuestro cursos
+                                                               
                                                             </td>
                                                          </tr>
                                                          <tr>
@@ -1370,29 +1370,29 @@
                                                                               align="center">
                                                                               <tbody>
                                                                                  <tr>
-                                                                                    <td width="10"><a
+                                                                                    <td width="20"><a
                                                                                           href="https://www.facebook.com/cursosposgradoupea"
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="111"
                                                                                              class="hover"
                                                                                              src="<?= base_url('assets/img/img_send_certificate/facebook1.png') ?>"
-                                                                                             alt="" width="10"
+                                                                                             alt="" width="20"
                                                                                              border="0"> </a></td>
-                                                                                    <td width="10"><a
+                                                                                    <td width="20"><a
                                                                                           href="https://twitter.com/posgradoupea"
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="112"
                                                                                              class="hover"
                                                                                              src="<?= base_url('assets/img/img_send_certificate/twitter1.png') ?>"
-                                                                                             alt="" width="10"
+                                                                                             alt="" width="20"
                                                                                              border="0"> </a></td>
-                                                                                    <td width="10"><a
+                                                                                    <td width="20"><a
                                                                                           href="https://www.instagram.com/upeaposgrado/"
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="113"
                                                                                              class="hover"
                                                                                              src="<?= base_url('assets/img/img_send_certificate/instagram1.png') ?>"
-                                                                                             alt="" width="10"
+                                                                                             alt="" width="20"
                                                                                              border="0"> </a></td>
                                                                                  </tr>
                                                                               </tbody>
