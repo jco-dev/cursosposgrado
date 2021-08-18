@@ -2,8 +2,8 @@
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <title>Cursos Posgrado | PSG</title>
-        <meta name="description" content="No aside layout examples" />
+        <title>Cursos Posgrado UPEA</title>
+        <meta name="description" content="Capacítate con nuestros Cursos Virtuales 100% prácticos" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />

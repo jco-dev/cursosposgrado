@@ -505,7 +505,7 @@
                                                                               href="https://cursosposgrado.upea.bo"
                                                                               style="text-decoration: none;"> <img
                                                                                  mc:edit="1" class="hover"
-                                                                                 src="img/logo.png" alt="Logo"
+                                                                                 src="<?= base_url('assets/img/img_send_certificate/logo.png') ?>" alt="Logo"
                                                                                  width="100" border="0"> </a> </td>
                                                                      </tr>
                                                                   </tbody>
@@ -560,8 +560,8 @@
                                                                               <span></span>
                                                                               <span style="color: white;"> <img
                                                                                     style="margin-bottom: -3px;"
-                                                                                    src="img/whatsapp.png" alt=""
-                                                                                    border="0"> Contáctanos </span>
+                                                                                    src="<?= base_url('assets/img/img_send_certificate/whatsapp.png') ?>" alt=""
+                                                                                    border="0"> Cont&aacute;ctanos </span>
                                                                            </a>
                                                                         </td>
                                                                      </tr>
@@ -589,8 +589,8 @@
                   <tbody>
                      <tr>
                         <td align="center" bgcolor="#303030"
-                           style="background-image: url('img/bg.png'); -webkit-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat no-repeat;"
-                           background="img/bg.png">
+                           style="background-image: url(<?= base_url('assets/img/img_send_certificate/bg.png') ?>); -webkit-background-size: cover; background-size: cover; background-position: center center; background-repeat: no-repeat no-repeat;"
+                           background="<?= base_url('assets/img/img_send_certificate/bg.png') ?>">
                            <!--[if gte mso 9]>
                                           <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:800px;">
                                              <v:fill type="frame" src="images/bg1.jpg"></v:fill>
@@ -600,8 +600,8 @@
                               <tbody>
                                  <tr>
                                     <td width="100%" align="center"
-                                       style="background-image: url('img/star.png'); background-position: center top; background-repeat: no-repeat no-repeat;"
-                                       background="images/star.png">
+                                       style="background-image: url(<?= base_url('assets/img/img_send_certificate/star.png') ?>); background-position: center top; background-repeat: no-repeat no-repeat;"
+                                       background="<?= base_url('assets/img/img_send_certificate/star.png') ?>">
                                        <!-- Start Header Text -->
                                        <table width="600" border="0" cellpadding="0" cellspacing="0" align="center"
                                           class="full">
@@ -655,7 +655,7 @@
                                                                         <td width="100%"
                                                                            style="text-align: center; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; font-size: 14px; color: #ffffff; line-height: 22px; font-weight: 400;"
                                                                            class="opensans" mc:edit="8">
-                                                                           Visita nuestra OFERTA ACADÉMICA, y no te
+                                                                           Visita nuestra OFERTA ACAD&Eacute;MICA, y no te
                                                                            pierdas nada
                                                                         </td>
                                                                      </tr>
@@ -836,21 +836,20 @@
                                                                      <tr>
                                                                         <td style="font-size: 13px; color: #484848; text-align: justify; text-align: left; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;"
                                                                            class="fullCenter opensans" mc:edit="16">
-                                                                           <p style="text-align: center;"><strong>AQUÍ
+                                                                           <p style="text-align: center;"><strong>AQU&Iacute;
                                                                                  TE ENVIAMOS TU CERTIFICADO
                                                                                  DIGITAL</strong><br></p>
                                                                            <p style="text-align: justify;">Gracias por
                                                                               la confianza brindada, y por participar
-                                                                              del curso: <strong>OFIMATICA VERSION 5
-                                                                                 UPEA.</strong><br></p>
+                                                                              del curso: <strong><?php echo $curso; ?></strong><br></p>
                                                                            <p style="text-align: justify;">Adjuntamos a
                                                                               este mensaje el certificado que indica que
-                                                                              ha PARTICIPADO en el curso. El certificado
-                                                                              cuenta con un código QR de verificación.
-                                                                              La alteración de cualquier dato del
-                                                                              certificado, lo dejará sin valor legal y
+                                                                              ha <?php echo $ap; ?> en el curso. El certificado
+                                                                              cuenta con un c&oacute;digo QR de verificaci&oacute;n.
+                                                                              La alteraci&oacute;n de cualquier dato del
+                                                                              certificado, lo dejar&aacute; sin valor legal y
                                                                               puede ser sujeto de delito de
-                                                                              falsificación.</p>
+                                                                              falsificaci&oacute;n.</p>
                                                                         </td>
                                                                      </tr>
                                                                      <tr>
@@ -876,7 +875,7 @@
                                                                   <tbody>
                                                                      <tr>
                                                                         <td align="center" class="profileImage">
-                                                                           <img mc:edit="18" src="img/profile.png"
+                                                                           <img mc:edit="18" src="<?= base_url('assets/img/img_send_certificate/profile.png') ?>"
                                                                               alt="" border="0" width="125"
                                                                               height="auto"
                                                                               style="width:125px; height: auto;"
@@ -896,7 +895,7 @@
                                                                         <td align="center"
                                                                            style="font-size: 12px; color: #1a1919; text-align: center; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 600;"
                                                                            mc:edit="20">
-                                                                           JUAN CARLOS CONDORI ZAPANA
+                                                                            <?= $nombre; ?>
                                                                         </td>
                                                                      </tr>
                                                                   </tbody>
@@ -958,7 +957,7 @@
                                                       <tbody>
                                                          <tr>
                                                             <td width="100%" align="center">
-                                                               <img mc:edit="33" src="img/curso.png" alt="" border="0"
+                                                               <img mc:edit="33" src="<?= base_url('assets/img/img_send_certificate/curso.png') ?>" alt="" border="0"
                                                                   width="149" height="auto"
                                                                   style="width:45px; height: auto;" class="hover">
                                                             </td>
@@ -1025,12 +1024,6 @@
                                                             <td width="100%" height="10"></td>
                                                          </tr>
                                                          <tr>
-                                                            <td width="100%" align="center"></td>
-                                                         </tr>
-                                                         <tr>
-                                                            <td width="100%" height="10"></td>
-                                                         </tr>
-                                                         <tr>
                                                             <td width="100%" align="center" class="image198">
                                                                <!-- Col 3 Image 1 -->
                                                                <table width="335" border="0" cellpadding="0"
@@ -1053,7 +1046,7 @@
                                                                                        <a href="https://cursosposgrado.upea.bo/"
                                                                                           style="text-decoration: none;"><img
                                                                                              mc:edit="42"
-                                                                                             src="img/2.jpg" alt=""
+                                                                                             src="<?= base_url('assets/img/img_send_certificate/1.jpg') ?>" alt=""
                                                                                              border="0" width="100%"
                                                                                              height="auto"
                                                                                              class="hover"></a>
@@ -1066,16 +1059,11 @@
                                                                                     <td width="100%"
                                                                                        style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;"
                                                                                        class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO TE CAPACITARÁS EN
-                                                                                       EL MANEJO PROFESIONAL DE ADOBE
-                                                                                       PHOTOSHOP. APRENDERÁS A REALIZAR
-                                                                                       SELECCIONES VECTORIALES Y
-                                                                                       AVANZADAS, FUSIÓN, FILTROS Y
-                                                                                       RETOQUE FOTOGRÁFICO AVANZADO.
+                                                                                       APRENDER&Aacute; A: INSTALAR O CREAR UN AULA VIRTUAL CON MOODLE. ESTRUCTURAR UNA PLATAFORMA, CREANDO SUS CATEGOR&Iacute;AS Y CURSOS. CREAR CONTENIDO EDUCATIVO, RECURSOS Y ACTIVIDADES, ACORDE A UN PLAN DE ESTUDIOS ACAD&Eacute;MICO. REALIZAR COPIAS DE SEGURIDAD DE SUS CURSOS, RECURSOS Y ACTIVIDADES EN MOODLE. CREAR Y CALIFICAR MEDIANTE COMPETENCIAS Y ESCALAS DE CALIFICACIONES. 
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
-                                                                                    <td width="100%" height="15"></td>
+                                                                                    <td width="100%" height="5"></td>
                                                                                  </tr>
                                                                               </tbody>
                                                                            </table>
@@ -1083,202 +1071,12 @@
                                                                      </tr>
                                                                   </tbody>
                                                                </table>
-                                                               <table width="1" border="0" cellpadding="0"
-                                                                  cellspacing="0" align="left"
-                                                                  style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                  class="full">
-                                                                  <tbody>
-                                                                     <tr>
-                                                                        <td width="100%" height="20"></td>
-                                                                     </tr>
-                                                                  </tbody>
-                                                               </table>
-                                                               <!-- Col 3 Image 1 -->
-                                                               <table width="335" border="0" cellpadding="0"
-                                                                  cellspacing="0" align="right"
-                                                                  style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                  class="full">
-                                                                  <tbody>
-                                                                     <tr>
-                                                                        <td width="100%"
-                                                                           style="background:#ffffff; border-radius:8px; padding:0px 0px; box-shadow:0 12px 29px rgba(223,234,237,1)">
-                                                                           <table width="100%" border="0"
-                                                                              cellpadding="0" cellspacing="0"
-                                                                              align="left"
-                                                                              style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                              class="full">
-                                                                              <tbody>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="line-height: 1px;">
-                                                                                       <a href="https://cursosposgrado.upea.bo/"
-                                                                                          style="text-decoration: none;"><img
-                                                                                             mc:edit="42"
-                                                                                             src="img/3.jpg" alt=""
-                                                                                             border="0" width="100%"
-                                                                                             height="auto"
-                                                                                             class="hover"></a>
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="10"></td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;"
-                                                                                       class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO TE CAPACITARÁS EN
-                                                                                       LA ADMINISTRACIÓN Y GESTIÓN DE
-                                                                                       LAS HERRAMIENTAS TIC'S MÁS USADAS
-                                                                                       EN LA EDUCACIÓN VIRTUAL, COMO SER
-                                                                                       CLASSROOM, ZOOM, MEET, MOODLE,
-                                                                                       GOOGLE DRIVE, GOOGLE FORMULARIOS
-                                                                                       Y OBS STUDIO.
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="15"></td>
-                                                                                 </tr>
-                                                                              </tbody>
-                                                                           </table>
-                                                                        </td>
-                                                                     </tr>
-                                                                  </tbody>
-                                                               </table>
-                                                            </td>
-                                                         </tr>
-                                                         <tr>
-                                                            <td width="100%" height="30"></td>
-                                                         </tr>
-                                                         <tr>
-                                                            <td width="100%" align="center" class="image198">
-                                                               <!-- Col 3 Image 1 -->
-                                                               <table width="335" border="0" cellpadding="0"
-                                                                  cellspacing="0" align="left"
-                                                                  style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                  class="full">
-                                                                  <tbody>
-                                                                     <tr>
-                                                                        <td width="100%"
-                                                                           style="background:#ffffff; border-radius:8px; padding:0px 0px; box-shadow:0 12px 29px rgba(223,234,237,1)">
-                                                                           <table width="100%" border="0"
-                                                                              cellpadding="0" cellspacing="0"
-                                                                              align="left"
-                                                                              style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                              class="full">
-                                                                              <tbody>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="line-height: 1px;">
-                                                                                       <a href="https://cursosposgrado.upea.bo/"
-                                                                                          style="text-decoration: none;"><img
-                                                                                             mc:edit="42"
-                                                                                             src="img/1.jpg" alt=""
-                                                                                             border="0" width="100%"
-                                                                                             height="auto"
-                                                                                             class="hover"></a>
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="10"></td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;"
-                                                                                       class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO TE CAPACITARÁS EN
-                                                                                       EL MANEJO PROFESIONAL DE ADOBE
-                                                                                       PHOTOSHOP. APRENDERÁS A REALIZAR
-                                                                                       SELECCIONES VECTORIALES Y
-                                                                                       AVANZADAS, FUSIÓN, FILTROS Y
-                                                                                       RETOQUE FOTOGRÁFICO AVANZADO.
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="15"></td>
-                                                                                 </tr>
-                                                                              </tbody>
-                                                                           </table>
-                                                                        </td>
-                                                                     </tr>
-                                                                  </tbody>
-                                                               </table>
-                                                               <table width="1" border="0" cellpadding="0"
-                                                                  cellspacing="0" align="left"
-                                                                  style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                  class="full">
-                                                                  <tbody>
-                                                                     <tr>
-                                                                        <td width="100%" height="20"></td>
-                                                                     </tr>
-                                                                  </tbody>
-                                                               </table>
-                                                               <!-- Col 3 Image 1 -->
-                                                               <table width="335" border="0" cellpadding="0"
-                                                                  cellspacing="0" align="right"
-                                                                  style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                  class="full">
-                                                                  <tbody>
-                                                                     <tr>
-                                                                        <td width="100%"
-                                                                           style="background:#ffffff; border-radius:8px; padding:0px 0px; box-shadow:0 12px 29px rgba(223,234,237,1)">
-                                                                           <table width="100%" border="0"
-                                                                              cellpadding="0" cellspacing="0"
-                                                                              align="left"
-                                                                              style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                                                              class="full">
-                                                                              <tbody>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="line-height: 1px;">
-                                                                                       <a href="https://cursosposgrado.upea.bo/"
-                                                                                          style="text-decoration: none;"><img
-                                                                                             mc:edit="42"
-                                                                                             src="img/4.jpg" alt=""
-                                                                                             border="0" width="100%"
-                                                                                             height="auto"
-                                                                                             class="hover"></a>
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="10"></td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%"
-                                                                                       style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;"
-                                                                                       class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO TE CAPACITARÁS EN
-                                                                                       LA ADMINISTRACIÓN Y GESTIÓN DE
-                                                                                       LAS HERRAMIENTAS TIC'S MÁS USADAS
-                                                                                       EN LA EDUCACIÓN VIRTUAL, COMO SER
-                                                                                       CLASSROOM, ZOOM, MEET, MOODLE,
-                                                                                       GOOGLE DRIVE, GOOGLE FORMULARIOS
-                                                                                       Y OBS STUDIO.
-                                                                                    </td>
-                                                                                 </tr>
-                                                                                 <tr>
-                                                                                    <td width="100%" height="15"></td>
-                                                                                 </tr>
-                                                                              </tbody>
-                                                                           </table>
-                                                                        </td>
-                                                                     </tr>
-                                                                  </tbody>
-                                                               </table>
+                                                               
                                                             </td>
                                                          </tr>
                                                       </tbody>
                                                    </table>
                                                 </td>
-                                             </tr>
-                                          </tbody>
-                                       </table>
-                                       <table width="100%" border="0" cellpadding="0" cellspacing="0" align="left"
-                                          style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-                                          class="full">
-                                          <tbody>
-                                             <tr>
-                                                <td width="100%" height="20"></td>
                                              </tr>
                                           </tbody>
                                        </table>
@@ -1303,7 +1101,7 @@
                                           class="full">
                                           <tbody>
                                              <tr>
-                                                <td width="100%" height="60" align="center"></td>
+                                                <td width="100%" height="20" align="center"></td>
                                              </tr>
                                              <tr>
                                                 <td width="100%" align="center">
@@ -1321,7 +1119,7 @@
                                                                class="image71">
                                                                <a href="https://www.facebook.com/groups/927439791526349/"
                                                                   style="text-decoration: none;"><img mc:edit="99"
-                                                                     src="img/facebook.png" alt="" border="0" width="71"
+                                                                     src="<?= base_url('assets/img/img_send_certificate/facebook.png') ?>" alt="" border="0" width="71"
                                                                      height="auto" style="width: 71px; height: auto;"
                                                                      class="hover"></a>
                                                             </td>
@@ -1375,7 +1173,7 @@
                                                                class="image71">
                                                                <a href="https://cursosposgrado.upea.bo/"
                                                                   style="text-decoration: none;"><img mc:edit="102"
-                                                                     src="img/email.png" alt="" border="0" width="71"
+                                                                     src="<?= base_url('assets/img/img_send_certificate/email.png') ?>" alt="" border="0" width="71"
                                                                      height="auto" style="width: 71px; height: auto;"
                                                                      class="hover"></a>
                                                             </td>
@@ -1430,7 +1228,7 @@
                                                                class="image71">
                                                                <a href="https://t.me/joinchat/Mczh3EU9cWkxMzNh"
                                                                   target="_blank" style="text-decoration: none;"><img
-                                                                     mc:edit="105" src="img/telegram.png" alt=""
+                                                                     mc:edit="105" src="<?= base_url('assets/img/img_send_certificate/telegram.png') ?>" alt=""
                                                                      border="0" width="71" height="auto"
                                                                      style="width: 71px; height: auto;"
                                                                      class="hover"></a>
@@ -1492,7 +1290,7 @@
                                                 <td width="100%" align="center">
                                                    <a href="https://cursosposgrado.upea.bo"
                                                       style="text-decoration: none;"><img mc:edit="108"
-                                                         src="img/logo.png" alt="" border="0" width="130" height="auto"
+                                                         src="<?= base_url('assets/img/img_send_certificate/logo.png') ?>" alt="" border="0" width="130" height="auto"
                                                          style="width:130px; height: auto;" class="hover"></a>
                                                 </td>
                                              </tr>
@@ -1503,7 +1301,7 @@
                                                 <td width="100%"
                                                    style="font-size: 14px; color: #484848; text-align: center; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 1.4; vertical-align: top; font-weight: 400;"
                                                    class="opensans" mc:edit="109">
-                                                   Tercer Piso del Edificio Emblemático de la UPEA.
+                                                   Tercer Piso del Edificio Emblem&aacute;tico de la UPEA.
                                                 </td>
                                              </tr>
                                              <tr>
@@ -1513,7 +1311,7 @@
                                                 <td width="100%"
                                                    style="font-size: 14px; color: #457ad1; text-align: center; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 30px; vertical-align: top;font-weight: 600;"
                                                    class="opensans" mc:edit="110">
-                                                   <p href="#" style="color: #457ad1; text-decoration:none"> SÍGUENOS EN
+                                                   <p href="#" style="color: #457ad1; text-decoration:none"> S&Iacute;GUENOS EN
                                                       NUESTRAS REDES SOCIALES </p>
                                                 </td>
                                              </tr>
@@ -1577,7 +1375,7 @@
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="111"
                                                                                              class="hover"
-                                                                                             src="img/facebook1.png"
+                                                                                             src="<?= base_url('assets/img/img_send_certificate/facebook1.png') ?>"
                                                                                              alt="" width="10"
                                                                                              border="0"> </a></td>
                                                                                     <td width="10"><a
@@ -1585,7 +1383,7 @@
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="112"
                                                                                              class="hover"
-                                                                                             src="img/twitter1.png"
+                                                                                             src="<?= base_url('assets/img/img_send_certificate/twitter1.png') ?>"
                                                                                              alt="" width="10"
                                                                                              border="0"> </a></td>
                                                                                     <td width="10"><a
@@ -1593,7 +1391,7 @@
                                                                                           style="text-decoration: none;">
                                                                                           <img mc:edit="113"
                                                                                              class="hover"
-                                                                                             src="img/instagram1.png"
+                                                                                             src="<?= base_url('assets/img/img_send_certificate/instagram1.png') ?>"
                                                                                              alt="" width="10"
                                                                                              border="0"> </a></td>
                                                                                  </tr>
@@ -1654,7 +1452,7 @@
                               <tbody>
                                  <tr>
                                     <td class="erase" style="line-height:1px; font-size:1px;" width="600"><img
-                                          src="img/transparant.png" height="1"
+                                          src="<?= base_url('assets/img/img_send_certificate/transparant.png') ?>" height="1"
                                           style="max-height:1px; min-height:1px; display:block; width:600px; min-width:600px;"
                                           border="0"></td>
                                  </tr>
