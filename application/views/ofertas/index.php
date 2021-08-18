@@ -70,6 +70,9 @@
                                     <!--begin::Actions-->
                                     <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
                                     <span class="text-muted font-weight-bold mr-4">Bienvenido</span>
+                                    <?php if(isset($proximo_curso) && $proximo_curso != null){?>
+                                        <a href="#proximoscursos" class="btn btn-light-primary font-weight-bolder btn-sm">Próximos cursos</a>
+                                    <?php } ?>
                                     <!--end::Actions-->
                                 </div>
                                 <!--end::Info-->
@@ -80,7 +83,6 @@
                                 <div class="alert p-3 alert-custom alert-white alert-shadow fade show gutter-b" role="alert">
                                     <div class="alert-icon">
                                         <span class="svg-icon svg-icon-primary svg-icon-xl">
-                                            <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Home/Home.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <rect x="0" y="0" width="24" height="24" />
@@ -96,8 +98,9 @@
                                     <div class="alert-text">Cursos vigentes</div>
                                 </div>
                                 <div class="row" id="contenido_cursos"></div>
+
                                 <?php if(isset($proximo_curso) && $proximo_curso != null){?>
-                                    <div class="alert p-3 alert-custom alert-white alert-shadow fade show gutter-b" role="alert">
+                                    <div class="alert p-3 alert-custom alert-white alert-shadow fade show gutter-b" role="alert" id="proximoscursos">
                                         <div class="alert-icon">
                                             <span class="svg-icon svg-icon-primary svg-icon-xl">
                                                 <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Home/Home.svg-->
@@ -120,7 +123,7 @@
                                     </div>
                                 <?php }?>
 
-                                <div class="separator separator-solid separator-dark separator-border-3 mt-5"></div>
+                                <!-- <div class="separator separator-solid separator-dark separator-border-3 mt-5"></div> -->
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -178,13 +181,13 @@
                                                 <div class="card-footer p-5">
                                                     <div class="d-flex justify-content-center">
                                                         <a class="" href="https://www.facebook.com/cursosposgradoupea" style="text-decoration: none;">
-                                                            <img mc:edit="111" class="hover" src="assets/img/facebook1.png" alt="" width="20" border="0" />
+                                                            <img mc:edit="111" class="hover" src="assets/images/facebook1.png" alt="" width="20" border="0" />
                                                         </a>
                                                         <a class="ml-4" href="https://twitter.com/posgradoupea" style="text-decoration: none;">
-                                                            <img mc:edit="112" class="hover" src="assets/img/twitter1.png" alt="" width="20" border="0" />
+                                                            <img mc:edit="112" class="hover" src="assets/images/twitter1.png" alt="" width="20" border="0" />
                                                         </a>
                                                         <a class="ml-4" href="https://www.instagram.com/upeaposgrado/" style="text-decoration: none;">
-                                                            <img mc:edit="113" class="hover" src="assets/img/instagram1.png" alt="" width="20" border="0" />
+                                                            <img mc:edit="113" class="hover" src="assets/images/instagram1.png" alt="" width="20" border="0" />
                                                         </a>
                                                     </div>
                                                     <div class="d-flex justify-content-center pt-2">

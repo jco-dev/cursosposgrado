@@ -13,7 +13,22 @@ class Ofertas extends CI_Controller
 
 	public function index()
 	{
-		$this->data['proximo_curso'] = $this->ofertas_model->verificar_proximos_cursos(); 
+		$this->data['proximo_curso'] = $this->ofertas_model->verificar_proximos_cursos();
+		$cursos_proximos = $this->ofertas_model->actualizar_proximo_curso();
+		// return var_dump($cursos_proximos);
+		if($cursos_proximos != NULL){
+			foreach($cursos_proximos as $c){
+				$res = $this->sql_ssl->modificar_tabla(
+					'configuracion_curso',
+					[
+						'proximo_curso' => 'no'
+					],
+					[
+						'id_configuracion_curso' => $c->id_configuracion_curso
+					]
+				);
+			}
+		} 
 		
 		$this->load->view('ofertas/index', $this->data);
 	}

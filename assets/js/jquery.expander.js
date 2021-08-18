@@ -19,7 +19,7 @@
 		version: "2.0.1",
 		defaults: {
 			// the number of characters at which the contents will be sliced into two parts.
-			slicePoint: 110,
+			slicePoint: 170,
 
 			// a string of characters at which to slice the contents into two parts,
 			// but only if the string appears before slicePoint

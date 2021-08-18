@@ -33,7 +33,14 @@ class Entrega extends PSG_Controller
                 array('dt' => 3, 'db' => 'calificacion_final'),
                 array('dt' => 4, 'db' => 'tipo_pago'),
                 array('dt' => 5, 'db' => 'monto_pago'),
-                array('dt' => 6, 'db' => 'tipo_participacion'),
+                array('dt' => 6, 'db' => 'certificacion_unica', 'formatter' => function($data){
+                    if($data == null || $data == ""){
+                        return "CURSO";
+                    }else{
+                        return $data;
+                    }
+
+                }),
                 array('dt' => 7, 'db' => 'certificado_recogido'),
                 array('dt' => 8, 'db' => 'fecha_entrega'),
                 array('dt' => 9, 'db' => 'entregado_a'),

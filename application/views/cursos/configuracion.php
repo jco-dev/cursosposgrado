@@ -1440,6 +1440,15 @@
                             <input type="date" class="form-control" id="fecha_fin_lanzamiento" name="fecha_fin_lanzamiento" />
                             <span class="form-text text-muted">Ingrese la fecha fin del lanzamiento del curso</span>
                         </div>
+
+                        <div class="col-lg-4">
+                            <label for="proximo_curso">Próximo Curso <span class="text-danger">(*)</span>:</label>
+                            <select name="proximo_curso" id="proximo_curso" class="form-control">
+                                <option value="no">no</option>
+                                <option value="si">si</option>
+                            </select>
+                            <span class="form-text text-muted">próximo curso</span>
+                        </div>
                     </div>
 
                     <div class="form-group row">

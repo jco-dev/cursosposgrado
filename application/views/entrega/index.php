@@ -18,7 +18,7 @@
                         <th>Nota</th>
                         <th>Tipo Pago</th>
                         <th>Monto Pago</th>
-                        <th>Tipo</th>
+                        <th>Tipo Certificación</th>
                         <th>Recogido</th>
                         <th>Fecha Entrega</th>
                         <th>Entregado a</th>

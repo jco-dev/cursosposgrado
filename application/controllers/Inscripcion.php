@@ -315,7 +315,7 @@ class Inscripcion extends CI_Controller
 
     public function monto_valid($monto)
     {
-        if (intval($monto) >= 100 && intval($monto) <= 1000) {
+        if (intval($monto) >= 50 && intval($monto) <= 1000) {
             return true;
         } else {
             $this->form_validation->set_message('monto pago', 'El campo {field} debe estar entre 100 y 1000');

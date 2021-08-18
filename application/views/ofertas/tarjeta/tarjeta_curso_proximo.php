@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1">
                                     <a href="#"
-                                        class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Fecha de Lanzamiento:</a>
+                                        class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Inicio:</a>
                                 </div>
                                 <span class="font-weight-bold min-w-45px"><?= $curso->fecha_inicial ?></span>
                             </div>

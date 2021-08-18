@@ -203,9 +203,9 @@ var KTWizard3 = (function () {
 								message: "Esta pregunta es obligatoria",
 							},
 							between: {
-								min: 100,
+								min: 50,
 								max: 1000,
-								message: "El monto de pago debe estar entre 100 y 1000",
+								message: "El monto de pago debe estar entre 50 y 1000",
 							},
 						},
 					},
@@ -279,7 +279,7 @@ jQuery(document).ready(function () {
 	});
 	$("#dia1").prop("disabled", "disabled");
 
-	$("#fecha").on("change", "#anio1,#mes1", function (e) {		
+	$("#fecha").on("change", "#anio1,#mes1", function (e) {
 		let anio = parseInt($("#anio1").val());
 		let mes = parseInt($("#mes1").val()) - 1;
 		let res = Date.getDaysInMonth(anio, mes);
@@ -293,7 +293,7 @@ jQuery(document).ready(function () {
 			opcion += "<option value='" + i + "'>" + i + "</option>";
 		}
 		$("#dia1").append(opcion);
-	}
+	};
 
 	$("#respaldo_transaccion").on("change", function () {
 		var imagen = this.files[0];
