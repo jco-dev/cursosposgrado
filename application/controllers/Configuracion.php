@@ -220,7 +220,8 @@ class Configuracion extends PSG_Controller
             $descuento = $this->input->post('descuento');
             $fecha_inicio_descuento = $this->input->post('fecha_inicio_descuento');
             $fecha_fin_descuento = $this->input->post('fecha_fin_descuento');
-            $proximo_curso = $this->input->post('proximo_curso');
+            $fecha_inicio_lanzamiento = $this->input->post('fecha_inicio_lanzamiento');
+            $fecha_fin_lanzamiento = $this->input->post('fecha_fin_lanzamiento');
             // subida del archivo pdf del curso
             if (isset($_FILES['url_pdf']) && $_FILES['url_pdf']['error'] === UPLOAD_ERR_OK) {
                 $fileTmpPath = $_FILES['url_pdf']['tmp_name'];
@@ -306,7 +307,8 @@ class Configuracion extends PSG_Controller
                         'descuento' => $descuento,
                         'fecha_inicio_descuento' => $fecha_inicio_descuento,
                         'fecha_fin_descuento' => $fecha_fin_descuento,
-                        'proximo_curso' => $proximo_curso
+                        'fecha_inicio_lanzamiento' => $fecha_inicio_lanzamiento,
+                        'fecha_fin_lanzamiento' => $fecha_fin_lanzamiento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -362,7 +364,8 @@ class Configuracion extends PSG_Controller
                         'descuento' => $descuento,
                         'fecha_inicio_descuento' => $fecha_inicio_descuento,
                         'fecha_fin_descuento' => $fecha_fin_descuento,
-                        'proximo_curso' => $proximo_curso
+                        'fecha_inicio_lanzamiento' => $fecha_inicio_lanzamiento,
+                        'fecha_fin_lanzamiento' => $fecha_fin_lanzamiento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -416,7 +419,8 @@ class Configuracion extends PSG_Controller
                         'descuento' => $descuento,
                         'fecha_inicio_descuento' => $fecha_inicio_descuento,
                         'fecha_fin_descuento' => $fecha_fin_descuento,
-                        'proximo_curso' => $proximo_curso
+                        'fecha_inicio_lanzamiento' => $fecha_inicio_lanzamiento,
+                        'fecha_fin_lanzamiento' => $fecha_fin_lanzamiento
 
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -470,7 +474,8 @@ class Configuracion extends PSG_Controller
                         'descuento' => $descuento,
                         'fecha_inicio_descuento' => $fecha_inicio_descuento,
                         'fecha_fin_descuento' => $fecha_fin_descuento,
-                        'proximo_curso' => $proximo_curso
+                        'fecha_inicio_lanzamiento' => $fecha_inicio_lanzamiento,
+                        'fecha_fin_lanzamiento' => $fecha_fin_lanzamiento
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
 

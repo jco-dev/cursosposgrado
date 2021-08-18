@@ -77,7 +77,12 @@ var KTDatatablesConfiguracion = (function () {
 							$("#horario").val(response.exito[0].horario);
 							$("#inversion").val(response.exito[0].inversion);
 							$("#descuento").val(response.exito[0].descuento);
-							$("#proximo_curso").val(response.exito[0].proximo_curso);
+							$("#fecha_inicio_lanzamiento").val(
+								response.exito[0].fecha_inicio_lanzamiento
+							);
+							$("#fecha_fin_lanzamiento").val(
+								response.exito[0].fecha_fin_lanzamiento
+							);
 							$("#fecha_inicio_descuento").val(
 								response.exito[0].fecha_inicio_descuento
 							);
