@@ -23,7 +23,7 @@ class Entrega extends PSG_Controller
             $table = "mdl_inscripcion_curso_vista";
             $primaryKey = 'id_inscripcion_curso';
             $columns = array(
-                array('dt' => 0, 'db' => 'id_inscripcion_curso'),
+                array('dt' => 0, 'db' => 'id_user'),
                 array('dt' => 1, 'db' => 'usuario', 'formatter' => function ($fullname) {
                     return '<small>' . $fullname . '</small>';
                 }),

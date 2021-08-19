@@ -4,7 +4,9 @@
         <meta charset="utf-8" />
         <title>Cursos Posgrado UPEA</title>
         <meta name="description" content="Capacítate con nuestros Cursos Virtuales 100% prácticos" />
+        <meta property="og:description" content="#EstudiaCursosPosgradoEnCasa" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta property="og:image" content="<?= base_url('assets/img/img_send_certificate/posgrado.png')?>" />
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
         <link href="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') ?>" rel="stylesheet" type="text/css" />
@@ -15,7 +17,7 @@
         <link href="<?= base_url('assets/css/themes/layout/header/menu/dark.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?= base_url('assets/css/themes/layout/brand/dark.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?= base_url('assets/css/themes/layout/aside/dark.css') ?>" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="<?= base_url('assets/img/posgrado.ico') ?>" />
+        <link rel="shortcut icon" href="<?= base_url('assets/img/img_send_certificate/posgrado.png')?>" />
     </head>
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading">
         <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
