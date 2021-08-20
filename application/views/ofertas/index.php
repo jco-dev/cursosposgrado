@@ -156,7 +156,7 @@
                                                     <center>
                                                         <div class="fb-page" data-href="https://www.facebook.com/cursosposgradoupea" data-width="300" data-hide-cover="false" data-show-facepile="true"></div>
                                                     </center>
-                                                    <center>
+                                                    <center class="pt-3">
                                                         <div id="fb-root"></div>
                                                         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v11.0" nonce="SaEqPZTT"></script>
                                                         <div class="fb-like pt-3" data-href="https://www.facebook.com/cursosposgradoupea" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
@@ -176,7 +176,7 @@
                                                             style="background-color: #29b6f6; color: #272727; line-height: 20px !important; text-decoration: none;"
                                                             target="_blank"
                                                         >
-                                                            <span style="color: white;"> <img style="margin-bottom: 0px;" src="<?= base_url('assets/img/telegram1.png') ?>" alt="" border="0" /> Unite a nuestro grupo </span>
+                                                            <span style="color: white; padding-left: 20px; padding-right: 20px;"> <img style="margin-bottom: 0px;" src="<?= base_url('assets/img/telegram1.png') ?>" alt="" border="0" /> Únite </span>
                                                         </a>
                                                     </div>
                                                 </div>
