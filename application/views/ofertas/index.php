@@ -186,7 +186,7 @@
                                                         <a class="ml-4" href="https://twitter.com/posgradoupea" style="text-decoration: none;">
                                                             <img mc:edit="112" class="hover" src="assets/images/twitter1.png" alt="" width="20" border="0" />
                                                         </a>
-                                                        <a class="ml-4" href="https://www.instagram.com/upeaposgrado/" style="text-decoration: none;">
+                                                        <a class="ml-4" href="https://www.instagram.com/cursosposgradoupea" style="text-decoration: none;">
                                                             <img mc:edit="113" class="hover" src="assets/images/instagram1.png" alt="" width="20" border="0" />
                                                         </a>
                                                     </div>
