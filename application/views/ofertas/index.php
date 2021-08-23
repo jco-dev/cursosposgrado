@@ -4,7 +4,9 @@
         <meta charset="utf-8" />
         <title>Cursos Posgrado UPEA</title>
         <meta name="description" content="Capacítate con nuestros Cursos Virtuales 100% prácticos" />
+        <meta property="og:description" content="#EstudiaCursosPosgradoEnCasa" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta property="og:image" content="<?= base_url('assets/img/img_send_certificate/posgrado.png')?>" />
         <!--begin::Fonts-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
         <link href="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') ?>" rel="stylesheet" type="text/css" />
@@ -15,7 +17,7 @@
         <link href="<?= base_url('assets/css/themes/layout/header/menu/dark.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?= base_url('assets/css/themes/layout/brand/dark.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?= base_url('assets/css/themes/layout/aside/dark.css') ?>" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="<?= base_url('assets/img/posgrado.ico') ?>" />
+        <link rel="shortcut icon" href="<?= base_url('assets/img/img_send_certificate/posgrado.png')?>" />
     </head>
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading">
         <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -154,7 +156,7 @@
                                                     <center>
                                                         <div class="fb-page" data-href="https://www.facebook.com/cursosposgradoupea" data-width="300" data-hide-cover="false" data-show-facepile="true"></div>
                                                     </center>
-                                                    <center>
+                                                    <center class="pt-3">
                                                         <div id="fb-root"></div>
                                                         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v11.0" nonce="SaEqPZTT"></script>
                                                         <div class="fb-like pt-3" data-href="https://www.facebook.com/cursosposgradoupea" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
@@ -174,7 +176,7 @@
                                                             style="background-color: #29b6f6; color: #272727; line-height: 20px !important; text-decoration: none;"
                                                             target="_blank"
                                                         >
-                                                            <span style="color: white;"> <img style="margin-bottom: 0px;" src="<?= base_url('assets/img/telegram1.png') ?>" alt="" border="0" /> Unite a nuestro grupo </span>
+                                                            <span style="color: white; padding-left: 20px; padding-right: 20px;"> <img style="margin-bottom: 0px;" src="<?= base_url('assets/img/telegram1.png') ?>" alt="" border="0" /> Únite </span>
                                                         </a>
                                                     </div>
                                                 </div>

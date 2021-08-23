@@ -12,7 +12,7 @@
             <table class="table table-separate table-head-custom table-checkable display nowrap" id="tbl_entrega_certificado">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>id user</th>
                         <th>Estudiante</th>
                         <th>Curso</th>
                         <th>Nota</th>
