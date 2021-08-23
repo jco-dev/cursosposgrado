@@ -867,7 +867,12 @@ class Cursos extends PSG_Controller
 			}
 
 			$rep = new ImprimirCertificado();
-			$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
+			if($datos_curso[0]->orientacion == "horizontal"){
+				$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
+			}else{
+				$rep->imprimir_blanco_vertical($curso_data, $datos_curso, $tipo);
+			}
+
 		}
 	}
 

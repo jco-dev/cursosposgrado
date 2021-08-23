@@ -629,15 +629,103 @@ class ImprimirCertificado extends Fpdf_psg
         echo base64_encode($this->Output('S'));
     }
 
+    public function imprimir_blanco_vertical($datos = null, $datos_curso = null, $tipo)
+    {
+        $valor = ['nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'imagen_personalizado', 'posx_imagen_personalizado', 'posy_imagen_personalizado', 'color_nombre_curso', 'fecha_certificacion', 'tipo_participacion','tipo'];
+
+        foreach ($datos as $key => $curso) {
+            $cur = array();
+            for ($i = 0; $i < count($curso); $i++) {
+
+                $cur[$valor[$i]] = $curso[$i];
+            }
+
+            $this->AddPage("P", "letter");
+            if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
+                $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
+            }
+
+            // CERTIFICADO
+            $this->AddFont('Roboto-Black', '', 'Roboto-Black.php');
+            $this->SetFont('Roboto-Black', '', 39);
+            $this->SetXY(10,65);
+            $this->Cell(197, 18, "CERTIFICADO", 0, 1, 'C');
+
+            // Nombre estudiante
+            $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
+            $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
+            $this->SetXY($datos_curso[0]->posx_nombre_participante, $datos_curso[0]->posy_nombre_participante);
+            $this->AddFont('PalaceScriptMT', '', 'PalaceScriptMT.php');
+            $this->SetFont('PalaceScriptMT', '', $datos_curso[0]->tamano_titulo + 15);
+            if ($tipo == "SI") {
+                $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
+            }
+
+            // TIPO DE PARTICIPACION
+            $this->SetTextColor(0, 0, 0);
+            $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
+            $this->AddFont('Roboto-Medium', '', 'Roboto-Medium.php');
+            $this->SetFont('Roboto-Medium', '', $datos_curso[0]->tamano_texto);
+            $this->Cell(197, 11, utf8_decode($this->verificar_tipo_participacion($cur['tipo_participacion'])), 0, 1, '');
+
+            // titulo del curso
+            if($cur['color_nombre_curso'] == ""){
+                $color_s[0] = 0;
+                $color_s[1] = 0;
+                $color_s[2] = 0;
+            }else{
+                $color_s = explode(", ", $cur['color_nombre_curso']);
+            }
+
+            $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
+            $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
+            $this->AddFont('Roboto-Black', '', 'Roboto-Black.php');
+            $this->SetFont('Roboto-Black', '', $datos_curso[0]->tamano_subtitulo);
+            $this->MultiCell(197, 9, utf8_decode($cur['nombre_curso']), 0, 'C');
+
+            //IMPRIMIR SUBITULO
+            $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
+            if($cur['tipo'] == "CURSO"){
+                if($datos_curso[0]->imprimir_subtitulo == "1"){
+                    $this->SetX($datos_curso[0]->posx_nombre_curso);
+                    $this->SetFont('Roboto-Medium', '', 13);
+                    $this->Cell(197, 5,utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
+                    $posy_bt = $posy_bt + 4;
+                }
+            }
+
+            //bloque de texto
+            $this->SetTextColor(0, 0, 0);
+            $this->SetXY($datos_curso[0]->posx_bloque_texto, $posy_bt);
+            $dia = date("d", strtotime($cur['fecha_inicial']));
+            $mes = $this->mes_literal(date("m", strtotime($cur['fecha_inicial'])));
+            $fecha_final = strtolower(fecha_literal($cur['fecha_final']));
+            $carga_horaria = $cur['carga_horaria'];
+            $this->SetFont('Roboto-Medium', '', $datos_curso[0]->tamano_texto);
+            $this->multiCelda(197, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
+            $fecha_certificacion = "El Alto, " . strtolower(fecha_literal($cur['fecha_certificacion']));
+            $this->SetX($datos_curso[0]->posx_bloque_texto);
+            $this->multiCelda(197, 8, utf8_decode(($fecha_certificacion)) . "     ", 0, 'R');
+
+            // imagen personalizado curso
+            if($cur['imagen_personalizado'] != "" || $cur['imagen_personalizado'] != null)
+            {
+                $this->Image($cur['imagen_personalizado'], $cur['posx_imagen_personalizado'] , $cur['posy_imagen_personalizado']);
+            }
+        }
+
+        echo base64_encode($this->Output('S'));
+    }
+
     public function verificar_tipo_participacion($tipo)
     {
         if($tipo == "APROBADO"){
             return "Por haber APROBADO SATISFACTORIAMENTE el curso: ";
         }elseif($tipo == "EXPOSITOR")
         {
-            return "Por haber participado en calidad de EXPOSITOR del curso especializado de:";
+            return "Por haber participado en calidad de EXPOSITOR del curso:";
         }elseif($tipo == "ORGANIZADOR"){
-            return "Por haber participado en calidad de ORGANIZADOR del curso especializado de:";
+            return "Por haber participado en calidad de ORGANIZADOR del curso:";
         }elseif($tipo == "PARTICIPADO"){
             return "Por haber PARTICIPADO del curso: ";
         }
