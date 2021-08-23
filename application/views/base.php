@@ -636,11 +636,11 @@
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>
-	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/estudiantes.js') ?>"></script>
 	<script src="<?= base_url('assets/js/contactos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/forms/widgets/bootstrap-switch.js') ?>"></script>
 	<script src="<?= base_url('assets/js/entrega/index.js') ?>"></script>
+	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 </body>
 <!--end::Body-->
 

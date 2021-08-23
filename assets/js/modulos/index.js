@@ -7,21 +7,16 @@ var KTDatatablesVerModulos = (function () {
 		tbl_modulos
 			.DataTable({
 				processing: true,
-				serverSide: true,
 				ajax: "/modulos/ajax_ver_modulos",
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],
 				],
-				iDisplayLength: 20,
-				responsive: true,
+				iDisplayLength: 10,
 				sortable: true,
-				// layout definition
-				layout: {
-					scroll: false,
-					footer: false,
-				},
-				pagination: true,
+				retrieve: true,
+				paging: true,
+				responsive: true,
 			})
 			.on("click", "a#btn_editar", function (e) {
 				let id = $(this).attr("data-id");
@@ -68,7 +63,7 @@ var KTDatatablesVerModulos = (function () {
 			.on("click", "a#btn_eliminar", function (e) {
 				let id = $(this).attr("data-id");
 				Swal.fire({
-					title:"¿Estas seguro de eliminar?",
+					title: "¿Estas seguro de eliminar?",
 					text: "Esta accion no se puede revertir",
 					icon: "warning",
 					showCancelButton: true,
@@ -91,7 +86,7 @@ var KTDatatablesVerModulos = (function () {
 								Swal.fire("Error!", response.error, "error");
 							}
 						});
-					}else if (result.dismiss === "cancel") {
+					} else if (result.dismiss === "cancel") {
 						Swal.fire({
 							text: "No se ha eliminado el modulo",
 							icon: "error",

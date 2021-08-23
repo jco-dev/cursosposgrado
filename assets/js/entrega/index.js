@@ -1,6 +1,6 @@
 "use strict";
 let tbl_entrega_certificdo;
-var KTDatatablesVerModulos = (function () {
+var KTDatatablesEntrega = (function () {
 	var init = function () {
 		tbl_entrega_certificdo = $("#tbl_entrega_certificado");
 		// begin first tbl_entrega_certificdo
@@ -122,5 +122,5 @@ jQuery(document).ready(function () {
 		$("#observacion_entrega_e").val("");
 	};
 
-	KTDatatablesVerModulos.init();
+	KTDatatablesEntrega.init();
 });
