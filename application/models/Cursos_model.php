@@ -185,6 +185,7 @@ class Cursos_model extends PSG_Model
 			mc.fullname as nombre_curso,
 			mc.shortname,
 			mcc.nota_aprobacion,
+			mcc.orientacion,
 			DATE_FORMAT(mcc.fecha_certificacion, '%Y-%m-%d') as fecha_certificacion,
 			DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') as fecha_inicial,
 			DATE_FORMAT(mcc.fecha_final, '%Y-%m-%d') as fecha_final,
