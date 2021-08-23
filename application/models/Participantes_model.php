@@ -92,4 +92,15 @@ class Participantes_model extends PSG_Model
 		}
 		return $resultado;
 	}
+
+	public function get_estudents()
+	{
+		$sql = "SELECT usuario, COUNT(id_user)as cantidad FROM mdl_inscripcion_curso_vista where tipo_participacion = 'PARTICIPANTE' group by id_user order by cantidad desc LIMIT 12";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }

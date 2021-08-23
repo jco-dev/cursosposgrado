@@ -69,5 +69,75 @@
 			</div>
 		</div>
 
+		<!--begin::Advance Table Widget 4-->
+		<div class="col-xl-12">
+			<div class="card card-custom card-stretch gutter-b">
+				<!--begin::Header-->
+				<div class="card-header border-0 py-5">
+					<h3 class="card-title align-items-start flex-column">
+						<span class="card-label font-weight-bolder text-dark">Listado de estudiantes que más cursos han pasado</span>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Más de <?php echo $total_user; ?> estudiantes registrados</span>
+					</h3>
+					<div class="card-toolbar">
+						<a href="#" class="btn btn-info font-weight-bolder font-size-sm mr-3">Nuevos Reportes</a>
+					</div>
+				</div>
+				<!--end::Header-->
+				<!--begin::Body-->
+				<div class="card-body pt-0 pb-3">
+					<div class="tab-content">
+						<!--begin::Table-->
+						<div class="table-responsive">
+							<table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+								<thead>
+									<tr class="text-left text-uppercase">
+										<th style="min-width: 250px" class="pl-7">
+											<span class="text-dark-75">Estudiante</span>
+										</th>
+										<th style="min-width: 100px">Cantidad</th>
+										<th style="min-width: 100px">Tipo Participación</th>
+										<!-- <th style="min-width: 80px">Acciones</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										if($estudiantes != null){
+											foreach($estudiantes as $est){
+												echo '<tr>
+													<td class="pl-0 py-8">
+														<div class="d-flex align-items-center">
+															<div class="symbol symbol-50 symbol-light mr-4">
+																<span class="symbol-label">
+																	<img src="assets/media/svg/avatars/001-boy.svg" class="h-75 align-self-end" alt="" />
+																</span>
+															</div>
+															<div>
+																<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">'.$est->usuario.'</a>
+															</div>
+														</div>
+													</td>
+													<td>
+														<span class="text-dark-75 font-weight-bolder d-block font-size-lg">'.$est->cantidad.'</span>
+													</td>
+													<td>
+														<span class="text-dark-75 font-weight-bolder d-block font-size-lg">PARTICIPANTE</span>
+													</td>
+												</tr>';
+											}
+										}
+										// <span class="text-muted font-weight-bold d-block">HTML, JS, ReactJS</span>
+									?>
+								</tbody>
+							</table>
+						</div>
+						<!--end::Table-->
+					</div>
+				</div>
+				<!--end::Body-->
+			</div>
+		</div>
+		<!--end::Advance Table Widget 4-->
+
+
 	</div>
 </div>
