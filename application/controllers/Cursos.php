@@ -229,19 +229,25 @@ class Cursos extends PSG_Controller
 			$id = $this->input->post('id');
 			$respuesta = $this->cursos_model->verificar_configuracion($id);
 			if ($respuesta) {
+				// HORIZONTAL
 				$res = $this->sql_ssl->insertar_tabla(
 					'configuracion_curso',
 					[
 						'id_course_moodle'          => $id,
 						'carga_horaria'             => 180,
-						'posx_nombre_participante'  => 62,
-						'posy_nombre_participante'  => 82,
-						'posx_bloque_texto' 	    => 27,
-						'posy_bloque_texto'         => 105,
-						'posx_qr' 				    => 231,
-						'posy_qr' 				    => 30,
-						'tamano_titulo'             => 23,
-						'tamano_subtitulo' 		    => 15,
+						'nota_aprobacion'			=> 65,
+						'posx_nombre_participante'  => 25,
+						'posy_nombre_participante'  => 90,
+						'posx_bloque_texto' 	    => 32,
+						'posy_bloque_texto'         => 131,
+						'posx_nombre_curso' 	    => 30,
+						'posy_nombre_curso'         => 120,
+						'posx_qr' 				    => 234,
+						'posy_qr' 				    => 40,
+						'posx_tipo_participacion' 	=> 32,
+						'posy_tipo_participacion'   => 108,
+						'tamano_titulo'             => 24,
+						'tamano_subtitulo' 		    => 21,
 						'tamano_texto' 			    => 15,
 						'color_nombre_participante' => "0, 0, 0",
 						'color_subtitulo' 		   	=> "0, 0, 0",
