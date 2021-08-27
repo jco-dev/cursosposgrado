@@ -131,6 +131,13 @@
                                         <div class="col-lg-6">
                                             <div class="card card-custom gutter-b">
                                                 <div class="card-body">
+                                                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23039BE5&ctz=America%2FLa_Paz&src=bDFyMWdubjA2bzYxZjhvN2F0ZDlxdTU1b2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&mode=AGENDA&showCalendars=0" style="border:solid 1px #777" width="100%" height="350" frameborder="0" scrolling="no"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card card-custom gutter-b">
+                                                <div class="card-body">
                                                     <iframe
                                                         width="100%"
                                                         height="350"
