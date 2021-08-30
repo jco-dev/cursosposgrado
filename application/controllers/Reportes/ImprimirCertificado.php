@@ -317,7 +317,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets\img\img_send_certificate/fondo.jpg", 0, 0, 215.9, 279.4);
+            $this->Image("assets/img/img_send_certificate/fondo.jpg", 0, 0, 215.9, 279.4);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
@@ -651,7 +651,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets\img\img_send_certificate/fondo.jpg", 0, 0, 215.9, 279.4);
+            $this->Image("assets/img/img_send_certificate/fondo.jpg", 0, 0, 215.9, 279.4);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
@@ -678,8 +678,7 @@ class ImprimirCertificado extends Fpdf_psg
             // TIPO DE PARTICIPACION
             $this->SetTextColor(0, 0, 0);
             $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-            $this->AddFont('Calibri-Light', '', 'Calibri-Light.php');
-            $this->SetFont('Calibri-Light', '', $datos_curso[0]->tamano_texto);
+            $this->SetFont('AusterRounded-Light', '', $datos_curso[0]->tamano_texto);
             $this->Cell(197, 11, utf8_decode($this->verificar_tipo_participacion($cur['tipo_participacion'])), 0, 1, '');
 
             // titulo del curso
