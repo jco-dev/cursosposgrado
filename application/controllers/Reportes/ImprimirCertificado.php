@@ -347,7 +347,6 @@ class ImprimirCertificado extends Fpdf_psg
             $this->Cell(171, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 0, 1, 'C');
 
             // TIPO PARTICIPACION
-            
             $this->SetFont('AusterRounded-Light', '', $datos_curso[0]->tamano_texto);
             $this->SetTextColor(0, 0, 0);
             if ($est['tipo_participacion'] == "PARTICIPANTE") {
@@ -640,6 +639,7 @@ class ImprimirCertificado extends Fpdf_psg
         $valor = ['nombre_curso', 'fecha_inicial', 'fecha_final', 'carga_horaria', 'imagen_personalizado', 'posx_imagen_personalizado', 'posy_imagen_personalizado', 'color_nombre_curso', 'fecha_certificacion', 'tipo_participacion','tipo'];
 
         foreach ($datos as $key => $curso) {
+
             $cur = array();
             for ($i = 0; $i < count($curso); $i++) {
 
@@ -647,15 +647,23 @@ class ImprimirCertificado extends Fpdf_psg
             }
 
             $this->AddPage("P", "letter");
+
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
+            $this->Image("assets\img\img_send_certificate/fondo.jpg", 0, 0, 215.9, 279.4);
+
+            $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
+            $this->SetFont('AusterRounded-Light', '', 15);
+            $this->SetXY(68,51);
+            $this->Cell(70, 7, "Otorga el Presente: ", 0, 1, 'L');
 
             // CERTIFICADO
-            $this->AddFont('Roboto-Black', '', 'Roboto-Black.php');
-            $this->SetFont('Roboto-Black', '', 39);
+            $this->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
+            $this->SetFont('BebasNeue-Regular', '', 60);
             $this->SetXY(10,65);
-            $this->Cell(197, 18, "CERTIFICADO", 0, 1, 'C');
+            $this->Cell(197, 20, "CERTIFICADO", 0, 1, 'C');
+
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -685,9 +693,9 @@ class ImprimirCertificado extends Fpdf_psg
 
             $this->SetTextColor($color_s[0], $color_s[1], $color_s[2]);
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
-            $this->AddFont('Roboto-Black', '', 'Roboto-Black.php');
-            $this->SetFont('Roboto-Black', '', $datos_curso[0]->tamano_subtitulo);
-            $this->MultiCell(197, 9, utf8_decode($cur['nombre_curso']), 0, 'C');
+            $this->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
+            $this->SetFont('BebasNeue-Regular', '', $datos_curso[0]->tamano_subtitulo);
+            $this->MultiCell(186, 13, utf8_decode($cur['nombre_curso']), 0, 'C');
 
             //IMPRIMIR SUBITULO
             $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
@@ -707,11 +715,11 @@ class ImprimirCertificado extends Fpdf_psg
             $mes = $this->mes_literal(date("m", strtotime($cur['fecha_inicial'])));
             $fecha_final = strtolower(fecha_literal($cur['fecha_final']));
             $carga_horaria = $cur['carga_horaria'];
-            $this->SetFont('Calibri-Light', '', $datos_curso[0]->tamano_texto);
-            $this->multiCelda(197, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
+            $this->SetFont('AusterRounded-Light', '', $datos_curso[0]->tamano_texto);
+            $this->multiCelda(128, 8, utf8_decode("Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de $carga_horaria horas académicas."), 0, 'J');
             $fecha_certificacion = "El Alto, " . strtolower(fecha_literal($cur['fecha_certificacion']));
             $this->SetX($datos_curso[0]->posx_bloque_texto);
-            $this->multiCelda(197, 8, utf8_decode(($fecha_certificacion)) . "     ", 0, 'R');
+            $this->multiCelda(132, 8, utf8_decode(($fecha_certificacion)) . "     ", 0, 'R');
 
             // imagen personalizado curso
             if($cur['imagen_personalizado'] != "" || $cur['imagen_personalizado'] != null)
