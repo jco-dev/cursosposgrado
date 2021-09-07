@@ -317,7 +317,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/fondo.jpg", 0, 0, 215.9, 280.15);
+            $this->Image("assets/img/img_send_certificate/fondo.jpg", 0, 0, 215.9, 280.5);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
@@ -427,130 +427,114 @@ class ImprimirCertificado extends Fpdf_psg
 
     public function imprimir_recibo($datos)
     {
-        $this->AddPage("P", "letter");
-        $this->Image('assets/img/posgrado.png', 31, 13, 23, 10);
-        $this->SetXY(30, 10);
-        $this->Cell(160, 70, "", 1);
-        //nombre curso
-        $this->SetXY(60, 13);
-        $this->SetFont('Arial', 'B', 14);
-        $this->Cell(110, 11, utf8_decode($datos['titulo']), 0);
+        header('Content-Type: application/pdf');
+        $pdf = new FPDF($orientation='P',$unit='mm', array(55.6,115));
+        $pdf->AddPage();
 
-        //fecha
-        $this->SetXY(150, 9);
-        $this->SetFont('Arial', '', 11);
-        $this->Cell(40, 10, utf8_decode("Fecha: " . $datos['fecha']), 0);
-        $this->SetXY(150, 14);
-        $this->Cell(40, 10, utf8_decode("Número: " . $datos['numero']), 0);
-        $this->SetXY(150, 19);
-        $this->Cell(40, 10, utf8_decode("Importe: " . $datos['importe']), 0);
+        
+        $pdf->SetFont('Arial','B',8);    //Letra Arial, negrita (Bold), tam. 20
+        
+        $pdf->Image(base_url('assets/img/img_send_certificate/cursos-logo.jpg'), 15,2,25,8);
+        $pdf->Ln(2);
+        $pdf->setX(3);
+        $pdf->SetFont('Arial','',5);
+        $pdf->Cell(49.8,2, utf8_decode("Telefóno: 70648629"), 0, 1, "C");
+        $pdf->SetFont('Arial','',5);
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Dirección:  Av. Sucre Bloque 'A' - Zona Villa Esperanza"), 0, 1, "C");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Tercer Piso del Edificio  Emblemático de la UPEA."), 0, 1, "C");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,3, utf8_decode("*********************************************************************"), 0, 1, "C");
 
-        $this->Ln(4);
-        $this->SetX(32);
-        $this->Cell(10, 10, utf8_decode("------------------------------------------------------------------------------------------------------------------------"), 0);
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Remitente: CURSOS POSGRADO UPEA"), 0, 1, "L");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("ID inscripción: 021012"), 0, 1, "L");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Fecha: 12/12/2021"), 0, 1, "L");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Método de pago: PAGO EN OFICINA"), 0, 1, "L");
+        
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("C.I.: 9248587 LP"), 0, 1, "L");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Cliente: JUAN CARLOS CONDORI ZAPANA"), 0, 1, "L");
 
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Descripción: '), 0);
-        $this->SetX(63);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['descripcion']), 0);
+        $pdf->setX(3);
+        $pdf->Cell(49.8,3, utf8_decode("*********************************************************************"), 0, 1, "C");
+        $data_header_table = array(utf8_decode('Nº'), 'CURSO', 'PAGO');
+        $lenght = array(5, 34, 9);
+        $pdf->SetFont('Arial', 'B', 5);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetTypeCell(['c', 'm', 'c']);
+        $pdf->SetAligns(['C', 'J', 'C']);
+        $pdf->SetWidths($lenght);
+        $pdf->setX(4);
+        $pdf->Row(
+            $data_header_table
+        );
 
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Recibido por: '), 0);
-        $this->SetX(65);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['recibido_por']), 0);
+        // Imprimir datos del reporte
+        $data_table = array(utf8_decode('1'), utf8_decode('GESTIÓN Y ADMINISTRACIÓN DE HERRAMIENTAS PARA LA EDUCACIÓN VIRTUAL 1RA. VERSIÓN'), 'Bs.'. 100);
+        $pdf->setX(4);
+        $pdf->Row(
+            $data_table
+        );
 
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Entregado a: '), 0);
-        $this->SetX(65);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['entregado_a']), 0);
+        // Imprimir total
+        $data_total = array(utf8_decode('TOTAL'), 'Bs.'. 100);
+        $lenght1 = array(39, 9);
+        $pdf->SetFont('Arial', 'B', 5);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetTypeCell(['c', 'c']);
+        $pdf->SetAligns(['C', 'C']);
+        $pdf->SetWidths($lenght1);
+        $pdf->setX(4);
+        $pdf->Row(
+            $data_total
+        );
 
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('A favor de: '), 0);
-        $this->SetX(60);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['a_favor_de']), 0);
+        $data_total = array(utf8_decode('SALDO'), 'Bs.'. 0);
+        $lenght1 = array(39, 9);
+        $pdf->SetFont('Arial', 'B', 5);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetTypeCell(['c', 'c']);
+        $pdf->SetAligns(['C', 'C']);
+        $pdf->SetWidths($lenght1);
+        $pdf->setX(4);
+        $pdf->Row(
+            $data_total
+        );
 
-        $this->Ln(15);
-        $this->SetX(50);
-        $this->Cell(10, 10, utf8_decode("----------------------------------                              -----------------------------------"), 0);
-        $this->Ln(4);
-        $this->SetX(50);
-        $this->Cell(10, 10, utf8_decode("       Recibí conforme                                           Entregué conforme"), 0);
+        // letras
+        $pdf->setX(3);
+        $pdf->Cell(49.8,3, utf8_decode("Son: " . $this->numberToLetras(100)) , 0, 1, "L");
+        $pdf->setX(3);
+        $pdf->Cell(49.8,2, utf8_decode("Usuario: JUANCA92"), 0, 1, "L");
 
+        $pdf->Image("http://localhost/generar_qr/qr_generator.php?code=12345fsdfsafdsafdsaf", 16, $pdf->GetY(),25,25, "png");
+        $pdf->SetY($pdf->GetY()+25);
+        $pdf->Ln();
+        $pdf->setX(3);
+        $pdf->Cell(49.8,3, utf8_decode("        **** GRACIAS POR INSCRIBIRSE AL CURSO ****") , 0, 1, "L");
+        $pdf->Output("D", "factura.pdf", true);
+    }
 
-
-        $this->Image('assets/img/posgrado.png', 31, 125, 23, 10);
-        $this->SetXY(30, 120);
-        $this->Cell(160, 70, "", 1);
-        //nombre curso
-        $this->SetXY(60, 125);
-        $this->SetFont('Arial', 'B', 14);
-        $this->Cell(110, 11, utf8_decode($datos['titulo']), 0);
-
-        //fecha
-        $this->SetXY(150, 120);
-        $this->SetFont('Arial', '', 11);
-        $this->Cell(40, 10, utf8_decode("Fecha: " . $datos['fecha']), 0);
-        $this->SetXY(150, 126);
-        $this->Cell(40, 10, utf8_decode("Número: " . $datos['numero']), 0);
-        $this->SetXY(150, 132);
-        $this->Cell(40, 10, utf8_decode("Importe: " . $datos['importe']), 0);
-
-        $this->Ln(3);
-        $this->SetX(32);
-        $this->Cell(10, 10, utf8_decode("------------------------------------------------------------------------------------------------------------------------"), 0);
-
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Descripción: '), 0);
-        $this->SetX(63);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['descripcion']), 0);
-
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Recibido por: '), 0);
-        $this->SetX(65);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['recibido_por']), 0);
-
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('Entregado a: '), 0);
-        $this->SetX(65);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['entregado_a']), 0);
-
-        $this->Ln(6);
-        $this->SetX(31);
-        $this->SetFont('Arial', 'B', 11);
-        $this->Cell(40, 10, utf8_decode('A favor de: '), 0);
-        $this->SetX(60);
-        $this->SetFont('Arial', '', 10);
-        $this->Cell(40, 10, utf8_decode($datos['a_favor_de']), 0);
-
-        $this->Ln(15);
-        $this->SetX(50);
-        $this->Cell(10, 10, utf8_decode("----------------------------------                              -----------------------------------"), 0);
-        $this->Ln(4);
-        $this->SetX(50);
-        $this->Cell(10, 10, utf8_decode("       Recibí conforme                                           Entregué conforme"), 0);
-
-        echo base64_encode($this->Output('S'));
+    public function print_header_table($data, $tam)
+    {
+        
+        $this->Ln();
+        $this->SetFont('Arial', 'B', 6);
+        $this->SetTextColor(0, 0, 0);
+        $this->SetTypeCell(['c', 'm', 'c']);
+        $this->SetAligns(['C', 'L', 'C']);
+        $this->SetWidths($tam);
+        // $this->Row(
+        //     $data
+        // );
+        $this->Ln();
+    
     }
 
     public function imprimir_blanco($datos = null, $datos_curso = null, $tipo)
@@ -809,5 +793,164 @@ class ImprimirCertificado extends Fpdf_psg
             $cn++;
         }
         return $cn;
+    }
+    function numberToLetras($xcifra)
+    {
+        $xarray = array(0 => "Cero",
+            1 => "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
+            "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE",
+            "VEINTI", 30 => "TREINTA", 40 => "CUARENTA", 50 => "CINCUENTA", 60 => "SESENTA", 70 => "SETENTA", 80 => "OCHENTA", 90 => "NOVENTA",
+            100 => "CIENTO", 200 => "DOSCIENTOS", 300 => "TRESCIENTOS", 400 => "CUATROCIENTOS", 500 => "QUINIENTOS", 600 => "SEISCIENTOS", 700 => "SETECIENTOS", 800 => "OCHOCIENTOS", 900 => "NOVECIENTOS"
+        );
+    //
+        $xcifra = trim($xcifra);
+        $xlength = strlen($xcifra);
+        $xpos_punto = strpos($xcifra, ".");
+        $xaux_int = $xcifra;
+        $xdecimales = "00";
+        if (!($xpos_punto === false)) {
+            if ($xpos_punto == 0) {
+                $xcifra = "0" . $xcifra;
+                $xpos_punto = strpos($xcifra, ".");
+            }
+            $xaux_int = substr($xcifra, 0, $xpos_punto); // obtengo el entero de la cifra a covertir
+            $xdecimales = substr($xcifra . "00", $xpos_punto + 1, 2); // obtengo los valores decimales
+        }
+
+        $XAUX = str_pad($xaux_int, 18, " ", STR_PAD_LEFT); // ajusto la longitud de la cifra, para que sea divisible por centenas de miles (grupos de 6)
+        $xcadena = "";
+        for ($xz = 0; $xz < 3; $xz++) {
+            $xaux = substr($XAUX, $xz * 6, 6);
+            $xi = 0;
+            $xlimite = 6; // inicializo el contador de centenas xi y establezco el límite a 6 dígitos en la parte entera
+            $xexit = true; // bandera para controlar el ciclo del While
+            while ($xexit) {
+                if ($xi == $xlimite) { // si ya llegó al límite máximo de enteros
+                    break; // termina el ciclo
+                }
+
+                $x3digitos = ($xlimite - $xi) * -1; // comienzo con los tres primeros digitos de la cifra, comenzando por la izquierda
+                $xaux = substr($xaux, $x3digitos, abs($x3digitos)); // obtengo la centena (los tres dígitos)
+                for ($xy = 1; $xy < 4; $xy++) { // ciclo para revisar centenas, decenas y unidades, en ese orden
+                    switch ($xy) {
+                        case 1: // checa las centenas
+                            if (substr($xaux, 0, 3) < 100) { // si el grupo de tres dígitos es menor a una centena ( < 99) no hace nada y pasa a revisar las decenas
+                                
+                            } else {
+                                $key = (int) substr($xaux, 0, 3);
+                                if (TRUE === array_key_exists($key, $xarray)){  // busco si la centena es número redondo (100, 200, 300, 400, etc..)
+                                    $xseek = $xarray[$key];
+                                    $xsub = $this->subfijo($xaux); // devuelve el subfijo correspondiente (Millón, Millones, Mil o nada)
+                                    if (substr($xaux, 0, 3) == 100)
+                                        $xcadena = " " . $xcadena . " CIEN " . $xsub;
+                                    else
+                                        $xcadena = " " . $xcadena . " " . $xseek . " " . $xsub;
+                                    $xy = 3; // la centena fue redonda, entonces termino el ciclo del for y ya no reviso decenas ni unidades
+                                }
+                                else { // entra aquí si la centena no fue numero redondo (101, 253, 120, 980, etc.)
+                                    $key = (int) substr($xaux, 0, 1) * 100;
+                                    $xseek = $xarray[$key]; // toma el primer caracter de la centena y lo multiplica por cien y lo busca en el arreglo (para que busque 100,200,300, etc)
+                                    $xcadena = " " . $xcadena . " " . $xseek;
+                                } // ENDIF ($xseek)
+                            } // ENDIF (substr($xaux, 0, 3) < 100)
+                            break;
+                        case 2: // checa las decenas (con la misma lógica que las centenas)
+                            if (substr($xaux, 1, 2) < 10) {
+                                
+                            } else {
+                                $key = (int) substr($xaux, 1, 2);
+                                if (TRUE === array_key_exists($key, $xarray)) {
+                                    $xseek = $xarray[$key];
+                                    $xsub = $this->subfijo($xaux);
+                                    if (substr($xaux, 1, 2) == 20)
+                                        $xcadena = " " . $xcadena . " VEINTE " . $xsub;
+                                    else
+                                        $xcadena = " " . $xcadena . " " . $xseek . " " . $xsub;
+                                    $xy = 3;
+                                }
+                                else {
+                                    $key = (int) substr($xaux, 1, 1) * 10;
+                                    $xseek = $xarray[$key];
+                                    if (20 == substr($xaux, 1, 1) * 10)
+                                        $xcadena = " " . $xcadena . " " . $xseek;
+                                    else
+                                        $xcadena = " " . $xcadena . " " . $xseek . " Y ";
+                                } // ENDIF ($xseek)
+                            } // ENDIF (substr($xaux, 1, 2) < 10)
+                            break;
+                        case 3: // checa las unidades
+                            if (substr($xaux, 2, 1) < 1) { // si la unidad es cero, ya no hace nada
+                                
+                            } else {
+                                $key = (int) substr($xaux, 2, 1);
+                                $xseek = $xarray[$key]; // obtengo directamente el valor de la unidad (del uno al nueve)
+                                $xsub = $this->subfijo($xaux);
+                                $xcadena = " " . $xcadena . " " . $xseek . " " . $xsub;
+                            } // ENDIF (substr($xaux, 2, 1) < 1)
+                            break;
+                    } // END SWITCH
+                } // END FOR
+                $xi = $xi + 3;
+            } // ENDDO
+
+            if (substr(trim($xcadena), -5, 5) == "ILLON") // si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE
+                $xcadena.= " DE";
+
+            if (substr(trim($xcadena), -7, 7) == "ILLONES") // si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE
+                $xcadena.= " DE";
+
+            // ----------- esta línea la puedes cambiar de acuerdo a tus necesidades o a tu país -------
+            if (trim($xaux) != "") {
+                switch ($xz) {
+                    case 0:
+                        if (trim(substr($XAUX, $xz * 6, 6)) == "1")
+                            $xcadena.= "UN BILLON ";
+                        else
+                            $xcadena.= " BILLONES ";
+                        break;
+                    case 1:
+                        if (trim(substr($XAUX, $xz * 6, 6)) == "1")
+                            $xcadena.= "UN MILLON ";
+                        else
+                            $xcadena.= " MILLONES ";
+                        break;
+                    case 2:
+                        if ($xcifra < 1) {
+                            $xcadena = "CERO $xdecimales/100 Bs.";
+                        }
+                        if ($xcifra >= 1 && $xcifra < 2) {
+                            $xcadena = "UN $xdecimales/100 Bs. ";
+                        }
+                        if ($xcifra >= 2) {
+                            $xcadena.= " $xdecimales/100 Bs. "; //
+                        }
+                        break;
+                } // endswitch ($xz)
+            } // ENDIF (trim($xaux) != "")
+            // ------------------      en este caso, para México se usa esta leyenda     ----------------
+            $xcadena = str_replace("VEINTI ", "VEINTI", $xcadena); // quito el espacio para el VEINTI, para que quede: VEINTICUATRO, VEINTIUN, VEINTIDOS, etc
+            $xcadena = str_replace("  ", " ", $xcadena); // quito espacios dobles
+            $xcadena = str_replace("UN UN", "UN", $xcadena); // quito la duplicidad
+            $xcadena = str_replace("  ", " ", $xcadena); // quito espacios dobles
+            $xcadena = str_replace("BILLON DE MILLONES", "BILLON DE", $xcadena); // corrigo la leyenda
+            $xcadena = str_replace("BILLONES DE MILLONES", "BILLONES DE", $xcadena); // corrigo la leyenda
+            $xcadena = str_replace("DE UN", "UN", $xcadena); // corrigo la leyenda
+        } // ENDFOR ($xz)
+        return trim($xcadena);
+    }
+
+    // END FUNCTION
+
+    function subfijo($xx)
+    { // esta función regresa un subfijo para la cifra
+        $xx = trim($xx);
+        $xstrlen = strlen($xx);
+        if ($xstrlen == 1 || $xstrlen == 2 || $xstrlen == 3)
+            $xsub = "";
+        //
+        if ($xstrlen == 4 || $xstrlen == 5 || $xstrlen == 6)
+            $xsub = "MIL";
+        //
+        return $xsub;
     }
 }

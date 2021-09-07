@@ -1,7 +1,7 @@
 "use strict";
 let _wizard;
 // Class definition
-var KTWizard3 = (function () {
+var KTinscripcion_local = (function () {
 	// Base elements
 	var _wizardEl;
 	var _formEl;
@@ -135,13 +135,13 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
-					respaldo_transaccion: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
+					// respaldo_transaccion: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 	},
+					// },
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -173,7 +173,7 @@ var KTWizard3 = (function () {
 	return {
 		// public functions
 		init: function () {
-			_wizardEl = KTUtil.getById("kt_wizard_inscripcion");
+			_wizardEl = KTUtil.getById("kt_wizard_inscripcion_local");
 			_formEl = KTUtil.getById("frm_curso_inscripcion_local");
 
 			initWizard();
@@ -183,7 +183,45 @@ var KTWizard3 = (function () {
 })();
 
 jQuery(document).ready(function () {
+	// Fecha de nacimiento
+	$("#anio2").select2({
+		placeholder: "Año",
+	});
+	$("#anio2").change(function () {
+		$("#mes2").removeAttr("disabled");
+	});
+
+	$("#mes2").select2({
+		placeholder: "Mes",
+	});
+	$("#mes2").prop("disabled", "disabled");
+	$("#mes2").change(function () {
+		$("#dia2").removeAttr("disabled");
+	});
+
+	$("#dia2").select2({
+		placeholder: "Dia",
+	});
+	$("#dia2").prop("disabled", "disabled");
+
+	$("#fecha2").on("change", "#anio2,#mes2", function (e) {
+		let anio = parseInt($("#anio2").val());
+		let mes = parseInt($("#mes2").val()) - 1;
+		let res = Date.getDaysInMonth(anio, mes);
+		llenar_dia(res);
+	});
+
+	const llenar_dia = (num) => {
+		$("#dia2").children().remove();
+		let opcion = "";
+		for (let i = 1; i <= num; i++) {
+			opcion += "<option value='" + i + "'>" + i + "</option>";
+		}
+		$("#dia2").append(opcion);
+	};
+
 	$("#card-title-inscripcion").addClass("d-none");
+
 	$("#respaldo_transaccion").on("change", function () {
 		var imagen = this.files[0];
 		// se valida el formato de la imagen png y jpeg
@@ -238,9 +276,8 @@ jQuery(document).ready(function () {
 		minimumResultsForSearch: Infinity,
 	});
 
-	KTWizard3.init();
-
-	$("#frm_curso_inscripcion_local").submit(function (e) {
+	$("#frm_curso_inscripcion_local").on("submit", function (e) {
+		// console.log("inscripcion");
 		e.preventDefault();
 		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
 			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
@@ -256,6 +293,7 @@ jQuery(document).ready(function () {
 				dataType: "JSON",
 			}).done(function (response) {
 				if (typeof response.exito != "undefined") {
+					window.open("/inscripcionadmin/imprimir/" + response.id, "_blank");
 					Swal.fire({
 						title: response.exito,
 						text: "¡Gracias por inscribirse!",
@@ -323,8 +361,12 @@ jQuery(document).ready(function () {
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
 
-				$("#fecha_nacimiento").val(response.datos[0].fecha_nacimiento);
-				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
+				if (response.datos[0].fecha_nacimiento != "") {
+					let fecha = response.datos[0].fecha_nacimiento.split("-");
+					$("#anio2").val(fecha[0]).trigger("change");
+					$("#mes2").val(fecha[1]).trigger("change");
+					$("#dia2").val(parseInt(fecha[2])).trigger("change");
+				}
 
 				$("#ciudad_residencia")
 					.val(response.datos[0].id_municipio)
@@ -367,8 +409,11 @@ jQuery(document).ready(function () {
 		$("#m_genero").text($(this).val());
 	});
 
-	$("#fecha_nacimiento").on("change", function () {
-		$("#m_fecha_nacimiento").html($(this).val());
+	$("#fecha2").on("change", "#anio2,#mes2, #dia2", function (e) {
+		let anio = $("#anio2").val();
+		let mes = $("#mes2").val();
+		let dia = $("#dia2").val();
+		$("#m_fecha_nacimiento").html(anio + "-" + mes + "-" + format_dia(dia));
 	});
 
 	$("#celular").on("change", function () {
@@ -387,8 +432,8 @@ jQuery(document).ready(function () {
 		}
 	);
 
-	$("#id_transaccion").on("change", function () {
-		$("#m_id_transaccion").html($(this).val());
+	$("#id_transaccion1").on("change", function () {
+		$("#m_id_transaccion2").html($(this).val());
 	});
 
 	$("#fecha_pago").on("change", function () {
@@ -406,4 +451,28 @@ jQuery(document).ready(function () {
 			$("#m_tipo_certificado_solicitado").text($(this).val());
 		}
 	);
+
+	function format_dia(dia) {
+		if (dia >= 1 && dia <= 9) {
+			return "0" + dia;
+		} else {
+			return dia;
+		}
+	}
+
+	// VERIFICAR MODALIDAD DE INSCRIPCION
+	$("input[type=radio][name=modalidad_inscripcion]").change(function () {
+		if (this.value == "PAGO EFECTIVO") {
+			// Verificar el numero el id de facturacion
+			$.ajax({
+				url: "/inscripcionadmin/verificar_id_factura",
+				type: "POST",
+			}).done(function (response) {
+				$("#id_transaccion1").val(response);
+				$("#m_id_transaccion2").val(response);
+			});
+		}
+	});
+
+	KTinscripcion_local.init();
 });

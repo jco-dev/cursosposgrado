@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5ca01df11fd0973c716033f6a1cb1ee3eac4ce64',
+    'reference' => 'e6d8f1823a6012a1ebdbd328695a879849ee689b',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5ca01df11fd0973c716033f6a1cb1ee3eac4ce64',
+      'reference' => 'e6d8f1823a6012a1ebdbd328695a879849ee689b',
     ),
     'camilord/qrcode' => 
     array (
@@ -76,12 +76,12 @@
     ),
     'phpmailer/phpmailer' => 
     array (
-      'pretty_version' => 'v6.5.0',
-      'version' => '6.5.0.0',
+      'pretty_version' => 'v6.5.1',
+      'version' => '6.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a5b5c43e50b7fba655f793ad27303cd74c57363c',
+      'reference' => 'dd803df5ad7492e1b40637f7ebd258fee5ca7355',
     ),
     'phpoffice/phpspreadsheet' => 
     array (
@@ -130,12 +130,12 @@
     ),
     'setasign/fpdf' => 
     array (
-      'pretty_version' => '1.8.3',
-      'version' => '1.8.3.0',
+      'pretty_version' => '1.8.4',
+      'version' => '1.8.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6a83253ece0df1c5b6c05fe7a900c660ae38afc3',
+      'reference' => 'b0ddd9c5b98ced8230ef38534f6f3c17308a7974',
     ),
     'setasign/fpdi' => 
     array (

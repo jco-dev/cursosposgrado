@@ -67,6 +67,7 @@ class Inscripcionadmin extends PSG_Controller
     public function guardar_preinscripcion()
     {
         // datos participante
+        // var_dump($_REQUEST);
         $ci = $this->input->post('ci');
         $expedido = $this->input->post('expedido');
         $correo = $this->input->post('correo');
@@ -75,14 +76,15 @@ class Inscripcionadmin extends PSG_Controller
         $paterno = $this->input->post('paterno');
         $materno = $this->input->post('materno');
         $genero = $this->input->post('genero');
-        $fecha_nacimiento = $this->input->post('fecha_nacimiento');
+        $fecha_nacimiento = $this->input->post('anio2') . '-' . $this->input->post('mes2') . '-' . $this->format_dia(intval($this->input->post('dia2')));
         $celular = $this->input->post('celular');
         $id_municipio = $this->input->post('ciudad_residencia');
         $modalidad_inscripcion = $this->input->post('modalidad_inscripcion');
-        $id_transaccion = $this->input->post('id_transaccion');
+        $id_transaccion = $this->input->post('id_transaccion1');
         $fecha_pago = $this->input->post('fecha_pago');
         $monto_pago = $this->input->post('monto_pago');
         $tipo_certificado_solicitado = $this->input->post('tipo_certificado_solicitado');
+        $estado = "PREINSCRITO";
 
         // verificar la inscripcion del curso con ci
         $respuesta = $this->sql_ssl->listar_tabla(
@@ -146,15 +148,19 @@ class Inscripcionadmin extends PSG_Controller
                             'monto_pago' => $monto_pago,
                             'tipo_certificacion' => $tipo_certificado_solicitado,
                             'fecha_pago' => $fecha_pago,
-                            'respaldo_pago' => $ruta
+                            'respaldo_pago' => $ruta,
+                            'estado' => $estado
                         ]
 
                     );
 
                     if (is_numeric($res)) {
+
                         $this->output->set_content_type('application/json')->set_output(
-                            json_encode(['exito' => "Registado al curso correctamente"])
+                            json_encode(['exito' => "Registado al curso correctamente",'id' => $res])
                         );
+                       
+
                     } else {
                         $this->output->set_content_type('application/json')->set_output(
                             json_encode(['error' => "Error al registrarse al curso"])
@@ -164,23 +170,23 @@ class Inscripcionadmin extends PSG_Controller
             } else {
                 // actualizar datos en participante y insertar la preinscripcion
                 $id_participante = $respuesta[0]->id_participante;
-                $respuesta = $this->sql_ssl->modificar_tabla(
-                    'mdl_participante',
-                    [
-                        'expedido' => $expedido,
-                        'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
-                        'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
-                        'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
-                        'genero' => $genero,
-                        'id_municipio' => $id_municipio,
-                        'fecha_nacimiento' => $fecha_nacimiento,
-                        'correo' => $correo,
-                        'celular' => $celular
-                    ],
-                    ['id_participante' => $id_participante]
-                );
+                // $respuesta = $this->sql_ssl->modificar_tabla(
+                //     'mdl_participante',
+                //     [
+                //         'expedido' => $expedido,
+                //         'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+                //         'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+                //         'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
+                //         'genero' => $genero,
+                //         'id_municipio' => $id_municipio,
+                //         'fecha_nacimiento' => $fecha_nacimiento,
+                //         'correo' => $correo,
+                //         'celular' => $celular
+                //     ],
+                //     ['id_participante' => $id_participante]
+                // );
 
-                if ($respuesta) {
+                if (true) {
                     //subir imagen
                     $ruta = '';
                     if (isset($_FILES['respaldo_transaccion']) && $_FILES['respaldo_transaccion']['error'] === UPLOAD_ERR_OK) {
@@ -212,14 +218,15 @@ class Inscripcionadmin extends PSG_Controller
                             'monto_pago' => $monto_pago,
                             'tipo_certificacion' => $tipo_certificado_solicitado,
                             'fecha_pago' => $fecha_pago,
-                            'respaldo_pago' => $ruta
+                            'respaldo_pago' => $ruta,
+                            'estado' => $estado
                         ]
 
                     );
 
                     if (is_numeric($res)) {
                         $this->output->set_content_type('application/json')->set_output(
-                            json_encode(['exito' => "Registado al curso correctamente"])
+                            json_encode(['exito' => "Registado al curso correctamente", 'id' => $res])
                         );
                     } else {
                         $this->output->set_content_type('application/json')->set_output(
@@ -234,6 +241,21 @@ class Inscripcionadmin extends PSG_Controller
             );
         }
 
+    }
+
+    public function imprimir()
+    {
+        $rep = new ImprimirCertificado();
+        $rep->imprimir_recibo([]);
+    }
+
+    public function format_dia($dia)
+    {
+        if ($dia >= 1 && $dia <= 9) {
+            return "0" + $dia;
+        } else {
+            return $dia;
+        }
     }
 
     public function buscar_por_ci()
@@ -669,5 +691,43 @@ class Inscripcionadmin extends PSG_Controller
                 json_encode(['data' => null])
             );
         }
+    }
+
+    public function verificar_id_factura()
+    {
+        $respuesta = $this->sql_ssl->listar_tabla(
+            'preinscripcion_curso',
+            ['id_transaccion' => '000001']
+        );
+        if(count($respuesta) != 0)
+        {
+            
+            $response = $this->inscripcion_model->get_id_last_id_transaccion();
+
+            if(intval(trim($response[0]->id_transaccion)) >= 1 && intval(trim($response[0]->id_transaccion)) <= 9)
+            {
+                echo "00000" . intval($response[0]->id_transaccion);
+            }elseif(intval(trim($response[0]->id_transaccion)) >= 10 && intval(trim($response[0]->id_transaccion)) <= 99)
+            {
+                echo "0000". intval(trim($response[0]->id_transaccion));
+            }elseif(intval(trim($response[0]->id_transaccion)) >= 100 && intval(trim($response[0]->id_transaccion)) <= 999)
+            {
+                echo "000". intval(trim($response[0]->id_transaccion));
+            }
+            elseif(intval(trim($response[0]->id_transaccion)) >= 1000 && intval(trim($response[0]->id_transaccion)) <= 9999)
+            {
+                echo "00". intval(trim($response[0]->id_transaccion));
+            }elseif(intval(trim($response[0]->id_transaccion)) >= 10000 && intval(trim($response[0]->id_transaccion)) <= 99999)
+            {
+                echo "0". intval(trim($response[0]->id_transaccion));
+            }elseif(intval(trim($response[0]->id_transaccion)) >= 100000 && intval(trim($response[0]->id_transaccion)) <= 999999)
+            {
+                echo intval(trim($response[0]->id_transaccion));
+            }
+
+        }else{
+            echo '0000001';
+        }
+
     }
 }

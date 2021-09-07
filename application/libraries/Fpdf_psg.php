@@ -2,6 +2,7 @@
 // require_once APPPATH.'/vendor/autoload.php';
 class Fpdf_psg extends FPDF
 {
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -56,7 +57,6 @@ class Fpdf_psg extends FPDF
 			$this->piePagina();  // $this->Footer()
 			$this->InFooter = false;
 		}
-		$this->SetY(25);
 	}
 
 	public function celda($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = false, $link = '')
@@ -373,15 +373,29 @@ class Fpdf_psg extends FPDF
 		// Sets the cell type of a column to the array
 		$this->type_cell = $c;
 	}
+	function SetBorder($b)
+	{
+		$this->border = $b;
+	}
 
 	function Row($data, $fill = 'D')
 	{
-		// return var_dump($this->getFontSize($data));
 		//Calculate the height of the row
 		$nb = 0;
-		for ($i = 0; $i < count($data); $i++)
-			$nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
-		$h = 5 * $nb;
+		if (isset($this->type_cell)) {
+			if (in_array('m', $this->type_cell) || in_array('wt', $this->type_cell)) {
+				for ($i = 0; $i < count($data); $i++)
+					$nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
+			} else {
+				$nb = 1;
+			}
+		} else {
+			for ($i = 0; $i < count($data); $i++)
+				$nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
+		}
+		$h = $this->FontSize + 2;
+		$altura = $h;
+		$h *=  $nb;
 		//Issue a page break first if needed
 		$this->CheckPageBreak($h);
 		//Draw the cells of the row
@@ -392,28 +406,40 @@ class Fpdf_psg extends FPDF
 			$x = $this->GetX();
 			$y = $this->GetY();
 			//Draw the border
-			$this->Rect($x, $y, $w, $h, $fill);
+			if (isset($this->border[$i])) {
+				$fill = ($fill == 'DF' || $fill == 'DF') ? true : false;
+				$this->DibujarBorde($w, $h, $this->border[$i], $fill);
+			} else {
+				$this->Rect($x, $y, $w, $h, $fill);
+			}
 			//Print the text
-			if (isset($this->type_cell)) {
+			if (isset($this->type_cell[$i])) {
 				#$this->type_cell = isset($this->aligns[$i]) ? $this->aligns[$i] : 'multicell';
 				switch ($this->type_cell[$i]) {
 					case 'm':
-						$this->multiCelda($w, 5, $data[$i], 0, $a);
-						// $this->AjustMultiCell($w,5,$data[$i],0,$a);
+						$this->multiCelda($w, $altura, $data[$i], 0, $a);
 						break;
 					case 'c':
 						$this->celda($w, $h, $data[$i], 0, 0, $a);
-						// $this->AjustCell($w,$h,$data[$i],0,0,$a);
 						break;
 					case 'wt':
-						$this->WriteTag($w, 4, $data[$i], 0, $a, false, 1);
+						$this->WriteTag($w, $altura, $data[$i], 0, $a, false, 1);
+						break;
+					case 'cfs':
+						$this->CellFitSpace($w, $h, $data[$i], 0, 0, $a);
+						break;
+					case 'cf':
+						$this->CellFit($w, $h, $data[$i], 0, 0, $a);
+						break;
+					case 'ac':
+						$this->AjustCell($w, $h, $data[$i], 0, 0, $a);
 						break;
 					default:
-						$this->multiCelda($w, 5, $data[$i], 0, $a);
+						$this->multiCelda($w, $altura, $data[$i], 0, $a);
 						break;
 				}
 			} else {
-				$this->multiCelda($w, 5, $data[$i], 0, $a);
+				$this->multiCelda($w, $altura, $data[$i], 0, $a);
 			}
 			//Put the position to the right of the cell
 			$this->SetXY($x + $w, $y);
@@ -473,7 +499,6 @@ class Fpdf_psg extends FPDF
 		if ($this->GetY() + $h > $this->PageBreakTrigger) {
 			// $this->AddPage($this->CurOrientation, $this->CurPageSize);
 			$this->agregarPagina($this->CurOrientation, $this->CurPageSize, $this->rotacion, $this->header, $this->footer);
-			$this->Ln();
 		}
 	}
 
@@ -1040,5 +1065,188 @@ class Fpdf_psg extends FPDF
 			}
 		}
 		return $datos_decodificados;
+	}
+
+	public function CellFit($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = false, $link = '', $scale = false, $force = true)
+	{
+		$str_width = $this->GetStringWidth($txt);
+		if ($str_width == 0) {
+			$str_width = 0.1;
+		}
+
+		if ($w == 0)
+			$w = $this->w - $this->rMargin - $this->x;
+		$ratio = ($w - $this->cMargin * 2) / $str_width;
+
+		$fit = ($ratio < 1 || ($ratio > 1 && $force));
+		if ($fit) {
+			if ($scale) {
+				$horiz_scale = $ratio * 100.0;
+				$this->_out(sprintf('BT %.2F Tz ET', $horiz_scale));
+			} else {
+				$char_space = ($w - $this->cMargin * 2 - $str_width) / max($this->MBGetStringLength($txt) - 1, 1) * $this->k;
+				$this->_out(sprintf('BT %.2F Tc ET', $char_space));
+			}
+			$align = '';
+		}
+
+		$this->Cell($w, $h, $txt, $border, $ln, $align, $fill, $link);
+
+		if ($fit)
+			$this->_out('BT ' . ($scale ? '100 Tz' : '0 Tc') . ' ET');
+	}
+
+	public function CellFitSpace($w, $h = 0, $txt = '', $border = 0, $ln = 0, $align = '', $fill = false, $link = '')
+	{
+		$this->CellFit($w, $h, $txt, $border, $ln, $align, $fill, $link, false, false);
+	}
+
+	public function MBGetStringLength($s)
+	{
+		if ($this->CurrentFont['type'] == 'Type0') {
+			$len = 0;
+			$nbbytes = strlen($s);
+			for ($i = 0; $i < $nbbytes; $i++) {
+				if (ord($s[$i]) < 128)
+					$len++;
+				else {
+					$len++;
+					$i++;
+				}
+			}
+			return $len;
+		} else
+			return strlen($s);
+	}
+
+	function DibujarBorde($w, $h, $border, $fill = false)
+	{
+		// $this->Line(9,7,7,8);
+		$k = $this->k;
+		$s = '';
+		if ($fill || $border == 1) {
+			if ($fill)
+				$op = ($border == 1) ? 'B' : 'f';
+			else
+				$op = 'S';
+			$s = sprintf('%.2F %.2F %.2F %.2F re %s ', $this->x * $k, ($this->h - $this->y) * $k, $w * $k, -$h * $k, $op);
+		}
+		if (is_string($border)) {
+			$x = $this->x;
+			$y = $this->y;
+			if (strpos($border, 'L') !== false)
+				$s .= sprintf('%.2F %.2F m %.2F %.2F l S ', $x * $k, ($this->h - $y) * $k, $x * $k, ($this->h - ($y + $h)) * $k);
+			if (strpos($border, 'T') !== false)
+				$s .= sprintf('%.2F %.2F m %.2F %.2F l S ', $x * $k, ($this->h - $y) * $k, ($x + $w) * $k, ($this->h - $y) * $k);
+			if (strpos($border, 'R') !== false)
+				$s .= sprintf('%.2F %.2F m %.2F %.2F l S ', ($x + $w) * $k, ($this->h - $y) * $k, ($x + $w) * $k, ($this->h - ($y + $h)) * $k);
+			if (strpos($border, 'B') !== false)
+				$s .= sprintf('%.2F %.2F m %.2F %.2F l S ', $x * $k, ($this->h - ($y + $h)) * $k, ($x + $w) * $k, ($this->h - ($y + $h)) * $k);
+		}
+		$this->_out($s);
+	}
+
+	function RoundedRect($x, $y, $w, $h, $r, $corners = '1234', $style = '')
+	{
+		$k = $this->k;
+		$hp = $this->h;
+		if ($style == 'F')
+			$op = 'f';
+		elseif ($style == 'FD' || $style == 'DF')
+			$op = 'B';
+		else
+			$op = 'S';
+		$MyArc = 4 / 3 * (sqrt(2) - 1);
+		$this->_out(sprintf('%.2F %.2F m', ($x + $r) * $k, ($hp - $y) * $k));
+
+		$xc = $x + $w - $r;
+		$yc = $y + $r;
+		$this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - $y) * $k));
+		if (strpos($corners, '2') === false)
+			$this->_out(sprintf('%.2F %.2F l', ($x + $w) * $k, ($hp - $y) * $k));
+		else
+			$this->_Arc($xc + $r * $MyArc, $yc - $r, $xc + $r, $yc - $r * $MyArc, $xc + $r, $yc);
+
+		$xc = $x + $w - $r;
+		$yc = $y + $h - $r;
+		$this->_out(sprintf('%.2F %.2F l', ($x + $w) * $k, ($hp - $yc) * $k));
+		if (strpos($corners, '3') === false)
+			$this->_out(sprintf('%.2F %.2F l', ($x + $w) * $k, ($hp - ($y + $h)) * $k));
+		else
+			$this->_Arc($xc + $r, $yc + $r * $MyArc, $xc + $r * $MyArc, $yc + $r, $xc, $yc + $r);
+
+		$xc = $x + $r;
+		$yc = $y + $h - $r;
+		$this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - ($y + $h)) * $k));
+		if (strpos($corners, '4') === false)
+			$this->_out(sprintf('%.2F %.2F l', ($x) * $k, ($hp - ($y + $h)) * $k));
+		else
+			$this->_Arc($xc - $r * $MyArc, $yc + $r, $xc - $r, $yc + $r * $MyArc, $xc - $r, $yc);
+
+		$xc = $x + $r;
+		$yc = $y + $r;
+		$this->_out(sprintf('%.2F %.2F l', ($x) * $k, ($hp - $yc) * $k));
+		if (strpos($corners, '1') === false) {
+			$this->_out(sprintf('%.2F %.2F l', ($x) * $k, ($hp - $y) * $k));
+			$this->_out(sprintf('%.2F %.2F l', ($x + $r) * $k, ($hp - $y) * $k));
+		} else
+			$this->_Arc($xc - $r, $yc - $r * $MyArc, $xc - $r * $MyArc, $yc - $r, $xc, $yc - $r);
+		$this->_out($op);
+	}
+
+	function _Arc($x1, $y1, $x2, $y2, $x3, $y3)
+	{
+		$h = $this->h;
+		$this->_out(sprintf(
+			'%.2F %.2F %.2F %.2F %.2F %.2F c ',
+			$x1 * $this->k,
+			($h - $y1) * $this->k,
+			$x2 * $this->k,
+			($h - $y2) * $this->k,
+			$x3 * $this->k,
+			($h - $y3) * $this->k
+		));
+	}
+
+	/* PDF_Rotate */
+
+	var $angle = 0;
+
+	function Rotate($angle, $x = -1, $y = -1)
+	{
+		if ($x == -1)
+			$x = $this->x;
+		if ($y == -1)
+			$y = $this->y;
+		if ($this->angle != 0)
+			$this->_out('Q');
+		$this->angle = $angle;
+		if ($angle != 0) {
+			$angle *= M_PI / 180;
+			$c = cos($angle);
+			$s = sin($angle);
+			$cx = $x * $this->k;
+			$cy = ($this->h - $y) * $this->k;
+			$this->_out(sprintf('q %.5F %.5F %.5F %.5F %.2F %.2F cm 1 0 0 1 %.2F %.2F cm', $c, $s, -$s, $c, $cx, $cy, -$cx, -$cy));
+		}
+	}
+
+	function _endpage()
+	{
+		if ($this->angle != 0) {
+			$this->angle = 0;
+			$this->_out('Q');
+		}
+		parent::_endpage();
+	}
+
+	/* Marca de Agua */
+
+	function RotatedText($x, $y, $txt, $angle)
+	{
+		//Text rotated around its origin
+		$this->Rotate($angle, $x, $y);
+		$this->Text($x, $y, $txt);
+		$this->Rotate(0);
 	}
 }

@@ -21,7 +21,7 @@ class Inscripcion_model extends PSG_Model
 
 	public function listar_cursos()
 	{
-		$sql = "SELECT mcc.id_course_moodle, mc.fullname FROM mdl_configuracion_curso mcc INNER JOIN mdl_course mc on mc.id = mcc.id_course_moodle";
+		$sql = "SELECT mcc.id_course_moodle, mc.fullname FROM mdl_configuracion_curso mcc INNER JOIN mdl_course mc on mc.id = mcc.id_course_moodle WHERE DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d') AND mcc.proximo_curso = 'no'";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
@@ -165,6 +165,17 @@ class Inscripcion_model extends PSG_Model
 			} else {
 				return null;
 			}
+		} else {
+			return null;
+		}
+	}
+
+	public function get_id_last_id_transaccion()
+	{
+		$sql = "SELECT (id_transaccion+1)as id_transaccion FROM mdl_preinscripcion_curso WHERE tipo_pago = 'PAGO EFECTIVO' order by id_preinscripcion_curso desc LIMIT 1";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
 		} else {
 			return null;
 		}
