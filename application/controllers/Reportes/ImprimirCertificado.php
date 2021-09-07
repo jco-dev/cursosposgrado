@@ -425,50 +425,59 @@ class ImprimirCertificado extends Fpdf_psg
         echo "pdf_temp/$name";
     }
 
-    public function imprimir_recibo($datos)
+    public function imprimir_recibo($data)
     {
-        header('Content-Type: application/pdf');
+        // return var_dump($data);
+        // header('Content-Type: application/pdf');
         $pdf = new FPDF($orientation='P',$unit='mm', array(55.6,115));
         $pdf->AddPage();
 
+        $pdf->setXY(3.7, 3);
+        $pdf->AddFont('EthnocentricRg-Regular', '', 'EthnocentricRg-Regular.php');
+        $pdf->SetFont('EthnocentricRg-Regular','',9);
+        $pdf->Cell(48,3, utf8_decode("CURSOS POSGRADO"), 0, 1, "C");
+        $pdf->setX(3.7);
+        $pdf->Cell(48,3, utf8_decode("UPEA"), 0, 1, "C");
+        $pdf->setX(3);
+        $pdf->Image('assets/img/img_send_certificate/posgrado-negro.jpg', 17.5,$pdf->GetY(),20,8);
+        $pdf->SetY($pdf->GetY()+9);
+        $pdf->SetFont('Arial','B',7);
+        $pdf->setX(3.7);
+        $pdf->Cell(48,2, utf8_decode("COMPROBANTE DE INSCRIPCIÓN"), 0, 1, "C");
+        $pdf->setX(3.7);
+        $pdf->SetFont('Arial','',5);
+        $pdf->Cell(48,2, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
         
-        $pdf->SetFont('Arial','B',8);    //Letra Arial, negrita (Bold), tam. 20
-        
-        $pdf->Image(base_url('assets/img/img_send_certificate/cursos-logo.jpg'), 15,2,25,8);
-        $pdf->Ln(2);
         $pdf->setX(3);
         $pdf->SetFont('Arial','',5);
-        $pdf->Cell(49.8,2, utf8_decode("Telefóno: 70648629"), 0, 1, "C");
+        $pdf->Cell(48,2, utf8_decode("Celular: 62332648"), 0, 1, "C");
         $pdf->SetFont('Arial','',5);
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Dirección:  Av. Sucre Bloque 'A' - Zona Villa Esperanza"), 0, 1, "C");
+        $pdf->Cell(48,2, utf8_decode("Dirección:  Av. Sucre Bloque 'A' - Zona Villa Esperanza"), 0, 1, "C");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Tercer Piso del Edificio  Emblemático de la UPEA."), 0, 1, "C");
-        $pdf->setX(3);
-        $pdf->Cell(49.8,3, utf8_decode("*********************************************************************"), 0, 1, "C");
+        $pdf->Cell(48,2, utf8_decode("Tercer Piso Oficina Nº 3 del Edificio  Emblemático UPEA."), 0, 1, "C");
+        $pdf->setX(3.7);
+        $pdf->Cell(48,2, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
 
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Remitente: CURSOS POSGRADO UPEA"), 0, 1, "L");
+        $pdf->Cell(48,2, utf8_decode("Nº transacción: ". $data->id_transaccion), 0, 1, "L");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("ID inscripción: 021012"), 0, 1, "L");
+        $pdf->Cell(48,2, utf8_decode("Fecha: " . strtolower(strftime("%d %b %G", strtotime($data->fecha_pago)))), 0, 1, "L");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Fecha: 12/12/2021"), 0, 1, "L");
+        $pdf->Cell(48,2, utf8_decode("Método de pago: PAGO EN OFICINA"), 0, 1, "L");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Método de pago: PAGO EN OFICINA"), 0, 1, "L");
-        
+        $pdf->Cell(48,2, utf8_decode("Participante: " . $data->participante), 0, 1, "L");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("C.I.: 9248587 LP"), 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Cliente: JUAN CARLOS CONDORI ZAPANA"), 0, 1, "L");
-
-        $pdf->setX(3);
-        $pdf->Cell(49.8,3, utf8_decode("*********************************************************************"), 0, 1, "C");
-        $data_header_table = array(utf8_decode('Nº'), 'CURSO', 'PAGO');
-        $lenght = array(5, 34, 9);
-        $pdf->SetFont('Arial', 'B', 5);
+        $pdf->Cell(48,2, utf8_decode("Carnet de identidad: " . $data->ci), 0, 1, "L");
+        $pdf->Ln();
+        // $pdf->setX(3);
+        // $pdf->Cell(48,3, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
+        $data_header_table = array(utf8_decode('Nº'), 'CURSO', 'MONTO');
+        $lenght = array(5, 34, 8);
+        $pdf->SetFont('Arial', '', 5);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetTypeCell(['c', 'm', 'c']);
-        $pdf->SetAligns(['C', 'J', 'C']);
+        $pdf->SetTypeCell(['c', 'c', 'c']);
+        $pdf->SetAligns(['C', 'C', 'C']);
         $pdf->SetWidths($lenght);
         $pdf->setX(4);
         $pdf->Row(
@@ -476,28 +485,18 @@ class ImprimirCertificado extends Fpdf_psg
         );
 
         // Imprimir datos del reporte
-        $data_table = array(utf8_decode('1'), utf8_decode('GESTIÓN Y ADMINISTRACIÓN DE HERRAMIENTAS PARA LA EDUCACIÓN VIRTUAL 1RA. VERSIÓN'), 'Bs.'. 100);
+        $data_table = array(utf8_decode('1'), utf8_decode($data->fullname), 'Bs.'. intval($data->monto_pago));
         $pdf->setX(4);
+        $pdf->SetTypeCell(['c', 'm', 'c']);
+        $pdf->SetAligns(['C', 'J', 'C']);
         $pdf->Row(
             $data_table
         );
 
         // Imprimir total
-        $data_total = array(utf8_decode('TOTAL'), 'Bs.'. 100);
-        $lenght1 = array(39, 9);
-        $pdf->SetFont('Arial', 'B', 5);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetTypeCell(['c', 'c']);
-        $pdf->SetAligns(['C', 'C']);
-        $pdf->SetWidths($lenght1);
-        $pdf->setX(4);
-        $pdf->Row(
-            $data_total
-        );
-
-        $data_total = array(utf8_decode('SALDO'), 'Bs.'. 0);
-        $lenght1 = array(39, 9);
-        $pdf->SetFont('Arial', 'B', 5);
+        $data_total = array(utf8_decode('TOTAL'), 'Bs.'. intval($data->monto_pago));
+        $lenght1 = array(39, 8);
+        $pdf->SetFont('Arial', '', 5);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetTypeCell(['c', 'c']);
         $pdf->SetAligns(['C', 'C']);
@@ -508,16 +507,23 @@ class ImprimirCertificado extends Fpdf_psg
         );
 
         // letras
+        $pdf->SetY($pdf->GetY()+1);
         $pdf->setX(3);
-        $pdf->Cell(49.8,3, utf8_decode("Son: " . $this->numberToLetras(100)) , 0, 1, "L");
+        $pdf->Cell(48,2, utf8_decode("Son: " . $this->numberToLetras(intval($data->monto_pago))) , 0, 1, "L");
         $pdf->setX(3);
-        $pdf->Cell(49.8,2, utf8_decode("Usuario: JUANCA92"), 0, 1, "L");
+        $pdf->Cell(48,2, utf8_decode("Usuario: BRAYAN27"), 0, 1, "L");
+        $code = md5('INSCRIPCION_' . $data->id_preinscripcion_curso);
 
-        $pdf->Image("http://localhost/generar_qr/qr_generator.php?code=12345fsdfsafdsafdsaf", 16, $pdf->GetY(),25,25, "png");
-        $pdf->SetY($pdf->GetY()+25);
+        $pdf->Image("http://localhost/generar_qr/qr_generator.php?inscripcion=" . $code, 17.5, $pdf->GetY(),20.5,20.5, "png");
+        $pdf->SetXY($pdf->GetX()+9.6, $pdf->GetY()+20.5);
+        $pdf->SetFont('Arial', '', 5);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->MultiCell(15.5, 1.8, utf8_decode("Código QR de verificación de inscripción"), 0, "C");
+        $pdf->SetY($pdf->GetY());
         $pdf->Ln();
         $pdf->setX(3);
-        $pdf->Cell(49.8,3, utf8_decode("        **** GRACIAS POR INSCRIBIRSE AL CURSO ****") , 0, 1, "L");
+        $pdf->Cell(48,3, utf8_decode("        **** GRACIAS POR INSCRIBIRSE AL CURSO ****") , 0, 1, "L");
+        $pdf->Image('assets/img/img_send_certificate/teampsg-negro.jpg', 22.2,$pdf->GetY(),11,3);
         $pdf->Output("D", "factura.pdf", true);
     }
 
@@ -916,13 +922,13 @@ class ImprimirCertificado extends Fpdf_psg
                         break;
                     case 2:
                         if ($xcifra < 1) {
-                            $xcadena = "CERO $xdecimales/100 Bs.";
+                            $xcadena = "CERO Bs.";
                         }
                         if ($xcifra >= 1 && $xcifra < 2) {
-                            $xcadena = "UN $xdecimales/100 Bs. ";
+                            $xcadena = "UN  Bs. ";
                         }
                         if ($xcifra >= 2) {
-                            $xcadena.= " $xdecimales/100 Bs. "; //
+                            $xcadena.= "  Bs. "; //
                         }
                         break;
                 } // endswitch ($xz)

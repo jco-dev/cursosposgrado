@@ -243,10 +243,15 @@ class Inscripcionadmin extends PSG_Controller
 
     }
 
-    public function imprimir()
+    public function imprimir($id_preinscripcion_curso)
     {
-        $rep = new ImprimirCertificado();
-        $rep->imprimir_recibo([]);
+        $response = $this->inscripcion_model->buscar_preinscrito($id_preinscripcion_curso);
+        // return var_dump($response);
+        if(count($response) > 0){
+            $rep = new ImprimirCertificado();
+            $rep->imprimir_recibo($response[0]);
+        }
+        
     }
 
     public function format_dia($dia)
@@ -726,7 +731,7 @@ class Inscripcionadmin extends PSG_Controller
             }
 
         }else{
-            echo '0000001';
+            echo '000001';
         }
 
     }

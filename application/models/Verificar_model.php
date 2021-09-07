@@ -30,4 +30,18 @@ class Verificar_model extends PSG_Model
 		}
 		return $resultado;
 	}
+
+	public function verificar_preinscripcion($id = NULL)
+	{
+		$sql = "SELECT mpc.id_preinscripcion_curso, concat_ws(' ', mp.nombre, mp.paterno, mp.materno) as participante, concat_ws(' ', mp.ci, mp.expedido) as ci,
+		mc.fullname, mpc.monto_pago, mpc.id_transaccion, mpc.fecha_pago, mpc.estado, mcc.fecha_inicial, mcc.fecha_final, mcc.carga_horaria
+		from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante = mp.id_participante and md5(concat('INSCRIPCION_', mpc.id_preinscripcion_curso)) = '" . $id . "'
+		inner join mdl_course mc on mpc.id_course_moodle = mc.id  inner join mdl_configuracion_curso mcc on mcc.id_course_moodle = mpc.id_course_moodle";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }
