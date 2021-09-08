@@ -11,7 +11,7 @@
 					<div class="card-block">
 						<h2 class="card-header text-center">
 							<img
-								src="https://plataformavirtual.upea.bo/pluginfile.php/1/core_admin/logo/0x200/1608126776/PSG.png"
+								src="<?= base_url('assets/img/img_send_certificate/psg-sin-fondo.png')?>"
 								class="img-fluid"
 								title="MOODLE UPEA"
 								alt="MOODLE UPEA"
@@ -31,20 +31,30 @@
 										<i class="fa fa-user"></i>
 										<?php echo $participante->participante; ?>
 									</h6>
+									<hr>
 
+									<label class="font-italic">
+											Inscrito correctamente al curso:
+									</label>
+									<h5 class="font-weight-bold">
+										<i class="fa fa-check"></i> 
+										<?= mb_convert_case(preg_replace('/\s+/', ' ', $participante->fullname), MB_CASE_UPPER); ?>
+									</h5>
+									<hr>
+
+									<label class="font-italic">
+										Que se realizará a partir de la fecha:
+									</label>
 									<h6 class="font-weight-bold">
-										<i class="fa fa-check"></i> Inscrito correctamente
-										al curso: <br />
-										<?php
-										echo mb_convert_case(preg_replace('/\s+/', ' ', $participante->fullname),
-										MB_CASE_UPPER); ?>
+										<i class="fa fa-calendar"></i>
+										<?= date("d-m-Y", strtotime($participante->fecha_inicial)) ?> hasta <?= date("d-m-Y", strtotime($participante->fecha_final)) ?>
 									</h6>
+									<hr>
+									<label class="font-italic">
+										Con una carga horaria de:
+									</label>
 									<h6 class="font-weight-bold">
-										<i class="fa fa-calendar"></i> Que se realizará a partir de la fecha: <br />
-										<?= $participante->fecha_inicial?> hasta <?= $participante->fecha_final?>
-									</h6>
-									<h6 class="font-weight-bold">
-										<i class="fa fa-archive"></i> Con una cargar horaria de: <br />
+									<i class="fa fa-archive"></i>
 										<?= $participante->carga_horaria?> horas académicas
 									</h6>
 								</div>

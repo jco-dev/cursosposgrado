@@ -50,7 +50,7 @@
                         
                         <div class="col-lg-4">
                             <label for="fecha_entrega">Fecha Entrega: </label>
-                            <input type="date" class="form-control" id="fecha_entrega_e" name="fecha_entrega_e" required/>
+                            <input type="date" class="form-control" id="fecha_entrega_e" name="fecha_entrega_e" value="<?= date('d/m/Y'); ?>" required/>
                             <span class="form-text text-muted">Ingrese la fecha de la entrega</span>
                         </div>
 

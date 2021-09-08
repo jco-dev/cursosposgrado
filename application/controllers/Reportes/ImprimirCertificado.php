@@ -429,101 +429,148 @@ class ImprimirCertificado extends Fpdf_psg
     {
         // return var_dump($data);
         // header('Content-Type: application/pdf');
-        $pdf = new FPDF($orientation='P',$unit='mm', array(55.6,115));
+        $pdf = new FPDF($orientation='P',$unit='mm', array(90,300));
         $pdf->AddPage();
+        $pdf->SetMargins(0.2,2,0.2);
 
-        $pdf->setXY(3.7, 3);
+        $pdf->setXY(0.2, 3);
         $pdf->AddFont('EthnocentricRg-Regular', '', 'EthnocentricRg-Regular.php');
-        $pdf->SetFont('EthnocentricRg-Regular','',9);
-        $pdf->Cell(48,3, utf8_decode("CURSOS POSGRADO"), 0, 1, "C");
-        $pdf->setX(3.7);
-        $pdf->Cell(48,3, utf8_decode("UPEA"), 0, 1, "C");
-        $pdf->setX(3);
-        $pdf->Image('assets/img/img_send_certificate/posgrado-negro.jpg', 17.5,$pdf->GetY(),20,8);
-        $pdf->SetY($pdf->GetY()+9);
-        $pdf->SetFont('Arial','B',7);
-        $pdf->setX(3.7);
-        $pdf->Cell(48,2, utf8_decode("COMPROBANTE DE INSCRIPCIÓN"), 0, 1, "C");
-        $pdf->setX(3.7);
-        $pdf->SetFont('Arial','',5);
-        $pdf->Cell(48,2, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
+        $pdf->SetFont('EthnocentricRg-Regular','',16.1);
+        $pdf->Cell(85,6, utf8_decode("CURSOS POSGRADO"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->Cell(85,6, utf8_decode("UPEA"), 0, 1, "C");
+        $pdf->setX(0.7);
+        $pdf->Image('assets/img/img_send_certificate/posgrado-negro.jpg', 22,$pdf->GetY()+0.2,40,17);
+        $pdf->SetY($pdf->GetY()+17);
         
-        $pdf->setX(3);
-        $pdf->SetFont('Arial','',5);
-        $pdf->Cell(48,2, utf8_decode("Celular: 62332648"), 0, 1, "C");
-        $pdf->SetFont('Arial','',5);
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Dirección:  Av. Sucre Bloque 'A' - Zona Villa Esperanza"), 0, 1, "C");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Tercer Piso Oficina Nº 3 del Edificio  Emblemático UPEA."), 0, 1, "C");
-        $pdf->setX(3.7);
-        $pdf->Cell(48,2, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','B',14);
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Cell(85,4, utf8_decode("https://cursosposgrado.upea.bo/"), 0, 1, "C");
+        $pdf->SetFont('Arial','',8);
+        $pdf->Cell(85,1, utf8_decode("----------------------------------------------------------------------------------"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',13);
+        $pdf->Cell(85,9, utf8_decode("DIRECCIÓN DE POSGRADO"), 0, 1, "C");
+        $pdf->Cell(85,8, utf8_decode("Edificio Emblemático de la UPEA."), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->Cell(85,8, utf8_decode("Tercer Piso Oficina Nº 3"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->Cell(85,8, utf8_decode("Dirección: Av. Juan Pablo II y Av. Sucre"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->Cell(85,8, utf8_decode("Zona: Villa Esperanza"), 0, 1, "C");
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(85,1, utf8_decode("========================================="), 0, 1, "C");
+        $pdf->SetFont('Arial','B',14.3);
+        $pdf->Cell(85,7, utf8_decode("COMPROBANTE DE INSCRIPCIÓN"), 0, 1, "C");
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(85,1, utf8_decode("========================================="), 0, 1, "C");
 
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Nº transacción: ". $data->id_transaccion), 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Fecha: " . strtolower(strftime("%d %b %G", strtotime($data->fecha_pago)))), 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Método de pago: PAGO EN OFICINA"), 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Participante: " . $data->participante), 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Carnet de identidad: " . $data->ci), 0, 1, "L");
-        $pdf->Ln();
-        // $pdf->setX(3);
-        // $pdf->Cell(48,3, utf8_decode("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"), 0, 1, "C");
+        $pdf->Cell(85,1.7, utf8_decode(""), 0, 1, "C");
+        
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Nº transacción: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode($data->id_transaccion), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Fecha: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode(strtolower(strftime("%d %b %G", strtotime($data->fecha_pago)))), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Método de pago: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode("EFECTIVO"), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Nombre: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode($data->nombre), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Paterno: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode($data->paterno), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("Materno: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode($data->materno), 0, 1, "R");
+
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','',15);
+        $pdf->Cell(40,8, utf8_decode("C.I.: "), 0, 0, "L");
+        $pdf->SetFont('Arial','B',14);
+        $pdf->Cell(45,8, utf8_decode($data->ci), 0, 1, "R");
+
+        $pdf->Cell(85,2, utf8_decode(""), 0, 1, "C");
+
         $data_header_table = array(utf8_decode('Nº'), 'CURSO', 'MONTO');
-        $lenght = array(5, 34, 8);
-        $pdf->SetFont('Arial', '', 5);
+        $lenght = array(10, 60 , 15);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetTypeCell(['c', 'c', 'c']);
         $pdf->SetAligns(['C', 'C', 'C']);
         $pdf->SetWidths($lenght);
-        $pdf->setX(4);
+        $pdf->setX(0.1);
+        $pdf->SetFont('Arial','B',10);
         $pdf->Row(
             $data_header_table
         );
 
         // Imprimir datos del reporte
         $data_table = array(utf8_decode('1'), utf8_decode($data->fullname), 'Bs.'. intval($data->monto_pago));
-        $pdf->setX(4);
+        $pdf->setX(0.1);
         $pdf->SetTypeCell(['c', 'm', 'c']);
         $pdf->SetAligns(['C', 'J', 'C']);
+        $pdf->SetFont('Arial','',11);
         $pdf->Row(
             $data_table
         );
 
         // Imprimir total
         $data_total = array(utf8_decode('TOTAL'), 'Bs.'. intval($data->monto_pago));
-        $lenght1 = array(39, 8);
-        $pdf->SetFont('Arial', '', 5);
+        $lenght1 = array(70, 15);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->SetTypeCell(['c', 'c']);
         $pdf->SetAligns(['C', 'C']);
         $pdf->SetWidths($lenght1);
-        $pdf->setX(4);
+        $pdf->setX(0.1);
         $pdf->Row(
             $data_total
         );
 
         // letras
-        $pdf->SetY($pdf->GetY()+1);
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Son: " . $this->numberToLetras(intval($data->monto_pago))) , 0, 1, "L");
-        $pdf->setX(3);
-        $pdf->Cell(48,2, utf8_decode("Usuario: BRAYAN27"), 0, 1, "L");
+        $pdf->SetY($pdf->GetY()+3);
+        $pdf->SetFont('Arial','',14);
+        $pdf->setX(0.1);
+        $pdf->Cell(85,6, utf8_decode("Son: " . $this->numberToLetras(intval($data->monto_pago))) , 0, 1, "L");
+        $pdf->setX(0.1);
+        $pdf->Cell(85,6, utf8_decode("Usuario: BRAYAN27"), 0, 1, "L");
         $code = md5('INSCRIPCION_' . $data->id_preinscripcion_curso);
 
-        $pdf->Image("http://localhost/generar_qr/qr_generator.php?inscripcion=" . $code, 17.5, $pdf->GetY(),20.5,20.5, "png");
-        $pdf->SetXY($pdf->GetX()+9.6, $pdf->GetY()+20.5);
-        $pdf->SetFont('Arial', '', 5);
+        $pdf->SetY($pdf->GetY()+1);
+        $pdf->Image("http://localhost/generar_qr/qr_generator.php?inscripcion=" . $code, 13.1, $pdf->GetY(),60,60, "png");
+        $pdf->SetXY($pdf->GetX()+18, $pdf->GetY()+58.5);
+        $pdf->SetFont('Arial', '', 10);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->MultiCell(15.5, 1.8, utf8_decode("Código QR de verificación de inscripción"), 0, "C");
+        $pdf->MultiCell(50, 4, utf8_decode("Código QR de verificación de inscripción"), 0, "C");
         $pdf->SetY($pdf->GetY());
         $pdf->Ln();
-        $pdf->setX(3);
-        $pdf->Cell(48,3, utf8_decode("        **** GRACIAS POR INSCRIBIRSE AL CURSO ****") , 0, 1, "L");
-        $pdf->Image('assets/img/img_send_certificate/teampsg-negro.jpg', 22.2,$pdf->GetY(),11,3);
+        $pdf->setX(0.1);
+
+        $pdf->SetFont('Arial','',10);
+        $pdf->Cell(85,6, utf8_decode("**** GRACIAS POR INSCRIBIRSE AL CURSO ****") , 0, 1, "C");
+        $pdf->Image('assets/img/img_send_certificate/teampsg-negro.jpg', 33,$pdf->GetY(),20,6);
+
+        $pdf->Cell(85,5, utf8_decode(""), 0, 1, "C");
         $pdf->Output("D", "factura.pdf", true);
     }
 

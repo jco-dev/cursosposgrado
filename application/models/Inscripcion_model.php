@@ -183,7 +183,7 @@ class Inscripcion_model extends PSG_Model
 
 	public function buscar_preinscrito($id_preinscripcion)
 	{
-		$sql = "SELECT mpc.id_preinscripcion_curso, concat_ws(' ', mp.nombre, mp.paterno, mp.materno) as participante, concat_ws(' ', mp.ci, mp.expedido) as ci,
+		$sql = "SELECT mpc.id_preinscripcion_curso, concat_ws(' ', mp.nombre, mp.paterno, mp.materno) as participante, mp.nombre, mp.paterno, mp.materno, concat_ws(' ', mp.ci, mp.expedido) as ci,
 		mc.fullname, mpc.monto_pago, mpc.id_transaccion, mpc.fecha_pago, mpc.estado 
 		from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante = mp.id_participante and mpc.id_preinscripcion_curso = '$id_preinscripcion'
 		inner join mdl_course mc on mpc.id_course_moodle = mc.id;";
