@@ -201,6 +201,13 @@ class Cursos extends PSG_Controller
 									</a>
 								</li>
 
+								<li class="navi-item">
+									<a onclick="reporte_totales(' . $id . ')" type="button" id="btn_reporte_totales" data-id=' . $id . ' class="navi-link" title="Reporte económico total del curso">
+										<span class="navi-icon"><i class="la la-money"></i></span>
+										<span class="navi-text">Totales</span>
+									</a>
+								</li>
+
 							</ul>
 						</div>
 					</div><script>jQuery(".navi").toggleClass("visible")</script>';

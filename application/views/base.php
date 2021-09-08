@@ -642,6 +642,7 @@
 	<script src="<?= base_url('assets/js/entrega/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
+	
 </body>
 <!--end::Body-->
 

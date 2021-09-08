@@ -249,4 +249,23 @@ const reporte_economico = (id) => {
 	}
 };
 
+// IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
+const reporte_totales = (id) => {
+	$.post(
+		"/cursos/imprimir_certificado_todos",
+		{
+			id,
+			value: "",
+		},
+		function (response) {
+			// console.log("ingreso");
+			$("#modal-title-totales").html("REPORTE ECONÓMICO TOTAL");
+			$("#modal_imprimir_totales").modal({
+				backdrop: "static",
+				keyboard: true,
+			});
+		}
+	);
+};
+
 jQuery(document).ready(function () {});
