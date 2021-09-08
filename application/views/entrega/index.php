@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-separate table-head-custom table-checkable display nowrap" id="tbl_entrega_certificado">
+            <table class="table table-separate table-head-custom table-checkable" id="tbl_entrega_certificado">
                 <thead>
                     <tr>
                         <th>id user</th>
