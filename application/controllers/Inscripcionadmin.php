@@ -22,7 +22,7 @@ class Inscripcionadmin extends PSG_Controller
     public function index()
     {
         $this->data['municipios'] = $this->inscripcion_model->listar_municipios();
-        $this->data['cursos'] = $this->inscripcion_model->listar_cursos();
+        $this->data['cursos'] = $this->inscripcion_model->listar_cursos_vigentes();
         $this->templater->view('inscripcion/index', $this->data);
     }
 

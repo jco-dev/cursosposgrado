@@ -21,6 +21,17 @@ class Inscripcion_model extends PSG_Model
 
 	public function listar_cursos()
 	{
+		$sql = "SELECT mcc.id_course_moodle, mc.fullname FROM mdl_configuracion_curso mcc INNER JOIN mdl_course mc on mc.id = mcc.id_course_moodle";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
+
+	public function listar_cursos_vigentes()
+	{
 		$sql = "SELECT mcc.id_course_moodle, mc.fullname FROM mdl_configuracion_curso mcc INNER JOIN mdl_course mc on mc.id = mcc.id_course_moodle WHERE DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d') AND mcc.proximo_curso = 'no'";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
