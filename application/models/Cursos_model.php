@@ -424,4 +424,24 @@ class Cursos_model extends PSG_Model
 		}
 	}
 
+	public function total_recaudacion_por_tipo_pago($id, $tipo)
+	{
+		if ($id != null) {
+			$sql = "select
+			tipo_pago, 
+			SUM(mpc.monto_pago) AS monto_total
+			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
+			and mpc.estado = '$tipo'
+			group  by tipo_pago";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
 }

@@ -991,7 +991,6 @@ class ImprimirCertificado extends Fpdf_psg
         } // ENDFOR ($xz)
         return trim($xcadena);
     }
-
     // END FUNCTION
 
     function subfijo($xx)
@@ -1005,5 +1004,142 @@ class ImprimirCertificado extends Fpdf_psg
             $xsub = "MIL";
         //
         return $xsub;
+    }
+
+    // IMPRIMIR TOTAL RECAUDACION 
+    public function imprimir_reporte_total_reacudacion($data_course, $inscritos, $preinscritos)
+    {
+        $this->AddPage("P", "letter");
+        // $this->Image("assets/img/img_send_certificate/posgrado-negro.jpg", 20, 10, 28, 14.5);
+        $this->AddFont('EthnocentricRg-Regular', '', 'EthnocentricRg-Regular.php');
+        $this->SetFont('EthnocentricRg-Regular','',20);
+        $this->Cell(0,8, utf8_decode("CURSOS POSGRADO"), 0, 1, "C");
+        $this->Cell(0,8, utf8_decode("UPEA"), 0, 1, "C");
+        $tam = 5;
+		$bordeCelda = 0;
+        $this->Ln();
+		$this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+		$this->Cell(35, $tam, utf8_decode('Curso: '), $bordeCelda, 0, 'L');
+		$this->SetFont('Arial', '', 12);
+		$this->Cell(80, $tam, utf8_decode($data_course[0]->nombre_curso), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+		$this->Cell(35, $tam, utf8_decode('Fecha Inicio: '), $bordeCelda, 0, 'L');
+		$this->SetFont('Arial', '', 12);
+		$this->Cell(80, $tam, utf8_decode($data_course[0]->fecha_inicial), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+		$this->Cell(35, $tam, utf8_decode('Fecha Fin: '), $bordeCelda, 0, 'L');
+		$this->SetFont('Arial', '', 12);
+		$this->Cell(80, $tam, utf8_decode($data_course[0]->fecha_final), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+		$this->Cell(35, $tam, utf8_decode('Carga Horaria: '), $bordeCelda, 0, 'L');
+		$this->SetFont('Arial', '', 12);
+		$this->Cell(80, $tam, utf8_decode($data_course[0]->carga_horaria . " horas académicas"), $bordeCelda, 1, 'L');
+
+        $this->Ln();
+        $this->SetFont('Arial', 'BU', 12);
+        $this->Cell(0,6, utf8_decode("TOTAL RECAUDACIÓN INSCRITOS"), 0, 1, "C");
+        $this->Ln();
+        $header = array('Tipo Pago', 'Monto Total');
+        $this->SetX($this->GetX() + 45);
+        $this->FancyTable($header,$inscritos);
+
+        $this->Ln(7);
+        $this->SetFont('Arial', 'BU', 12);
+        $this->Cell(0,6, utf8_decode("TOTAL RECAUDACIÓN PREINSCRITOS"), 0, 1, "C");
+        $this->Ln();
+        $this->SetX($this->GetX() + 45);
+        $this->FancyTable($header,$preinscritos);
+
+        $this->Ln(7);
+        $this->SetFont('Arial', 'BU', 12);
+        $this->Cell(0,6, utf8_decode("TOTAL RECAUDACIÓN"), 0, 1, "C");
+        $this->Ln();
+        $this->SetX($this->GetX() + 45);
+        $this->imprimir_total($inscritos, $preinscritos);
+
+        echo base64_encode($this->Output('S'));
+    }
+
+    public function imprimir_total($inscritos, $preinscritos)
+    {
+        $this->SetFillColor(51,102,204);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(51,102,204);
+        $this->SetLineWidth(.3);
+        $this->SetFont('','B');
+        // Header
+        $w = array(55, 55,);
+       
+        $this->Cell($w[0],7,"TOTAL: ",1,0,'C',true);
+        $this->Cell($w[1],7,$this->sumar_inscritos_preinscritos($inscritos, $preinscritos) . " Bs.",1,0,'C',true);
+        $this->Ln();
+    }
+
+    public function sumar_inscritos_preinscritos($inscritos, $preinscritos)
+    {
+        $suma = 0;
+        foreach($inscritos as $row)
+        {
+            $suma = $suma + intval($row->monto_total);
+        }
+
+        $suma1 = 0;
+        foreach($preinscritos as $row)
+        {
+            $suma1 = $suma1 + intval($row->monto_total);
+        }
+        return $suma + $suma1;
+    }
+
+    public function FancyTable($header, $data)
+    {
+        // Colors, line width and bold font
+        $this->SetFillColor(51,102,204);
+        $this->SetTextColor(255);
+        $this->SetDrawColor(51,102,204);
+        $this->SetLineWidth(.3);
+        $this->SetFont('','B');
+        // Header
+        $w = array(55, 55,);
+        for($i=0;$i<count($header);$i++)
+            $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
+        $this->Ln();
+        // Color and font restoration
+        $this->SetFillColor(224,235,255);
+        $this->SetTextColor(0);
+        $this->SetFont('');
+        // Data
+        $fill = false;
+        $total_inscritos = 0;
+        if($data != null){
+            foreach($data as $row)
+            {
+                $this->SetX($this->GetX() + 45);
+                $this->Cell($w[0],6,$row->tipo_pago,'LR',0,'L',$fill);
+                $this->Cell($w[1],6,$row->monto_total . " Bs.",'LR',0,'C',$fill);
+                $total_inscritos = $total_inscritos + intval($row->monto_total);
+                $this->Ln();
+                $fill = !$fill;
+            }
+            $this->SetFont('Arial', 'B', 12);
+            $this->SetX($this->GetX() + 45);
+            $this->Cell($w[0],6,"TOTAL",'LR',0,'C',$fill);
+            $this->Cell($w[1],6, $total_inscritos . " Bs.",'LR',0,'C',$fill);
+            $this->Ln();
+        }else{
+            $this->SetX($this->GetX() + 45);
+            $this->Cell($w[0] + $w[1],6,"SIN REGISTROS",'LR',0,'C',$fill);
+            $this->Ln();
+        }
+        // Closing line
+        $this->SetX($this->GetX() + 45);
+        $this->Cell(array_sum($w),0,'','T');
     }
 }

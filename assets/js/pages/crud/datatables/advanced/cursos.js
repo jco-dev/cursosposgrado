@@ -250,17 +250,19 @@ const reporte_economico = (id) => {
 };
 
 // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
+google.charts.load("current", { packages: ["corechart"] });
+// google.setOnLoadCallback(reporte_totales);
 const reporte_totales = (id) => {
 	$.post(
-		"/cursos/imprimir_certificado_todos",
+		"/cursos/reporte_totales_curso",
 		{
 			id,
-			value: "",
 		},
 		function (response) {
+			$("#descargar_recaudacion_total").removeAttr("id-course");
+			$("#descargar_recaudacion_total").attr("id-course", id);
 			generar_grafico(response);
-			// console.log("ingreso");
-			$("#modal-title-totales").html("REPORTE ECONÓMICO TOTAL");
+			$("#modal-title-totales").html(response.nombre_curso);
 			$("#modal_imprimir_totales").modal({
 				backdrop: "static",
 				keyboard: true,
@@ -269,46 +271,101 @@ const reporte_totales = (id) => {
 	);
 };
 
-google.load("visualization", "1", { packages: ["corechart"] });
-google.setOnLoadCallback(reporte_totales);
-
 function generar_grafico(res) {
-	// console.log(res);
-	// let data = new google.visualization.DataTable();
-	// data.addColumn("string", "Estado");
-	// data.addColumn("number", "Cantidad");
-	// $.each(res, function (i, res) {
-	// 	var estado = res.estado;
-	// 	var cantidad = parseInt($.trim(res.cantidad));
-	// 	data.addRows([[estado, cantidad]]);
-	// });
+	// INSCRITOS
+	let data = new google.visualization.DataTable();
+	data.addColumn("string", "Tipo Pago");
+	data.addColumn("number", "Monto");
+	let total_inscritos = 0;
+	$.each(res.inscritos, function (i, res) {
+		var tipo_pago = res.tipo_pago;
+		var monto_total = parseInt($.trim(res.monto_total));
+		total_inscritos = total_inscritos + parseInt($.trim(res.monto_total));
+		data.addRows([[tipo_pago, monto_total]]);
+	});
+
+	$("#total_reacudacion_inscritos").html(total_inscritos + " Bs.");
+
 	var options = {
-		title: "REPORTE ECONÓMICO TOTAL",
-		// pieHole: 0.4,
+		title: "REPORTE ECONÓMICO TOTAL INSCRITOS",
 		is3D: true,
-		chartArea: {
-			top: 20,
-			bottom: 10,
-			height: "100%",
-			width: "100%",
+		bar: {
+			groupWidth: "100%",
 		},
+		height: "270",
+		width: "370",
 	};
-	var data = google.visualization.arrayToDataTable([
-		["Task", "Inscritos"],
-		["TIGO MONEY", 7],
-		["DEPÓSITO BANCARIO", 5],
-		["PAGO EFECTIVO", 4],
-		["TIGO MONEY1", 7],
-		["DEPÓSITO BANCARIO1", 5],
-		["PAGO EFECTIVO1", 4],
-	]);
 
 	var chart = new google.visualization.PieChart(
-		document.getElementById("chart_div")
+		document.getElementById("piechart_3d_inscritos")
 	);
-	var chart_area = document.getElementById("chart_div");
 
 	chart.draw(data, options);
+
+	// PREINSCRITOS
+
+	var options1 = {
+		title: "REPORTE ECONÓMICO TOTAL PREINSCRITOS",
+		is3D: true,
+		bar: {
+			groupWidth: "100%",
+		},
+		height: "270",
+		width: "370",
+	};
+	// var data1 = google.visualization.arrayToDataTable([
+	// 	["Tipo Pago", "Monto"],
+	// 	["DEPÓSITO BANCARIO", 3000],
+	// 	["PAGO EFECTIVO", 4500],
+	// 	["TIGO MONEY", 0],
+	// ]);
+	let data1 = new google.visualization.DataTable();
+	data1.addColumn("string", "Tipo Pago");
+	data1.addColumn("number", "Monto");
+	let total_preinscritos = 0;
+	$.each(res.preinscritos, function (i, res) {
+		var tipo_pago = res.tipo_pago;
+		var monto_total = parseInt($.trim(res.monto_total));
+		total_preinscritos = total_preinscritos + parseInt($.trim(res.monto_total));
+		data1.addRows([[tipo_pago, monto_total]]);
+	});
+
+	$("#total_reacudacion_preinscritos").html(total_preinscritos + " Bs.");
+
+	var chart1 = new google.visualization.PieChart(
+		document.getElementById("piechart_3d_preinscritos")
+	);
+
+	chart1.draw(data1, options1);
 }
 
-jQuery(document).ready(function () {});
+jQuery(document).ready(function () {
+	$("#descargar_recaudacion_total").on("click", function (e) {
+		$("#modal_imprimir_totales").modal("hide");
+		e.preventDefault();
+		let id = $(this).attr("id-course");
+		$.post(
+			"/cursos/reporte_totales_pdf",
+			{
+				id,
+			},
+			function (response) {
+				if (typeof response.error != "undefined") {
+					Swal.fire("Error!", response.error, "error");
+				} else {
+					$("#modal-title-certificado").html("REPORTE DE RECAUDACIONES");
+					$("#modal-body-certificado").children().remove();
+					$("#modal-body-certificado").html(
+						'<embed src="data:application/pdf;base64,' +
+							response +
+							'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="600px" style="border: none;"/>'
+					);
+					$("#modal_imprimir_certificado").modal({
+						backdrop: "static",
+						keyboard: true,
+					});
+				}
+			}
+		);
+	});
+});

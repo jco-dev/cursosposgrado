@@ -122,7 +122,8 @@ class Cursos extends PSG_Controller
 					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
 				array('dt' => 6, 'db' => 'timecreated'),
-				array('dt' => 7, 'db' => 'id', 'formatter' => function ($id) {
+				array('dt' => 7, 'db' => 'id', 'formatter' => function ($id, $row) {
+					$nombre_curso = $row['fullname'];
 					return '<div class="dropdown dropdown-inline lista-opciones">
 						<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</a>
 						<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
@@ -1100,5 +1101,35 @@ class Cursos extends PSG_Controller
 		$total_p = ($total_preinscrito[0]->monto_total != null) ? intval($total_preinscrito[0]->monto_total) : 0; 
         $rep = new Reporte_economico_excel();
         $rep->reporte_economico_curo($data_course, $data_students, $total_i, $total_p);
+	}
+
+	// REPORTE TOTALES CURSO
+	public function reporte_totales_curso()
+	{
+		$id = $this->input->post('id');
+		$data_course = $this->cursos_model->get_datos_curso($id);
+		$tipo_inscritos = (array) $this->cursos_model->total_recaudacion_por_tipo_pago($id, 'INSCRITO');
+		$tipo_preinscritos = (array) $this->cursos_model->total_recaudacion_por_tipo_pago($id, 'PREINSCRITO');
+
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			[
+				"nombre_curso" => $data_course[0]->nombre_curso,
+				"id" => $id,
+				'inscritos' => $tipo_inscritos,
+				'preinscritos' => $tipo_preinscritos,
+			]
+		));
+	}
+
+	public function reporte_totales_pdf()
+	{
+		$id = $this->input->post('id');
+		$data_course = $this->cursos_model->get_datos_curso($id);
+		$tipo_inscritos = (array) $this->cursos_model->total_recaudacion_por_tipo_pago($id, 'INSCRITO');
+		$tipo_preinscritos = (array) $this->cursos_model->total_recaudacion_por_tipo_pago($id, 'PREINSCRITO');
+
+		$rep = new ImprimirCertificado();
+		$rep->imprimir_reporte_total_reacudacion($data_course, $tipo_inscritos, $tipo_preinscritos);
+
 	}
 }

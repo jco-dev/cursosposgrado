@@ -1,10 +1,10 @@
-<style>
+<!-- <style>
     .chart {
         align-content: center;
         display: flex;
         justify-content: center;
     }
-</style>
+</style> -->
 <div class="container-fluid">
     <!--begin::Card-->
     <div class="card card-custom">
@@ -61,10 +61,30 @@
                 </button>
             </div>
             <div class="modal-body" id="modal-body-totales">
-				<div class="chart img-responsive" id="chart_div">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div id="piechart_3d_inscritos"></div>
+                        <blockquote class="blockquote text-center">
+                            <p class="mb-0">Recaudación Total</p>
+                            <footer class="blockquote-footer" id="total_reacudacion_inscritos">
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="piechart_3d_preinscritos"></div>
+                        <blockquote class="blockquote text-center">
+                            <p class="mb-0">Recaudación Total</p>
+                            <footer class="blockquote-footer" id="total_reacudacion_preinscritos">
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-primary"> <i class="fa fa-print"></i> Imprimir</button>
+                <button class="btn btn-primary" id="descargar_recaudacion_total" id-course=""> 
+                    <i class="fa fa-print"></i> 
+                    Imprimir
+                </button>
             </div>
         </div>
     </div>
