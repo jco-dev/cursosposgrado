@@ -258,6 +258,7 @@ const reporte_totales = (id) => {
 			value: "",
 		},
 		function (response) {
+			generar_grafico(response);
 			// console.log("ingreso");
 			$("#modal-title-totales").html("REPORTE ECONÓMICO TOTAL");
 			$("#modal_imprimir_totales").modal({
@@ -267,5 +268,47 @@ const reporte_totales = (id) => {
 		}
 	);
 };
+
+google.load("visualization", "1", { packages: ["corechart"] });
+google.setOnLoadCallback(reporte_totales);
+
+function generar_grafico(res) {
+	// console.log(res);
+	// let data = new google.visualization.DataTable();
+	// data.addColumn("string", "Estado");
+	// data.addColumn("number", "Cantidad");
+	// $.each(res, function (i, res) {
+	// 	var estado = res.estado;
+	// 	var cantidad = parseInt($.trim(res.cantidad));
+	// 	data.addRows([[estado, cantidad]]);
+	// });
+	var options = {
+		title: "REPORTE ECONÓMICO TOTAL",
+		// pieHole: 0.4,
+		is3D: true,
+		chartArea: {
+			top: 20,
+			bottom: 10,
+			height: "100%",
+			width: "100%",
+		},
+	};
+	var data = google.visualization.arrayToDataTable([
+		["Task", "Inscritos"],
+		["TIGO MONEY", 7],
+		["DEPÓSITO BANCARIO", 5],
+		["PAGO EFECTIVO", 4],
+		["TIGO MONEY1", 7],
+		["DEPÓSITO BANCARIO1", 5],
+		["PAGO EFECTIVO1", 4],
+	]);
+
+	var chart = new google.visualization.PieChart(
+		document.getElementById("chart_div")
+	);
+	var chart_area = document.getElementById("chart_div");
+
+	chart.draw(data, options);
+}
 
 jQuery(document).ready(function () {});

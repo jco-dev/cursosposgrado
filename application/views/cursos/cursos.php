@@ -1,4 +1,10 @@
-
+<style>
+    .chart {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+</style>
 <div class="container-fluid">
     <!--begin::Card-->
     <div class="card card-custom">
@@ -55,45 +61,37 @@
                 </button>
             </div>
             <div class="modal-body" id="modal-body-totales">
-				<!--begin::Card-->
-                <!--begin::Chart-->
-                <div id="piechart_3d"></div>
-                <div id="chart_wrap">
-                    <div id="piechart"></div>
-                </div>
-                <!--end::Chart-->
+				<div class="chart img-responsive" id="chart_div">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-primary"> <i class="fa fa-print"></i> Imprimir</button>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
     var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work',     11],
-        ['Eat',      2],
-        ['Commute',  2],
-        ['Watch TV', 2],
-        ['Sleep',    7]
+        ['Task', 'Inscritos'],
+        ['TIGO MONEY', 7],
+        ['DEPÓSITO BANCARIO', 5],
+        ['PAGO EFECTIVO', 4],
     ]);
 
     var options = {
         title: 'REPORTE ECONÓMICO TOTAL',
         is3D: true,
         chartArea: {
-            top: 30,
             height: '100%',
             width: '100%'
         },
-        height: '100%',
-        width: '100%'
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
     }
-</script>
+</script> -->
