@@ -10,7 +10,7 @@ class SendEmail extends PSG_Controller
 	{
 		$this->CI = &get_instance();
 	}
-	
+
 	public function send_certificates($estudiantes, $course_data)
 	{
 		// return var_dump($estudiantes[0]->certificacion_unica);
@@ -36,16 +36,16 @@ class SendEmail extends PSG_Controller
 				$mail->isHTML(true);
 				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = "tls";
-				// $mail->SMTPSecure = "ssl";
-				$mail->Host = "smtp.mailtrap.io";
-				// $mail->Host = "smtp.gmail.com";
-				$mail->Port = 2525;
-				// $mail->Port = 465;
-				$mail->Username = "c177e9965bd0d9";
-				// $mail->Username = "psg.upea@gmail.com";
-				$mail->Password = "76499092bb5e36";
-				// $mail->Password = "Psg2020#";
+				// $mail->SMTPSecure = "tls";
+				$mail->SMTPSecure = "ssl";
+				// $mail->Host = "smtp.mailtrap.io";
+				$mail->Host = "smtp.gmail.com";
+				// $mail->Port = 2525;
+				$mail->Port = 465;
+				// $mail->Username = "c177e9965bd0d9";
+				$mail->Username = "psg.upea@gmail.com";
+				// $mail->Password = "76499092bb5e36";
+				$mail->Password = "Psg2020#";
 				$mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
 				$mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
 				$mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
@@ -57,23 +57,23 @@ class SendEmail extends PSG_Controller
 				//verfificamos certificacion solicitado por curso, modulos o ambos
 				$photo = false;
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".jpg")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".jpg");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf");
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.jpg")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.jpg");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.pdf");
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.jpg")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.jpg");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.pdf");
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.jpg")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.jpg");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.pdf");
 					$photo = true;
 				}
 
