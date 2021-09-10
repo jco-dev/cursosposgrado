@@ -316,7 +316,7 @@ class Cursos extends PSG_Controller
 					if (is_numeric($resp)) {
 						$cn++;
 					}
-				}else{
+				} else {
 					$response = $this->sql_ssl->modificar_tabla(
 						'inscripcion_curso',
 						[
@@ -365,7 +365,7 @@ class Cursos extends PSG_Controller
 					}
 				}),
 				array('dt' => 5, 'db' => 'tipo_pago'),
-				
+
 				array('dt' => 6, 'db' => 'monto_pago'),
 				array('dt' => 7, 'db' => 'respaldo_pago', 'formatter' => function ($img) {
 					if ($img == "") {
@@ -528,7 +528,7 @@ class Cursos extends PSG_Controller
 					'monto_pago' => $monto_pago,
 					'tipo_participacion' => $tipo_participacion,
 					'certificado_recogido' => $certificado_recogido,
-					'fecha_entrega' => $fecha_entrega. date(' h:i:s'),
+					'fecha_entrega' => $fecha_entrega . date(' h:i:s'),
 					'entregado_a' => $entregado_a,
 					'observacion_entrega' => $observacion_entrega,
 					'tipo_certificacion_solicitado' => $tipo_certificacion_solicitado
@@ -804,13 +804,11 @@ class Cursos extends PSG_Controller
 				}
 
 				$rep = new ImprimirCertificado();
-				if($datos_curso[0]->orientacion == "horizontal"){
-					$rep->imprimir_todos($datos_curso, $data, $value);
-				}else{
+				if ($datos_curso[0]->orientacion == "horizontal") {
+					$rep->imprimir_todos_version2($datos_curso, $data, $value);
+				} else {
 					$rep->imprimir_todos_vertical($datos_curso, $data, $value);
 				}
-				
-				
 			}
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode(
@@ -875,12 +873,11 @@ class Cursos extends PSG_Controller
 			}
 
 			$rep = new ImprimirCertificado();
-			if($datos_curso[0]->orientacion == "horizontal"){
+			if ($datos_curso[0]->orientacion == "horizontal") {
 				$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
-			}else{
-				$rep->imprimir_blanco_vertical($curso_data, $datos_curso, $tipo);
+			} else {
+				$rep->imprimir_blanco_vertical_version1($curso_data, $datos_curso, $tipo);
 			}
-
 		}
 	}
 
@@ -1096,11 +1093,11 @@ class Cursos extends PSG_Controller
 		$data_course = $this->cursos_model->get_datos_curso($id);
 		$data_students = $this->cursos_model->get_inscritos_preinscritos($id);
 		$total_inscrito = $this->cursos_model->total_recaudacion($id, 'INSCRITO');
-		$total_i = ($total_inscrito[0]->monto_total != null) ? intval($total_inscrito[0]->monto_total) : 0; 
+		$total_i = ($total_inscrito[0]->monto_total != null) ? intval($total_inscrito[0]->monto_total) : 0;
 		$total_preinscrito = $this->cursos_model->total_recaudacion($id, 'PREINSCRITO');
-		$total_p = ($total_preinscrito[0]->monto_total != null) ? intval($total_preinscrito[0]->monto_total) : 0; 
-        $rep = new Reporte_economico_excel();
-        $rep->reporte_economico_curo($data_course, $data_students, $total_i, $total_p);
+		$total_p = ($total_preinscrito[0]->monto_total != null) ? intval($total_preinscrito[0]->monto_total) : 0;
+		$rep = new Reporte_economico_excel();
+		$rep->reporte_economico_curo($data_course, $data_students, $total_i, $total_p);
 	}
 
 	// REPORTE TOTALES CURSO
@@ -1130,6 +1127,5 @@ class Cursos extends PSG_Controller
 
 		$rep = new ImprimirCertificado();
 		$rep->imprimir_reporte_total_reacudacion($data_course, $tipo_inscritos, $tipo_preinscritos);
-
 	}
 }
