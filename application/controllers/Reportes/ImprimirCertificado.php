@@ -314,7 +314,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/fondo.jpg", 0, 0, 215.9, 280.5);
+            $this->Image("assets/img/img_send_certificate/fondo1.jpg", 0, 0, 215.9, 280.5);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
