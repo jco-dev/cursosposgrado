@@ -462,7 +462,7 @@ jQuery(document).ready(function () {
 
 	// VERIFICAR MODALIDAD DE INSCRIPCION
 	$("input[type=radio][name=modalidad_inscripcion]").change(function () {
-		if (this.value == "PAGO EFECTIVO") {
+		if (this.value == "PAGO EN OFICINA") {
 			// Verificar el numero el id de facturacion
 			$.ajax({
 				url: "/inscripcionadmin/verificar_id_factura",
@@ -470,7 +470,11 @@ jQuery(document).ready(function () {
 			}).done(function (response) {
 				$("#id_transaccion1").val(response);
 				$("#m_id_transaccion2").val(response);
+				$("#id_transaccion1").attr("readonly", true);
 			});
+		} else {
+			$("#id_transaccion1").val("");
+			$("#id_transaccion1").attr("readonly", false);
 		}
 	});
 

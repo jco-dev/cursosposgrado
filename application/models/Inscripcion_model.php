@@ -183,7 +183,7 @@ class Inscripcion_model extends PSG_Model
 
 	public function get_id_last_id_transaccion()
 	{
-		$sql = "SELECT (id_transaccion+1)as id_transaccion FROM mdl_preinscripcion_curso WHERE tipo_pago = 'PAGO EFECTIVO' order by id_preinscripcion_curso desc LIMIT 1";
+		$sql = "SELECT (id_transaccion+1)as id_transaccion FROM mdl_preinscripcion_curso WHERE tipo_pago = 'PAGO EN OFICINA' order by id_preinscripcion_curso desc LIMIT 1";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());

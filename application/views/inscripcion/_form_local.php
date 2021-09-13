@@ -165,7 +165,7 @@
                     <span></span>Depósito o transferencia bancaria
                 </label>
                 <label class="radio">
-                    <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EFECTIVO" />
+                    <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EN OFICINA" />
                     <span></span>Pago en oficina
                 </label>
             </div>
@@ -199,7 +199,7 @@
     <br>
     <div class="card card-custom">
         <div class="card-body form-group pb-0">
-            <label class="col-form-label text-lg-right">Respaldo de la transacción (Subir fotografía o captura del depósito o transacción) <span class="text-danger">(*)</span></label>
+            <label class="col-form-label text-lg-right">Respaldo de la transacción (Subir fotografía o captura del depósito o transacción) </label>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="respaldo_transaccion" name="respaldo_transaccion" accept="image/jpeg,image/png" />
                 <label class="custom-file-label" for="">Añadir archivo</label>
