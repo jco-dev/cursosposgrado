@@ -6,23 +6,24 @@
      <div class="card card-custom">
          <div class="card-body pb-0">
              <div class="form-group row">
-                 <div class="col-lg-9">
+                 <div class="col-lg-8">
                      <label for="ci"> N&uacute;mero C.I. <span class="text-danger">(*)</span></label>
                      <input type="text" class="form-control" name="ci" id="ci" placeholder="Tu respuesta" />
                  </div>
-                 <div class="col-lg-3">
+                 <div class="col-lg-4">
                      <label for="ci"> Expedido <span class="text-danger">*</span></label>
                      <select name="expedido" id="expedido" class="form-control">
                          <option value=""> Elige </option>
-                         <option value="CH">CH</option>
-                         <option value="LP" selected>LP</option>
-                         <option value="CB">CB</option>
-                         <option value="OR">OR</option>
-                         <option value="PT">PT</option>
-                         <option value="TJ">TJ</option>
-                         <option value="SC">SC</option>
-                         <option value="BE">BE</option>
-                         <option value="PD">PD</option>
+                         <option value="QR"> Nueva cédula con código QR </option>
+                         <option value="CH">Chuquisaca</option>
+                         <option value="LP" selected>La Paz</option>
+                         <option value="CB">Cochabamba</option>
+                         <option value="OR">Oruro</option>
+                         <option value="PT">Potosí</option>
+                         <option value="TJ">Tarija</option>
+                         <option value="SC">Santa Cruz</option>
+                         <option value="BE">Beni</option>
+                         <option value="PD">Pando</option>
                      </select>
                  </div>
              </div>
@@ -37,7 +38,15 @@
          </div>
      </div>
 
-    <input type="hidden" name="estado" id="estado" value="<?= $estado; ?>">
+     <br>
+     <div class="card card-custom">
+         <div class="card-body form-group pb-0">
+             <label for="celular"> Número de celular (con WhatsApp) <span class="text-danger">(*)</span></label>
+             <input type="text" class="form-control" name="celular" id="celular" placeholder="Tu respuesta" />
+         </div>
+     </div>
+
+     <input type="hidden" name="estado" id="estado" value="<?= $estado; ?>">
      <br>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
@@ -65,7 +74,7 @@
      <br>
      <div class="card card-custom">
          <div class="card-body">
-             <label for="materno"> Género </label>
+             <label for="materno"> Género <span class="text-danger">(*)</span> </label>
              <div class="radio-list">
                  <label class="radio">
                      <input type="radio" name="genero" id="genero" value="M" />
@@ -83,13 +92,13 @@
      <div class="card card-custom">
          <div class="card-body form-group row pb-0" id="fecha">
              <div class="col-lg-12">
-                 <label for="celular"> Fecha de Nacimiento <span class="text-danger">(*)</span></label>
+                 <label for="celular"> Fecha de Nacimiento </label>
              </div>
              <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                 <select name="anio" id="anio" style="width: 100%;" required>
+                 <select name="anio" id="anio" style="width: 100%;">
                      <option value=""></option>
                      <?php
-                        $anio = intval(date('Y'))-10;
+                        $anio = intval(date('Y')) - 10;
                         for ($i = 0; $i < 100; $i++) {
                             echo "<option value=" . $anio . ">" . $anio . "</option>";
                             $anio--;
@@ -98,7 +107,7 @@
                  </select>
              </div>
              <div class="form-group col-lg-3 col-sm-12 col-md-3">
-                 <select name="mes" id="mes" style="width: 100%;" required>
+                 <select name="mes" id="mes" style="width: 100%;">
                      <option value=""></option>
                      <option value="01">Enero</option>
                      <option value="02">Febrero</option>
@@ -115,7 +124,7 @@
                  </select>
              </div>
              <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                 <select name="dia" id="dia" style="width: 100%;" required>
+                 <select name="dia" id="dia" style="width: 100%;">
                      <option value=""></option>
                  </select>
              </div>
@@ -125,15 +134,7 @@
      <br>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
-             <label for="celular"> Número de celular (con WhatsApp) <span class="text-danger">(*)</span></label>
-             <input type="text" class="form-control" name="celular" id="celular" placeholder="Tu respuesta" />
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="ciudad_residencia"> Ciudad de residencia <span class="text-danger">(*)</span></label> <br>
+             <label for="ciudad_residencia"> Ciudad de residencia </label> <br>
              <select name="ciudad_residencia" id="ciudad_residencia" class="form-control">
                  <option value=""> Elige </option>
                  <?php

@@ -14,15 +14,16 @@
                     <label for="ci"> Expedido <span class="text-danger">*</span></label>
                     <select name="expedido" id="expedido" class="form-control">
                         <option value=""> Elige </option>
-                        <option value="CH">CH</option>
-                        <option value="LP" selected>LP</option>
-                        <option value="CB">CB</option>
-                        <option value="OR">OR</option>
-                        <option value="PT">PT</option>
-                        <option value="TJ">TJ</option>
-                        <option value="SC">SC</option>
-                        <option value="BE">BE</option>
-                        <option value="PD">PD</option>
+                        <option value="QR"> Nueva cédula con código QR </option>
+                        <option value="CH">Chuquisaca</option>
+                        <option value="LP" selected>La Paz</option>
+                        <option value="CB">Cochabamba</option>
+                        <option value="OR">Oruro</option>
+                        <option value="PT">Potosí</option>
+                        <option value="TJ">Tarija</option>
+                        <option value="SC">Santa Cruz</option>
+                        <option value="BE">Beni</option>
+                        <option value="PD">Pando</option>
                     </select>
                 </div>
             </div>

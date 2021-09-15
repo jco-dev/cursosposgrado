@@ -129,34 +129,34 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
-					ciudad_residencia: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					anio: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					mes: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
-					dia: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-						},
-					},
+					// ciudad_residencia: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 	},
+					// },
+					// anio: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 	},
+					// },
+					// mes: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 	},
+					// },
+					// dia: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 	},
+					// },
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -179,6 +179,8 @@ var KTWizard3 = (function () {
 })();
 
 jQuery(document).ready(function () {
+
+	$("#ciudad_residencia").val(30).trigger('change');
 	$("#ciudad_residencia").select2({
 		placeholder: "Elige",
 	});
@@ -228,9 +230,9 @@ jQuery(document).ready(function () {
 		$("#dia").append(opcion);
 	};
 
-	KTWizard3.init();
+	
 
-	$("#frm_curso_informacion").submit(function (e) {
+	$("#frm_curso_informacion").on('submit', function (e) {
 		e.preventDefault();
 
 		let data = new FormData($("#frm_curso_informacion")[0]);
@@ -393,5 +395,6 @@ jQuery(document).ready(function () {
 		$("#m_profesion_oficio").html($("#profesion_oficio :selected").text());
 	});
 
+	KTWizard3.init();
 	
 });

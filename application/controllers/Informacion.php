@@ -35,6 +35,7 @@ class Informacion extends CI_Controller
 
 	public function guardar_informacion()
 	{
+		// return var_dump($_REQUEST);
 		$this->load->library('form_validation');
 		$this->load->helper('email');
 
@@ -42,9 +43,6 @@ class Informacion extends CI_Controller
 		$this->form_validation->set_rules('expedido', 'expedido', 'required');
 		$this->form_validation->set_rules('correo', 'correo', 'required|valid_email');
 		$this->form_validation->set_rules('nombre', 'nombre', 'required');
-		$this->form_validation->set_rules('anio', 'año', 'required');
-		$this->form_validation->set_rules('mes', 'mes', 'required');
-		$this->form_validation->set_rules('dia', 'dia', 'required');
 		$this->form_validation->set_rules('celular', 'celular', 'callback_validar_celular');
 
 		if ($this->form_validation->run() == false) {
@@ -69,9 +67,10 @@ class Informacion extends CI_Controller
 				$celular = $this->input->post('celular');
 				$id_municipio = $this->input->post('ciudad_residencia');
 				$id_profesion_oficio = $this->input->post('profesion_oficio');
-				if($this->input->post('estado') == "rpjfdaskf"){
+
+				if ($this->input->post('estado') == "rpjfdaskf") {
 					$estado = "PROXIMO";
-				}else{
+				} else {
 					$estado = "INTERESADO";
 				}
 
@@ -86,29 +85,43 @@ class Informacion extends CI_Controller
 					//inscribir
 					//verificamos si ya esta inscrito en participante
 
-					// inscribir en participante y preinscripcion
-					$resp = $this->sql_ssl->insertar_tabla(
+					$res = $this->sql_ssl->listar_tabla(
 						'mdl_participante',
-						[
-							'ci' => $ci,
-							'expedido' => $expedido,
-							'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
-							'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
-							'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
-							'genero' => $genero,
-							'id_municipio' => $id_municipio,
-							'id_profesion_oficio' => $id_profesion_oficio,
-							'fecha_nacimiento' => $fecha_nacimiento,
-							'correo' => $correo,
-							'celular' => $celular
-						]
+						['ci' => $ci]
 					);
 
-					if (is_numeric($resp)) {
+					$id_participante = 0;
+					if (is_array($res) && count($res) == 0) {
+						// 
+						// inscribir en participante y preinscripcion
+						$resp = $this->sql_ssl->insertar_tabla(
+							'mdl_participante',
+							[
+								'ci' => $ci,
+								'expedido' => $expedido,
+								'nombre' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($nombre)), MB_CASE_UPPER),
+								'paterno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($paterno)), MB_CASE_UPPER),
+								'materno' =>  mb_convert_case(preg_replace('/\s+/', ' ', trim($materno)), MB_CASE_UPPER),
+								'genero' => $genero,
+								'id_municipio' => $id_municipio,
+								'id_profesion_oficio' => $id_profesion_oficio,
+								'fecha_nacimiento' => $fecha_nacimiento,
+								'correo' => $correo,
+								'celular' => $celular
+							]
+						);
+						$id_participante = $resp;
+					} else {
+						// echo "array en pos 0";
+						$id_participante = $res[0]->id_participante;
+						// var_dump($res[0]);
+					}
+
+					if ($id_participante != 0) {
 						$res = $this->sql_ssl->insertar_tabla(
 							'mdl_preinscripcion_curso',
 							[
-								'id_participante' => $resp,
+								'id_participante' => $id_participante,
 								'id_course_moodle' => $id_curso,
 								'estado' => $estado
 							]
@@ -116,7 +129,6 @@ class Informacion extends CI_Controller
 						);
 
 						if (is_numeric($res)) {
-
 							$respuesta = $this->enviar_correo_personal($id_curso, $res);
 							if ($respuesta) {
 								$this->output->set_content_type('application/json')->set_output(
@@ -150,7 +162,7 @@ class Informacion extends CI_Controller
 
 	public function enviar_correo_personal($idcurso, $id_preinscripcion_curso)
 	{
-		$respuesta1 = $this->inscripcion_model->get_data_informacion($idcurso);
+		$respuesta1 = $this->inscripcion_model->get_data_informacion($id_preinscripcion_curso);
 
 		$send = new SendEmail();
 		$res = $send->enviar_correo_personal($respuesta1);

@@ -120,8 +120,10 @@ class SendEmail extends PSG_Controller
 		}
 	}
 
+	// Enviar la información del curso
 	public function enviar_correo_personal($datos)
 	{
+		// return var_dump($datos);
 		if (count($datos) == 1) {
 			$cn = 0;
 			foreach ($datos as $estudiante) {
@@ -136,16 +138,16 @@ class SendEmail extends PSG_Controller
 				$mail->isHTML(true);
 				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = "tls";
-				// $mail->SMTPSecure = "ssl";
-				$mail->Host = "smtp.mailtrap.io";
-				// $mail->Host = "mail.upea.bo";
-				$mail->Port = 25;
-				// $mail->Port = 465;
-				$mail->Username = "c177e9965bd0d9";
-				// $mail->Username = "posgrado@upea.bo";
-				$mail->Password = "76499092bb5e36";
-				// $mail->Password = "Posgrado#1";
+				// $mail->SMTPSecure = "tls";
+				$mail->SMTPSecure = "ssl";
+				// $mail->Host = "smtp.mailtrap.io";
+				$mail->Host = "smtp.gmail.com";
+				// $mail->Port = 2525;
+				$mail->Port = 465;
+				// $mail->Username = "c177e9965bd0d9";
+				$mail->Username = "psg.upea@gmail.com";
+				// $mail->Password = "76499092bb5e36";
+				$mail->Password = "Psg2020#";
 				$mail->setFrom('posgrado@upea.bo', 'POSGRADO UPEA');
 				$mail->addReplyTo('posgrado@upea.bo', 'POSGRADO UPEA');
 				$mail->addCC('psg.upea@gmail.com', 'PSG UPEA');
