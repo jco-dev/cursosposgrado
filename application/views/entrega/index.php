@@ -47,16 +47,16 @@
                     <input type="hidden" id="id_inscripcion_curso_e" name="id_inscripcion_curso_e">
 
                     <div class="form-group row">
-                        
+
                         <div class="col-lg-4">
                             <label for="fecha_entrega">Fecha Entrega: </label>
-                            <input type="date" class="form-control" id="fecha_entrega_e" name="fecha_entrega_e" value="<?= date('d/m/Y'); ?>" required/>
+                            <input type="date" class="form-control" id="fecha_entrega_e" name="fecha_entrega_e" required />
                             <span class="form-text text-muted">Ingrese la fecha de la entrega</span>
                         </div>
 
                         <div class="col-lg-4">
                             <label for="entregado_a">Certificado recogido: </label>
-                            <select name="certificado_recogido_e" id="certificado_recogido_e" class="form-control" required >
+                            <select name="certificado_recogido_e" id="certificado_recogido_e" class="form-control" required>
                                 <option value="">-- seleccione --</option>
                                 <option value="si">si</option>
                                 <option value="no">no</option>
@@ -65,10 +65,10 @@
                         </div>
                         <div class="col-lg-4">
                             <label for="entregado_a">entregado a: </label>
-                            <input type="text" class="form-control" id="entregado_a_e" name="entregado_a_e" required/>
+                            <input type="text" class="form-control" id="entregado_a_e" name="entregado_a_e" required />
                             <span class="form-text text-muted">Ingrese a la persona entregado</span>
                         </div>
-                        
+
                     </div>
 
                     <div class="form-group row">

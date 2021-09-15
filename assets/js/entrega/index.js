@@ -70,6 +70,14 @@ var KTDatatablesEntrega = (function () {
 })();
 
 jQuery(document).ready(function () {
+
+	// Fecha por defecto hoy
+	var now = new Date();
+	var day = ("0" + now.getDate()).slice(-2);
+	var month = ("0" + (now.getMonth() + 1)).slice(-2);
+	var today = now.getFullYear() + "-" + month + "-" + day;
+	$("#fecha_entrega_e").val(today);
+
 	$("#frm_entrega").submit(function (e) {
 		e.preventDefault();
 		let data = new FormData($(this)[0]);
