@@ -702,9 +702,9 @@ class Inscripcionadmin extends PSG_Controller
     {
         $respuesta = $this->sql_ssl->listar_tabla(
             'preinscripcion_curso',
-            ['id_transaccion' => '000001']
+            ['id_transaccion' => '000001', 'tipo_pago' => 'PAGO EN OFICINA']
         );
-        if(count($respuesta) != 0)
+        if($respuesta != NULL)
         {
             
             $response = $this->inscripcion_model->get_id_last_id_transaccion();

@@ -190,7 +190,7 @@
                 </label>
                 <label class="radio">
                     <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EFECTIVO" />
-                    <span></span>Pago en oficina
+                    <span></span>Pago Efectivo
                 </label>
             </div>
         </div>
