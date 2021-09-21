@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -52,3 +52,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'verificacion';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['invitacion/(:any)'] = 'invitacion/index/$1';
+
+/** rutas por categoria */
+$route['disenioMultimedia'] = 'invitacion/index/1';
+$route['computacion'] = 'invitacion/index/2';
+$route['ingenieria'] = 'invitacion/index/3';
+$route['sistemas'] = 'invitacion/index/4';
+$route['educacionVirtual'] = 'invitacion/index/5';
