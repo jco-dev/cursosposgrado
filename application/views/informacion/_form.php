@@ -41,8 +41,20 @@
      <br>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
+
              <label for="celular"> Número de celular (con WhatsApp) <span class="text-danger">(*)</span></label>
-             <input type="text" class="form-control" name="celular" id="celular" placeholder="Tu respuesta" />
+             <div class="input-group">
+                 <input type="text" class="form-control" minlength="8" maxlength="8" name="celular" id="celular" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" placeholder="Tu respuesta" />
+                 <div class="input-group-append">
+                     <label class="checkbox checkbox-inline checkbox-primary">
+                         <button type="button" href="javascript:void(0)" class="btn" style="background-color: #26CC64; border-radius: 2px;" data-curso="<?= $curso ?>" id="enviar-whatsapp-informacion">
+                             <span>
+                                 <i class="fab fa-whatsapp text-white"></i>
+                             </span>
+                         </button>
+                     </label>
+                 </div>
+             </div>
          </div>
      </div>
 

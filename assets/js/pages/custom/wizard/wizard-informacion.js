@@ -179,8 +179,7 @@ var KTWizard3 = (function () {
 })();
 
 jQuery(document).ready(function () {
-
-	$("#ciudad_residencia").val(30).trigger('change');
+	$("#ciudad_residencia").val(30).trigger("change");
 	$("#ciudad_residencia").select2({
 		placeholder: "Elige",
 	});
@@ -230,9 +229,7 @@ jQuery(document).ready(function () {
 		$("#dia").append(opcion);
 	};
 
-	
-
-	$("#frm_curso_informacion").on('submit', function (e) {
+	$("#frm_curso_informacion").on("submit", function (e) {
 		e.preventDefault();
 
 		let data = new FormData($("#frm_curso_informacion")[0]);
@@ -320,10 +317,9 @@ jQuery(document).ready(function () {
 
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
-				
-				if(response.datos[0].fecha_nacimiento != "")
-				{
-					let fecha = (response.datos[0].fecha_nacimiento).split("-");
+
+				if (response.datos[0].fecha_nacimiento != "") {
+					let fecha = response.datos[0].fecha_nacimiento.split("-");
 					$("#anio").val(fecha[0]).trigger("change");
 					$("#mes").val(fecha[1]).trigger("change");
 					$("#dia").val(parseInt(fecha[2])).trigger("change");
@@ -377,10 +373,10 @@ jQuery(document).ready(function () {
 	});
 
 	$("#fecha").on("change", "#anio,#mes, #dia", function (e) {
-		let anio = $("#anio").val()
-		let mes = $("#mes").val()
-		let dia = $('#dia').val();
-		$("#m_fecha_nacimiento").html(anio +'-'+mes+'-'+format_dia(dia));
+		let anio = $("#anio").val();
+		let mes = $("#mes").val();
+		let dia = $("#dia").val();
+		$("#m_fecha_nacimiento").html(anio + "-" + mes + "-" + format_dia(dia));
 	});
 
 	$("#celular").on("change", function () {
@@ -395,6 +391,39 @@ jQuery(document).ready(function () {
 		$("#m_profesion_oficio").html($("#profesion_oficio :selected").text());
 	});
 
+	// Envio de información por whatsapp
+	$("#enviar-whatsapp-informacion").on("click", function (e) {
+		let id = $(this).attr("data-curso");
+		if (/^\d{8}$/.test($("#celular").val())) {
+			$.post("/informacion/informacion_curso", { id }, function (response) {
+				if (typeof response.exito != "undefined") {
+					console.log(response);
+					window.open(
+						`https://api.whatsapp.com/send?phone=+591${$(
+							"#celular"
+						).val()}&text=${encodeURI(
+							`${response.exito[0].mensaje_whatsapp}`
+						)}`,
+						"_blank"
+					);
+				} else {
+					Swal.fire({
+						title: "Error al enviar la información del curso",
+						icon: "error",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					});
+				}
+			});
+		} else {
+			Swal.fire({
+				title: "El número de celular ingresado es inválido",
+				icon: "error",
+				showCancelButton: false,
+				confirmButtonText: "Ok",
+			});
+		}
+	});
+
 	KTWizard3.init();
-	
 });

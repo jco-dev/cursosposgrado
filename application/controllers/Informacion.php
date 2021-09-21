@@ -290,4 +290,15 @@ class Informacion extends CI_Controller
 			return $dia;
 		}
 	}
+
+	public function informacion_curso()
+	{
+		$id_curso = $this->encryption->decrypt(base64_decode($this->input->post('id')));
+		$response = $this->informacion_model->informacion_curso($id_curso);
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			[
+				'exito' => $response
+			]
+		));
+	}
 }

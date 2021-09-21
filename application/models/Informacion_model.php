@@ -18,4 +18,17 @@ class Informacion_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function informacion_curso($id)
+	{
+		$sql = "SELECT  
+			mcc.mensaje_whatsapp
+			from mdl_configuracion_curso mcc where  mcc.id_course_moodle =$id";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }
