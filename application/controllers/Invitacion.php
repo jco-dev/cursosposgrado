@@ -10,23 +10,45 @@ class Invitacion extends CI_Controller
 
     public function index($id = null)
     {
-        // return var_dump($_SERVER);
+        // echo '<pre>';
+        // var_dump(apache_response_headers());
+        // return var_dump(getallheaders()['User-Agent']);
         $grupos = $this->invitacion_model->listar_grupos_whatsapp(['id_categoria' => $id])->result();
-        $total_grupos = count($grupos);
-        $cn = 1;
-        foreach ($grupos as $value) {
-            if ($value->suscritos < 256) {
-                $suscritos = ++$value->suscritos;
-                $this->invitacion_model->actualizar_suscritos($value->id_grupo_whatsapp, $suscritos);
-                header('Location: ' . $value->url_invitacion);
-                break;
-            } elseif ($total_grupos == $cn && $value->suscritos > 200) {
-                $this->enviar_correo($id);
-                if ($value->suscritos == 256) {
-                    echo "TODOS LOS GRUPOS ESTÁN LLENOS POR FAVOR INTENTE MÁS TARDE";
+        if (strpos(mb_convert_case(getallheaders()['User-Agent'], MB_CASE_LOWER), "whatsapp") === false) {
+            $total_grupos = count($grupos);
+            $cn = 1;
+            foreach ($grupos as $value) {
+                if ($value->suscritos < 256) {
+                    $suscritos = ++$value->suscritos;
+                    $this->invitacion_model->actualizar_suscritos($value->id_grupo_whatsapp, $suscritos);
+                    header('Location: ' . $value->url_invitacion);
+                    break;
+                } elseif ($total_grupos == $cn && $value->suscritos > 200) {
+                    $this->enviar_correo($id);
+                    if ($value->suscritos == 256) {
+                        echo "TODOS LOS GRUPOS ESTÁN LLENOS POR FAVOR INTENTE MÁS TARDE";
+                    }
+                }
+                $cn++;
+            }
+        } else {
+            foreach ($grupos as $value) {
+                if ($value->suscritos < 256) {
+                    header('Location: ' . $value->url_invitacion);
+                    break;
                 }
             }
-            $cn++;
+        }
+    }
+
+    public function video_informaciones($id_video_informacion)
+    {
+        $video = $this->invitacion_model->video_informacion([' id_video_informacion' => $id_video_informacion]);
+        if (isset($video['url_video']) && !is_null($video['url_video'])) {
+            header('Location: ' . $video['url_video']);
+            exit;
+        } else {
+            echo 'Error, no pudimos encontrar su video de informacion.';
         }
     }
 

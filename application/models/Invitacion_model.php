@@ -30,4 +30,9 @@ class Invitacion_model extends PSG_Model
 		$this->mk->join("categoria as c", "c.id_categoria = rc.id_categoria");
 		return $this->mk->where("rc.id_categoria=$id")->get();
 	}
+
+	public function video_informacion($condicion)
+	{
+		return $this->mk->get_where('video_informacion', $condicion)->row_array();
+	}
 }

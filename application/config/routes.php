@@ -60,3 +60,4 @@ $route['computacion'] = 'invitacion/index/2';
 $route['ingenieria'] = 'invitacion/index/3';
 $route['sistemas'] = 'invitacion/index/4';
 $route['educacionVirtual'] = 'invitacion/index/5';
+$route['youtubePormocional'] = 'invitacion/video_informaciones/1';
