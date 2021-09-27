@@ -14,8 +14,8 @@
     <div class="container-fluid pt-2" id="padding-container">
         <div class="card card-custom p-0" style="border: 2px solid #000000;">
             <div class="card-body p-0">
-                <img src="<?= base_url($data[0]->banner_curso) ?>" alt="Banner del curso" class="img-fluid rounded" style="width: 900px;height: 157px;">
-            </div>            
+                <img src="<?= base_url($data[0]->banner_curso) ?>" alt="Banner del curso" class="img-fluid rounded" style="width: 100%; height: 157px;">
+            </div>
         </div>
 
         <br>
@@ -29,7 +29,7 @@
                 <span class="text-danger">(*) Obligatorio</span>
             </div>
         </div>
-        
+
         <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
             <div class="wizard-nav d-none">
                 <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">
@@ -38,15 +38,6 @@
                         <div class="wizard-label">
                             <h3 class="wizard-title">
                                 <span>1.</span>Datos personales
-                            </h3>
-                            <div class="wizard-bar"></div>
-                        </div>
-                    </div>
-
-                    <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-label">
-                            <h3 class="wizard-title">
-                                <span>4.</span>Completado
                             </h3>
                             <div class="wizard-bar"></div>
                         </div>
@@ -63,13 +54,15 @@
                         <?php include('_curso_id.php'); ?>
                         <?php include("_form.php"); ?>
                         <!--begin: Wizard Actions-->
-                        <div class="d-flex justify-content-between border-top mt-5 pt-10">
-                            <div class="mr-2">
-                                <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-prev"> Atr&aacute;s</button>
-                            </div>
+                        <div class="d-flex justify-content-between border-top mt-2 pt-2">
                             <div>
-                                <button type="submit" class="btn btn-info btn-sm font-weight-bolder px-9 py-4 submit" data-wizard-type="action-submit"> Enviar</button>
-                                <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-next"> Siguiente</button>
+                                <!-- <button type="submit" class="btn btn-info btn-sm font-weight-bolder px-9 py-4 submit" data-wizard-type="action-submit"> Enviar</button> -->
+                                <button href="javascript:void(0)" class="btn text-white" style="background-color: #26CC64; border-radius: 2px;">
+                                    <span>
+                                        <i class="fab fa-whatsapp text-white"></i>
+                                    </span>
+                                    Regístrate
+                                </button>
                             </div>
                         </div>
                         <!--end: Wizard Actions-->
@@ -83,7 +76,7 @@
 
     <?php include('_script.global.php'); ?>
     <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-informacion.js') ?>"></script>
-    
+
 </body>
 
 </html>

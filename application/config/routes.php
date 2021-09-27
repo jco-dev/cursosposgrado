@@ -60,5 +60,5 @@ $route['computacion'] = 'invitacion/index/2';
 $route['ingenieria'] = 'invitacion/index/3';
 $route['sistemas'] = 'invitacion/index/4';
 $route['educacionVirtual'] = 'invitacion/index/5';
-$route['videoInscripcion'] = 'invitacion/video_informaciones/1';
-$route['videoCertificados'] = 'invitacion/video_informaciones/2';
+$route['videoCertificados'] = 'invitacion/video_informaciones/1';
+$route['videoInscripcion'] = 'invitacion/video_informaciones/2';

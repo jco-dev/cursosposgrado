@@ -59,45 +59,45 @@ var KTWizard3 = (function () {
 		_validations.push(
 			FormValidation.formValidation(_formEl, {
 				fields: {
-					ci: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-							stringLength: {
-								max: 11,
-								message: "El CI debe puede tener hasta 11 dígitos",
-							},
-						},
-					},
-					paterno: {
-						validators: {
-							regexp: {
-								regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i,
-								message:
-									"El apellido paterno puede constar de caracteres alfabéticos y solo espacios",
-							},
-						},
-					},
-					materno: {
-						validators: {
-							regexp: {
-								regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
-								message:
-									"El apellidos materno puede constar de caracteres alfabéticos y solo espacios",
-							},
-						},
-					},
-					correo: {
-						validators: {
-							notEmpty: {
-								message: "Esta pregunta es obligatoria",
-							},
-							emailAddress: {
-								message: "Debe ser un correo válido",
-							},
-						},
-					},
+					// ci: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 		stringLength: {
+					// 			max: 11,
+					// 			message: "El CI debe puede tener hasta 11 dígitos",
+					// 		},
+					// 	},
+					// },
+					// paterno: {
+					// 	validators: {
+					// 		regexp: {
+					// 			regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i,
+					// 			message:
+					// 				"El apellido paterno puede constar de caracteres alfabéticos y solo espacios",
+					// 		},
+					// 	},
+					// },
+					// materno: {
+					// 	validators: {
+					// 		regexp: {
+					// 			regexp: /^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/i,
+					// 			message:
+					// 				"El apellidos materno puede constar de caracteres alfabéticos y solo espacios",
+					// 		},
+					// 	},
+					// },
+					// correo: {
+					// 	validators: {
+					// 		notEmpty: {
+					// 			message: "Esta pregunta es obligatoria",
+					// 		},
+					// 		emailAddress: {
+					// 			message: "Debe ser un correo válido",
+					// 		},
+					// 	},
+					// },
 					nombre: {
 						validators: {
 							notEmpty: {
@@ -179,59 +179,22 @@ var KTWizard3 = (function () {
 })();
 
 jQuery(document).ready(function () {
-	$("#ciudad_residencia").val(30).trigger("change");
-	$("#ciudad_residencia").select2({
-		placeholder: "Elige",
+	$("#celular").on("change", function (e) {
+		$.ajax({
+			url: "/informacion/buscar_contacto",
+			type: "POST",
+			data: {
+				celular: $(this).val(),
+			},
+		}).done(function (response) {
+			if (response.length > 0) {
+				$("#nombre").val(response[0].nombre);
+			}
+		});
 	});
-
-	$("#expedido").select2({
-		placeholder: "Elige",
-		minimumResultsForSearch: Infinity,
-	});
-
-	$("#profesion_oficio").select2({
-		placeholder: "Elige",
-	});
-
-	$("#anio").select2({
-		placeholder: "Año",
-	});
-	$("#anio").change(function () {
-		$("#mes").removeAttr("disabled");
-	});
-
-	$("#mes").select2({
-		placeholder: "Mes",
-	});
-	$("#mes").prop("disabled", "disabled");
-	$("#mes").change(function () {
-		$("#dia").removeAttr("disabled");
-	});
-
-	$("#dia").select2({
-		placeholder: "Dia",
-	});
-	$("#dia").prop("disabled", "disabled");
-
-	$("#fecha").on("change", "#anio,#mes", function (e) {
-		let anio = parseInt($("#anio").val());
-		let mes = parseInt($("#mes").val()) - 1;
-		let res = Date.getDaysInMonth(anio, mes);
-		llenar_dia(res);
-	});
-
-	const llenar_dia = (num) => {
-		$("#dia").children().remove();
-		let opcion = "";
-		for (let i = 1; i <= num; i++) {
-			opcion += "<option value='" + i + "'>" + i + "</option>";
-		}
-		$("#dia").append(opcion);
-	};
 
 	$("#frm_curso_informacion").on("submit", function (e) {
 		e.preventDefault();
-
 		let data = new FormData($("#frm_curso_informacion")[0]);
 		$.ajax({
 			type: "POST",
@@ -243,43 +206,42 @@ jQuery(document).ready(function () {
 			dataType: "JSON",
 		}).done(function (response) {
 			if (typeof response.exito != "undefined") {
-				Swal.fire({
-					title: response.exito,
-					icon: "success",
-					showCancelButton: false,
-					confirmButtonText: "Ok",
-				}).then(function (result) {
-					if (result.value) {
-						location.reload();
-					}
-				});
+				limpiarCampos();
+				window.open(
+					`https://api.whatsapp.com/send?phone=+591${
+						response.celular
+					}&text=${encodeURI(`${response.exito[0].mensaje_whatsapp}`)}`,
+					"_blank"
+				);
 			}
-			if (typeof response.error != "undefined") {
-				Swal.fire({
-					title: response.error,
-					icon: "error",
-					showCancelButton: false,
-					confirmButtonText: "Ok",
-				}).then(function (result) {
-					if (result.value) {
-						location.reload();
-					}
-				});
-			}
+			// if (typeof response.error != "undefined") {
+			// 	Swal.fire({
+			// 		title: response.error,
+			// 		icon: "error",
+			// 		showCancelButton: false,
+			// 		confirmButtonText: "Ok",
+			// 	}).then(function (result) {
+			// 		if (result.value) {
+			// 			location.reload();
+			// 		}
+			// 	});
+			// }
 			if (typeof response.warning != "undefined") {
 				Swal.fire({
-					title: response.warning,
+					html: response.warning,
+					title: "Advertencia !!!",
 					icon: "info",
 					showCancelButton: false,
 					confirmButtonText: "Ok",
-				}).then(function (result) {
-					if (result.value) {
-						location.reload();
-					}
 				});
 			}
 		});
 	});
+
+	const limpiarCampos = () => {
+		$("#nombre").val("");
+		$("#celular").val("");
+	};
 
 	function format_dia(dia) {
 		if (dia >= 1 && dia <= 9) {
@@ -289,141 +251,39 @@ jQuery(document).ready(function () {
 		}
 	}
 
-	// traer datos
-	$("#ci").on("change", function (e) {
-		let ci = $(this).val();
-		$.post("/inscripcion/buscar_por_ci", { ci: ci }, function (response) {
-			if (typeof response.datos != "undefined") {
-				//poner datos
-				$("#expedido").val(response.datos[0].expedido).trigger("change");
-
-				$("#correo").val(response.datos[0].correo);
-				$("#m_correo").text(response.datos[0].correo);
-
-				$("#nombre").val(response.datos[0].nombre);
-				$("#m_nombre").text(response.datos[0].nombre);
-
-				$("#paterno").val(response.datos[0].paterno);
-				$("#m_paterno").text(response.datos[0].paterno);
-
-				$("#materno").val(response.datos[0].materno);
-				$("#m_materno").text(response.datos[0].materno);
-
-				$("input[name=genero][value='" + response.datos[0].genero + "']").prop(
-					"checked",
-					true
-				);
-				$("#m_genero").text(response.datos[0].genero);
-
-				$("#celular").val(response.datos[0].celular);
-				$("#m_celular").text(response.datos[0].celular);
-
-				if (response.datos[0].fecha_nacimiento != "") {
-					let fecha = response.datos[0].fecha_nacimiento.split("-");
-					$("#anio").val(fecha[0]).trigger("change");
-					$("#mes").val(fecha[1]).trigger("change");
-					$("#dia").val(parseInt(fecha[2])).trigger("change");
-				}
-
-				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
-
-				$("#ciudad_residencia")
-					.val(response.datos[0].id_municipio)
-					.trigger("change");
-
-				$("#profesion_oficio")
-					.val(response.datos[0].id_profesion_oficio)
-					.trigger("change");
-
-				$("input[name=genero][value=" + response.datos[0].genero + "]").attr(
-					"checked",
-					"checked"
-				);
-			}
-		});
-	});
-
-	// mostrar datos ingresados en el paso final
-	$("#ci").on("change", function () {
-		$("#m_ci").html($(this).val());
-	});
-
-	$("#expedido").on("change", function () {
-		$("#m_expedido").html($(this).val());
-	});
-
-	$("#correo").on("change", function () {
-		$("#m_correo").text($(this).val());
-	});
-
-	$("#nombre").on("change", function () {
-		$("#m_nombre").text($(this).val());
-	});
-
-	$("#paterno").on("change", function () {
-		$("#m_paterno").text($(this).val());
-	});
-
-	$("#materno").on("change", function () {
-		$("#m_materno").text($(this).val());
-	});
-
-	$('input[name=genero][type="radio"]').on("change", function () {
-		$("#m_genero").text($(this).val());
-	});
-
-	$("#fecha").on("change", "#anio,#mes, #dia", function (e) {
-		let anio = $("#anio").val();
-		let mes = $("#mes").val();
-		let dia = $("#dia").val();
-		$("#m_fecha_nacimiento").html(anio + "-" + mes + "-" + format_dia(dia));
-	});
-
-	$("#celular").on("change", function () {
-		$("#m_celular").html($(this).val());
-	});
-
-	$("#ciudad_residencia").on("change", function () {
-		$("#m_ciudad_residencia").html($("#ciudad_residencia :selected").text());
-	});
-
-	$("#profesion_oficio").on("change", function () {
-		$("#m_profesion_oficio").html($("#profesion_oficio :selected").text());
-	});
-
 	// Envio de información por whatsapp
-	$("#enviar-whatsapp-informacion").on("click", function (e) {
-		let id = $(this).attr("data-curso");
-		if (/^\d{8}$/.test($("#celular").val())) {
-			$.post("/informacion/informacion_curso", { id }, function (response) {
-				if (typeof response.exito != "undefined") {
-					console.log(response);
-					window.open(
-						`https://api.whatsapp.com/send?phone=+591${$(
-							"#celular"
-						).val()}&text=${encodeURI(
-							`${response.exito[0].mensaje_whatsapp}`
-						)}`,
-						"_blank"
-					);
-				} else {
-					Swal.fire({
-						title: "Error al enviar la información del curso",
-						icon: "error",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					});
-				}
-			});
-		} else {
-			Swal.fire({
-				title: "El número de celular ingresado es inválido",
-				icon: "error",
-				showCancelButton: false,
-				confirmButtonText: "Ok",
-			});
-		}
-	});
+	// $("#enviar-whatsapp-informacion").on("click", function (e) {
+	// 	let id = $(this).attr("data-curso");
+	// 	if (/^\d{8}$/.test($("#celular").val())) {
+	// 		$.post("/informacion/informacion_curso", { id }, function (response) {
+	// 			if (typeof response.exito != "undefined") {
+	// 				console.log(response);
+	// 				window.open(
+	// 					`https://api.whatsapp.com/send?phone=+591${$(
+	// 						"#celular"
+	// 					).val()}&text=${encodeURI(
+	// 						`${response.exito[0].mensaje_whatsapp}`
+	// 					)}`,
+	// 					"_blank"
+	// 				);
+	// 			} else {
+	// 				Swal.fire({
+	// 					title: "Error al enviar la información del curso",
+	// 					icon: "error",
+	// 					showCancelButton: false,
+	// 					confirmButtonText: "Ok",
+	// 				});
+	// 			}
+	// 		});
+	// 	} else {
+	// 		Swal.fire({
+	// 			title: "El número de celular ingresado es inválido",
+	// 			icon: "error",
+	// 			showCancelButton: false,
+	// 			confirmButtonText: "Ok",
+	// 		});
+	// 	}
+	// });
 
 	KTWizard3.init();
 });

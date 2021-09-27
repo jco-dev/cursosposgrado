@@ -1,64 +1,17 @@
  <!--begin: Wizard Step 1-->
  <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
 
-     <h4 class="mb-10 font-weight-bold text-dark">Datos Personales.</h4>
-
-     <div class="card card-custom">
-         <div class="card-body pb-0">
-             <div class="form-group row">
-                 <div class="col-lg-8">
-                     <label for="ci"> N&uacute;mero C.I. <span class="text-danger">(*)</span></label>
-                     <input type="text" class="form-control" name="ci" id="ci" placeholder="Tu respuesta" />
-                 </div>
-                 <div class="col-lg-4">
-                     <label for="ci"> Expedido <span class="text-danger">*</span></label>
-                     <select name="expedido" id="expedido" class="form-control">
-                         <option value=""> Elige </option>
-                         <option value="QR"> Nueva cédula con código QR </option>
-                         <option value="CH">Chuquisaca</option>
-                         <option value="LP" selected>La Paz</option>
-                         <option value="CB">Cochabamba</option>
-                         <option value="OR">Oruro</option>
-                         <option value="PT">Potosí</option>
-                         <option value="TJ">Tarija</option>
-                         <option value="SC">Santa Cruz</option>
-                         <option value="BE">Beni</option>
-                         <option value="PD">Pando</option>
-                     </select>
-                 </div>
-             </div>
-         </div>
-     </div>
-
-     <br>
-     <div class=" card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="correo"> Dirección de correo electrónico <span class="text-danger">(*)</span></label>
-             <input type="email" class="form-control" name="correo" id="correo" placeholder="Tu direccion de correo electronico" />
-         </div>
-     </div>
-
-     <br>
+     <h4 class="mb-10 font-weight-bold text-dark">Ingrese sus datos.</h4>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
 
              <label for="celular"> Número de celular (con WhatsApp) <span class="text-danger">(*)</span></label>
              <div class="input-group">
                  <input type="text" class="form-control" minlength="8" maxlength="8" name="celular" id="celular" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" placeholder="Tu respuesta" />
-                 <div class="input-group-append">
-                     <label class="checkbox checkbox-inline checkbox-primary">
-                         <button type="button" href="javascript:void(0)" class="btn" style="background-color: #26CC64; border-radius: 2px;" data-curso="<?= $curso ?>" id="enviar-whatsapp-informacion">
-                             <span>
-                                 <i class="fab fa-whatsapp text-white"></i>
-                             </span>
-                         </button>
-                     </label>
-                 </div>
              </div>
          </div>
      </div>
 
-     <input type="hidden" name="estado" id="estado" value="<?= $estado; ?>">
      <br>
      <div class="card card-custom">
          <div class="card-body form-group pb-0">
@@ -67,164 +20,5 @@
          </div>
      </div>
 
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="paterno"> Apellido Paterno </label>
-             <input type="text" class="form-control" name="paterno" id="paterno" placeholder="Tu respuesta" />
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="materno"> Apellido Materno </label>
-             <input type="text" class="form-control" name="materno" id="materno" placeholder="Tu respuesta" />
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body">
-             <label for="materno"> Género <span class="text-danger">(*)</span> </label>
-             <div class="radio-list">
-                 <label class="radio">
-                     <input type="radio" name="genero" id="genero" value="M" />
-                     <span></span>Masculino
-                 </label>
-                 <label class="radio">
-                     <input type="radio" name="genero" id="genero" value="F" />
-                     <span></span>Femenino
-                 </label>
-             </div>
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group row pb-0" id="fecha">
-             <div class="col-lg-12">
-                 <label for="celular"> Fecha de Nacimiento </label>
-             </div>
-             <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                 <select name="anio" id="anio" style="width: 100%;">
-                     <option value=""></option>
-                     <?php
-                        $anio = intval(date('Y')) - 10;
-                        for ($i = 0; $i < 100; $i++) {
-                            echo "<option value=" . $anio . ">" . $anio . "</option>";
-                            $anio--;
-                        }
-                        ?>
-                 </select>
-             </div>
-             <div class="form-group col-lg-3 col-sm-12 col-md-3">
-                 <select name="mes" id="mes" style="width: 100%;">
-                     <option value=""></option>
-                     <option value="01">Enero</option>
-                     <option value="02">Febrero</option>
-                     <option value="03">Marzo</option>
-                     <option value="04">Abril</option>
-                     <option value="05">Mayo</option>
-                     <option value="06">Junio</option>
-                     <option value="07">Julio</option>
-                     <option value="08">Agosto</option>
-                     <option value="09">Septiembre</option>
-                     <option value="10">Octubre</option>
-                     <option value="11">Noviembre</option>
-                     <option value="12">Diciembre</option>
-                 </select>
-             </div>
-             <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                 <select name="dia" id="dia" style="width: 100%;">
-                     <option value=""></option>
-                 </select>
-             </div>
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="ciudad_residencia"> Ciudad de residencia </label> <br>
-             <select name="ciudad_residencia" id="ciudad_residencia" class="form-control">
-                 <option value=""> Elige </option>
-                 <?php
-                    foreach ($municipios as $key => $municipio) {
-                        echo "<option value='" . $municipio->id_municipio . "'>" . $municipio->nombre_departamento . " - " . $municipio->nombre_municipio . "</option>";
-                    }
-                    ?>
-             </select>
-         </div>
-     </div>
-
-     <br>
-     <div class="card card-custom">
-         <div class="card-body form-group pb-0">
-             <label for="profesion_oficio"> Profesi&oacute;n u Ocupaci&oacute;n </label> <br>
-             <select name="profesion_oficio" id="profesion_oficio" class="form-control">
-                 <option value=""> Elige </option>
-                 <?php
-                    foreach ($profesiones_ocupaciones as $key => $value) {
-                        echo "<option value='" . $value->id_profesion_oficio . "'>" . $value->descripcion . "</option>";
-                    }
-                    ?>
-             </select>
-         </div>
-     </div>
-
-
  </div>
  <!--end: Wizard Step 1-->
-
- <!--begin: Wizard Step 4-->
- <div class="pb-5" data-wizard-type="step-content">
-     <div class="card card-custom">
-         <div class="card-header bg-info-o-5 border-0">
-             <div class="card-title p-3" id="card-title-inscripcion">
-                 <h3 class="card-label">Revise sus datos antes de enviar</h3>
-             </div>
-             <!--begin::Body-->
-             <div class="card-body">
-
-                 <ul class="list-group">
-                     <li class="list-group-item active"><strong>1. DATOS PERSONALES</strong></li>
-                     <li class="list-group-item">
-                         <strong>Carnet de Identidad:&nbsp;</strong> <span id="m_ci"></span> <span id="m_expedido"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Correo:&nbsp;</strong>
-                         <span id="m_correo"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Nombres:&nbsp;</strong> <span id="m_nombre"></span> <span id="m_paterno"></span> <span id="m_materno"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>G&eacute;nero: &nbsp;</strong>
-                         <span id="m_genero">M</span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Fecha Nacimiento (YYYY-MM-DD): </strong>
-                         <span id="m_fecha_nacimiento"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>N&uacute;mero celular: &nbsp;</strong>
-                         <span id="m_celular"></span>
-                     </li>
-                     <li class="list-group-item">
-                         <strong>Ciudad residencia: &nbsp;</strong>
-                         <span id="m_ciudad_residencia"></span>
-                     </li>
-
-                     <li class="list-group-item">
-                         <strong>Profesi&oacute;n u Oficio: &nbsp;</strong>
-                         <span id="m_profesion_oficio"></span>
-                     </li>
-
-                 </ul>
-             </div>
-             <!--end::Body-->
-         </div>
-     </div>
- </div>
- <!--end: Wizard Step 4-->
