@@ -250,4 +250,6 @@ ENVIO DE CERTIFICADOS A LOS NUEVE DEPARTAMENTOS
 		$("#celular").val("");
 		$("#id_evento").val("");
 	};
+
+	// $("#btn-ofertas").hide();
 });

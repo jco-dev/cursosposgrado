@@ -70,6 +70,7 @@
                                 <!--begin::Actions-->
                                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
                                 <span class="text-muted font-weight-bold mr-4">Bienvenido</span>
+                                <a href="<?= base_url('certificacion'); ?>" class="btn btn-light-primary font-weight-bolder btn-sm">Certificación</a>
                                 <?php if (isset($proximo_curso) && $proximo_curso != null) { ?>
                                     <a href="#proximoscursos" class="btn btn-light-primary font-weight-bolder btn-sm">Próximos cursos</a>
                                 <?php } ?>
