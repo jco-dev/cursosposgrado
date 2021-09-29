@@ -917,7 +917,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/computacion.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad3d.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -926,11 +926,9 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO CONOCER&Aacute;S A TU
-                                                                                       COMPUTADORA, GESTIONAR&Aacute;S
-                                                                                       PROGRAMAS Y ARCHIVOS, MANEJAR&Aacute;S
-                                                                                       HERRAMIENTAS EN L&Iacute;NEA Y SABR&Aacute;S
-                                                                                       UTILIZARLA DE FORMA SEGURA.
+                                                                                       <?= utf8_decode('EN ESTE CURSO APRENDERÁS CONCEPTOS FUNDAMENTALES DE AUTOCAD EN 3D, SÓLIDOS,
+                                                                                       CÁMARAS Y ESTILOS VISUALES. TAMBIÉN COMO REALIZAR RENDER, BACKGROUND E ILUMINACION,
+                                                                                       ASÍ COMO UNA INTRODUCCIÓN A 3D MAX.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -959,7 +957,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/photoshop.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -968,12 +966,8 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       CAPAC&Iacute;TATE EN EL MANEJO DE
-                                                                                       AUTOCAD, DONDE DESARROLLARAS TUS
-                                                                                       HABILIDADES, DESTREZAS Y LA
-                                                                                       CAPACIDAD DE INTERACTUAR DE
-                                                                                       MANERA CORRECTA CON LA INTERFAZ
-                                                                                       DEL SOFTWARE.
+                                                                                       <?= utf8_decode('EN ESTE CURSO TE CAPACITARÁS EN EL MANEJO PROFESIONAL DE ADOBE PHOTOSHOP DESDE LO MÁS BÁSICO.
+                                                                                       APRENDERÁS A REALIZAR PÓSTER PUBLICITARIOS, IMÁGENES DEDICATORIOS, RETOQUES FOTOGRÁFICOS, TRATAMIENTO DE IMÁGENES.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1011,9 +1005,9 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       CON ESTE CURSO TE CAPACITAR&Aacute;S EN EL MANEJO DE INTERNET DESDE CERO,
-                                                                                       CONFIGURACI&Oacute;N B&Aacute;SICA DE REDES, OPTIMIZACI&Oacute;N DE VELOCIDAD,
-                                                                                       CONTROL DE USO Y BLOQUEO DE CONSUMO.
+                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE INTERNET DESDE CERO,
+                                                                                       CONFIGURACIÓN BÁSICA DE REDES, OPTIMIZACIÓN DE VELOCIDAD,
+                                                                                       CONTROL DE USO Y BLOQUEO DE CONSUMO.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1051,8 +1045,8 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       CON ESTE CURSO TE CAPACITAR&Aacute;S EN EL MANEJO B&Aacute;SICO DE EXCEL, APRENDER&Aacute;S A
-                                                                                       REALIZAR TABLAS DIN&Aacute;MICAS, F&Oacute;RMULAS Y FUNCIONES EN HOJAS DE C&Aacute;LCULO. DESDE CERO.
+                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO BÁSICO DE EXCEL, APRENDERÁS A
+                                                                                       REALIZAR TABLAS DINÁMICAS, FÓRMULAS Y FUNCIONES EN HOJAS DE CÁLCULO. DESDE CERO.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1072,7 +1066,7 @@
                                                          <tr>
                                                             <td width="100%" align="center" class="image198">
                                                                <!-- Col 3 Image 1 -->
-                                                               <table width="335" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
+                                                               <!-- <table width="335" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
                                                                   <tbody>
                                                                      <tr>
                                                                         <td width="100%" style="background:#ffffff; border-radius:8px; padding:0px 0px; box-shadow:0 12px 29px rgba(223,234,237,1)">
@@ -1103,7 +1097,7 @@
                                                                         </td>
                                                                      </tr>
                                                                   </tbody>
-                                                               </table>
+                                                               </table> -->
                                                                <table width="1" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
                                                                   <tbody>
                                                                      <tr>
