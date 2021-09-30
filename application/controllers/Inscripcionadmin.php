@@ -7,7 +7,7 @@ class Inscripcionadmin extends PSG_Controller
 {
     protected $id = null;
     public $cn = 1;
-    public $cn1 = 1; 
+    public $cn1 = 1;
     public $cninf = 1;
     // protected $data;
     public function __construct()
@@ -67,7 +67,7 @@ class Inscripcionadmin extends PSG_Controller
     public function guardar_preinscripcion()
     {
         // datos participante
-        // var_dump($_REQUEST);
+        // return var_dump($_REQUEST);
         $ci = $this->input->post('ci');
         $expedido = $this->input->post('expedido');
         $correo = $this->input->post('correo');
@@ -79,7 +79,7 @@ class Inscripcionadmin extends PSG_Controller
         $fecha_nacimiento = $this->input->post('anio2') . '-' . $this->input->post('mes2') . '-' . $this->format_dia(intval($this->input->post('dia2')));
         $celular = $this->input->post('celular');
         $id_municipio = $this->input->post('ciudad_residencia');
-        $modalidad_inscripcion = $this->input->post('modalidad_inscripcion');
+        $modalidad_inscripcion = $this->input->post('modalidad_inscripcion_local');
         $id_transaccion = $this->input->post('id_transaccion1');
         $fecha_pago = $this->input->post('fecha_pago');
         $monto_pago = $this->input->post('monto_pago');
@@ -157,10 +157,8 @@ class Inscripcionadmin extends PSG_Controller
                     if (is_numeric($res)) {
 
                         $this->output->set_content_type('application/json')->set_output(
-                            json_encode(['exito' => "Registado al curso correctamente",'id' => $res])
+                            json_encode(['exito' => "Registado al curso correctamente", 'id' => $res])
                         );
-                       
-
                     } else {
                         $this->output->set_content_type('application/json')->set_output(
                             json_encode(['error' => "Error al registrarse al curso"])
@@ -240,18 +238,16 @@ class Inscripcionadmin extends PSG_Controller
                 json_encode(['warning' => "Ya se encuentra registrado en el curso"])
             );
         }
-
     }
 
     public function imprimir($id_preinscripcion_curso)
     {
         $response = $this->inscripcion_model->buscar_preinscrito($id_preinscripcion_curso);
         // return var_dump($response);
-        if(count($response) > 0){
+        if (count($response) > 0) {
             $rep = new ImprimirCertificado();
             $rep->imprimir_recibo($response[0]);
         }
-        
     }
 
     public function format_dia($dia)
@@ -286,7 +282,7 @@ class Inscripcionadmin extends PSG_Controller
                 $primaryKey = 'id_participante';
                 $condicion = "id_course_moodle= $id";
                 $columns = array(
-                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function ($id) {
                         return $this->cn1++;
                     }),
                     array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
@@ -388,7 +384,7 @@ class Inscripcionadmin extends PSG_Controller
                 $table = "mdl_ver_inscritos";
                 $primaryKey = 'id_participante';
                 $columns = array(
-                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                    array('dt' => 0, 'db' => 'id_participante', 'formatter' => function ($id) {
                         return $this->cn++;
                     }),
                     array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
@@ -553,15 +549,15 @@ class Inscripcionadmin extends PSG_Controller
         if ($this->input->is_ajax_request()) {
             $id = $this->input->post('id');
             $table = "mdl_ver_informacion";
-            if($id != null){
+            if ($id != null) {
                 $condicion = "id_course_moodle= $id";
-            }else{
+            } else {
                 $condicion = null;
             }
-            
+
             $primaryKey = 'id_participante';
             $columns = array(
-                array('dt' => 0, 'db' => 'id_participante', 'formatter' => function($id){
+                array('dt' => 0, 'db' => 'id_participante', 'formatter' => function ($id) {
                     return $this->cninf++;
                 }),
                 array('dt' => 1, 'db' => 'ci', 'formatter' => function ($ci) {
@@ -653,7 +649,7 @@ class Inscripcionadmin extends PSG_Controller
         $id = $_GET['id'];
         $estado = $_GET['estado'];
         $data = $this->listar_data_estudiantes($id, $estado);
-       
+
         if (count($data) != 0) {
             $curso = $this->sql_ssl->listar_tabla("mdl_course", ["id" => $data[0]->id_course_moodle]);
             if (count($curso) == 1) {
@@ -671,13 +667,13 @@ class Inscripcionadmin extends PSG_Controller
                 'mdl_participante_preinscripcion_curso',
                 ['estado' => "PREINSCRITO", 'id_course_moodle' => $id]
             );
-        }elseif($estado == "INSCRITO"){
+        } elseif ($estado == "INSCRITO") {
             $data = $this->sql_ssl->listar_tabla(
                 'mdl_participante_preinscripcion_curso',
                 ['estado' => "INSCRITO", 'id_course_moodle' => $id]
             );
-        }else{
-            $data = $this->inscripcion_model->listar_estudiantes_todos($id); 
+        } else {
+            $data = $this->inscripcion_model->listar_estudiantes_todos($id);
         }
         return $data;
     }
@@ -704,35 +700,24 @@ class Inscripcionadmin extends PSG_Controller
             'preinscripcion_curso',
             ['id_transaccion' => '000001', 'tipo_pago' => 'PAGO EN OFICINA']
         );
-        if($respuesta != NULL)
-        {
-            
-            $response = $this->inscripcion_model->get_id_last_id_transaccion();
+        if ($respuesta != NULL) {
 
-            if(intval(trim($response[0]->id_transaccion)) >= 1 && intval(trim($response[0]->id_transaccion)) <= 9)
-            {
+            $response = $this->inscripcion_model->get_id_last_id_transaccion();
+            if (intval(trim($response[0]->id_transaccion)) >= 1 && intval(trim($response[0]->id_transaccion)) <= 9) {
                 echo "00000" . intval($response[0]->id_transaccion);
-            }elseif(intval(trim($response[0]->id_transaccion)) >= 10 && intval(trim($response[0]->id_transaccion)) <= 99)
-            {
-                echo "0000". intval(trim($response[0]->id_transaccion));
-            }elseif(intval(trim($response[0]->id_transaccion)) >= 100 && intval(trim($response[0]->id_transaccion)) <= 999)
-            {
-                echo "000". intval(trim($response[0]->id_transaccion));
-            }
-            elseif(intval(trim($response[0]->id_transaccion)) >= 1000 && intval(trim($response[0]->id_transaccion)) <= 9999)
-            {
-                echo "00". intval(trim($response[0]->id_transaccion));
-            }elseif(intval(trim($response[0]->id_transaccion)) >= 10000 && intval(trim($response[0]->id_transaccion)) <= 99999)
-            {
-                echo "0". intval(trim($response[0]->id_transaccion));
-            }elseif(intval(trim($response[0]->id_transaccion)) >= 100000 && intval(trim($response[0]->id_transaccion)) <= 999999)
-            {
+            } elseif (intval(trim($response[0]->id_transaccion)) >= 10 && intval(trim($response[0]->id_transaccion)) <= 99) {
+                echo "0000" . intval(trim($response[0]->id_transaccion));
+            } elseif (intval(trim($response[0]->id_transaccion)) >= 100 && intval(trim($response[0]->id_transaccion)) <= 999) {
+                echo "000" . intval(trim($response[0]->id_transaccion));
+            } elseif (intval(trim($response[0]->id_transaccion)) >= 1000 && intval(trim($response[0]->id_transaccion)) <= 9999) {
+                echo "00" . intval(trim($response[0]->id_transaccion));
+            } elseif (intval(trim($response[0]->id_transaccion)) >= 10000 && intval(trim($response[0]->id_transaccion)) <= 99999) {
+                echo "0" . intval(trim($response[0]->id_transaccion));
+            } elseif (intval(trim($response[0]->id_transaccion)) >= 100000 && intval(trim($response[0]->id_transaccion)) <= 999999) {
                 echo intval(trim($response[0]->id_transaccion));
             }
-
-        }else{
+        } else {
             echo '000001';
         }
-
     }
 }

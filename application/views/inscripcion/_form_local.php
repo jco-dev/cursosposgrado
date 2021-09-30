@@ -158,15 +158,15 @@
             <label for="modalidad_inscripcion"> Modalidad de Inscripci&oacute;n <span class="text-danger">(*)</span></label>
             <div class="radio-list form-group">
                 <label class="radio">
-                    <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="TIGO MONEY" />
+                    <input type="radio" name="modalidad_inscripcion_local" id="modalidad_inscripcion_local" value="TIGO MONEY" />
                     <span></span>Tigo Money
                 </label>
                 <label class="radio">
-                    <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="DEPOSITO BANCARIO" />
+                    <input type="radio" name="modalidad_inscripcion_local" id="modalidad_inscripcion_local" value="DEPOSITO BANCARIO" />
                     <span></span>Depósito o transferencia bancaria
                 </label>
                 <label class="radio">
-                    <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EN OFICINA" />
+                    <input type="radio" name="modalidad_inscripcion_local" id="modalidad_inscripcion_local" value="PAGO EN OFICINA" />
                     <span></span>Pago en oficina
                 </label>
             </div>

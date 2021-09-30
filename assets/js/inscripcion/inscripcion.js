@@ -121,7 +121,7 @@ var KTinscripcion_local = (function () {
 		_validations.push(
 			FormValidation.formValidation(_formEl, {
 				fields: {
-					modalidad_inscripcion: {
+					modalidad_inscripcion_local: {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
@@ -425,7 +425,7 @@ jQuery(document).ready(function () {
 	});
 
 	// MOSTRAR DATOS INGRASADOS PASO 2
-	$('input[name=modalidad_inscripcion][type="radio"]').on(
+	$('input[name=modalidad_inscripcion_local][type="radio"]').on(
 		"change",
 		function () {
 			$("#m_modalidad_inscripcion").text($(this).val());
@@ -461,7 +461,7 @@ jQuery(document).ready(function () {
 	}
 
 	// VERIFICAR MODALIDAD DE INSCRIPCION
-	$("input[type=radio][name=modalidad_inscripcion]").change(function () {
+	$("input[type=radio][name=modalidad_inscripcion_local]").change(function () {
 		if (this.value == "PAGO EN OFICINA") {
 			// Verificar el numero el id de facturacion
 			$.ajax({
