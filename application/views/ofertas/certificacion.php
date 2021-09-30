@@ -1,3 +1,70 @@
+<?php
+
+    $message = '';
+
+    // generating expression
+    $expression = (object) array(
+        "n1" => rand(0, 9), 
+        "n2" => rand(0, 9)
+    );
+    
+    function generateImage($text, $file) {
+        $im = @imagecreate(84, 37) or die("Cannot Initialize new GD image stream");
+        $background_color = imagecolorallocate($im, 200, 200, 200);
+        $text_color = imagecolorallocate($im, 0, 0, 0);
+        imagestring($im, 5, 12, 12,  $text, $text_color);
+        imagepng($im, $file);
+        imagedestroy($im);
+    }
+    $captchaImage = 'assets/img/captcha/captcha'.time().'.png';
+    generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
+
+    // masking with alphabets
+    $alphabet = array('K', 'g', 'A', 'D', 'R', 'V', 's', 'L', 'Q', 'w');
+    $alphabetsForNumbers = array(
+        array('K', 'g', 'A', 'D', 'R', 'V', 's', 'L', 'Q', 'w'),
+        array('M', 'R', 'o', 'F', 'd', 'X', 'z', 'a', 'K', 'L'),
+        array('H', 'Q', 'O', 'T', 'A', 'B', 'C', 'D', 'e', 'F'),
+        array('T', 'A', 'p', 'H', 'j', 'k', 'l', 'z', 'x', 'v'),
+        array('f', 'b', 'P', 'q', 'w', 'e', 'K', 'N', 'M', 'V'),
+        array('i', 'c', 'Z', 'x', 'W', 'E', 'g', 'h', 'n', 'm'),
+        array('O', 'd', 'q', 'a', 'Z', 'X', 'C', 'b', 't', 'g'),
+        array('p', 'E', 'J', 'k', 'L', 'A', 'S', 'Q', 'W', 'T'),
+        array('f', 'W', 'C', 'G', 'j', 'I', 'O', 'P', 'Q', 'D'),
+        array('A', 'g', 'n', 'm', 'd', 'w', 'u', 'y', 'x', 'r')
+    );
+    $usedAlphabet = rand(0, 9);
+    $code = $alphabet[$usedAlphabet].
+            $alphabetsForNumbers[$usedAlphabet][$expression->n1].
+            $alphabetsForNumbers[$usedAlphabet][$expression->n2];
+
+    // process form submitting
+    function getIndex($alphabet, $letter) {
+        for($i=0; $i<count($alphabet); $i++) {
+            $l = $alphabet[$i];
+            if($l === $letter) return $i;
+        }
+    }
+    function getExpressionResult($code) {
+        global $alphabet, $alphabetsForNumbers;
+        $userAlphabetIndex = getIndex($alphabet, substr($code, 0, 1));
+        $number1 = (int) getIndex($alphabetsForNumbers[$userAlphabetIndex], substr($code, 1, 1));
+        $number2 = (int) getIndex($alphabetsForNumbers[$userAlphabetIndex], substr($code, 2, 1));
+        return $number1 + $number2;
+    }
+
+    if(isset($_POST["code"])) {
+        $sentCode = $_POST["code"];
+        $result = (int) $_POST["result"];
+        if(getExpressionResult($sentCode) === $result) {
+            $message = '<p class="success">Success. ('.$result.')</p>';
+        } else {
+            $message = '<p class="failure">Failure. ('.$result.')</p>';
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -119,252 +186,71 @@
                                         </div>
                                         <div class="alert-text">
                                             <span class="h5"> Disponibilidad de Entrega de certificados</span>
-                                            <p>Los certificados se generan 14 días después de la conclusión del mismo</p>
+                                            <p class="m-0 text-justify">Los certificados se generan 14 días después de la conclusión del mismo</p>
 
-                                            <span class="bg-primary-o-10" style="width: 10px; height: 10px;"></span>
-                                            <div class="bg-primary-o-20" style="width: 10px; height: 10px;"></div>
-                                            <div class="bg-primary-o-30" style="width: 10px; height: 10px;"></div>
-                                            <div class="bg-primary-o-40" style="width: 10px; height: 10px;"></div>
-                                            <div class="bg-primary-o-50" style="width: 10px; height: 10px;"></div>
-                                            <div class="bg-primary" style="width: 10px; height: 10px;"></div>
+                                            <div class="d-flex flex-row pt-2">
+                                                
+                                                
+                                                <div class="bg-primary" style="width: 10px; height: 10px;"></div>
+                                                <?php 
+                                                    for ($i=100; $i >= 0 ; $i = $i - 10) { 
+                                                        echo '<div class="bg-primary-o-'.$i.'" style="width: 10px; height: 10px; margin-left: 5px"></div>';
+                                                    }
+                                                ?>
+                                                
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                     <!--end::Notice-->
                                     <!--begin::Row-->
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <!--begin::List Widget 10-->
                                             <div class="card card-custom card-stretch gutter-b">
-                                                <!--begin::Header-->
-                                                <div class="card-header border-0">
-                                                    <h3 class="card-title font-weight-bolder text-dark">Notifications</h3>
-                                                    <div class="card-toolbar">
-                                                        <div class="dropdown dropdown-inline">
-                                                            <a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="ki ki-bold-more-ver"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                                                                <!--begin::Naviigation-->
-                                                                <ul class="navi">
-                                                                    <li class="navi-header font-weight-bold py-5">
-                                                                        <span class="font-size-lg">Add New:</span>
-                                                                        <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
-                                                                    </li>
-                                                                    <li class="navi-separator mb-3 opacity-70"></li>
-                                                                    <li class="navi-item">
-                                                                        <a href="#" class="navi-link">
-                                                                            <span class="navi-icon">
-                                                                                <i class="flaticon2-shopping-cart-1"></i>
-                                                                            </span>
-                                                                            <span class="navi-text">Order</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="navi-item">
-                                                                        <a href="#" class="navi-link">
-                                                                            <span class="navi-icon">
-                                                                                <i class="navi-icon flaticon2-calendar-8"></i>
-                                                                            </span>
-                                                                            <span class="navi-text">Members</span>
-                                                                            <span class="navi-label">
-                                                                                <span class="label label-light-danger label-rounded font-weight-bold">3</span>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="navi-item">
-                                                                        <a href="#" class="navi-link">
-                                                                            <span class="navi-icon">
-                                                                                <i class="navi-icon flaticon2-telegram-logo"></i>
-                                                                            </span>
-                                                                            <span class="navi-text">Project</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="navi-item">
-                                                                        <a href="#" class="navi-link">
-                                                                            <span class="navi-icon">
-                                                                                <i class="navi-icon flaticon2-new-email"></i>
-                                                                            </span>
-                                                                            <span class="navi-text">Record</span>
-                                                                            <span class="navi-label">
-                                                                                <span class="label label-light-success label-rounded font-weight-bold">5</span>
-                                                                            </span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="navi-separator mt-3 opacity-70"></li>
-                                                                    <li class="navi-footer pt-5 pb-4">
-                                                                        <a class="btn btn-light-primary font-weight-bolder btn-sm" href="#">More options</a>
-                                                                        <a class="btn btn-clean font-weight-bold btn-sm d-none" href="#" data-toggle="tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
-                                                                    </li>
-                                                                </ul>
-                                                                <!--end::Naviigation-->
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="result">
+                                                    <?php echo $message; ?>
                                                 </div>
-                                                <!--end::Header-->
-                                                <!--begin::Body-->
-                                                <div class="card-body pt-0">
-                                                    <!--begin::Item-->
-                                                    <div class="mb-6">
-                                                        <!--begin::Content-->
-                                                        <div class="d-flex align-items-center flex-grow-1">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                                <input type="checkbox" value="1" />
-                                                                <span></span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                                    <!--begin::Title-->
-                                                                    <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Daily Standup Meeting</a>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Data-->
-                                                                    <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                                    <!--end::Data-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Label-->
-                                                                <span class="label label-lg label-light-primary label-inline font-weight-bold py-4">Approved</span>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
+                                                <form>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+														<label>Carnet de Identidad
+														<span class="text-danger">*</span></label>
+														<input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad" required/>
+														<span class="form-text text-muted">Ingrese su Carnet de Identidad</span>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputPassword1">Celular
+														<span class="text-danger">*</span></label>
+														<input type="number" class="form-control" id="nro_celular" name="nro_celular" required/>
+													</div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-6">
+                                                            <input type="hidden" name="code" value="<?php echo $code; ?>" />
+                                                            <label class="col-lg-12">Captcha <span class="text-danger">*</span></label>
+															<img src="<?php echo $captchaImage; ?>" class="img-responsive" />
+														</div>
+														<div class="col-6">
+                                                            <label> &nbsp;</label>
+															<input type="text" class="form-control" name="result" required/>
+														</div>
+
                                                     </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="mb-6">
-                                                        <!--begin::Content-->
-                                                        <div class="d-flex align-items-center flex-grow-1">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                                <input type="checkbox" value="1" />
-                                                                <span></span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                                    <!--begin::Title-->
-                                                                    <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Group Town Hall Meet-up with showcase</a>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Data-->
-                                                                    <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                                    <!--end::Data-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Label-->
-                                                                <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
+
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary mr-2">Consultar</button>
+													    <button type="reset" class="btn btn-secondary">Limpiar</button>
                                                     </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="mb-6">
-                                                        <!--begin::Content-->
-                                                        <div class="d-flex align-items-center flex-grow-1">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                                <input type="checkbox" value="1" />
-                                                                <span></span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                                    <!--begin::Title-->
-                                                                    <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Next sprint planning and estimations</a>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Data-->
-                                                                    <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                                    <!--end::Data-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Label-->
-                                                                <span class="label label-lg label-light-success label-inline font-weight-bold py-4">Success</span>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
                                                     </div>
-                                                    <!--end::Item-->
-                                                    <!--begin::Item-->
-                                                    <div class="mb-6">
-                                                        <!--begin::Content-->
-                                                        <div class="d-flex align-items-center flex-grow-1">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                                <input type="checkbox" value="1" />
-                                                                <span></span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                                    <!--begin::Title-->
-                                                                    <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Sprint delivery and project deployment</a>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Data-->
-                                                                    <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                                    <!--end::Data-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Label-->
-                                                                <span class="label label-lg label-light-danger label-inline font-weight-bold py-4">Rejected</span>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
-                                                    </div>
-                                                    <!--end: Item-->
-                                                    <!--begin: Item-->
-                                                    <div class="">
-                                                        <!--begin::Content-->
-                                                        <div class="d-flex align-items-center flex-grow-1">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                                                                <input type="checkbox" value="1" />
-                                                                <span></span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Section-->
-                                                            <div class="d-flex flex-wrap align-items-center justify-content-between w-100">
-                                                                <!--begin::Info-->
-                                                                <div class="d-flex flex-column align-items-cente py-2 w-75">
-                                                                    <!--begin::Title-->
-                                                                    <a href="#" class="text-dark-75 font-weight-bold text-hover-primary font-size-lg mb-1">Data analytics research showcase</a>
-                                                                    <!--end::Title-->
-                                                                    <!--begin::Data-->
-                                                                    <span class="text-muted font-weight-bold">Due in 2 Days</span>
-                                                                    <!--end::Data-->
-                                                                </div>
-                                                                <!--end::Info-->
-                                                                <!--begin::Label-->
-                                                                <span class="label label-lg label-light-warning label-inline font-weight-bold py-4">In Progress</span>
-                                                                <!--end::Label-->
-                                                            </div>
-                                                            <!--end::Section-->
-                                                        </div>
-                                                        <!--end::Content-->
-                                                    </div>
-                                                    <!--end: Item-->
-                                                </div>
-                                                <!--end: Card Body-->
+													
+                                                </form>
+
                                             </div>
                                             <!--end: Card-->
                                             <!--end: List Widget 10-->
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-8">
                                             <!--begin::Mixed Widget 5-->
                                             <div class="card card-custom bg-radial-gradient-primary card-stretch gutter-b">
                                                 <!--begin::Header-->
