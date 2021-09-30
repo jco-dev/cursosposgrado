@@ -252,4 +252,37 @@ ENVIO DE CERTIFICADOS A LOS NUEVE DEPARTAMENTOS
 	};
 
 	// $("#btn-ofertas").hide();
+	const generarCaptcha = () => {
+		$.ajax({
+			type: "POST",
+			url: "/certificacion/generarCaptcha",
+		}).done(function (response) {
+			// console.log(response);
+			$("#code").val(response.codigo);
+			$("#img-captcha").attr("src", response.ruta);
+		});
+	};
+
+	generarCaptcha();
+
+	$("#frm-consulta-certificacion").submit(function (e) {
+		e.preventDefault();
+		let data = new FormData($(this)[0]);
+		$.ajax({
+			type: "POST",
+			url: "/certificacion/verificacionCertificacion",
+			data: $(this).serialize(),
+		}).done(function (response) {
+			console.log(response);
+			if (typeof response.message != "undefined") {
+				if (response.recargar == true) {
+					generarCaptcha();
+				}
+				$(".result").html(response.message);
+				$("#code").val("");
+				$("#result").val("");
+				$("#result").focus();
+			}
+		});
+	});
 });

@@ -1,70 +1,3 @@
-<?php
-
-    $message = '';
-
-    // generating expression
-    $expression = (object) array(
-        "n1" => rand(0, 9), 
-        "n2" => rand(0, 9)
-    );
-    
-    function generateImage($text, $file) {
-        $im = @imagecreate(84, 37) or die("Cannot Initialize new GD image stream");
-        $background_color = imagecolorallocate($im, 200, 200, 200);
-        $text_color = imagecolorallocate($im, 0, 0, 0);
-        imagestring($im, 5, 12, 12,  $text, $text_color);
-        imagepng($im, $file);
-        imagedestroy($im);
-    }
-    $captchaImage = 'assets/img/captcha/captcha'.time().'.png';
-    generateImage($expression->n1.' + '.$expression->n2.' =', $captchaImage);
-
-    // masking with alphabets
-    $alphabet = array('K', 'g', 'A', 'D', 'R', 'V', 's', 'L', 'Q', 'w');
-    $alphabetsForNumbers = array(
-        array('K', 'g', 'A', 'D', 'R', 'V', 's', 'L', 'Q', 'w'),
-        array('M', 'R', 'o', 'F', 'd', 'X', 'z', 'a', 'K', 'L'),
-        array('H', 'Q', 'O', 'T', 'A', 'B', 'C', 'D', 'e', 'F'),
-        array('T', 'A', 'p', 'H', 'j', 'k', 'l', 'z', 'x', 'v'),
-        array('f', 'b', 'P', 'q', 'w', 'e', 'K', 'N', 'M', 'V'),
-        array('i', 'c', 'Z', 'x', 'W', 'E', 'g', 'h', 'n', 'm'),
-        array('O', 'd', 'q', 'a', 'Z', 'X', 'C', 'b', 't', 'g'),
-        array('p', 'E', 'J', 'k', 'L', 'A', 'S', 'Q', 'W', 'T'),
-        array('f', 'W', 'C', 'G', 'j', 'I', 'O', 'P', 'Q', 'D'),
-        array('A', 'g', 'n', 'm', 'd', 'w', 'u', 'y', 'x', 'r')
-    );
-    $usedAlphabet = rand(0, 9);
-    $code = $alphabet[$usedAlphabet].
-            $alphabetsForNumbers[$usedAlphabet][$expression->n1].
-            $alphabetsForNumbers[$usedAlphabet][$expression->n2];
-
-    // process form submitting
-    function getIndex($alphabet, $letter) {
-        for($i=0; $i<count($alphabet); $i++) {
-            $l = $alphabet[$i];
-            if($l === $letter) return $i;
-        }
-    }
-    function getExpressionResult($code) {
-        global $alphabet, $alphabetsForNumbers;
-        $userAlphabetIndex = getIndex($alphabet, substr($code, 0, 1));
-        $number1 = (int) getIndex($alphabetsForNumbers[$userAlphabetIndex], substr($code, 1, 1));
-        $number2 = (int) getIndex($alphabetsForNumbers[$userAlphabetIndex], substr($code, 2, 1));
-        return $number1 + $number2;
-    }
-
-    if(isset($_POST["code"])) {
-        $sentCode = $_POST["code"];
-        $result = (int) $_POST["result"];
-        if(getExpressionResult($sentCode) === $result) {
-            $message = '<p class="success">Success. ('.$result.')</p>';
-        } else {
-            $message = '<p class="failure">Failure. ('.$result.')</p>';
-        }
-    }
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -186,19 +119,19 @@
                                         </div>
                                         <div class="alert-text">
                                             <span class="h5"> Disponibilidad de Entrega de certificados</span>
-                                            <p class="m-0 text-justify">Los certificados se generan 14 días después de la conclusión del mismo</p>
+                                            <p class="m-0 text-justify">Los certificados se generan 10 días hábiles después de la conclusión del curso</p>
 
                                             <div class="d-flex flex-row pt-2">
-                                                
-                                                
+
+
                                                 <div class="bg-primary" style="width: 10px; height: 10px;"></div>
-                                                <?php 
-                                                    for ($i=100; $i >= 0 ; $i = $i - 10) { 
-                                                        echo '<div class="bg-primary-o-'.$i.'" style="width: 10px; height: 10px; margin-left: 5px"></div>';
-                                                    }
+                                                <?php
+                                                for ($i = 100; $i >= 0; $i = $i - 10) {
+                                                    echo '<div class="bg-primary-o-' . $i . '" style="width: 10px; height: 10px; margin-left: 5px"></div>';
+                                                }
                                                 ?>
-                                                
-                                                
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -208,42 +141,43 @@
                                         <div class="col-lg-4">
                                             <!--begin::List Widget 10-->
                                             <div class="card card-custom card-stretch gutter-b">
-                                                <div class="result">
-                                                    <?php echo $message; ?>
-                                                </div>
-                                                <form>
+
+                                                <form id="frm-consulta-certificacion">
                                                     <div class="card-body">
+                                                        <div class="result">
+
+                                                        </div>
                                                         <div class="form-group">
-														<label>Carnet de Identidad
-														<span class="text-danger">*</span></label>
-														<input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad" required/>
-														<span class="form-text text-muted">Ingrese su Carnet de Identidad</span>
-													</div>
-													<div class="form-group">
-														<label for="exampleInputPassword1">Celular
-														<span class="text-danger">*</span></label>
-														<input type="number" class="form-control" id="nro_celular" name="nro_celular" required/>
-													</div>
+                                                            <label>Carnet de Identidad
+                                                                <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad" required />
+                                                            <span class="form-text text-muted">Ingrese su Carnet de Identidad</span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Celular
+                                                                <span class="text-danger">*</span></label>
+                                                            <input type="number" class="form-control" id="nro_celular" name="nro_celular" required />
+                                                        </div>
 
-                                                    <div class="form-group row">
-                                                        <div class="col-6">
-                                                            <input type="hidden" name="code" value="<?php echo $code; ?>" />
-                                                            <label class="col-lg-12">Captcha <span class="text-danger">*</span></label>
-															<img src="<?php echo $captchaImage; ?>" class="img-responsive" />
-														</div>
-														<div class="col-6">
-                                                            <label> &nbsp;</label>
-															<input type="text" class="form-control" name="result" required/>
-														</div>
+                                                        <div class="form-group row">
+                                                            <div class="col-6">
+                                                                <input type="hidden" name="code" id="code" value="" />
+                                                                <label class="col-lg-12">Captcha <span class="text-danger">*</span></label>
+                                                                <img src="" id="img-captcha" />
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label> &nbsp;</label>
+                                                                <input type="text" class="form-control" name="result" id="result" required />
+                                                            </div>
 
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary mr-2">Consultar</button>
+                                                            <button type="reset" class="btn btn-secondary">Limpiar</button>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary mr-2">Consultar</button>
-													    <button type="reset" class="btn btn-secondary">Limpiar</button>
-                                                    </div>
-                                                    </div>
-													
                                                 </form>
 
                                             </div>
