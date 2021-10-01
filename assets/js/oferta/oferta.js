@@ -273,7 +273,7 @@ ENVIO DE CERTIFICADOS A LOS NUEVE DEPARTAMENTOS
 			url: "/certificacion/verificacionCertificacion",
 			data: $(this).serialize(),
 		}).done(function (response) {
-			console.log(response);
+			// console.log(response);
 			if (typeof response.message != "undefined") {
 				if (response.recargar == true) {
 					generarCaptcha();
@@ -282,6 +282,16 @@ ENVIO DE CERTIFICADOS A LOS NUEVE DEPARTAMENTOS
 				$("#code").val("");
 				$("#result").val("");
 				$("#result").focus();
+			}
+
+			if (typeof response.resp != "undefined") {
+				$(".result").html("");
+				$("#cursos-certificacion").html(response.resp);
+				$("#carnet_identidad").val("");
+				$("#nro_celular").val("");
+				$("#result").val("");
+				$("#carnet_identidad").focus();
+				generarCaptcha();
 			}
 		});
 	});
