@@ -301,18 +301,7 @@
                         <span id="m_correo"></span>
                     </li>
                     <li class="list-group-item">
-                        <strong>Nombres:&nbsp;</strong> <span id="m_nombre"></span> <span id="m_paterno"></span> <span id="m_materno"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>G&eacute;nero: &nbsp;</strong>
-                        <span id="m_genero">M</span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Fecha Nacimiento (YYYY-MM-DD): </strong>
-                        <span id="m_fecha_nacimiento"></span>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>N&uacute;mero celular: &nbsp;</strong>
+                        ºstrong>N&uacute;mero celular: &nbsp;</strong>
                         <span id="m_celular"></span>
                     </li>
                     <li class="list-group-item">
