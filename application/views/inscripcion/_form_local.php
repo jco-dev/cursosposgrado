@@ -87,7 +87,7 @@
                 <label for="celular"> Fecha de Nacimiento <span class="text-danger">(*)</span></label>
             </div>
             <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                <select name="anio2" id="anio2" style="width: 100%;" required>
+                <select name="anio2" id="anio2" style="width: 100%;">
                     <option value=""></option>
                     <?php
                     $anio = intval(date('Y')) - 10;
@@ -99,7 +99,7 @@
                 </select>
             </div>
             <div class="form-group col-lg-3 col-sm-12 col-md-3">
-                <select name="mes2" id="mes2" style="width: 100%;" required>
+                <select name="mes2" id="mes2" style="width: 100%;">
                     <option value=""></option>
                     <option value="01">Enero</option>
                     <option value="02">Febrero</option>
@@ -116,7 +116,7 @@
                 </select>
             </div>
             <div class="form-group col-lg-2 col-sm-12 col-md-2">
-                <select name="dia2" id="dia2" style="width: 100%;" required>
+                <select name="dia2" id="dia2" style="width: 100%;">
                     <option value=""></option>
                 </select>
             </div>
