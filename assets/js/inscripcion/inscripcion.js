@@ -276,64 +276,6 @@ jQuery(document).ready(function () {
 		minimumResultsForSearch: Infinity,
 	});
 
-	$("#frm_curso_inscripcion_local").on("submit", function (e) {
-		// console.log("inscripcion");
-		e.preventDefault();
-		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
-			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
-		} else {
-			let data = new FormData($(this)[0]);
-			$.ajax({
-				type: "POST",
-				url: "/inscripcionadmin/guardar_preinscripcion",
-				data: data,
-				cache: false,
-				contentType: false,
-				processData: false,
-				dataType: "JSON",
-			}).done(function (response) {
-				if (typeof response.exito != "undefined") {
-					window.open("/inscripcionadmin/imprimir/" + response.id, "_blank");
-					Swal.fire({
-						title: response.exito,
-						text: "¡Gracias por inscribirse!",
-						icon: "success",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
-						}
-					});
-				}
-				if (typeof response.error != "undefined") {
-					Swal.fire({
-						title: response.error,
-						icon: "error",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
-						}
-					});
-				}
-				if (typeof response.warning != "undefined") {
-					Swal.fire({
-						title: response.warning,
-						icon: "info",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					}).then(function (result) {
-						if (result.value) {
-							location.reload();
-						}
-					});
-				}
-			});
-		}
-	});
-
 	// traer datos
 	$("#ci").on("change", function (e) {
 		let ci = $(this).val();
@@ -475,6 +417,64 @@ jQuery(document).ready(function () {
 		} else {
 			$("#id_transaccion1").val("");
 			$("#id_transaccion1").attr("readonly", false);
+		}
+	});
+
+	$("#frm_curso_inscripcion_local").on("submit", function (e) {
+		console.log("inscripcion");
+		e.preventDefault();
+		if (!$("input:radio[name=tipo_certificado_solicitado]").is(":checked")) {
+			Swal.fire("Advertencia!", "Elija el tipo de certificado", "warning");
+		} else {
+			let data = new FormData($(this)[0]);
+			$.ajax({
+				type: "POST",
+				url: "/inscripcionadmin/guardar_preinscripcion",
+				data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				dataType: "JSON",
+			}).done(function (response) {
+				if (typeof response.exito != "undefined") {
+					window.open("/inscripcionadmin/imprimir/" + response.id, "_blank");
+					Swal.fire({
+						title: response.exito,
+						text: "¡Gracias por inscribirse!",
+						icon: "success",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					}).then(function (result) {
+						if (result.value) {
+							location.reload();
+						}
+					});
+				}
+				if (typeof response.error != "undefined") {
+					Swal.fire({
+						title: response.error,
+						icon: "error",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					}).then(function (result) {
+						if (result.value) {
+							location.reload();
+						}
+					});
+				}
+				if (typeof response.warning != "undefined") {
+					Swal.fire({
+						title: response.warning,
+						icon: "info",
+						showCancelButton: false,
+						confirmButtonText: "Ok",
+					}).then(function (result) {
+						if (result.value) {
+							location.reload();
+						}
+					});
+				}
+			});
 		}
 	});
 

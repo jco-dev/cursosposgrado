@@ -315,7 +315,7 @@
                         <strong>Monto Pago:&nbsp;</strong>
                         <span id="m_monto_pago"></span>
                     </li>
-                    <li class="list-group-item active"><strong>3. RECOGO DEL CERTIFICADO</strong></li>
+                    <li class="list-group-item active"><strong>3. RECOJO DEL CERTIFICADO</strong></li>
                     <li class="list-group-item">
                         <strong>Tipo certificado solicitado:</strong>
                         <span id="m_tipo_certificado_solicitado">Ambos</span>
