@@ -40,6 +40,9 @@ assets/certificados_enviar/
 /application/vendor/
 assets/certificados/
 
+assets/img/imagen_modulo/
+assets/img/imagen_personalizado_curso/
+
 
 
 /application/config/database.php

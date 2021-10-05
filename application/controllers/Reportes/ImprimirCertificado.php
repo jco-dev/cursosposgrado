@@ -131,9 +131,9 @@ class ImprimirCertificado extends Fpdf_psg
     public function verificar_aprobacion($nota_aprobacion, $nota_final)
     {
         if (intval($nota_final) >= intval($nota_aprobacion)) {
-            return "Por haber APROBADO SATISFACTORIAMENTE el curso: ";
+            return "Por haber APROBADO SATISFACTORIAMENTE el curso práctico de: ";
         } else {
-            return "Por haber PARTICIPADO del curso: ";
+            return "Por haber PARTICIPADO del curso práctico de: ";
         }
     }
 
@@ -443,7 +443,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/fondo-2.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -509,8 +509,8 @@ class ImprimirCertificado extends Fpdf_psg
             if ($est['tipo'] == "CURSO") {
                 if ($datos_curso[0]->imprimir_subtitulo == "1") {
                     $this->SetX($datos_curso[0]->posx_nombre_curso);
-                    $this->SetFont('AusterRounded-Light', '', 13);
-                    $this->Cell(193.4, 5, utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
+                    $this->SetFont('AusterRounded-Light', '', 15);
+                    $this->Cell(193.4, 7, utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
                     $posy_bt = $posy_bt + 4;
                 }
             }
@@ -654,7 +654,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/fondo-2.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -708,8 +708,8 @@ class ImprimirCertificado extends Fpdf_psg
             if ($est['tipo'] == "CURSO") {
                 if ($datos_curso[0]->imprimir_subtitulo == "1") {
                     $this->SetX($datos_curso[0]->posx_nombre_curso);
-                    $this->SetFont('Arial', 'B', 13);
-                    $this->Cell(193.4, 5, utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
+                    $this->SetFont('AusterRounded-Light', '', 15);
+                    $this->Cell(193.4, 7, utf8_decode($datos_curso[0]->subtitulo), 0, 1, 'C');
                     $posy_bt = $posy_bt + 4;
                 }
             }
@@ -844,13 +844,13 @@ class ImprimirCertificado extends Fpdf_psg
     public function verificar_tipo_participacion($tipo)
     {
         if ($tipo == "APROBADO") {
-            return "Por haber APROBADO SATISFACTORIAMENTE el curso: ";
+            return "Por haber APROBADO SATISFACTORIAMENTE el curso práctico de: ";
         } elseif ($tipo == "EXPOSITOR") {
-            return "Por haber participado en calidad de EXPOSITOR del curso:";
+            return "Por haber participado en calidad de EXPOSITOR del curso práctico de:";
         } elseif ($tipo == "ORGANIZADOR") {
-            return "Por haber participado en calidad de ORGANIZADOR del curso:";
+            return "Por haber participado en calidad de ORGANIZADOR del curso práctico de:";
         } elseif ($tipo == "PARTICIPADO") {
-            return "Por haber PARTICIPADO del curso: ";
+            return "Por haber PARTICIPADO del curso práctico de: ";
         }
     }
 
@@ -1359,7 +1359,7 @@ class ImprimirCertificado extends Fpdf_psg
         $pdf->Image('assets/img/img_send_certificate/teampsg-negro.jpg', 33, $pdf->GetY(), 20, 6);
 
         $pdf->Cell(85, 5, utf8_decode(""), 0, 1, "C");
-        $pdf->Output("D", "factura.pdf", true);
+        $pdf->Output("D", "factura" . date("_Y-m-d_H-i-s") . ".pdf", true);
     }
 
     public function print_header_table($data, $tam)
