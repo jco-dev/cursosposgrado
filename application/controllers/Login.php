@@ -27,9 +27,14 @@ class Login extends CI_Controller
 			$password = $this->input->post("password");
 			$resultado = $this->login_model->autenticar_usuario($usuario, $password);
 			if (empty($resultado['code'])) {
+
 				$this->session->set_userdata('id', $this->encryption->encrypt($resultado['id']));
 				$this->session->set_flashdata('info', 'Ha ingresado correctamente al Sistema. ¡Le damos la Bienvenida!');
-				redirect(base_url('principal'));
+				if ($resultado['id'] != 4) {
+					redirect(base_url());
+				} else {
+					redirect(base_url('principal'));
+				}
 			} else {
 				$this->session->set_flashdata($resultado['code'], $resultado['message']);
 				redirect(base_url('login'));

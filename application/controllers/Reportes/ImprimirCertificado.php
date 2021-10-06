@@ -420,7 +420,7 @@ class ImprimirCertificado extends Fpdf_psg
         echo "pdf_temp/$name";
     }
 
-    // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO VERTICAL
+    // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO HORIZONTAL
     public function imprimir_todos_version2($datos_curso = null, $datos_estudiante = null, $value)
     {
         // var_dump($datos_estudiante);
@@ -443,7 +443,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/fondo-autocad.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -654,7 +654,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/fondo-autocad.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);

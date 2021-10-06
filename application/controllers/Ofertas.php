@@ -74,7 +74,7 @@ class Ofertas extends CI_Controller
 	{
 		// return var_dump($_REQUEST);
 		$this->load->library('form_validation');
-		$this->config->set_item('language', 'spanish');
+		// $this->config->set_item('language', 'spanish');
 		// $this->form_validation->set_rules('ci', 'carnet de identidad', 'required');
 		// $this->form_validation->set_rules('expedido', 'expedido', 'required');
 		// $this->form_validation->set_rules('correo', 'correo', 'required|valid_email');
@@ -85,8 +85,8 @@ class Ofertas extends CI_Controller
 			$this->output->set_content_type('application/json')->set_output(json_encode(array('warning' => validation_errors())));
 		} else {
 
-			$id_curso = $this->encryption->decrypt(base64_decode($this->input->post('id')));
-			$nombre = strtoupper($this->input->post('nombre'));
+			// $id_curso = $this->encryption->decrypt(base64_decode($this->input->post('id')));
+			$nombre = mb_convert_case(preg_replace('/\s+/', ' ', trim($this->input->post('nombre'))), MB_CASE_UPPER);
 			$celular = $this->input->post('celular');
 			$id_evento = $this->input->post('id_evento');
 
@@ -95,7 +95,7 @@ class Ofertas extends CI_Controller
 
 			if (count($respuesta_v) == 0) {
 				// Insertar contacto
-				$respuesta = $this->ofertas_model->insertar_contacto(['nombre' => $nombre, 'celular' => $celular]);
+				$respuesta = $this->ofertas_model->insertar_contacto(['nombre' => $nombre, 'celular' => $celular, 'creado_el' => date("Y-m-d H:i:s")]);
 				if ($respuesta) {
 					// insertar area interes contacto
 					$respuesta1 = $this->ofertas_model->insertar_area(['id_evento' => $id_evento, 'id_contacto' => $respuesta, 'fecha_registro' => date("Y-m-d H:i:s"), 'estado_suscripcion' => 'ACTIVO']);

@@ -80,14 +80,18 @@
                             <?php if ($this->session->userdata('id', TRUE) != null) : ?>
 
                                 <div class="d-flex align-items-center">
-                                    <a href="#" class="btn btn-primary btn-sm font-weight-bold font-size-base mr-1" data-titulo="EXPOCRUZ" data-id="2" id="btn-expo">
+                                    <a href="#" class="btn btn-primary btn-sm font-weight-bold font-size-base mr-1" data-titulo="FIPAZ" data-id="3" id="btn-fipaz">
                                         <i class="fa fa-bell"></i>
-                                        Fexpo Cruz
+                                        FIPAZ
                                     </a>
-                                    <a href="#" class="btn btn-success btn-sm font-weight-bold font-size-base mr-1" data-titulo="FERIA DE LIBRO" data-id="1" id="btn-libro">
+                                    <!-- <a href="#" class="btn btn-primary btn-sm font-weight-bold font-size-base mr-1" data-titulo="EXPOCRUZ" data-id="2" id="btn-expo">
                                         <i class="fa fa-bell"></i>
-                                        Feria de libro
+                                        EXPOCRUZ
                                     </a>
+                                    <a href="#" class="btn btn-success btn-sm font-weight-bold font-size-base mr-1" data-titulo="FERIA DEL LIBRO" data-id="1" id="btn-libro">
+                                        <i class="fa fa-bell"></i>
+                                        FERIA DEL LIBRO
+                                    </a> -->
                                 </div>
                             <?php endif; ?>
                             <!--end::Toolbar-->
