@@ -142,7 +142,7 @@
                                             <!--begin::List Widget 10-->
                                             <div class="card card-custom card-stretch gutter-b">
 
-                                                <form id="frm-consulta-certificacion">
+                                                <form id="frm-consulta-certificacion" class="needs-validation">
                                                     <div class="card-body">
                                                         <div class="result">
 
@@ -167,7 +167,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <label> &nbsp;</label>
-                                                                <input type="text" class="form-control" name="result" id="result" required />
+                                                                <input type="number" class="form-control" name="result" id="result" required />
                                                             </div>
 
                                                         </div>

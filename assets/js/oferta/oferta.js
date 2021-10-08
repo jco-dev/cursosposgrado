@@ -351,6 +351,8 @@ ENVIO DE CERTIFICADOS A LOS NUEVE DEPARTAMENTOS
 	generarCaptcha();
 
 	$("#frm-consulta-certificacion").submit(function (e) {
+		$("#frm-consulta-certificacion").addClass("was-validated");
+		$("#frm-consulta-certificacion").removeClass("needs-validation");
 		e.preventDefault();
 		let data = new FormData($(this)[0]);
 		$.ajax({
