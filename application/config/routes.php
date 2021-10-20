@@ -63,3 +63,6 @@ $route['educacionVirtual'] = 'invitacion/index/5';
 $route['videoCertificados'] = 'invitacion/video_informaciones/1';
 $route['videoInscripcion'] = 'invitacion/video_informaciones/2';
 $route['zoom'] = 'invitacion/video_informaciones/3';
+$route['inscripcion-ofimatica'] = 'invitacion/video_informaciones/4';
+$route['inscripcion-excelavanzado'] = 'invitacion/video_informaciones/5';
+$route['inscripcion-tics'] = 'invitacion/video_informaciones/6';

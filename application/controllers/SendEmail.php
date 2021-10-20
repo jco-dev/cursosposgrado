@@ -36,7 +36,7 @@ class SendEmail extends PSG_Controller
 				$mail->isHTML(true);
 				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
-				// $mail->SMTPSecure = "tls";
+				$mail->SMTPSecure = "tls";
 				$mail->SMTPSecure = "ssl";
 				// $mail->Host = "smtp.mailtrap.io";
 				$mail->Host = "smtp.gmail.com";
@@ -62,18 +62,18 @@ class SendEmail extends PSG_Controller
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-1.pdf");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_1.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_1.pdf");
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-2.pdf");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_2.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_2.pdf");
 					$photo = true;
 				}
 
-				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "-3.pdf");
+				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_3.pdf")) {
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_3.pdf");
 					$photo = true;
 				}
 
