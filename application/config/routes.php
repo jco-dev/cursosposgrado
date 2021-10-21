@@ -66,3 +66,4 @@ $route['zoom'] = 'invitacion/video_informaciones/3';
 $route['inscripcion-ofimatica'] = 'invitacion/video_informaciones/4';
 $route['inscripcion-excelavanzado'] = 'invitacion/video_informaciones/5';
 $route['inscripcion-tics'] = 'invitacion/video_informaciones/6';
+$route['zoom-ofimatica'] = 'invitacion/video_informaciones/7';

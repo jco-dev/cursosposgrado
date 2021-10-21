@@ -314,7 +314,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/fondo1.jpg", 0, 0, 215.9, 280.5);
+            $this->Image("assets/img/img_send_certificate/fondo-excel.jpeg", 0, 0, 215.9, 280.5);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
@@ -443,7 +443,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/fondo-autocad.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/computacion-fondo.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -654,7 +654,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/fondo-autocad.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/computacion-fondo.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -763,7 +763,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/fondo1.jpg", 0, 0, 215.9, 279.4);
+            $this->Image("assets/img/img_send_certificate/fondo-excel.jpeg", 0, 0, 215.9, 279.4);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
