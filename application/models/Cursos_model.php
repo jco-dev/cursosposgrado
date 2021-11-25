@@ -323,7 +323,7 @@ class Cursos_model extends PSG_Model
 	public function contar_modulos($id)
 	{
 		if ($id != null) {
-			$sql = "SELECT COUNT(*) as cantidad FROM mdl_certificacion WHERE id_course='$id' AND estado='REGISTRADO'" ;
+			$sql = "SELECT COUNT(*) as cantidad FROM mdl_certificacion WHERE id_course='$id' AND estado='REGISTRADO'";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());
@@ -338,7 +338,7 @@ class Cursos_model extends PSG_Model
 	public function contar_estudiantes_inscritos($id)
 	{
 		if ($id != null) {
-			$sql = "SELECT COUNT(*) as cantidad FROM mdl_inscripcion_curso_vista WHERE id = $id AND tipo_participacion = 'PARTICIPANTE'" ;
+			$sql = "SELECT COUNT(*) as cantidad FROM mdl_inscripcion_curso_vista WHERE id = $id AND tipo_participacion = 'PARTICIPANTE'";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());
@@ -353,7 +353,7 @@ class Cursos_model extends PSG_Model
 	public function contar_estudiantes_preinscritos($id)
 	{
 		if ($id != null) {
-			$sql = "SELECT COUNT(*) as cantidad FROM mdl_ver_inscritos WHERE id_course_moodle = $id" ;
+			$sql = "SELECT COUNT(*) as cantidad FROM mdl_ver_inscritos WHERE id_course_moodle = $id";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());
@@ -444,4 +444,24 @@ class Cursos_model extends PSG_Model
 		}
 	}
 
+	public function total_recaudacion_por_tipo_pago_agrupacion($id, $tipo)
+	{
+		if ($id != null) {
+			$sql = "SELECT
+			count(mpc.tipo_pago) as cantidad,
+			mpc.tipo_pago,
+			sum(mpc.monto_pago) as monto_pago
+			from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante  = mp.id_participante  and mpc.id_course_moodle = '$id' and mpc.estado <> 'INTERESADO'
+			and mpc.estado = '$tipo'
+			group by mpc.tipo_pago";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 }

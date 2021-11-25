@@ -917,7 +917,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad3d.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/redes-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -926,8 +926,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('EN ESTE CURSO APRENDERÁS CONCEPTOS FUNDAMENTALES DE AUTOCAD EN 3D, SÓLIDOS, 
-                                                                                       CÁMARAS Y ESTILOS VISUALES. TAMBIÉN COMO REALIZAR RENDER, BACKGROUND E ILUMINACION, ASÍ COMO UNA INTRODUCCIÓN A 3D MAX.') ?>
+                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE INTERNET DESDE CERO, CONFIGURACIÓN BÁSICA DE REDES, OPTIMIZACIÓN DE VELOCIDAD, CONTROL DE USO Y BLOQUEO DE CONSUMO. ') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -956,7 +955,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/herramientas.jpg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/after-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -965,8 +964,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode("EN ESTE CURSO TE CAPACITARÁS EN LA ADMINISTRACIÓN Y GESTIÓN DE LAS HERRAMIENTAS TIC'S MÁS 
-                                                                                       USADAS EN LA EDUCACIÓN VIRTUAL, COMO SER CLASSROOM, ZOOM, MEET, MOODLE, GOOGLE DRIVE, GOOGLE FORMULARIOS Y OBS STUDIO.") ?>
+                                                                                       <?= utf8_decode("PODRÁS, MEJORAR TUS VIDEOS, APRENDE DESDE CERO Y PODRÁS CREAR TUS PROPIAS ANIMACIONES, MANIPULAR TODO TIPO DE DETALLES, EDICIÓN Y MOVIMIENTO. ") ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -995,7 +993,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/excel-avanzado.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/ofimatica-min.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1004,8 +1002,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('USTED APRENDERÁ A UTILIZAR LAS OPCIONES MÁS IMPORTANTES DE EXCEL, DESDE UN NIVEL INTERMEDIO Y LUEGO AVANZADO, 
-                                                                                       USANDO EJEMPLOS Y TÉRMINOS ESCENCIALES PARA QUE ENTIENDA LAS FUNCIONALIDADES MÁS USUALES, Y PUEDA APLICARLAS TANTO EN EL CAMPO LABORAL COMO EN EL RUBRO EDUCATIVO.') ?>
+                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE LOS PAQUETES OFIMÁTICOS; WORD PARA CREAR DOCUMENTOS, EXCEL PARA PROCESAR INFORMACIÓN, Y POWERPOINT PARA DISEÑAR PRESENTACIONES.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1034,7 +1031,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/ofimatica.jpg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/photoshop-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1043,8 +1040,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE LOS PAQUETES OFIMÁTICOS; WORD PARA CREAR DOCUMENTOS, 
-                                                                                       EXCEL PARA PROCESAR INFORMACIÓN Y POWERPOINT PARA DISEÑAR PRESENTACIONES..') ?>
+                                                                                       <?= utf8_decode('INSCRÍBETE AHORA. CON ESTE CURSO APRENDERÁS A REALIZAR EL RETOQUE Y FOTOMONTAJE A TUS FOTOGRAFÍAS, TU IMAGINACIÓN NO TENDRA LÍMITES APRENDERÁS A CREAR TUS PROPIAS IMÁGENES.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1064,7 +1060,7 @@
                                                          <tr>
                                                             <td width="100%" align="center" class="image198">
                                                                <!-- Col 3 Image 1 -->
-                                                               <!-- <table width="335" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
+                                                               <table width="335" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
                                                                   <tbody>
                                                                      <tr>
                                                                         <td width="100%" style="background:#ffffff; border-radius:8px; padding:0px 0px; box-shadow:0 12px 29px rgba(223,234,237,1)">
@@ -1073,7 +1069,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/photoshop.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/plataforma-min.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1082,9 +1078,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       EN ESTE CURSO TE CAPACITAR&Aacute;S EN EL MANEJO PROFESIONAL DE ADOBE PHOTOSHOP
-                                                                                       DESDE LO M&Aacute;S B&Aacute;SICO. APRENDER&Aacute;S A REALIZAR P&Oacute;STER PUBLICITARIOS, IM&Aacute;GENES
-                                                                                       DEDICATORIOS, RETOQUES FOTOGR&Aacute;FICOS, TRATAMIENTO DE IM&Aacute;GENES.
+                                                                                       <?= utf8_decode('APRENDERÁ A: INSTALAR O CREAR UN AULA VIRTUAL CON MOODLE. ESTRUCTURAR UNA PLATAFORMA, CREANDO SUS CATEGORÍAS Y CURSOS. CREAR CONTENIDO EDUCATIVO, RECURSOS Y ACTIVIDADES, ACORDE A UN PLAN DE ESTUDIOS ACADÉMICO. REALIZAR COPIAS DE SEGURIDAD DE SUS CURSOS, RECURSOS Y ACTIVIDADES EN MOODLE. CREAR Y CALIFICAR MEDIANTE COMPETENCIAS Y ESCALAS DE CALIFICACIONES. ') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1095,7 +1089,7 @@
                                                                         </td>
                                                                      </tr>
                                                                   </tbody>
-                                                               </table> -->
+                                                               </table>
                                                                <table width="1" border="0" cellpadding="0" cellspacing="0" align="left" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="full">
                                                                   <tbody>
                                                                      <tr>

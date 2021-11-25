@@ -36,7 +36,7 @@ class SendEmail extends PSG_Controller
 				$mail->isHTML(true);
 				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
-				$mail->SMTPSecure = "tls";
+				// $mail->SMTPSecure = "tls";
 				$mail->SMTPSecure = "ssl";
 				// $mail->Host = "smtp.mailtrap.io";
 				$mail->Host = "smtp.gmail.com";

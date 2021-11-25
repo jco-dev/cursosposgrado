@@ -1096,8 +1096,10 @@ class Cursos extends PSG_Controller
 		$total_i = ($total_inscrito[0]->monto_total != null) ? intval($total_inscrito[0]->monto_total) : 0;
 		$total_preinscrito = $this->cursos_model->total_recaudacion($id, 'PREINSCRITO');
 		$total_p = ($total_preinscrito[0]->monto_total != null) ? intval($total_preinscrito[0]->monto_total) : 0;
+		$total_agrupacion_incritos = $this->cursos_model->total_recaudacion_por_tipo_pago_agrupacion($id, 'INSCRITO');
+		$total_agrupacion_preinscritos = $this->cursos_model->total_recaudacion_por_tipo_pago_agrupacion($id, 'PREINSCRITO');
 		$rep = new Reporte_economico_excel();
-		$rep->reporte_economico_curo($data_course, $data_students, $total_i, $total_p);
+		$rep->reporte_economico_curso($data_course, $data_students, $total_i, $total_p, $total_agrupacion_incritos, $total_agrupacion_preinscritos);
 	}
 
 	// REPORTE TOTALES CURSO
