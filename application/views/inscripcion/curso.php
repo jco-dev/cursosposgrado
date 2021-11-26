@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Cursos posgrado | PSG</title>
     <link rel="icon" type="image/vnd.microsoft.icon" href="<?= base_url("assets/img/posgrado1.ico") ?>" sizes="16x16 24x24 36x36 48x48">
-
+    <style>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
     <?php include('_style.php'); ?>
 
 </head>

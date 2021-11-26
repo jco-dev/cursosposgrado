@@ -917,7 +917,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/redes-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/ofimatica-min.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -926,7 +926,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE INTERNET DESDE CERO, CONFIGURACIÓN BÁSICA DE REDES, OPTIMIZACIÓN DE VELOCIDAD, CONTROL DE USO Y BLOQUEO DE CONSUMO. ') ?>
+                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE LOS PAQUETES OFIMÁTICOS; WORD PARA CREAR DOCUMENTOS, EXCEL PARA PROCESAR INFORMACIÓN Y POWERPOINT PARA DISEÑAR PRESENTACIONES.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -955,7 +955,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/after-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/excel-tres-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -964,7 +964,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode("PODRÁS, MEJORAR TUS VIDEOS, APRENDE DESDE CERO Y PODRÁS CREAR TUS PROPIAS ANIMACIONES, MANIPULAR TODO TIPO DE DETALLES, EDICIÓN Y MOVIMIENTO. ") ?>
+                                                                                       <?= utf8_decode("CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DEL EN EXCEL, APRENDERÁS A REALIZAR TABLAS, FÓRMULAS Y FUNCIONES EN HOJAS DE CÁLCULO, DESDE CERO A EXPERTO.") ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -993,7 +993,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/ofimatica-min.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1002,7 +1002,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('CON ESTE CURSO TE CAPACITARÁS EN EL MANEJO DE LOS PAQUETES OFIMÁTICOS; WORD PARA CREAR DOCUMENTOS, EXCEL PARA PROCESAR INFORMACIÓN, Y POWERPOINT PARA DISEÑAR PRESENTACIONES.') ?>
+                                                                                       <?= utf8_decode(' CAPACÍTATE EN EL MANEJO DE AUTOCAD, DONDE DESARROLLARAS TUS HABILIDADES, DESTREZAS Y LA CAPACIDAD DE INTERACTUAR DE MANERA CORRECTA CON LA INTERFAZ DEL SOFTWARE.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1040,7 +1040,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('INSCRÍBETE AHORA. CON ESTE CURSO APRENDERÁS A REALIZAR EL RETOQUE Y FOTOMONTAJE A TUS FOTOGRAFÍAS, TU IMAGINACIÓN NO TENDRA LÍMITES APRENDERÁS A CREAR TUS PROPIAS IMÁGENES.') ?>
+                                                                                       <?= utf8_decode('INSCRÍBETE YA. CON EL CURSO PODRÁS REALIZAR EL RETOQUE Y FOTOMONTAJE A TUS FOTOGRAFÍAS , TU IMAGINACIÓN NO TENDRÁ LÍMITE, APRENDERÁS A CREAR TUS PROPIAS IMÁGENES. NO PIERDAS ESTA OPORTUNIDAD DE APRENDER CON LOS MEJORES. ') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1069,7 +1069,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/plataforma-min.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad3d.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1078,13 +1078,14 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('APRENDERÁ A: INSTALAR O CREAR UN AULA VIRTUAL CON MOODLE. ESTRUCTURAR UNA PLATAFORMA, CREANDO SUS CATEGORÍAS Y CURSOS. CREAR CONTENIDO EDUCATIVO, RECURSOS Y ACTIVIDADES, ACORDE A UN PLAN DE ESTUDIOS ACADÉMICO. REALIZAR COPIAS DE SEGURIDAD DE SUS CURSOS, RECURSOS Y ACTIVIDADES EN MOODLE. CREAR Y CALIFICAR MEDIANTE COMPETENCIAS Y ESCALAS DE CALIFICACIONES. ') ?>
+                                                                                       <?= utf8_decode('EN ESTE CURSO APRENDERÁS CONCEPTOS FUNDAMENTALES DE AUTOCAD EN 3D, SÓLIDOS, CÁMARAS Y ESTILOS VISUALES. TAMBIÉN COMO REALIZAR RENDER, BACKGROUND E ILUMINACION, ASÍ COMO UNA INTRODUCCIÓN A 3D MAX.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" height="15"></td>
                                                                                  </tr>
                                                                               </tbody>
+
                                                                            </table>
                                                                         </td>
                                                                      </tr>

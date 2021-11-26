@@ -1271,7 +1271,7 @@
                     <div class="form-group row">
                         <div class="col-lg-3">
                             <label for="fecha_certificacion">Fecha Certificaci&oacute;n <span class="text-danger">(*)</span>: </label>
-                            <input type="datetime" class="form-control" id="fecha_certificacion" name="fecha_certificacion" />
+                            <input type="date" class="form-control" id="fecha_certificacion" name="fecha_certificacion" />
                             <span class="form-text text-muted">Ingrese la fecha de certificacion curso</span>
                         </div>
 

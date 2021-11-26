@@ -464,4 +464,19 @@ class Cursos_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function date_print($id)
+	{
+		if ($id != null) {
+			$sql = "SELECT fecha_inicial, fecha_final, fecha_certificacion FROM mdl_configuracion_curso WHERE id_course_moodle = '$id'";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 }

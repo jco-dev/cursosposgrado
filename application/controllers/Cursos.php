@@ -1130,4 +1130,16 @@ class Cursos extends PSG_Controller
 		$rep = new ImprimirCertificado();
 		$rep->imprimir_reporte_total_reacudacion($data_course, $tipo_inscritos, $tipo_preinscritos);
 	}
+
+	public function date_impresion()
+	{
+		$id = $this->input->post('id');
+		$response = $this->cursos_model->date_print($id);
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			[
+				'exito' => $response
+			]
+		));
+		// $data_course = $this->cursos_model->get_datos_curso($id);
+	}
 }

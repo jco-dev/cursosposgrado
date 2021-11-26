@@ -443,7 +443,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/internet.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -654,7 +654,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/ofiv4.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/internet.jpeg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
