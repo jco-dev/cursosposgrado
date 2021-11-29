@@ -26,7 +26,54 @@ var KTDatatablesCursos = (function () {
 				responsive: true,
 				order: [[0, "desc"]],
 			})
-			.on("click", ".dropdown", function () {})
+			.on("click", ".estado_informe", function () {
+				// console.log("click");
+				var id = $(this).attr("id");
+				let valor = $(this).attr("valor");
+				let curso = $(this).attr("curso");
+				let mensaje = "";
+				if (valor == "SI") {
+					mensaje =
+						"¿Esta seguro de cambiar el estado 'NO ENTREGADO'  a 'ENTREGADO' del curso: " +
+						curso +
+						"?";
+				} else {
+					mensaje =
+						"¿Esta seguro de cambiar el estado 'ENTREGADO'  a 'NO ENTREGADO' del curso: " +
+						curso +
+						"?";
+				}
+
+				Swal.fire({
+					title: "CAMBIAR EL ESTADO DEL INFORME DEL CURSO",
+					text: mensaje,
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Si, cambiar!",
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.post(
+							"/cursos/cambiar_estado_informe",
+							{ id, valor },
+							function (response) {
+								if (response.exito) {
+									Swal.fire("Exito!", response.exito, "success");
+									tbl_cursos.DataTable().ajax.reload();
+								}
+								if (response.error) {
+									Swal.fire("Error!", response.error, "error");
+								}
+								if (response.warning) {
+									Swal.fire("Advertencia!", response.warning, "warning");
+								}
+							}
+						);
+						Swal.fire("Deleted!", "Your file has been deleted.", "success");
+					}
+				});
+			})
 			.on("click", "#btn_inscripcion", function (e) {
 				jQuery(".navi").toggleClass("visible");
 			})

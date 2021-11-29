@@ -26,6 +26,7 @@
                         <th>Preinscritos</th>
                         <th>M&oacute;dulos</th>
                         <th>Fecha Registro</th>
+                        <th>Informe</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -81,8 +82,8 @@
                 </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button class="btn btn-primary" id="descargar_recaudacion_total" id-course=""> 
-                    <i class="fa fa-print"></i> 
+                <button class="btn btn-primary" id="descargar_recaudacion_total" id-course="">
+                    <i class="fa fa-print"></i>
                     Imprimir
                 </button>
             </div>

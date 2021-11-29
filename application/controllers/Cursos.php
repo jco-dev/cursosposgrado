@@ -122,7 +122,15 @@ class Cursos extends PSG_Controller
 					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
 				array('dt' => 6, 'db' => 'timecreated'),
-				array('dt' => 7, 'db' => 'id', 'formatter' => function ($id, $row) {
+				array('dt' => 7, 'db' => 'estado_informe', 'formatter' => function ($state, $row) {
+					// var_dump($row['id']);
+					if ($state == "SI") {
+						return "<span class='estado_informe label label-success label-inline mr-2' valor='NO' curso='" . $row['fullname'] . "' valor='NO' id='" . $row['id'] . "' title='Anular el informe entregado' style='cursor: pointer'>ENTREGADO</span>";
+					} else {
+						return "<span class='estado_informe label label-danger label-inline mr-2' valor='SI' curso='" . $row['fullname'] . "' id='" . $row['id'] . "' title='Cambiar de estado a entregado el informe' style='cursor: pointer'>NO ENTREGADO</span>";
+					}
+				}),
+				array('dt' => 8, 'db' => 'id', 'formatter' => function ($id, $row) {
 					$nombre_curso = $row['fullname'];
 					return '<div class="dropdown dropdown-inline lista-opciones">
 						<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</a>
@@ -1141,5 +1149,30 @@ class Cursos extends PSG_Controller
 			]
 		));
 		// $data_course = $this->cursos_model->get_datos_curso($id);
+	}
+
+	public function cambiar_estado_informe()
+	{
+		$id = $this->input->post('id');
+		$valor = $this->input->post('valor');
+
+		$response = $this->sql_ssl->modificar_tabla(
+			'configuracion_curso',
+			['estado_informe' => $valor],
+			['id_course_moodle' => $id]
+		);
+		if ($response) {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'exito' => "Estado de informe actualizado correctamente "
+				]
+			));
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => "Error al actualizar el estado de informe"
+				]
+			));
+		}
 	}
 }
