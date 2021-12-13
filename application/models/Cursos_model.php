@@ -267,7 +267,7 @@ class Cursos_model extends PSG_Model
 			ic.certificacion_unica,
 			ic.estado_inscripcion_curso
 			from mdl_inscripcion_curso ic inner join mdl_user u on ic.id_user_moodle = u.id
-			inner join mdl_course c on ic.id_course_moodle = c.id AND c.id = '$id'";
+			inner join mdl_course c on ic.id_course_moodle = c.id AND c.id = '$id' ORDER BY u.firstname, u.lastname";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());

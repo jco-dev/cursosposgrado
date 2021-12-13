@@ -74,3 +74,5 @@ $route['inscripcion-photoshop-retoque'] = 'invitacion/video_informaciones/11';
 $route['inscripcion-excel'] = 'invitacion/video_informaciones/12';
 $route['inscripcion-autocad-2d'] = 'invitacion/video_informaciones/13';
 $route['inscripcion-autocad-3d'] = 'invitacion/video_informaciones/14';
+$route['inscripcion-routers'] = 'invitacion/video_informaciones/15';
+$route['inscripcion-computacion'] = 'invitacion/video_informaciones/16';

@@ -58,17 +58,17 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso práctico de:"), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "ORGANIZADOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso práctico de:"), 0, 1, '');
             } else {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado  del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado  del curso práctico de:"), 0, 1, '');
             }
 
             // titulo del curso
@@ -217,17 +217,17 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso práctico de:"), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "ORGANIZADOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso práctico de:"), 0, 1, '');
             } else {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
                 $this->AddFont('OpenSans-SemiBold', '', 'OpenSans-SemiBold.php');
                 $this->SetFont('OpenSans-SemiBold', '', $datos_curso[0]->tamano_texto);
-                $this->Cell(190, 11, utf8_decode("Por haber participado  del curso especializado de:"), 0, 1, '');
+                $this->Cell(190, 11, utf8_decode("Por haber participado  del curso práctico de:"), 0, 1, '');
             }
 
             // titulo del curso
@@ -351,13 +351,13 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Cell(186, 11, utf8_decode($this->verificar_aprobacion($datos_curso[0]->nota_aprobacion, $est['calificacion_final'])), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "EXPOSITOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(186, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(186, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso práctico de:"), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "ORGANIZADOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(186, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(186, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso práctico de:"), 0, 1, '');
             } else {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(186, 11, utf8_decode("Por haber participado  del curso especializado de:"), 0, 1, '');
+                $this->Cell(186, 11, utf8_decode("Por haber participado  del curso práctico de:"), 0, 1, '');
             }
 
             // titulo del curso
@@ -443,7 +443,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/internet.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/after-fondo.jpg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -480,13 +480,13 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Cell(193.4, 11, utf8_decode($this->verificar_aprobacion($datos_curso[0]->nota_aprobacion, $est['calificacion_final'])), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "EXPOSITOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(193.4, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(193.4, 11, utf8_decode("Por haber participado en calidad de EXPOSITOR del curso práctico de:"), 0, 1, '');
             } elseif ($est['tipo_participacion'] == "ORGANIZADOR") {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(193.4, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso especializado de:"), 0, 1, '');
+                $this->Cell(193.4, 11, utf8_decode("Por haber participado en calidad de ORGANIZADOR del curso práctico de:"), 0, 1, '');
             } else {
                 $this->SetXY($datos_curso[0]->posx_tipo_participacion, $datos_curso[0]->posy_tipo_participacion);
-                $this->Cell(193.4, 11, utf8_decode("Por haber participado  del curso especializado de:"), 0, 1, '');
+                $this->Cell(193.4, 11, utf8_decode("Por haber participado  del curso práctico de:"), 0, 1, '');
             }
 
             // titulo del curso
@@ -654,7 +654,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/internet.jpeg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/after-fondo.jpg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);

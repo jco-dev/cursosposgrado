@@ -993,7 +993,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad3d.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1002,7 +1002,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode(' CAPACÍTATE EN EL MANEJO DE AUTOCAD, DONDE DESARROLLARAS TUS HABILIDADES, DESTREZAS Y LA CAPACIDAD DE INTERACTUAR DE MANERA CORRECTA CON LA INTERFAZ DEL SOFTWARE.') ?>
+                                                                                       <?= utf8_decode('EN ESTE CURSO APRENDERÁS CONCEPTOS FUNDAMENTALES DE AUTOCAD EN 3D, SÓLIDOS, CÁMARAS Y ESTILOS VISUALES. TAMBIÉN COMO REALIZAR RENDER, BACKGROUND E ILUMINACION, ASÍ COMO UNA INTRODUCCIÓN A 3D MAX.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1031,7 +1031,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/photoshop-min.png') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/herramientas.jpg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1040,7 +1040,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('INSCRÍBETE YA. CON EL CURSO PODRÁS REALIZAR EL RETOQUE Y FOTOMONTAJE A TUS FOTOGRAFÍAS , TU IMAGINACIÓN NO TENDRÁ LÍMITE, APRENDERÁS A CREAR TUS PROPIAS IMÁGENES. NO PIERDAS ESTA OPORTUNIDAD DE APRENDER CON LOS MEJORES. ') ?>
+                                                                                       <?= utf8_decode(" EN ESTE CURSO TE CAPACITARÁS EN LA ADMINISTRACIÓN Y GESTIÓN DE LAS HERRAMIENTAS TIC'S MÁS USADAS EN LA EDUCACIÓN VIRTUAL, COMO SER CLASSROOM, ZOOM, MEET, MOODLE, GOOGLE DRIVE, GOOGLE FORMULARIOS Y OBS STUDIO.") ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
@@ -1069,7 +1069,7 @@
                                                                                  <tr>
                                                                                     <td width="100%" style="line-height: 1px;">
                                                                                        <a href="https://cursosposgrado.upea.bo/" style="text-decoration: none;">
-                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad3d.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
+                                                                                          <img mc:edit="42" src="<?= base_url('assets/img/img_send_certificate/autocad.jpeg') ?>" alt="" border="0" width="100%" height="auto" class="hover" />
                                                                                        </a>
                                                                                     </td>
                                                                                  </tr>
@@ -1078,7 +1078,7 @@
                                                                                  </tr>
                                                                                  <tr>
                                                                                     <td width="100%" style="text-align: justify; font-size: 12px; padding: 0px 10px; color: #797979; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" class="opensans" mc:edit="44">
-                                                                                       <?= utf8_decode('EN ESTE CURSO APRENDERÁS CONCEPTOS FUNDAMENTALES DE AUTOCAD EN 3D, SÓLIDOS, CÁMARAS Y ESTILOS VISUALES. TAMBIÉN COMO REALIZAR RENDER, BACKGROUND E ILUMINACION, ASÍ COMO UNA INTRODUCCIÓN A 3D MAX.') ?>
+                                                                                       <?= utf8_decode('CAPACÍTATE EN EL MANEJO DE AUTOCAD, DONDE DESARROLLARAS TUS HABILIDADES, DESTREZAS Y LA CAPACIDAD DE INTERACTUAR DE MANERA CORRECTA CON LA INTERFAZ DEL SOFTWARE.') ?>
                                                                                     </td>
                                                                                  </tr>
                                                                                  <tr>
