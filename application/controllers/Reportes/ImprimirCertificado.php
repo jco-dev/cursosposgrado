@@ -192,6 +192,10 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
+            if (file_exists('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg')) {
+                $this->Image('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg', 0, 0, 279.4, 215.9);
+            }
+
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
             $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
@@ -204,7 +208,7 @@ class ImprimirCertificado extends Fpdf_psg
 
             $this->SetFont('Arial', 'B', $datos_curso[0]->tamano_titulo);
             $this->SetXY($datos_curso[0]->posx_nombre_participante + 15, $datos_curso[0]->posy_nombre_participante);
-            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 1, 1, 'C');
+            $this->Cell(196, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 0, 1, 'C');
 
             // TIPO PARTICIPACION
             $this->SetTextColor(0, 0, 0);
@@ -314,7 +318,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/excel-vertical.jpeg", 0, 0, 215.9, 280.5);
+            $this->Image("assets/img/img_send_certificate/photoshop-vertical.jpg", 0, 0, 215.9, 280.5);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);
@@ -335,13 +339,13 @@ class ImprimirCertificado extends Fpdf_psg
             $this->AddFont('PalaceScriptMT', '', 'PalaceScriptMT.php');
             $this->SetFont('PalaceScriptMT', '', $datos_curso[0]->tamano_titulo + 15);
             if ($value == "SI") {
-                $this->Cell(15, 18, utf8_decode("A: "), 0, 1, 'C');
+                $this->Cell(15, 10, utf8_decode("A: "), 0, 1, 'C');
             }
 
             $this->AddFont('Roboto-Black', '', 'Roboto-Black.php');
             $this->SetFont('Roboto-Black', '', $datos_curso[0]->tamano_titulo);
             $this->SetXY($datos_curso[0]->posx_nombre_participante + 15, $datos_curso[0]->posy_nombre_participante);
-            $this->Cell(171, 18, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 0, 1, 'C');
+            $this->AjustCell(132, 10, utf8_decode(mb_convert_case(preg_replace('/\s+/', ' ', trim($est['nombre_estudiante'])), MB_CASE_UPPER)), 0, 1, 'C');
 
             // TIPO PARTICIPACION
             $this->SetFont('AusterRounded-Light', '', $datos_curso[0]->tamano_texto);
@@ -373,7 +377,7 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
             $this->SetFont('BebasNeue-Regular', '', $datos_curso[0]->tamano_subtitulo);
-            $this->MultiCell(186, 13, utf8_decode($est['nombre_curso']), 0, 'C');
+            $this->MultiCell(132, 10, utf8_decode($est['nombre_curso']), 0, 'C');
 
             //IMPRIMIR SUBITULO
             $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
@@ -443,7 +447,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/after-fondo.jpg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/moodle-fondo.jpg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -566,6 +570,10 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
+            if (file_exists('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg')) {
+                $this->Image('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg', 0, 0, 279.4, 215.9);
+            }
+
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
             $this->SetTextColor($color_p[0], $color_p[1], $color_p[2]);
@@ -654,7 +662,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.5, 215.9);
             }
-            $this->Image("assets/img/img_send_certificate/after-fondo.jpg", 0, 0, 279.7, 215.9);
+            $this->Image("assets/img/img_send_certificate/moodle-fondo.jpg", 0, 0, 279.7, 215.9);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 17);
@@ -763,7 +771,7 @@ class ImprimirCertificado extends Fpdf_psg
             if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 215.9, 279.4);
             }
-            $this->Image("assets/img/img_send_certificate/excel-vertical.jpeg", 0, 0, 215.9, 279.4);
+            $this->Image("assets/img/img_send_certificate/photoshop-vertical.jpg", 0, 0, 215.9, 279.4);
 
             $this->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
             $this->SetFont('AusterRounded-Light', '', 15);

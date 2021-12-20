@@ -813,7 +813,7 @@ class Cursos extends PSG_Controller
 
 				$rep = new ImprimirCertificado();
 				if ($datos_curso[0]->orientacion == "horizontal") {
-					$rep->imprimir_todos_version2($datos_curso, $data, $value);
+					$rep->imprimir_todos_version1($datos_curso, $data, $value);
 				} else {
 					$rep->imprimir_todos_vertical($datos_curso, $data, $value);
 				}
@@ -882,7 +882,7 @@ class Cursos extends PSG_Controller
 
 			$rep = new ImprimirCertificado();
 			if ($datos_curso[0]->orientacion == "horizontal") {
-				$rep->imprimir_blanco_version1($curso_data, $datos_curso, $tipo);
+				$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
 			} else {
 				$rep->imprimir_blanco_vertical_version1($curso_data, $datos_curso, $tipo);
 			}

@@ -1,0 +1,55 @@
+.contenedor-cupon {
+	width: 50%;
+	margin: 50px auto;
+}
+
+#cupon-fecha-fin {
+	display: flex;
+	justify-content: center;
+}
+
+.simply-section {
+	background: #a6a6a6;
+	width: 60px;
+	height: 60px;
+	margin: 0 5px;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.simply-amount {
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	display: flex;
+	justify-content: center;
+	/* align-items: center; */
+}
+
+.simply-word {
+	font-weight: 300;
+	font-size: 11px;
+	text-align: center;
+}
+
+@media (max-width: 990px) {
+	.contenedor-cupon {
+		width: 100%;
+	}
+}
+
+.button-cupon {
+	background-color: #b50624;
+	color: white;
+	padding: 8px 48px;
+	margin-top: 15px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.button-cupon:hover {
+	color: white;
+	background-color: #dc001a;
+}

@@ -27,9 +27,7 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             min-width: 100px;
-            /* padding: 1px 10px; */
             padding: 0px 30px;
-            /* font-family: 'Lobster', cursive; */
             font-size: 14px;
             line-height: 30px;
             text-decoration: none;
@@ -39,8 +37,6 @@
             outline: none;
             border-radius: 6px;
             border: .7px solid #800E10;
-
-
             position: relative;
             overflow: visible;
             /* IE9 & 10 */
@@ -134,7 +130,7 @@
                                 <span class="text-muted font-weight-bold mr-4">Bienvenido</span>
                                 <a href="<?= base_url('certificacion'); ?>" class="btn btn-light-primary font-weight-bolder btn-sm">Certificación</a>
                                 <!-- Button cupón -->
-                                <a class="btn-cupon" href="<?= base_url('cupon'); ?>">Obtener cupón</a>
+                                <a class="btn-cupon" href="<?= base_url('/cupon'); ?>">Obtener cupón</a>
                                 <!-- End cupón -->
                                 <?php if (isset($proximo_curso) && $proximo_curso != null) { ?>
                                     <a href="#proximoscursos" class="btn btn-light-primary font-weight-bolder btn-sm">Próximos cursos</a>
