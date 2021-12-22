@@ -213,4 +213,23 @@ class Cupon extends CI_Controller
 		} else {
 		}
 	}
+
+	public function buscar_por_ci()
+	{
+		$ci = $this->input->post('ci');
+		$respuesta = $this->sql_ssl->listar_tabla(
+			'mdl_participante',
+			['ci' => $ci]
+		);
+		if (count($respuesta) != 0) {
+			$this->output->set_content_type('application/json')->set_output(
+				json_encode(['datos' => $respuesta])
+			);
+		}
+	}
+
+	public function inscripcion()
+	{
+		var_dump($_REQUEST);
+	}
 }

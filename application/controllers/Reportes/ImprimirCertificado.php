@@ -192,8 +192,8 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
-            if (file_exists('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg')) {
-                $this->Image('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg', 0, 0, 279.4, 215.9);
+            if (file_exists('assets/img/img_send_certificate/ofimatica-fondo.jpeg')) {
+                $this->Image('assets/img/img_send_certificate/ofimatica-fondo.jpeg', 0, 0, 279.4, 215.9);
             }
 
             // Nombre estudiante
@@ -570,8 +570,8 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
-            if (file_exists('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg')) {
-                $this->Image('assets/img/img_send_certificate/basico-intermedio-avanzado.jpg', 0, 0, 279.4, 215.9);
+            if (file_exists('assets/img/img_send_certificate/ofimatica-fondo.jpeg')) {
+                $this->Image('assets/img/img_send_certificate/ofimatica-fondo.jpeg', 0, 0, 279.4, 215.9);
             }
 
             // Nombre estudiante

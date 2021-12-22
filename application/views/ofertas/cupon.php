@@ -132,7 +132,7 @@
 
                                                     <section style="width: 420px;">
                                                         <p>👉 Regístrate en el formulario.</p>
-                                                        <p>💵 Obtén un cupón descuento del 20%.</p>
+                                                        <p>💵 Obtén un cupón descuento del 30%.</p>
                                                         <p>🔄 Comparte con tus amig@s para que también obtengan su &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cupón navideño.</p>
                                                     </section>
                                                     <h4 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h4>
@@ -220,21 +220,21 @@
                     </button>
                 </div>
                 <div class="modal-body" id="modal-body-contacto">
-                    <form action="" id="frm_inscripcion_cupon" role="form" method="post">
+                    <form action="/cupon/inscripcion" id="frm_inscripcion_cupon" role="form" method="post">
 
                         <div class="form-group row">
                             <div class="col-lg-8">
                                 <label for="ci">Número de Documento: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="ci" name="ci" />
+                                <input type="text" class="form-control" id="ci_cupon" name="ci_cupon" required />
                                 <span class="form-text text-muted">Ingrese su número de documento(C.I.)</span>
                             </div>
                             <div class="col-lg-4">
                                 <label for="nombre">Expedido: </label>
-                                <select name="expedido" id="expedido" class="form-control">
+                                <select name="expedido_cupon" id="expedido_cupon" class="form-control">
                                     <option value=""> Elige </option>
                                     <option value="QR"> Nueva cédula con código QR </option>
                                     <option value="CH">Chuquisaca</option>
-                                    <option value="LP" selected>La Paz</option>
+                                    <option value="LP">La Paz</option>
                                     <option value="CB">Cochabamba</option>
                                     <option value="OR">Oruro</option>
                                     <option value="PT">Potosí</option>
@@ -249,17 +249,17 @@
                         <div class="form-group row">
                             <div class="col-lg-4">
                                 <label for="nombre">Nombre: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" />
+                                <input type="text" class="form-control" id="nombre_cupon" name="nombre_cupon" required />
                                 <span class="form-text text-muted">Ingrese su nombre</span>
                             </div>
                             <div class="col-lg-4">
                                 <label for="paterno">Paterno: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="paterno" name="paterno" />
+                                <input type="text" class="form-control" id="paterno_cupon" name="paterno_cupon" required />
                                 <span class="form-text text-muted">Apellido paterno</span>
                             </div>
                             <div class="col-lg-4">
                                 <label for="materno">Materno: </label>
-                                <input type="text" class="form-control" id="materno" name="materno" />
+                                <input type="text" class="form-control" id="materno_cupon" name="materno_cupon" />
                                 <span class="form-text text-muted">Apellido materno</span>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                         <div class="form-group row">
                             <div class="col-lg-12">
                                 <label for="celular">Celular: <span class="text-danger">(*)</span></label>
-                                <input type="number" class="form-control" id="celular" name="celular" />
+                                <input type="number" class="form-control" id="celular_cupon" name="celular_cupon" required />
                                 <span class="form-text text-muted">Número de celular</span>
                             </div>
                         </div>
