@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
 			processData: false,
 			dataType: "JSON",
 		}).done(function (response) {
-			console.log(response);
+			// console.log(response);
 			if (typeof response.exito != "undefined") {
 				if (response.id_evento == "1") {
 					// feria de libro

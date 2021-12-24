@@ -29,8 +29,8 @@
         }
 
         img.cupon-image {
-            width: 280px;
-            height: 290px;
+            width: 300px;
+            height: 200px;
             padding: 5px;
             text-align: center;
             margin: 0;
@@ -123,38 +123,30 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <!--begin::List Widget 10-->
-                                            <div class="card card-custom card-stretch gutter-b p-5 mb-20">
+                                            <div class="card card-custom card-stretch gutter-b">
                                                 <div class="contenedor-cupon">
-                                                    <img src="assets/img/img_send_certificate/cupon.png" class="cupon-image" alt="Imagen de cupón">
-                                                    <h3 style="font-weight: bold;">¡Tus Cursos al mejor precio!</h3>
-                                                    <h6 style="text-align: center;">Consigue un descuento para tu próxima inscripción en cualquiera de nuestros cursos.</h6>
-                                                    <h6>¿Qué tienes que hacer para conseguir tu cupón navideño?</h6>
+                                                    <img src="assets/img/img_send_certificate/cupon.jpg" class="cupon-image" alt="Imagen de cupón">
+                                                    <h3 style="font-weight: bold;">¡Obtén tu descuento ahora!</h3>
+                                                    <h6 style="text-align: center;">Consigue tus descuentos para tus próximas inscripciones en cualquiera de nuestros cursos.</h6>
+                                                    <h6 style="text-align: center;">¿Qué tienes que hacer para conseguir tu cupón por fin de año?</h6>
 
-                                                    <section style="width: 420px;">
+                                                    <section style="padding-left: 5px;padding-right: 5px;">
                                                         <p>👉 Regístrate en el formulario.</p>
-                                                        <p>💵 Obtén un cupón descuento del 30%.</p>
-                                                        <p>🔄 Comparte con tus amig@s para que también obtengan su &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cupón navideño.</p>
+                                                        <p>💵 Obtén un cupón de descuento del <strong>30%</strong>.</p>
+                                                        <p>🔄 Comparte esta noticia con tus amig@s para que obtengan su cupón por fin de año.</p>
                                                     </section>
-                                                    <h4 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h4>
+                                                    <h5 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h5>
                                                     <p>📆 Promoción válida hasta: <span style="font-weight: bold;">31/12/2021</span></p>
                                                     <div id="cupon-fecha-fin"></div>
-                                                    <button class="btn button-cupon">OBTENER CUPÓN</button>
+                                                    <button class="btn button-cupon">¡OBTÉN TUS CUPONES AHORA!</button>
                                                 </div>
-
                                             </div>
-                                            <!--end: Card-->
-                                            <!--end: List Widget 10-->
                                         </div>
                                     </div>
-                                    <!--end::Row-->
-
-
                                 </div>
-                                <!--end::Content-->
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <?php include('footer.php') ?>
             </div>
@@ -210,11 +202,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-cupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal animated bounceInDown" id="modal-cupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Formulario de inscripción cupón</h5>
+                    <h5 class="modal-title">Regístrate en este formulario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
@@ -223,65 +215,105 @@
                     <form action="/cupon/inscripcion" id="frm_inscripcion_cupon" role="form" method="post">
 
                         <div class="form-group row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-9">
                                 <label for="ci">Número de Documento: <span class="text-danger">(*)</span></label>
                                 <input type="text" class="form-control" id="ci_cupon" name="ci_cupon" required />
                                 <span class="form-text text-muted">Ingrese su número de documento(C.I.)</span>
                             </div>
-                            <div class="col-lg-4">
-                                <label for="nombre">Expedido: </label>
-                                <select name="expedido_cupon" id="expedido_cupon" class="form-control">
-                                    <option value=""> Elige </option>
-                                    <option value="QR"> Nueva cédula con código QR </option>
-                                    <option value="CH">Chuquisaca</option>
-                                    <option value="LP">La Paz</option>
-                                    <option value="CB">Cochabamba</option>
-                                    <option value="OR">Oruro</option>
-                                    <option value="PT">Potosí</option>
-                                    <option value="TJ">Tarija</option>
-                                    <option value="SC">Santa Cruz</option>
-                                    <option value="BE">Beni</option>
-                                    <option value="PD">Pando</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-lg-4">
-                                <label for="nombre">Nombre: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="nombre_cupon" name="nombre_cupon" required />
-                                <span class="form-text text-muted">Ingrese su nombre</span>
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="paterno">Paterno: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="paterno_cupon" name="paterno_cupon" required />
-                                <span class="form-text text-muted">Apellido paterno</span>
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="materno">Materno: </label>
-                                <input type="text" class="form-control" id="materno_cupon" name="materno_cupon" />
-                                <span class="form-text text-muted">Apellido materno</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-lg-12">
-                                <label for="celular">Celular: <span class="text-danger">(*)</span></label>
-                                <input type="number" class="form-control" id="celular_cupon" name="celular_cupon" required />
-                                <span class="form-text text-muted">Número de celular</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-lg-12">
-                                <button href="javascript:void(0)" class="btn btn-primary" style="padding: 8px 48px">
-                                    Terminar
+                            <div class="col-lg-3">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn btn-secondary btn-block btn-buscar-ci">
+                                    <i class="fas fa-search" id="icono-btn-buscar"></i>
+                                    Registrar
                                 </button>
+                            </div>
+                        </div>
+                        <div id="form-inscripcion">
+                            <div class="form-group row">
+                                <input type="hidden" id="id_participante_cupon" name="id_participante_cupon" />
+                                <div class="col-lg-12">
+                                    <label for="nombre">Expedido: </label>
+                                    <select name="expedido_cupon" id="expedido_cupon" class="form-control">
+                                        <option value=""> Elige </option>
+                                        <option value="QR"> Nueva cédula con código QR </option>
+                                        <option value="CH">Chuquisaca</option>
+                                        <option value="LP">La Paz</option>
+                                        <option value="CB">Cochabamba</option>
+                                        <option value="OR">Oruro</option>
+                                        <option value="PT">Potosí</option>
+                                        <option value="TJ">Tarija</option>
+                                        <option value="SC">Santa Cruz</option>
+                                        <option value="BE">Beni</option>
+                                        <option value="PD">Pando</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label for="nombre">Nombre: <span class="text-danger">(*)</span></label>
+                                    <input type="text" class="form-control" id="nombre_cupon" name="nombre_cupon" required />
+                                    <span class="form-text text-muted">Ingrese su nombre</span>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="paterno">Paterno: <span class="text-danger">(*)</span></label>
+                                    <input type="text" class="form-control" id="paterno_cupon" name="paterno_cupon" required />
+                                    <span class="form-text text-muted">Apellido paterno</span>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="materno">Materno: </label>
+                                    <input type="text" class="form-control" id="materno_cupon" name="materno_cupon" />
+                                    <span class="form-text text-muted">Apellido materno</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <label for="celular">Celular: <span class="text-danger">(*)</span></label>
+                                    <input type="number" class="form-control" id="celular_cupon" name="celular_cupon" required />
+                                    <span class="form-text text-muted">Número de celular</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <button href="javascript:void(0)" class="btn button-cupon btn-block">
+                                        <i class="fas fa-save text-white" style="padding-bottom: 5px;"></i>
+                                        RESERVAR MI CUPÓN
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                     </form>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_imprimir_cupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title-cupon">Cupón de descuento</h5>
+                    <button type="button" class="close close-modal-cupon" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-cupon">
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-around">
+                        <a href="#" id="descargar-cupon" title='cupon.pdf' download="cupon.pdf" class="btn btn-danger">
+                            <i class="far fa-file-pdf"></i>
+                            Descargar PDF
+                        </a>
+                        <a href="#" id="whatsapp" class="btn btn-success ml-2">
+                            <i class="fab fa-whatsapp"></i>
+                            Enviar a WhatsApp
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -360,6 +392,186 @@
             },
             "font-family": "Poppins",
         };
+    </script>
+    <script>
+        //download.js v4.2, by dandavis; 2008-2016. [CCBY2] see http://danml.com/download.html for tests/usage
+        // v1 landed a FF+Chrome compat way of downloading strings to local un-named files, upgraded to use a hidden frame and optional mime
+        // v2 added named files via a[download], msSaveBlob, IE (10+) support, and window.URL support for larger+faster saves than dataURLs
+        // v3 added dataURL and Blob Input, bind-toggle arity, and legacy dataURL fallback was improved with force-download mime and base64 support. 3.1 improved safari handling.
+        // v4 adds AMD/UMD, commonJS, and plain browser support
+        // v4.1 adds url download capability via solo URL argument (same domain/CORS only)
+        // v4.2 adds semantic variable names, long (over 2MB) dataURL support, and hidden by default temp anchors
+        // https://github.com/rndme/download
+
+        (function(root, factory) {
+            if (typeof define === 'function' && define.amd) {
+                // AMD. Register as an anonymous module.
+                define([], factory);
+            } else if (typeof exports === 'object') {
+                // Node. Does not work with strict CommonJS, but
+                // only CommonJS-like environments that support module.exports,
+                // like Node.
+                module.exports = factory();
+            } else {
+                // Browser globals (root is window)
+                root.download = factory();
+            }
+        }(this, function() {
+
+            return function download(data, strFileName, strMimeType) {
+
+                var self = window, // this script is only for browsers anyway...
+                    defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
+                    mimeType = strMimeType || defaultMime,
+                    payload = data,
+                    url = !strFileName && !strMimeType && payload,
+                    anchor = document.createElement("a"),
+                    toString = function(a) {
+                        return String(a);
+                    },
+                    myBlob = (self.Blob || self.MozBlob || self.WebKitBlob || toString),
+                    fileName = strFileName || "download",
+                    blob,
+                    reader;
+                myBlob = myBlob.call ? myBlob.bind(self) : Blob;
+
+                if (String(this) === "true") { //reverse arguments, allowing download.bind(true, "text/xml", "export.xml") to act as a callback
+                    payload = [payload, mimeType];
+                    mimeType = payload[0];
+                    payload = payload[1];
+                }
+
+
+                if (url && url.length < 2048) { // if no filename and no mime, assume a url was passed as the only argument
+                    fileName = url.split("/").pop().split("?")[0];
+                    anchor.href = url; // assign href prop to temp anchor
+                    if (anchor.href.indexOf(url) !== -1) { // if the browser determines that it's a potentially valid url path:
+                        var ajax = new XMLHttpRequest();
+                        ajax.open("GET", url, true);
+                        ajax.responseType = 'blob';
+                        ajax.onload = function(e) {
+                            download(e.target.response, fileName, defaultMime);
+                        };
+                        setTimeout(function() {
+                            ajax.send();
+                        }, 0); // allows setting custom ajax headers using the return:
+                        return ajax;
+                    } // end if valid url?
+                } // end if url?
+
+
+                //go ahead and download dataURLs right away
+                if (/^data\:[\w+\-]+\/[\w+\-]+[,;]/.test(payload)) {
+
+                    if (payload.length > (1024 * 1024 * 1.999) && myBlob !== toString) {
+                        payload = dataUrlToBlob(payload);
+                        mimeType = payload.type || defaultMime;
+                    } else {
+                        return navigator.msSaveBlob ? // IE10 can't do a[download], only Blobs:
+                            navigator.msSaveBlob(dataUrlToBlob(payload), fileName) :
+                            saver(payload); // everyone else can save dataURLs un-processed
+                    }
+
+                } //end if dataURL passed?
+
+                blob = payload instanceof myBlob ?
+                    payload :
+                    new myBlob([payload], {
+                        type: mimeType
+                    });
+
+
+                function dataUrlToBlob(strUrl) {
+                    var parts = strUrl.split(/[:;,]/),
+                        type = parts[1],
+                        decoder = parts[2] == "base64" ? atob : decodeURIComponent,
+                        binData = decoder(parts.pop()),
+                        mx = binData.length,
+                        i = 0,
+                        uiArr = new Uint8Array(mx);
+
+                    for (i; i < mx; ++i) uiArr[i] = binData.charCodeAt(i);
+
+                    return new myBlob([uiArr], {
+                        type: type
+                    });
+                }
+
+                function saver(url, winMode) {
+
+                    if ('download' in anchor) { //html5 A[download]
+                        anchor.href = url;
+                        anchor.setAttribute("download", fileName);
+                        anchor.className = "download-js-link";
+                        anchor.innerHTML = "downloading...";
+                        anchor.style.display = "none";
+                        document.body.appendChild(anchor);
+                        setTimeout(function() {
+                            anchor.click();
+                            document.body.removeChild(anchor);
+                            if (winMode === true) {
+                                setTimeout(function() {
+                                    self.URL.revokeObjectURL(anchor.href);
+                                }, 250);
+                            }
+                        }, 66);
+                        return true;
+                    }
+
+                    // handle non-a[download] safari as best we can:
+                    if (/(Version)\/(\d+)\.(\d+)(?:\.(\d+))?.*Safari\//.test(navigator.userAgent)) {
+                        url = url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+                        if (!window.open(url)) { // popup blocked, offer direct download:
+                            if (confirm("Displaying New Document\n\nUse Save As... to download, then click back to return to this page.")) {
+                                location.href = url;
+                            }
+                        }
+                        return true;
+                    }
+
+                    //do iframe dataURL download (old ch+FF):
+                    var f = document.createElement("iframe");
+                    document.body.appendChild(f);
+
+                    if (!winMode) { // force a mime that will download:
+                        url = "data:" + url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+                    }
+                    f.src = url;
+                    setTimeout(function() {
+                        document.body.removeChild(f);
+                    }, 333);
+
+                } //end saver
+
+
+
+
+                if (navigator.msSaveBlob) { // IE10+ : (has Blob, but not a[download] or URL)
+                    return navigator.msSaveBlob(blob, fileName);
+                }
+
+                if (self.URL) { // simple fast and modern way using Blob and URL:
+                    saver(self.URL.createObjectURL(blob), true);
+                } else {
+                    // handle non-Blob()+non-URL browsers:
+                    if (typeof blob === "string" || blob.constructor === toString) {
+                        try {
+                            return saver("data:" + mimeType + ";base64," + self.btoa(blob));
+                        } catch (y) {
+                            return saver("data:" + mimeType + "," + encodeURIComponent(blob));
+                        }
+                    }
+
+                    // Blob but not URL support:
+                    reader = new FileReader();
+                    reader.onload = function(e) {
+                        saver(this.result);
+                    };
+                    reader.readAsDataURL(blob);
+                }
+                return true;
+            }; /* end download() */
+        }));
     </script>
     <script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
     <script src="<?= base_url('assets/plugins/custom/prismjs/prismjs.bundle.js') ?>"></script>
