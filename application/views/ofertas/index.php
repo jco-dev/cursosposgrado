@@ -152,7 +152,7 @@
                     </div>
                     <div class="d-flex flex-column-fluid">
                         <div class="container-fluid px-lg-30">
-                            <div class="alert p-3 alert-custom alert-white alert-shadow fade show gutter-b" role="alert">
+                            <div class="alert p-3 alert-custom alert-white alert-shadow fade show" role="alert">
                                 <div class="alert-icon">
                                     <span class="svg-icon svg-icon-primary svg-icon-xl">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
