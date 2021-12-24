@@ -27,9 +27,7 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
             min-width: 100px;
-            padding: 0px 30px;
             font-size: 12px;
-            line-height: 25px;
             text-decoration: none;
             color: white;
             background: #A51214;
@@ -64,7 +62,12 @@
 
         @media(max-width:400px) {
             .btn-cupon {
-                padding: 0px 5px;
+                padding: 0px 20px;
+
+            }
+
+            .icon-cupon {
+                font-size: 26px;
             }
         }
     </style>
@@ -163,9 +166,9 @@
                                 </div>
                                 <div class="alert-text">Cursos vigentes</div>
                                 <!-- Button cupón -->
-                                <a class="btn-cupon text-white" href="<?= base_url('/cupon'); ?>">
-                                    <i class="fas fa-gift text-white"></i>
-                                    OBTENER CUPÓN
+                                <a class="btn-cupon text-white" style="display: flex; justify-content: space-around; padding: 10px; 30px;" href="<?= base_url('/cupon'); ?>">
+                                    <i class="fas fa-gift text-white icon-cupon" style="display: flex; justify-content: center; align-items: center;"></i>
+                                    <span class="text-cupon" style="margin-left: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">OBTENER MI CUPÓN POR FIN DE AÑO</span>
                                 </a>
                                 <!-- End cupón -->
                             </div>
