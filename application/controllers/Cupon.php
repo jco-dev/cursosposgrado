@@ -183,4 +183,54 @@ class Cupon extends CI_Controller
 		$rep = new CuponDescuento();
 		$rep->imprimir_cupon($cupones, $participante);
 	}
+
+	public function verificar_cupon()
+	{
+		$ci = trim($this->input->post('ci'));
+		$numero_cupon = trim($this->input->post('numero_cupon'));
+		$data = $this->cupon_model->verificar_cupon_por_ci_cupon($ci, $numero_cupon);
+		if ($data != NULL) {
+			if ($data[0]->estado == 'REGISTRADO') {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'warning' => 'Cupón válido.',
+						'tipo' => 'success'
+					]
+				));
+			} else {
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'warning' => 'El cupón ya ha sido utilizado.',
+						'tipo' => 'danger'
+					]
+				));
+			}
+		} else {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'warning' => 'Número de cupón no válido.',
+					'tipo' => 'warning'
+				]
+			));
+		}
+	}
+
+	public function buscar_cupones_usuario()
+	{
+		$ci = $this->input->post('ci');
+		$cupones = $this->cupon_model->buscar_cupones_usuario($ci);
+		$data = array();
+
+		if ($cupones != NULL) {
+			foreach ($cupones as $key => $value) {
+				array_push($data, $value->numero_cupon);
+			}
+		}
+
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			[
+				'cupones' => $data
+			]
+		));
+	}
 }

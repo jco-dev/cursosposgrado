@@ -448,11 +448,18 @@ jQuery(document).ready(function () {
 				$("#celular").val(response.datos[0].celular);
 				$("#m_celular").text(response.datos[0].celular);
 
-				if (response.datos[0].fecha_nacimiento != "") {
+				if (
+					response.datos[0].fecha_nacimiento != "" &&
+					response.datos[0].fecha_nacimiento != null
+				) {
 					let fecha = response.datos[0].fecha_nacimiento.split("-");
 					$("#anio1").val(fecha[0]).trigger("change");
 					$("#mes1").val(fecha[1]).trigger("change");
 					$("#dia1").val(parseInt(fecha[2])).trigger("change");
+				} else {
+					$("#anio1").val("").trigger("change");
+					$("#mes1").val("").trigger("change");
+					$("#dia1").val("").trigger("change");
 				}
 				$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
 
@@ -547,4 +554,53 @@ jQuery(document).ready(function () {
 			return dia;
 		}
 	}
+
+	// Verificar cupón
+	$("#cupon").on("keyup", function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		if ($(this).val().length >= 4) {
+			let cupon = $(this).val();
+			let ci = $("#ci").val();
+			$.ajax({
+				url: "/cupon/verificar_cupon",
+				method: "POST",
+				data: { numero_cupon: cupon, ci: ci },
+				dataType: "json",
+				success: function (response) {
+					console.log(response);
+				},
+			});
+		}
+	});
+
+	$("#ci").on("keyup", function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		let ci = $(this).val();
+
+		if (ci.length >= 4) {
+			$.post("/cupon/buscar_cupones_usuario", { ci: ci }, function (response) {
+				if (response.cupones.length > 0) {
+					$("#card-cupon-body").append(
+						'<label for="monto_pago">Aplicar cupón</label><div class="radio-list form-group m-0">'
+					);
+					response.cupones.forEach((element) => {
+						$("#card-cupon-body").append(
+							' <label class="radio mb-2 p-2"><input type="radio" name="cupon" id="cupon" value="' +
+								element +
+								'" /><span style="margin-right: 6px;"></span> ' +
+								element +
+								"</label>"
+						);
+					});
+					$("#card-cupon-body").append(
+						'<label class="radio mb-2 p-2"><input type="radio" name="cupon" id="cupon" value="" /><span style="margin-right: 6px;"></span>Ninguno</label></div>"'
+					);
+				} else {
+					console.log("no hay cupones");
+				}
+			});
+		}
+	});
 });

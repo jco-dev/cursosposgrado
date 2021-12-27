@@ -213,12 +213,36 @@
     </div>
 
     <br>
-    <div class="card card-custom">
-        <div class="card-body form-group pb-0">
-            <label for="monto_pago">Monto Pago <span class="text-danger">(*)</span></label>
-            <input type="number" id="monto_pago" name="monto_pago" class="form-control">
+    <div class="card card-custom" id="card-cupon">
+        <div class="card-body form-group pb-0" id="card-cupon-body">
+
+
+            <!-- <input type="text" id="cupon" name="cupon" class="form-control">
+            <span class="form-text text-muted">DISPONIBLES: NAV-00001 NAV-00002</span> -->
         </div>
     </div>
+
+    <br>
+    <div class="card card-custom">
+        <div class="card-body form-group pb-0 row">
+
+            <div class="col-lg-8">
+                <label for="monto_pago">Monto Pago <span class="text-danger">(*)</span></label>
+                <input type="number" id="monto_pago" name="monto_pago" class="form-control">
+            </div>
+            <div class="col-lg-4">
+                <label for="monto_pago">Costo curso</label>
+                <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                    <input type="text" id="costo_curso" value="Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?>" class="form-control" disabled>
+                <?php } else { ?>
+                    <input type="text" id="costo_curso" value="Bs. <?= intval($datos[0]->inversion) ?>" class="form-control" disabled>
+                <?php } ?>
+
+            </div>
+        </div>
+    </div>
+
+
 
     <br>
     <div class="card card-custom">
