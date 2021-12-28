@@ -42,4 +42,17 @@ class Cupon_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function buscar_cupon_por_numero_cupon($ci, $numero_cupon)
+	{
+		$sql = "SELECT * FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
+		JOIN mdl_cupones mc ON mc.id_cupones = mcp.id_cupones
+		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci'";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }

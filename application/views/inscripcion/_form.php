@@ -214,12 +214,7 @@
 
     <br>
     <div class="card card-custom" id="card-cupon">
-        <div class="card-body form-group pb-0" id="card-cupon-body">
-
-
-            <!-- <input type="text" id="cupon" name="cupon" class="form-control">
-            <span class="form-text text-muted">DISPONIBLES: NAV-00001 NAV-00002</span> -->
-        </div>
+        <div class="card-body form-group pb-0" id="card-cupon-body"></div>
     </div>
 
     <br>
@@ -227,7 +222,7 @@
         <div class="card-body form-group pb-0 row">
 
             <div class="col-lg-8">
-                <label for="monto_pago">Monto Pago <span class="text-danger">(*)</span></label>
+                <label for="monto_pago">Monto Pago en (Bolivianos) <span class="text-danger">(*)</span></label>
                 <input type="number" id="monto_pago" name="monto_pago" class="form-control">
             </div>
             <div class="col-lg-4">

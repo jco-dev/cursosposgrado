@@ -233,4 +233,12 @@ class Cupon extends CI_Controller
 			]
 		));
 	}
+
+	public function porcentaje_cupon()
+	{
+		$numero_cupon = $this->input->post('numero_cupon');
+		$ci = $this->input->post('ci');
+		$cupon  = $this->cupon_model->buscar_cupon_por_numero_cupon($ci, $numero_cupon);
+		var_dump($cupon);
+	}
 }
