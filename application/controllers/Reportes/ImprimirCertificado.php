@@ -377,7 +377,7 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
             $this->SetFont('BebasNeue-Regular', '', $datos_curso[0]->tamano_subtitulo);
-            $this->MultiCell(132, 10, utf8_decode($est['nombre_curso']), 0, 'C');
+            $this->MultiCell(127, 10, utf8_decode($est['nombre_curso']), 0, 'C');
 
             //IMPRIMIR SUBITULO
             $posy_bt = intval($datos_curso[0]->posy_bloque_texto);
@@ -802,6 +802,7 @@ class ImprimirCertificado extends Fpdf_psg
             $this->Cell(197, 11, utf8_decode($this->verificar_tipo_participacion($cur['tipo_participacion'])), 0, 1, '');
 
             // titulo del curso
+            // titulo del curso
             if ($cur['color_nombre_curso'] == "") {
                 $color_s[0] = 0;
                 $color_s[1] = 0;
@@ -814,7 +815,7 @@ class ImprimirCertificado extends Fpdf_psg
             $this->SetXY($datos_curso[0]->posx_nombre_curso, $datos_curso[0]->posy_nombre_curso);
             $this->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
             $this->SetFont('BebasNeue-Regular', '', $datos_curso[0]->tamano_subtitulo);
-            $this->MultiCell(186, 13, utf8_decode($cur['nombre_curso']), 0, 'C');
+            $this->MultiCell(127, 10, utf8_decode($cur['nombre_curso']), 0, 'C');
 
             //IMPRIMIR SUBITULO
             $posy_bt = intval($datos_curso[0]->posy_bloque_texto);

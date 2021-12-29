@@ -596,6 +596,7 @@ jQuery(document).ready(function () {
 						'<div class="radio-list form-group m-0">'
 					);
 					response.cupones.forEach((element) => {
+						console.log(element);
 						$("#card-cupon-body").append(
 							' <label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" id="cupon_participante" value="' +
 								element +
@@ -605,7 +606,7 @@ jQuery(document).ready(function () {
 						);
 					});
 					$("#card-cupon-body").append(
-						'<label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" id="cupon_participante" value="ninguno" /><span style="margin-right: 6px;"></span>Ninguno</label>'
+						'<label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" checked="checked" id="cupon_participante" value="ninguno" /><span style="margin-right: 6px;"></span>Ninguno</label>'
 					);
 					$("#card-cupon-body").append("</div>");
 				} else {
@@ -631,8 +632,17 @@ jQuery(document).ready(function () {
 						ci: ci,
 					},
 				}).done(function (response) {
-					console.log(response);
+					let precio_con_descuento =
+						costo_curso - costo_curso * (response.porcentaje / 100);
+					$(".form-tex-costo").text(
+						"Total a cancelar con descuento: Bs. " + precio_con_descuento
+					);
+					$("#monto_pago").focus();
 				});
+			} else {
+				$(".form-tex-costo").text("");
+				$("#monto_pago").val();
+				$("#monto_pago").focus();
 			}
 		}
 	);

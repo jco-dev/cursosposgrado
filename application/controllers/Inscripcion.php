@@ -29,10 +29,29 @@ class Inscripcion extends CI_Controller
         }
     }
 
+    public function validar_fecha_cupon($ci, $numero_cupon)
+    {
+        $data = $this->inscripcion_model->verificar_cupon_por_ci_cupon($ci, $numero_cupon);
+        if ($data != NULL) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function guardar_preinscripcion()
     {
+        // return var_dump($_REQUEST);
         $this->load->library('form_validation');
         $this->load->helper('email');
+
+        $ci = trim($this->input->post('ci'));
+        $cupon_participante = trim($this->input->post('cupon_participante'));
+        $id_cupones_p = null;
+        if ($this->validar_fecha_cupon($ci, $cupon_participante)) {
+            $id_cupones_participante = $this->inscripcion_model->verificar_cupon_por_ci_cupon($ci, $cupon_participante)[0]->id_cupones_participante;
+            $id_cupones_p = $id_cupones_participante;
+        }
 
         $this->form_validation->set_rules('ci', 'carnet de identidad', 'required');
         $this->form_validation->set_rules('expedido', 'expedido', 'required');
@@ -145,6 +164,7 @@ class Inscripcion extends CI_Controller
                                     [
                                         'id_participante' => $resp,
                                         'id_course_moodle' => $id_curso,
+                                        'id_cupones_participante' => $id_cupones_p,
                                         'tipo_pago' => $modalidad_inscripcion,
                                         'id_transaccion' => $id_transaccion,
                                         'monto_pago' => $monto_pago,
@@ -212,6 +232,7 @@ class Inscripcion extends CI_Controller
                                     [
                                         'id_participante' => $id_participante,
                                         'id_course_moodle' => $id_curso,
+                                        'id_cupones_participante' => $id_cupones_p,
                                         'tipo_pago' => $modalidad_inscripcion,
                                         'id_transaccion' => $id_transaccion,
                                         'monto_pago' => $monto_pago,
@@ -224,6 +245,11 @@ class Inscripcion extends CI_Controller
                                 );
 
                                 if (is_numeric($res)) {
+                                    $this->sql_ssl->modificar_tabla(
+                                        'cupones_participante',
+                                        ['estado' => "UTILIZADO", 'fecha_utilizado_cupon' => date('Y-m-d H:i:s')],
+                                        ['id_cupones_participante' => $id_cupones_p]
+                                    );
                                     $this->output->set_content_type('application/json')->set_output(
                                         json_encode(['exito' => "Registado al curso correctamente"])
                                     );
@@ -244,7 +270,7 @@ class Inscripcion extends CI_Controller
                         json_encode(['warning' => $mensaje])
                     );
                 }
-            }else{
+            } else {
                 $this->output->set_content_type('application/json')->set_output(
                     json_encode(['warning' => $this->mensaje])
                 );

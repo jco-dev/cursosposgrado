@@ -22,7 +22,8 @@ class Cupon_model extends PSG_Model
 	public function verificar_cupon_por_ci_cupon($ci, $numero_cupon)
 	{
 		$sql = "SELECT * FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
-		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci'";
+		JOIN mdl_cupones mc ON mcp.id_cupones = mc.id_cupones 
+		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci' and mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
@@ -34,7 +35,8 @@ class Cupon_model extends PSG_Model
 	public function buscar_cupones_usuario($ci)
 	{
 		$sql = "SELECT mcp.numero_cupon FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
-		WHERE mp.ci = '$ci' AND mcp.estado = 'REGISTRADO'";
+		JOIN mdl_cupones mc ON mcp.id_cupones = mc.id_cupones 
+		WHERE mp.ci = '9248587' AND mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
@@ -47,7 +49,7 @@ class Cupon_model extends PSG_Model
 	{
 		$sql = "SELECT * FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
 		JOIN mdl_cupones mc ON mc.id_cupones = mcp.id_cupones
-		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci'";
+		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci' and mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());

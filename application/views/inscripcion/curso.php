@@ -119,7 +119,7 @@
                         <?php include('_curso_id.php'); ?>
                         <?php include('_form.php'); ?>
                         <!--begin: Wizard Actions-->
-                        <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                        <div class="d-flex justify-content-between border-top mt-0 pt-1">
                             <div class="mr-2">
                                 <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-prev"> Atr&aacute;s</button>
                             </div>

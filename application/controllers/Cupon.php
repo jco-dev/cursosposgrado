@@ -89,7 +89,7 @@ class Cupon extends CI_Controller
 						'id_participante' => $id_participante,
 						'id_cupones' => $cupones[0]->id_cupones,
 						'numero_cupon' => $cupones[0]->sigla_cupon . '-' . $numero,
-						'gestion' => date('Y'),
+						'fecha_registro' => date('Y-m-d H:i:s'),
 						'estado' => 'REGISTRADO'
 					]
 				);
@@ -219,6 +219,7 @@ class Cupon extends CI_Controller
 	{
 		$ci = $this->input->post('ci');
 		$cupones = $this->cupon_model->buscar_cupones_usuario($ci);
+		// var_dump($cupones);
 		$data = array();
 
 		if ($cupones != NULL) {
@@ -239,6 +240,10 @@ class Cupon extends CI_Controller
 		$numero_cupon = $this->input->post('numero_cupon');
 		$ci = $this->input->post('ci');
 		$cupon  = $this->cupon_model->buscar_cupon_por_numero_cupon($ci, $numero_cupon);
-		var_dump($cupon);
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			[
+				'porcentaje' => $cupon[0]->porcentaje
+			]
+		));
 	}
 }

@@ -19,12 +19,18 @@
         cursor: zoom-in;
         width: 100%;
     }
+
+    @media (max-width:984px) {
+        .costo-curso-c {
+            padding-top: 14px;
+        }
+    }
 </style>
 
 <!--begin: Wizard Step 1-->
 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
 
-    <h4 class="mb-10 font-weight-bold text-dark">Datos Personales.</h4>
+    <h4 class="mb-5 font-weight-bold text-dark">Datos Personales.</h4>
 
     <div class="card card-custom">
         <div class="card-body pb-0">
@@ -53,41 +59,35 @@
         </div>
     </div>
 
-    <br>
-    <div class=" card card-custom">
+    <div class=" card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="correo"> Dirección de correo electrónico <span class="text-danger">(*)</span></label>
             <input type="email" class="form-control" name="correo" id="correo" placeholder="Tu direccion de correo electronico" />
         </div>
     </div>
 
-
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="nombre"> Nombre(s) <span class="text-danger">(*)</span></label>
             <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu respuesta" />
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="paterno"> Apellido Paterno </label>
             <input type="text" class="form-control" name="paterno" id="paterno" placeholder="Tu respuesta" />
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="materno"> Apellido Materno </label>
             <input type="text" class="form-control" name="materno" id="materno" placeholder="Tu respuesta" />
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body">
             <label for="materno"> Género </label>
             <div class="radio-list">
@@ -103,8 +103,7 @@
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group row pb-0" id="fecha">
             <div class="col-lg-12">
                 <label for="celular"> Fecha de Nacimiento <span class="text-danger">(*)</span></label>
@@ -146,16 +145,14 @@
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="celular"> Número de celular (con WhatsApp) <span class="text-danger">(*)</span></label>
             <input type="text" class="form-control" name="celular" id="celular" placeholder="Tu respuesta" />
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="ciudad_residencia"> Ciudad de residencia <span class="text-danger">(*)</span></label> <br>
             <select name="ciudad_residencia" id="ciudad_residencia" class="form-control">
@@ -174,7 +171,7 @@
 <!--end: Wizard Step 1-->
 <!--begin: Wizard Step 2-->
 <div class="pb-5" data-wizard-type="step-content">
-    <h4 class="mb-10 font-weight-bold text-dark">Pago del Curso</h4>
+    <h4 class="mb-5 font-weight-bold text-dark">Pago del Curso</h4>
 
     <div class="card card-custom">
         <div class="card-body pb-0">
@@ -196,51 +193,46 @@
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="id_transaccion">ID de transacción(código de transación de tigo money, transación bancaria o el número recibo de su inscripción en oficina) <span class="text-danger">(*)</span></label>
             <input type="text" id="id_transaccion" name="id_transaccion" class="form-control" placeholder="Tu respuesta">
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="fecha_pago">Fecha Pago <span class="text-danger">(*)</span></label>
             <input type="date" id="fecha_pago" name="fecha_pago" class="form-control" value="<?= date("Y-m-d") ?>" />
         </div>
     </div>
 
-    <br>
-    <div class="card card-custom" id="card-cupon">
+
+    <div class="card card-custom mt-6" id="card-cupon">
         <div class="card-body form-group pb-0" id="card-cupon-body"></div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0 row">
 
             <div class="col-lg-8">
-                <label for="monto_pago">Monto Pago en (Bolivianos) <span class="text-danger">(*)</span></label>
+                <label for="monto_pago">Monto Pago en Bolivianos <span class="text-danger">(*)</span></label>
                 <input type="number" id="monto_pago" name="monto_pago" class="form-control">
+                <div class="form-text form-tex-costo"></div>
             </div>
-            <div class="col-lg-4">
-                <label for="monto_pago">Costo curso</label>
+            <div class="col-lg-4 costo-curso-c">
+                <label for="monto_pago">Costo del Curso</label>
                 <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                    <input type="text" id="costo_curso" value="Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?>" class="form-control" disabled>
+                    <input type="text" id="costo_curso" value="Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?>" class="form-control form-control-solid" disabled>
                 <?php } else { ?>
-                    <input type="text" id="costo_curso" value="Bs. <?= intval($datos[0]->inversion) ?>" class="form-control" disabled>
+                    <input type="text" id="costo_curso" value="Bs. <?= intval($datos[0]->inversion) ?>" class="form-control form-control-solid" disabled>
                 <?php } ?>
 
             </div>
         </div>
     </div>
 
-
-
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label class="col-form-label text-lg-right">Respaldo de la transacción (Subir fotografía o captura del depósito o transacción) <span class="text-danger">(*)</span></label>
             <div class="custom-file">
@@ -277,8 +269,7 @@
         <div class="card-body text-justify">Describa a continuación la forma de recojo de su certificado (Nota: Para acceder al certificado de aprobación será necesario obtener una nota mínima de 66 puntos) Para el envío de su certificado puede ser por flota o Currier con costo adicional dependiendo de la ciudad que reside </div>
     </div>
 
-    <br>
-    <div class="card card-custom">
+    <div class="card card-custom mt-6">
         <div class="card-body form-group pb-0">
             <label for="tipo_certificado_solicitado">Solicite el tipo de certificado <span class="text-danger">(*)</span></label>
             <div class="radio-list form-group" id="error-certificado">
@@ -320,7 +311,7 @@
                         <span id="m_correo"></span>
                     </li>
                     <li class="list-group-item">
-                        ºstrong>N&uacute;mero celular: &nbsp;</strong>
+                        <strong>N&uacute;mero celular: &nbsp;</strong>
                         <span id="m_celular"></span>
                     </li>
                     <li class="list-group-item">

@@ -84,17 +84,17 @@ class Inscripcion_model extends PSG_Model
 	public function ver_estudiantes_curso($idcurso, $estado)
 	{
 		$sql = "";
-		if($estado == "PREINSCRITO"){
+		if ($estado == "PREINSCRITO") {
 			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
 			        WHERE estado= 'PREINSCRITO' AND id_course_moodle = $idcurso";
-		}elseif($estado == "INSCRITO"){
+		} elseif ($estado == "INSCRITO") {
 			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
 			        WHERE estado= 'INSCRITO' AND id_course_moodle = $idcurso";
-		}else{
+		} else {
 			$sql = "SELECT count(id_participante) AS total from mdl_participante_preinscripcion_curso  
 			        WHERE id_course_moodle = $idcurso";
 		}
-		
+
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
@@ -198,6 +198,19 @@ class Inscripcion_model extends PSG_Model
 		mc.fullname, mpc.monto_pago, mpc.id_transaccion, mpc.fecha_pago, mpc.estado 
 		from mdl_preinscripcion_curso mpc inner join mdl_participante mp on mpc.id_participante = mp.id_participante and mpc.id_preinscripcion_curso = '$id_preinscripcion'
 		inner join mdl_course mc on mpc.id_course_moodle = mc.id;";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
+
+	public function verificar_cupon_por_ci_cupon($ci, $numero_cupon)
+	{
+		$sql = "SELECT * FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
+		JOIN mdl_cupones mc ON mcp.id_cupones = mc.id_cupones 
+		WHERE mcp.numero_cupon = '$numero_cupon' AND mp.ci = '$ci' and mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());
