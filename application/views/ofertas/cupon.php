@@ -126,7 +126,7 @@
                                             <div class="card card-custom card-stretch gutter-b">
                                                 <div class="row">
 
-                                                    <div class="col-lg-7 p-10">
+                                                    <div class="col-lg-12 p-10">
                                                         <div class="contenedo-cupon">
                                                             <img src="assets/img/img_send_certificate/cupon.jpg" class="cupon-image" alt="Imagen de cupón">
                                                             <h3 style="font-weight: bold;">¡Obtén tu descuento ahora!</h3>
@@ -141,670 +141,14 @@
                                                             <h5 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h5>
                                                             <p>📆 Promoción válida hasta: <span style="font-weight: bold;">31/12/2021</span></p>
                                                             <div id="cupon-fecha-fin"></div>
-                                                            <button class="btn button-cupon">¡OBTÉN TUS CUPONES AHORA!</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-5 p-10">
-                                                        <div class="main-wrapper">
-                                                            <div class="tree-container">
-                                                                <div class="star"></div>
-                                                                <div class="spiral-container">
-                                                                    <ul class="spiral one">
-                                                                        <li class="light-wrapper light-wrapper-1">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-2">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-3">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-4">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-5">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-6">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-7">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-8">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-9">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-10">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-11">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-12">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-13">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-14">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-15">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-16">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-17">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-18">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-19">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-20">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-21">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-22">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-23">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-24">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-25">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-26">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-27">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-28">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-29">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-30">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-31">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-32">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-33">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-34">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-35">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-36">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-37">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-38">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-39">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-40">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-41">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-42">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-43">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <ul class="spiral two">
-                                                                        <li class="light-wrapper light-wrapper-1">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-2">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-3">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-4">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-5">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-6">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-7">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-8">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-9">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-10">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-11">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-12">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-13">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-14">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-15">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-16">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-17">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-18">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-19">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-20">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-21">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-22">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-23">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-24">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-25">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-26">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-27">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-28">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-29">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-30">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-31">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-32">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-33">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-34">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-35">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-36">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-37">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-38">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-39">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-40">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-41">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-42">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-43">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <ul class="spiral three">
-                                                                        <li class="light-wrapper light-wrapper-1">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-2">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-3">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-4">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-5">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-6">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-7">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-8">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-9">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-10">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-11">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-12">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-13">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-14">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-15">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-16">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-17">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-18">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-19">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-20">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-21">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-22">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-23">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-24">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-25">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-26">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-27">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-28">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-29">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-30">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-31">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-32">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-33">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-34">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-35">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-36">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-37">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-38">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-39">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-40">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-41">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-42">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="light-wrapper light-wrapper-43">
-                                                                            <div class="stabilise">
-                                                                                <div class="light"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-container">
-                                                                <h2 class="happy">Felices Fiestas</h2>
-                                                            </div>
+                                                            <?php
+                                                            if (count($validar_fecha) > 0) {
+                                                            ?>
+                                                                <button class="btn button-cupon">¡OBTÉN TUS CUPONES AHORA!</button>
+                                                            <?php
+                                                            }
+                                                            ?>
+
                                                         </div>
                                                     </div>
 
@@ -886,14 +230,14 @@
                         <div class="form-group row">
                             <div class="col-lg-9">
                                 <label for="ci">Número de Documento: <span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="ci_cupon" name="ci_cupon" required />
+                                <input type="text" class="form-control form-control-solid" id="ci_cupon" name="ci_cupon" autofocus="autofocus" required />
                                 <span class="form-text text-muted">Ingrese su número de documento(C.I.)</span>
                             </div>
                             <div class="col-lg-3">
                                 <label>&nbsp;</label>
-                                <button type="button" class="btn btn-secondary btn-block btn-buscar-ci">
+                                <button type="button" class="btn btn-primary btn-block btn-buscar-ci">
                                     <i class="fas fa-search" id="icono-btn-buscar"></i>
-                                    Registrar
+                                    Buscar
                                 </button>
                             </div>
                         </div>
@@ -902,7 +246,7 @@
                                 <input type="hidden" id="id_participante_cupon" name="id_participante_cupon" />
                                 <div class="col-lg-12">
                                     <label for="nombre">Expedido: </label>
-                                    <select name="expedido_cupon" id="expedido_cupon" class="form-control">
+                                    <select name="expedido_cupon" id="expedido_cupon" class="form-control form-select-solid" required>
                                         <option value=""> Elige </option>
                                         <option value="QR"> Nueva cédula con código QR </option>
                                         <option value="CH">Chuquisaca</option>
@@ -921,17 +265,17 @@
                             <div class="form-group row">
                                 <div class="col-lg-4">
                                     <label for="nombre">Nombre: <span class="text-danger">(*)</span></label>
-                                    <input type="text" class="form-control" id="nombre_cupon" name="nombre_cupon" required />
+                                    <input type="text" class="form-control form-control-solid" id="nombre_cupon" name="nombre_cupon" required />
                                     <span class="form-text text-muted">Ingrese su nombre</span>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="paterno">Paterno: <span class="text-danger">(*)</span></label>
-                                    <input type="text" class="form-control" id="paterno_cupon" name="paterno_cupon" required />
+                                    <input type="text" class="form-control form-control-solid" id="paterno_cupon" name="paterno_cupon" required />
                                     <span class="form-text text-muted">Apellido paterno</span>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="materno">Materno: </label>
-                                    <input type="text" class="form-control" id="materno_cupon" name="materno_cupon" />
+                                    <input type="text" class="form-control form-control-solid" id="materno_cupon" name="materno_cupon" />
                                     <span class="form-text text-muted">Apellido materno</span>
                                 </div>
                             </div>
@@ -939,14 +283,14 @@
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <label for="celular">Celular: <span class="text-danger">(*)</span></label>
-                                    <input type="number" class="form-control" id="celular_cupon" name="celular_cupon" required />
+                                    <input type="number" class="form-control form-control-solid" id="celular_cupon" name="celular_cupon" required />
                                     <span class="form-text text-muted">Número de celular</span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-lg-12">
-                                    <button href="javascript:void(0)" class="btn button-cupon btn-block">
+                                    <button href="javascript:void(0)" type="submit" class="btn button-cupon-submit btn-block" id="btn-inscribir-cupon">
                                         <i class="fas fa-save text-white" style="padding-bottom: 5px;"></i>
                                         RESERVAR MI CUPÓN
                                     </button>
@@ -1249,6 +593,7 @@
     <script src="<?= base_url('assets/plugins/custom/gmaps/gmaps.js') ?>"></script>
     <script src="<?= base_url('assets/js/pages/widgets.js') ?>"></script>
     <script src="<?= base_url('assets/js/oferta/oferta.js') ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.form.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/jquery.expander.js') ?>"></script>
     <script src="<?= base_url('assets/js/simplyCountdown.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/cupon/index.js') ?>"></script>

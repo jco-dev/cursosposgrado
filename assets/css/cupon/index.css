@@ -35,6 +35,20 @@
 	}
 }
 
+.button-cupon-submit {
+	background-color: #b50624;
+	color: white;
+	padding: 8px 48px;
+	margin-top: 15px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.button-cupon-submit:hover {
+	color: white;
+	background-color: #dc001a;
+}
+
 .button-cupon {
 	background-color: #b50624;
 	color: white;
@@ -47,229 +61,4 @@
 .button-cupon:hover {
 	color: white;
 	background-color: #dc001a;
-}
-
-.main-wrapper {
-	background: radial-gradient(
-		ellipse at bottom,
-		#a90e0e 5%,
-		#4e0303 55%,
-		#330000 78%
-	);
-	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-.tree-container {
-	display: block;
-	height: 370px;
-	margin: 0;
-	padding: 0;
-}
-
-.text-container {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	bottom: 14%;
-	left: 15%;
-	right: 15%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	text-align: center;
-}
-.text-container h2 {
-	color: rgba(252, 251, 233, 0.85);
-	font-family: "Great Vibes", cursive;
-	font-weight: 400;
-	margin: 0 0 0.8em 0;
-}
-.text-container h2.happy {
-	font-size: 3.3em;
-}
-.text-container a.c2 {
-	display: block;
-	font-size: 13px;
-	width: 40px;
-	height: 40px;
-	background-color: rgba(252, 251, 233, 0.8);
-	border-radius: 50%;
-	color: #8c1313;
-	text-decoration: none;
-	line-height: 40px;
-}
-
-.star {
-	border-radius: 0;
-	border-color: #f7b93f transparent transparent transparent;
-	border-style: solid;
-	border-top-width: 9.2307692307692px;
-	border-right-width: 12px;
-	border-left-width: 12px;
-	height: 0;
-	width: 0;
-	margin-bottom: 5px;
-	background: transparent;
-	z-index: 100;
-	animation: pulsate-star 1.4s ease-in-out infinite alternate-reverse;
-}
-.star:before,
-.star:after {
-	border-color: #f7b93f transparent transparent transparent;
-	border-style: solid;
-	border-top-width: 9.2307692307692px;
-	border-right-width: 12px;
-	border-left-width: 12px;
-	border-bottom: 0;
-	content: "";
-	display: block;
-	height: 0;
-	left: -12px;
-	position: absolute;
-	top: -9.2307692307692px;
-	width: 0;
-}
-.star:before {
-	transform: translate(15.5555555%, -15.5555555%) rotate(72deg) translateY(50%);
-}
-.star:after {
-	transform: translate(-15.5555555%, -15.5555555%) rotate(-72deg)
-		translateY(50%);
-}
-
-.spiral-container {
-	width: 100%;
-	height: 100%;
-	display: block;
-}
-
-.spiral {
-	position: relative;
-	margin: 0;
-	padding: 0;
-	transform-style: preserve-3d;
-}
-.spiral.one {
-	animation: rotate-tree 6s infinite linear both;
-	animation-delay: -1.7s;
-}
-.spiral.one .light {
-	background: #fcfbe9;
-}
-.spiral.two {
-	animation: rotate-tree 7s infinite linear both;
-	animation-delay: -1s;
-}
-.spiral.two .light {
-	background: #e8a41d;
-}
-.spiral.three {
-	animation: rotate-tree 8s infinite linear both;
-	animation-delay: -0.1s;
-}
-.spiral.three .light {
-	background: #f5e393;
-}
-.spiral > .light-wrapper {
-	border-radius: 50%;
-	position: absolute;
-	display: block;
-	width: 6px;
-	height: 6x;
-	left: 50%;
-	top: 50%;
-	margin: -6/2 0 0 - 6/2;
-}
-.spiral .stabilise {
-	position: absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-}
-.spiral .light {
-	position: absolute;
-	display: block;
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	top: 0;
-	left: 0;
-	opacity: 1;
-	animation-name: pulsate;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: infinite;
-	animation-direction: alternate-reverse;
-}
-
-.makespiral( @className: ~".spiral"; @itemNo:3; @degrees:0; @elNo: 1; @size: 5px; @delayOffset: 0 )
-	when
-	( @elNo <= @itemNo ) {
-	@spacing: 11;
-	@currDeg: unit(@degrees, deg);
-	@correctionDeg: unit(-@degrees, deg);
-	@y: unit(cos(@currDeg) * @elNo * @elNo / 10, px);
-	@x: unit(sin(@currDeg) * @elNo * @elNo / 10, px);
-	@z: unit(@elNo * @elNo / 6, px);
-	@duration: unit(`Math.random() * 1 + 0.3 `, s);
-	@randNo: `Math.random() `;
-
-	@{className} {
-		.light-wrapper.light-wrapper-@{elNo} {
-			transform: translate3d(@x, @y, @z) rotateX(90deg) rotateZ(0deg)
-				rotateY(@correctionDeg);
-			width: (@size * (@elNo / @itemNo) * 7);
-			height: (@size * (@elNo / @itemNo) * 7);
-
-			.light {
-				animation-duration: @duration;
-				animation-delay: @duration;
-			}
-		}
-	}
-
-	.makespiral(@className; @itemNo; @degrees + @spacing; @elNo + 1; @size; @delayOffset);
-}
-
-.makespiral(@className: ~".spiral.one"; @itemNo: 43; @size: 2px);
-.makespiral(@className: ~".spiral.two"; @itemNo: 43; @size: 3px; @delayOffset: 1);
-.makespiral(@className: ~".spiral.three"; @itemNo: 43; @size: 2px; @delayOffset: 0.5);
-
-@keyframes pulsate {
-	0% {
-		transform: scale(0.5);
-		opacity: 0.4;
-	}
-	100% {
-		transform: scale(1);
-	}
-}
-
-@keyframes pulsate-star {
-	0% {
-		transform: scale(0.9);
-		opacity: 0.8;
-	}
-	100% {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-@keyframes rotate-tree {
-	0% {
-		transform: rotateX(-90deg) rotateZ(0deg) rotateY(0deg);
-	}
-	100% {
-		transform: rotateX(-90deg) rotateZ(360deg) rotateY(0deg);
-	}
 }

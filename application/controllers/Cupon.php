@@ -16,17 +16,15 @@ class Cupon extends CI_Controller
 
 	public function index()
 	{
+		$this->data['validar_fecha'] = $this->sql_ssl->listar_tabla('cupones', ['fecha_inicio <= ' => date('Y-m-d'), 'fecha_fin >= ' => date('Y-m-d')]);
 		$this->load->view('ofertas/cupon', $this->data);
 	}
 
 	public function buscar_por_ci()
 	{
 		$ci = $this->input->post('ci');
-		$respuesta = $this->sql_ssl->listar_tabla(
-			'mdl_participante',
-			['ci' => $ci]
-		);
-		if (count($respuesta) != 0) {
+		$respuesta = $this->cupon_model->listar_data_usuario($ci);
+		if ($respuesta) {
 			$this->output->set_content_type('application/json')->set_output(
 				json_encode(['datos' => $respuesta])
 			);
@@ -35,6 +33,7 @@ class Cupon extends CI_Controller
 
 	public function verificar_registro($ci)
 	{
+		// var_dump($ci);
 		$respuesta = $this->sql_ssl->listar_tabla(
 			'mdl_participante',
 			['ci' => $ci]
@@ -45,17 +44,18 @@ class Cupon extends CI_Controller
 			return false;
 		}
 	}
-
+	// public function generar_cupon()5671BIE
 	public function inscripcion()
 	{
+		// var_dump($_REQUEST);
 		$id_participante = null;
 		// Obtener id_participante del participante
 		if ($this->input->post('id_participante_cupon') == "" && $this->input->post('id_participante_cupon') == null) {
 			if ($this->verificar_registro($this->input->post('ci_cupon'))) {
 				$id_participante = $this->verificar_registro(trim($this->input->post('ci_cupon')));
 			} else {
-				$id_participante = $this->sql_ssl->insertar_tabla(
-					'mdl_participante',
+				$data = $this->sql_ssl->insertar_tabla(
+					'participante',
 					[
 						'id_participante' => $this->input->post('id_participante_cupon'),
 						'ci' => trim($this->input->post('ci_cupon')),
@@ -67,10 +67,13 @@ class Cupon extends CI_Controller
 						'celular' => trim($this->input->post('celular_cupon')),
 					]
 				);
+				$id_participante = $data;
 			}
 		} else {
 			$id_participante = $this->input->post('id_participante_cupon');
 		}
+
+		// var_dump($id_participante);
 
 		// obtener id_cupon del cupon
 		$cupones = $this->sql_ssl->listar_tabla(

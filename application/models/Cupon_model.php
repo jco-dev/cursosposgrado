@@ -57,4 +57,15 @@ class Cupon_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function listar_data_usuario($ci)
+	{
+		$sql = "SELECT id_participante, ci, expedido, nombre, paterno, materno, celular FROM mdl_participante where ci = '$ci'";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }
