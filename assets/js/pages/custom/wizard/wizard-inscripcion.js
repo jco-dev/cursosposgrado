@@ -420,64 +420,109 @@ jQuery(document).ready(function () {
 	});
 
 	// traer datos
-	$("#ci").on("change", function (e) {
+	$("#ci").on("keyup change", function (e) {
 		let ci = $(this).val();
-		$.post("/inscripcion/buscar_por_ci", { ci: ci }, function (response) {
-			if (response != "") {
-				if (typeof response.datos != "undefined") {
-					//poner datos
-					$("#expedido").val(response.datos[0].expedido).trigger("change");
+		if (ci.length >= 4) {
+			$.post("/inscripcion/buscar_por_ci", { ci: ci }, function (response) {
+				if (response != "") {
+					if (typeof response.datos != "undefined") {
+						//poner datos
+						$("#ci").val(response.datos[0].ci);
+						$("#m_ci").text(response.datos[0].ci);
+						// console.log(response.datos);
+						$("#expedido").val(response.datos[0].expedido).trigger("change");
 
-					$("#correo").val(response.datos[0].correo);
-					$("#m_correo").text(response.datos[0].correo);
+						$("#correo").val(response.datos[0].correo);
+						$("#m_correo").text(response.datos[0].correo);
 
-					$("#nombre").val(response.datos[0].nombre);
-					$("#m_nombre").text(response.datos[0].nombre);
+						$("#nombre").val(response.datos[0].nombre);
+						$("#m_nombre").text(response.datos[0].nombre);
 
-					$("#paterno").val(response.datos[0].paterno);
-					$("#m_paterno").text(response.datos[0].paterno);
+						$("#paterno").val(response.datos[0].paterno);
+						$("#m_paterno").text(response.datos[0].paterno);
 
-					$("#materno").val(response.datos[0].materno);
-					$("#m_materno").text(response.datos[0].materno);
+						$("#materno").val(response.datos[0].materno);
+						$("#m_materno").text(response.datos[0].materno);
 
-					$(
-						"input[name=genero][value='" + response.datos[0].genero + "']"
-					).prop("checked", true);
-					$("#m_genero").text(response.datos[0].genero);
+						$(
+							"input[name=genero][value='" + response.datos[0].genero + "']"
+						).prop("checked", true);
+						$("#m_genero").text(response.datos[0].genero);
 
-					$("#celular").val(response.datos[0].celular);
-					$("#m_celular").text(response.datos[0].celular);
+						$("#celular").val(response.datos[0].celular);
+						$("#m_celular").text(response.datos[0].celular);
 
-					if (
-						response.datos[0].fecha_nacimiento != "" &&
-						response.datos[0].fecha_nacimiento != null
-					) {
-						let fecha = response.datos[0].fecha_nacimiento.split("-");
-						$("#anio1").val(fecha[0]).trigger("change");
-						$("#mes1").val(fecha[1]).trigger("change");
-						$("#dia1").val(parseInt(fecha[2])).trigger("change");
-					} else {
-						$("#anio1").val("").trigger("change");
-						$("#mes1").val("").trigger("change");
-						$("#dia1").val("").trigger("change");
+						if (
+							response.datos[0].fecha_nacimiento != "" &&
+							response.datos[0].fecha_nacimiento != null
+						) {
+							let fecha = response.datos[0].fecha_nacimiento.split("-");
+							$("#anio1").val(fecha[0]).trigger("change");
+							$("#mes1").val(fecha[1]).trigger("change");
+							$("#dia1").val(parseInt(fecha[2])).trigger("change");
+						} else {
+							$("#anio1").val("").trigger("change");
+							$("#mes1").val("").trigger("change");
+							$("#dia1").val("").trigger("change");
+						}
+						$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
+
+						$("#ciudad_residencia")
+							.val(response.datos[0].id_municipio)
+							.trigger("change");
+
+						$(
+							"input[name=genero][value=" + response.datos[0].genero + "]"
+						).attr("checked", "checked");
 					}
-					$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
+				} else {
+					$("#frm_curso_inscripcion").trigger("reset");
+					$("#dia1").val("").trigger("change");
+					$("#mes1").val("").trigger("change");
+					$("#anio1").val("").trigger("change");
+					$("#ciudad_residencia").val("").trigger("change");
 
-					$("#ciudad_residencia")
-						.val(response.datos[0].id_municipio)
-						.trigger("change");
-
-					$("input[name=genero][value=" + response.datos[0].genero + "]").attr(
-						"checked",
-						"checked"
-					);
+					$("#ci").val(ci);
+					$("#m_ci").text(ci);
+					$("#ci").focus();
 				}
-			} else {
-				$("#frm_curso_inscripcion").trigger("reset");
-				$("#ci").focus();
-			}
-		});
+			});
+		}
+		verificar_cupones(ci);
 	});
+
+	const verificar_cupones = (ci) => {
+		if (ci.length >= 4) {
+			$.post("/cupon/buscar_cupones_usuario", { ci }, function (response) {
+				if (response.cupones.length > 0) {
+					$("#card-cupon-body").empty();
+					$("#card-cupon").show();
+					$("#card-cupon-body").append(
+						'<label for="monto_pago">Aplicar cupón</label>'
+					);
+					$("#card-cupon-body").append(
+						'<div class="radio-list form-group m-0">'
+					);
+					response.cupones.forEach((element) => {
+						// console.log(element);
+						$("#card-cupon-body").append(
+							' <label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" id="cupon_participante" value="' +
+								element +
+								'" /><span style="margin-right: 6px;"></span> ' +
+								element +
+								"</label>"
+						);
+					});
+					$("#card-cupon-body").append(
+						'<label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" checked="checked" id="cupon_participante" value="ninguno" /><span style="margin-right: 6px;"></span>Ninguno</label>'
+					);
+					$("#card-cupon-body").append("</div>");
+				} else {
+					$("#card-cupon").hide();
+				}
+			});
+		}
+	};
 
 	// mostrar datos ingresados en el paso final
 	$("#ci").on("change", function () {
@@ -572,46 +617,8 @@ jQuery(document).ready(function () {
 				data: { numero_cupon: cupon, ci: ci },
 				dataType: "json",
 				success: function (response) {
-					console.log(response);
+					// console.log(response);
 				},
-			});
-		}
-	});
-
-	$("#ci").on("keyup change", function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		let ci = $(this).val();
-
-		if (ci.length >= 4) {
-			$.post("/cupon/buscar_cupones_usuario", { ci: ci }, function (response) {
-				if (response.cupones.length > 0) {
-					$("#card-cupon-body").empty();
-					$("#card-cupon").show();
-
-					$("#card-cupon-body").append(
-						'<label for="monto_pago">Aplicar cupón</label>'
-					);
-					$("#card-cupon-body").append(
-						'<div class="radio-list form-group m-0">'
-					);
-					response.cupones.forEach((element) => {
-						console.log(element);
-						$("#card-cupon-body").append(
-							' <label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" id="cupon_participante" value="' +
-								element +
-								'" /><span style="margin-right: 6px;"></span> ' +
-								element +
-								"</label>"
-						);
-					});
-					$("#card-cupon-body").append(
-						'<label class="radio mb-2 p-2"><input type="radio" name="cupon_participante" checked="checked" id="cupon_participante" value="ninguno" /><span style="margin-right: 6px;"></span>Ninguno</label>'
-					);
-					$("#card-cupon-body").append("</div>");
-				} else {
-					$("#card-cupon").hide();
-				}
 			});
 		}
 	});
@@ -634,13 +641,14 @@ jQuery(document).ready(function () {
 				}).done(function (response) {
 					let precio_con_descuento =
 						costo_curso - costo_curso * (response.porcentaje / 100);
-					$(".form-tex-costo").text(
+					$(".form-text-costo").text(
 						"Total a cancelar con descuento: Bs. " + precio_con_descuento
 					);
+					$(".form-text-costo").fadeTo(400);
 					$("#monto_pago").focus();
 				});
 			} else {
-				$(".form-tex-costo").text("");
+				$(".form-text-costo").text("");
 				$("#monto_pago").val();
 				$("#monto_pago").focus();
 			}

@@ -172,6 +172,7 @@ class Cupon extends CI_Controller
 
 	public function cupon_pdf()
 	{
+		// return var_dump($_REQUEST);
 		$id_cupones_participante = $this->input->post('numero');
 		$id_participante = $this->input->post('codigo');
 		$participante = $this->sql_ssl->listar_tabla(

@@ -125,33 +125,42 @@
                                             <!--begin::List Widget 10-->
                                             <div class="card card-custom card-stretch gutter-b">
                                                 <div class="row">
+                                                    <?php
+                                                    if (count($validar_fecha) > 0) {
+                                                    ?>
+                                                        <div class="col-lg-12 p-10">
+                                                            <div class="contenedo-cupon">
+                                                                <img src="assets/img/img_send_certificate/cupon.jpg" class="cupon-image" alt="Imagen de cupón">
+                                                                <h3 style="font-weight: bold;">¡Obtén tu descuento ahora!</h3>
+                                                                <h6 style="text-align: center;">Consigue tus descuentos para tus próximas inscripciones en cualquiera de nuestros cursos.</h6>
+                                                                <h6 style="text-align: center;">¿Qué tienes que hacer para conseguir tu cupón por fin de año?</h6>
 
-                                                    <div class="col-lg-12 p-10">
-                                                        <div class="contenedo-cupon">
-                                                            <img src="assets/img/img_send_certificate/cupon.jpg" class="cupon-image" alt="Imagen de cupón">
-                                                            <h3 style="font-weight: bold;">¡Obtén tu descuento ahora!</h3>
-                                                            <h6 style="text-align: center;">Consigue tus descuentos para tus próximas inscripciones en cualquiera de nuestros cursos.</h6>
-                                                            <h6 style="text-align: center;">¿Qué tienes que hacer para conseguir tu cupón por fin de año?</h6>
+                                                                <section style="padding-left: 5px;padding-right: 5px;">
+                                                                    <p>👉 Regístrate en el formulario.</p>
+                                                                    <p>💵 Obtén un cupón de descuento del <strong>30%</strong>.</p>
+                                                                    <p>🔄 Comparte esta noticia con tus amig@s para que obtengan su cupón por fin de año.</p>
+                                                                </section>
+                                                                <h5 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h5>
+                                                                <p>📆 Promoción válida hasta: <span style="font-weight: bold;">31/12/2021</span></p>
+                                                                <div id="cupon-fecha-fin"></div>
 
-                                                            <section style="padding-left: 5px;padding-right: 5px;">
-                                                                <p>👉 Regístrate en el formulario.</p>
-                                                                <p>💵 Obtén un cupón de descuento del <strong>30%</strong>.</p>
-                                                                <p>🔄 Comparte esta noticia con tus amig@s para que obtengan su cupón por fin de año.</p>
-                                                            </section>
-                                                            <h5 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h5>
-                                                            <p>📆 Promoción válida hasta: <span style="font-weight: bold;">31/12/2021</span></p>
-                                                            <div id="cupon-fecha-fin"></div>
-                                                            <?php
-                                                            if (count($validar_fecha) > 0) {
-                                                            ?>
                                                                 <button class="btn button-cupon">¡OBTÉN TUS CUPONES AHORA!</button>
-                                                            <?php
-                                                            }
-                                                            ?>
 
+
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    <?php
+                                                    } else {
+                                                    ?>
 
+                                                        <div class="col-lg-12 p-10">
+                                                            Muchas gracias por confiar en nosotros. Por el momento no tenemos cupones disponibles para ti.</br>
+                                                            <a href="/" class="btn btn-primary mt-5">
+                                                                <i class="fas fa-arrow-left"></i>
+                                                                Volver a Inicio
+                                                            </a>
+                                                        </div>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,7 +229,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Regístrate en este formulario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close cerrar-formulario-registro" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
@@ -291,7 +300,7 @@
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <button href="javascript:void(0)" type="submit" class="btn button-cupon-submit btn-block" id="btn-inscribir-cupon">
-                                        <i class="fas fa-save text-white" style="padding-bottom: 5px;"></i>
+                                        <i class="fas fa-save text-white button-reservar-cupon-icono" style="padding-bottom: 5px;"></i>
                                         RESERVAR MI CUPÓN
                                     </button>
                                 </div>
@@ -331,6 +340,12 @@
             </div>
         </div>
     </div>
+
+    <form id="frm-pdf-registro" action="/cupon/cupon_pdf">
+        <input type="hidden" name="numero" id="numero">
+        <input type="hidden" name="codigo" id="codigo">
+        <input type="submit">
+    </form>
 
     <div id="kt_scrolltop" class="scrolltop">
         <span class="svg-icon">

@@ -36,7 +36,7 @@ class Cupon_model extends PSG_Model
 	{
 		$sql = "SELECT mcp.numero_cupon FROM mdl_cupones_participante mcp JOIN mdl_participante mp ON mcp.id_participante = mp.id_participante 
 		JOIN mdl_cupones mc ON mcp.id_cupones = mc.id_cupones 
-		WHERE mp.ci = '9248587' AND mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
+		WHERE mp.ci = '$ci' AND mcp.estado = 'REGISTRADO' and " . date('Y-m-d') . " <= mc.fecha_fin_canje";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());

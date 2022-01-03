@@ -166,10 +166,17 @@
                                 </div>
                                 <div class="alert-text">Cursos vigentes</div>
                                 <!-- Button cupón -->
-                                <a class="btn-cupon text-white" style="display: flex; justify-content: space-around; padding: 10px; 30px;" href="<?= base_url('/cupon'); ?>">
-                                    <i class="fas fa-gift text-white icon-cupon" style="display: flex; justify-content: center; align-items: center;"></i>
-                                    <span class="text-cupon" style="margin-left: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">OBTENER MI CUPÓN POR FIN DE AÑO</span>
-                                </a>
+                                <?php
+                                if (count($validar_fecha) > 0) {
+                                ?>
+                                    <a class="btn-cupon text-white" style="display: flex; justify-content: space-around; padding: 10px; 30px;" href="<?= base_url('/cupon'); ?>">
+                                        <i class="fas fa-gift text-white icon-cupon" style="display: flex; justify-content: center; align-items: center;"></i>
+                                        <span class="text-cupon" style="margin-left: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">OBTENER MI CUPÓN POR FIN DE AÑO</span>
+                                    </a>
+                                <?php
+                                }
+                                ?>
+
                                 <!-- End cupón -->
                             </div>
 

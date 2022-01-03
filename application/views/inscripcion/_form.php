@@ -218,7 +218,7 @@
             <div class="col-lg-8">
                 <label for="monto_pago">Monto Pago en Bolivianos <span class="text-danger">(*)</span></label>
                 <input type="number" id="monto_pago" name="monto_pago" class="form-control">
-                <div class="form-text form-tex-costo"></div>
+                <div class="form-text-costo fs-7 fw-bold text-muted"></div>
             </div>
             <div class="col-lg-4 costo-curso-c">
                 <label for="monto_pago">Costo del Curso</label>
