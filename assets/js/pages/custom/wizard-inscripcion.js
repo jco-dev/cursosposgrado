@@ -1,5 +1,5 @@
 "use strict";
-
+$("input #ci").focus();
 // Class definition
 var KTWizard3 = (function () {
 	// Base elements

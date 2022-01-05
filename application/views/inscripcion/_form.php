@@ -294,17 +294,22 @@
 <!--begin: Wizard Step 4-->
 <div class="pb-5" data-wizard-type="step-content">
     <div class="card card-custom">
-        <div class="card-header bg-info-o-5 border-0">
-            <div class="card-title p-3" id="card-title-inscripcion">
-                <h3 class="card-label">Revise sus datos antes de enviar</h3>
+        <div class="bg-info-o-5 border-0">
+            <div class="pl-5 pr-5 row" id="card-title-inscripcion">
+                <div class="col-lg-12 text-center pt-7">
+                    <h4>¡Revise sus datos antes de enviar!</h4>
+                </div>
             </div>
             <!--begin::Body-->
-            <div class="card-body">
+            <div class="card-body pt-3">
 
                 <ul class="list-group">
                     <li class="list-group-item active"><strong>1. DATOS PERSONALES</strong></li>
                     <li class="list-group-item">
                         <strong>Carnet de Identidad:&nbsp;</strong> <span id="m_ci"></span> <span id="m_expedido"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Nombres:&nbsp;</strong> <span id="m_nombre"></span> <span id="m_paterno"></span> <span id="m_materno"></span>
                     </li>
                     <li class="list-group-item">
                         <strong>Correo:&nbsp;</strong>
@@ -315,27 +320,35 @@
                         <span id="m_celular"></span>
                     </li>
                     <li class="list-group-item">
+                        <strong>Fecha Nacimiento (YYYY-MM-DD): </strong>
+                        <span id="m_anio1"></span>-<span id="m_mes1"></span>-<span id="m_dia1"></span>
+                    </li>
+                    <li class="list-group-item">
                         <strong>Ciudad residencia: &nbsp;</strong>
                         <span id="m_ciudad_residencia"></span>
                     </li>
                     <li class="list-group-item active">
-                        <storng>2. PAGO DEL CURSO</storng>
+                        <strong>2. PAGO DEL CURSO</strong>
                     </li>
                     <li class="list-group-item">
                         <strong>Modalidad Inscripci&oacute;n:</strong>&nbsp;
                         <span id="m_modalidad_inscripcion"></span>
                     </li>
                     <li class="list-group-item">
-                        <strong>Id Transacci&oacute;n:</strong>&nbsp;
+                        <strong># Transacci&oacute;n:</strong>&nbsp;
                         <span id="m_id_transaccion"></span>
                     </li>
                     <li class="list-group-item">
-                        <strong>Fecha Pago: &nbsp;</strong>
+                        <strong>Fecha Pago (YYYY-MM-DD): &nbsp;</strong>
                         <span id="m_fecha_pago"><?= date("Y-m-d") ?></span>
                     </li>
                     <li class="list-group-item">
                         <strong>Monto Pago:&nbsp;</strong>
                         <span id="m_monto_pago"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Cupón:&nbsp;</strong>
+                        <span id="m_cupon_participante"></span>
                     </li>
                     <li class="list-group-item active"><strong>3. RECOJO DEL CERTIFICADO</strong></li>
                     <li class="list-group-item">

@@ -1,6 +1,5 @@
 "use strict";
-
-// Class definition
+$("#ci").focus();
 var KTWizard3 = (function () {
 	// Base elements
 	var _wizardEl;
@@ -367,6 +366,8 @@ jQuery(document).ready(function () {
 							}).then(function (result) {
 								if (result.value) {
 									location.reload();
+									limpiar_formulario();
+									$("#frm_curso_inscripcion").trigger("reset");
 								}
 							});
 						}
@@ -379,6 +380,8 @@ jQuery(document).ready(function () {
 							}).then(function (result) {
 								if (result.value) {
 									location.reload();
+									limpiar_formulario();
+									$("#frm_curso_inscripcion").trigger("reset");
 								}
 							});
 						}
@@ -400,6 +403,8 @@ jQuery(document).ready(function () {
 							}).then(function (result) {
 								if (result.value) {
 									location.reload();
+									limpiar_formulario();
+									$("#frm_curso_inscripcion").trigger("reset");
 								}
 							});
 						}
@@ -428,29 +433,22 @@ jQuery(document).ready(function () {
 					if (typeof response.datos != "undefined") {
 						//poner datos
 						$("#ci").val(response.datos[0].ci);
-						$("#m_ci").text(response.datos[0].ci);
 						// console.log(response.datos);
 						$("#expedido").val(response.datos[0].expedido).trigger("change");
 
 						$("#correo").val(response.datos[0].correo);
-						$("#m_correo").text(response.datos[0].correo);
 
 						$("#nombre").val(response.datos[0].nombre);
-						$("#m_nombre").text(response.datos[0].nombre);
 
 						$("#paterno").val(response.datos[0].paterno);
-						$("#m_paterno").text(response.datos[0].paterno);
 
 						$("#materno").val(response.datos[0].materno);
-						$("#m_materno").text(response.datos[0].materno);
 
 						$(
 							"input[name=genero][value='" + response.datos[0].genero + "']"
 						).prop("checked", true);
-						$("#m_genero").text(response.datos[0].genero);
 
 						$("#celular").val(response.datos[0].celular);
-						$("#m_celular").text(response.datos[0].celular);
 
 						if (
 							response.datos[0].fecha_nacimiento != "" &&
@@ -465,7 +463,6 @@ jQuery(document).ready(function () {
 							$("#mes1").val("").trigger("change");
 							$("#dia1").val("").trigger("change");
 						}
-						$("#m_fecha_nacimiento").text(response.datos[0].fecha_nacimiento);
 
 						$("#ciudad_residencia")
 							.val(response.datos[0].id_municipio)
@@ -476,20 +473,138 @@ jQuery(document).ready(function () {
 						).attr("checked", "checked");
 					}
 				} else {
-					$("#frm_curso_inscripcion").trigger("reset");
+					limpiar_formulario();
 					$("#dia1").val("").trigger("change");
 					$("#mes1").val("").trigger("change");
 					$("#anio1").val("").trigger("change");
 					$("#ciudad_residencia").val("").trigger("change");
-
-					$("#ci").val(ci);
-					$("#m_ci").text(ci);
 					$("#ci").focus();
 				}
 			});
 		}
 		verificar_cupones(ci);
 	});
+
+	const listar_datos_usuario = () => {
+		let campos = [];
+		$("#frm_curso_inscripcion")
+			.find("input, select")
+			.each(function () {
+				let text = null;
+				let fila = [];
+				if (this.name == "expedido") {
+					text = $('select[name="expedido"] option:selected').text();
+					fila.push(this.name);
+					fila.push(this.value);
+					fila.push(text);
+
+					campos.push(fila);
+				} else if (this.name == "ciudad_residencia") {
+					text = $('select[name="ciudad_residencia"] option:selected').text();
+					fila.push(this.name);
+					fila.push(this.value);
+					fila.push(text);
+
+					campos.push(fila);
+				} else if (this.name == "genero") {
+					if ($(this).is(":checked")) {
+						// You have a checked radio button here...
+						text = $("input[name=genero][type=radio]:checked").val();
+
+						fila.push(this.name);
+						fila.push(this.value);
+						fila.push(text);
+
+						campos.push(fila);
+					}
+				} else if (this.name == "cupon_participante") {
+					if ($(this).is(":checked")) {
+						// You have a checked radio button here...
+						text = $(
+							"input[name=cupon_participante][type=radio]:checked"
+						).val();
+
+						fila.push(this.name);
+						fila.push(this.value);
+						fila.push(text);
+
+						campos.push(fila);
+					}
+				} else if (this.name == "modalidad_inscripcion") {
+					if ($(this).is(":checked")) {
+						// You have a checked radio button here...
+						text = $(
+							"input[name=modalidad_inscripcion][type=radio]:checked"
+						).val();
+
+						fila.push(this.name);
+						fila.push(this.value);
+						fila.push(text);
+
+						campos.push(fila);
+					}
+				} else if (this.name == "tipo_certificado_solicitado") {
+					if ($(this).is(":checked")) {
+						// You have a checked radio button here...
+						text = $(
+							"input[name=tipo_certificado_solicitado][type=radio]:checked"
+						).val();
+
+						fila.push(this.name);
+						fila.push(this.value);
+						fila.push(text);
+
+						campos.push(fila);
+					}
+				} else {
+					fila.push(this.name);
+					fila.push(this.value);
+					fila.push(text);
+					campos.push(fila);
+				}
+
+				// console.log(text);
+				// return { value: this.value, name: this.name, text: text };
+			});
+
+		campos.map((data) => {
+			$("#m_" + data[0]).html(data[1]);
+
+			if (data[0] == "ciudad_residencia") {
+				$("#m_" + data[0]).text(data[2]);
+			}
+
+			if (data[0] == "monto_pago") {
+				$("#m_" + data[0]).html(data[1] + " Bs.");
+			}
+
+			if (data[0] == "tipo_certificado_solicitado") {
+				if (data[1] == "AMBOS") {
+					$("#m_" + data[0]).html("DIGITAL Y FÍSICO");
+				} else {
+					$("#m_" + data[0]).html(data[1]);
+				}
+			}
+		});
+	};
+
+	$("#frm_curso_inscripcion").change(function (e) {
+		listar_datos_usuario();
+	});
+
+	const limpiar_formulario = () => {
+		$("#expedido").val("").trigger("change");
+		$("#correo").val("");
+		$("#nombre").val("");
+		$("#paterno").val("");
+		$("#materno").val("");
+		$("input[name=genero][value='M']").prop("checked", true);
+		$("#celular").val("");
+		$("#anio1").val("").trigger("change");
+		$("#mes1").val("").trigger("change");
+		$("#dia1").val("").trigger("change");
+		$("#ciudad_residencia").val("").trigger("change");
+	};
 
 	const verificar_cupones = (ci) => {
 		if (ci.length >= 4) {
@@ -524,104 +639,13 @@ jQuery(document).ready(function () {
 		}
 	};
 
-	// mostrar datos ingresados en el paso final
-	$("#ci").on("change", function () {
-		$("#m_ci").html($(this).val());
-	});
-
-	$("#expedido").on("change", function () {
-		$("#m_expedido").html($(this).val());
-	});
-
-	$("#correo").on("change", function () {
-		$("#m_correo").text($(this).val());
-	});
-
-	$("#nombre").on("change", function () {
-		$("#m_nombre").text($(this).val());
-	});
-
-	$("#paterno").on("change", function () {
-		$("#m_paterno").text($(this).val());
-	});
-
-	$("#materno").on("change", function () {
-		$("#m_materno").text($(this).val());
-	});
-
-	$('input[name=genero][type="radio"]').on("change", function () {
-		$("#m_genero").text($(this).val());
-	});
-
-	$("#fecha").on("change", "#anio1,#mes1, #dia1", function (e) {
-		let anio = $("#anio1").val();
-		let mes = $("#mes1").val();
-		let dia = $("#dia1").val();
-		$("#m_fecha_nacimiento").html(anio + "-" + mes + "-" + format_dia(dia));
-	});
-
-	$("#celular").on("change", function () {
-		$("#m_celular").html($(this).val());
-	});
-
-	$("#ciudad_residencia").on("change", function () {
-		$("#m_ciudad_residencia").html($("#ciudad_residencia :selected").text());
-	});
-
-	// MOSTRAR DATOS INGRASADOS PASO 2
-	$('input[name=modalidad_inscripcion][type="radio"]').on(
-		"change",
-		function () {
-			$("#m_modalidad_inscripcion").text($(this).val());
-		}
-	);
-
-	$("#id_transaccion").on("change", function () {
-		$("#m_id_transaccion").html($(this).val());
-	});
-
-	$("#fecha_pago").on("change", function () {
-		$("#m_fecha_pago").html($(this).val());
-	});
-
-	$("#monto_pago").on("change", function () {
-		$("#m_monto_pago").html("Bs. " + $(this).val());
-	});
-
-	// para el paso 3
-	$('input[name=tipo_certificado_solicitado][type="radio"]').on(
-		"change",
-		function () {
-			$("#m_tipo_certificado_solicitado").text($(this).val());
-		}
-	);
-
-	function format_dia(dia) {
+	const format_dia = (dia) => {
 		if (dia >= 1 && dia <= 9) {
 			return "0" + dia;
 		} else {
 			return dia;
 		}
-	}
-
-	// Verificar cupón
-	$("#cupon").on("keyup", function (e) {
-		e.preventDefault();
-		e.stopPropagation();
-		if ($(this).val().length >= 4) {
-			let cupon = $(this).val();
-			let ci = $("#ci").val();
-			$.ajax({
-				url: "/cupon/verificar_cupon",
-				method: "POST",
-				data: { numero_cupon: cupon, ci: ci },
-				dataType: "json",
-				success: function (response) {
-					// console.log(response);
-				},
-			});
-		}
-	});
+	};
 
 	$("#padding-container").on(
 		"change",
