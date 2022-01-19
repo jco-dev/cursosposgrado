@@ -1371,6 +1371,82 @@ class ImprimirCertificado extends Fpdf_psg
         $pdf->Output("D", "factura" . date("_Y-m-d_H-i-s") . ".pdf", true);
     }
 
+    public function imprimir_estudiantes($students, $data_course)
+    {
+        $this->AddPage("P", "letter");
+        $this->SetFont('Arial', 'B', 14);
+        $this->AddFont('EthnocentricRg-Regular', '', 'EthnocentricRg-Regular.php');
+        $this->SetFont('EthnocentricRg-Regular', '', 20);
+        $this->Cell(0, 8, utf8_decode("CURSOS POSGRADO"), 0, 1, "C");
+        $this->Cell(0, 8, utf8_decode("UPEA"), 0, 1, "C");
+        $tam = 5;
+        $bordeCelda = 0;
+        $this->Ln();
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+        $this->Cell(35, $tam, utf8_decode('Curso: '), $bordeCelda, 0, 'L');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(80, $tam, utf8_decode($data_course[0]->shortname), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+        $this->Cell(35, $tam, utf8_decode('Fecha Inicio: '), $bordeCelda, 0, 'L');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(80, $tam, utf8_decode($data_course[0]->fecha_inicial), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+        $this->Cell(35, $tam, utf8_decode('Fecha Fin: '), $bordeCelda, 0, 'L');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(80, $tam, utf8_decode($data_course[0]->fecha_final), $bordeCelda, 1, 'L');
+
+        $this->SetFont('Arial', 'B', 12);
+        $this->SetX(20);
+        $this->Cell(35, $tam, utf8_decode('Carga Horaria: '), $bordeCelda, 0, 'L');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(80, $tam, utf8_decode($data_course[0]->carga_horaria . " horas académicas"), $bordeCelda, 1, 'L');
+        $this->Ln();
+        $this->SetTypeCell(['c', 'c', 'c', 'cfs']);
+        $this->SetAligns(['C', 'C', 'C', 'C']);
+        $this->SetWidths([35, 101, 30, 30]);
+        $this->SetFont('Arial', 'B', 9);
+        $this->Row([
+            utf8_decode('ID INSCRIPCIÓN'),
+            'NOMBRES Y APELLIDOS',
+            'NOTA FINAL',
+            'CERTIFICADO'
+        ]);
+        if (count($students) > 0) {
+            $bandera = false;
+
+
+            $this->SetAligns(['C', 'L', 'C', 'C']);
+            $this->SetFont('Arial', '', 12);
+            //Gris tenue de cada fila
+            $this->SetFillColor(238, 238, 238);
+            //Color del texto: Negro
+            $this->SetTextColor(3, 3, 3);
+            $this->SetFont('Arial', '', 8);
+            foreach ($students as $key => $student) {
+                if ($bandera) {
+                    $d = "D";
+                } else {
+                    $d = "DF";
+                }
+                $this->Row([
+                    $student->id_inscripcion_curso,
+                    utf8_decode($student->usuario),
+                    $student->calificacion_final,
+                    utf8_decode($student->certificacion_unica)
+                ], $d);
+                $bandera = !$bandera;
+            }
+        } else {
+            $this->Cell(0, 10, utf8_decode('NO HAY ESTUDIANTES INSCRITOS'), 1, 1, 'C');
+        }
+        $this->Output("D", $data_course[0]->shortname . ".pdf", true);
+    }
+
     public function print_header_table($data, $tam)
     {
 

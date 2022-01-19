@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     <div class="col-lg-12">
                         <label for="course">Curso <span class="text-danger">(*)</span>:</label>
-                        <select name="course" id="course" class="form-control">
+                        <select name="course" id="course" class="form-control" required>
                             <option></option>
                         </select>
                         <span class="form-text text-muted">Seleccione curso</span>
@@ -21,7 +21,7 @@
 
                     <div class="col-lg-12 mt-10">
                         <label for="user">Seleccione Usuario <span class="text-danger">(*)</span>:</label>
-                        <select name="user" id="user" class="form-control">
+                        <select name="user" id="user" class="form-control" required>
                             <option></option>
                         </select>
                         <span class="form-text text-muted">Seleccione usuario</span>

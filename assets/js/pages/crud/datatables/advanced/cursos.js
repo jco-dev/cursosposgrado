@@ -327,6 +327,20 @@ const reporte_economico = (id) => {
 	}
 };
 
+// DESCARGAR LISTADO DE ESTUDIANTES PDF
+const reporte_estudiantes = (id) => {
+	if (id != null || id != "") {
+		window.open("/cursos/reporte_estudiantes/" + id, "_blank");
+	} else {
+		swal({
+			html: true,
+			title: "Adventencia!!!",
+			text: "Error al imprimir el reporte de estudiantes del curso",
+			type: "warning",
+		});
+	}
+};
+
 // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
 google.charts.load("current", { packages: ["corechart"] });
 // google.setOnLoadCallback(reporte_totales);

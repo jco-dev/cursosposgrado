@@ -8,8 +8,7 @@ var KTDatatablesConfiguracion = (function () {
 		tbl_configuracion_curso
 			.DataTable({
 				processing: true,
-				serverSide: true,
-				ajax: "/configuracion/ajax_configuracion_curso",
+				ajax: { url: "/configuracion/ajax_configuracion_curso", type: "POST" },
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
 					[10, 20, 30, 50, 100, "Todos"],

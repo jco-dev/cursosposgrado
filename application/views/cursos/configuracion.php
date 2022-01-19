@@ -1160,6 +1160,7 @@
                     <tr>
                         <th>id</th>
                         <th>Nombre Curso</th>
+                        <th>Shortname</th>
                         <th>Imagen</th>
                         <th>Nota Aprobacion</th>
                         <th>fecha inicial</th>

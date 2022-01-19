@@ -23,40 +23,43 @@ class Configuracion extends PSG_Controller
             $table = "mdl_cursos_configuracion";
             $primaryKey = 'id_configuracion_curso';
             $columns = array(
-                array('dt' => 0, 'db' => 'id_configuracion_curso', 'formatter' => function($id){
+                array('dt' => 0, 'db' => 'id_configuracion_curso', 'formatter' => function ($id) {
                     return $this->cn++;
                 }),
                 array('dt' => 1, 'db' => 'fullname', 'formatter' => function ($fullname) {
                     return '<small>' . $fullname . '</small>';
                 }),
-                array('dt' => 2, 'db' => 'imagen_curso', 'formatter' => function ($img) {
+                array('dt' => 2, 'db' => 'shortname', 'formatter' => function ($fullname) {
+                    return '<small>' . $fullname . '</small>';
+                }),
+                array('dt' => 3, 'db' => 'imagen_curso', 'formatter' => function ($img) {
                     if ($img == "") {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                     } else {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$img") . '" alt="foto curso" />';
                     }
                 }),
-                array('dt' => 3, 'db' => 'nota_aprobacion'),
-                array('dt' => 4, 'db' => 'fecha_inicial'),
-                array('dt' => 5, 'db' => 'fecha_final'),
-                array('dt' => 6, 'db' => 'carga_horaria'),
-                array('dt' => 7, 'db' => 'fecha_certificacion'),
-                array('dt' => 8, 'db' => 'fecha_creacion'),
-                array('dt' => 9, 'db' => 'posx_nombre_participante'),
-                array('dt' => 10, 'db' => 'posy_nombre_participante'),
-                array('dt' => 11, 'db' => 'posx_bloque_texto'),
-                array('dt' => 12, 'db' => 'posy_bloque_texto'),
-                array('dt' => 13, 'db' => 'posx_nombre_curso'),
-                array('dt' => 14, 'db' => 'posy_nombre_curso'),
-                array('dt' => 15, 'db' => 'posx_qr'),
-                array('dt' => 16, 'db' => 'posy_qr'),
-                array('dt' => 17, 'db' => 'posx_tipo_participacion'),
-                array('dt' => 18, 'db' => 'posy_tipo_participacion'),
-                array('dt' => 19, 'db' => 'fuente_pdf'),
-                array('dt' => 20, 'db' => 'tamano_titulo'),
-                array('dt' => 21, 'db' => 'tamano_subtitulo'),
-                array('dt' => 22, 'db' => 'tamano_texto'),
-                array('dt' => 23, 'db' => 'color_nombre_participante', 'formatter' => function ($color) {
+                array('dt' => 4, 'db' => 'nota_aprobacion'),
+                array('dt' => 5, 'db' => 'fecha_inicial'),
+                array('dt' => 6, 'db' => 'fecha_final'),
+                array('dt' => 7, 'db' => 'carga_horaria'),
+                array('dt' => 8, 'db' => 'fecha_certificacion'),
+                array('dt' => 9, 'db' => 'fecha_creacion'),
+                array('dt' => 10, 'db' => 'posx_nombre_participante'),
+                array('dt' => 11, 'db' => 'posy_nombre_participante'),
+                array('dt' => 12, 'db' => 'posx_bloque_texto'),
+                array('dt' => 13, 'db' => 'posy_bloque_texto'),
+                array('dt' => 14, 'db' => 'posx_nombre_curso'),
+                array('dt' => 15, 'db' => 'posy_nombre_curso'),
+                array('dt' => 16, 'db' => 'posx_qr'),
+                array('dt' => 17, 'db' => 'posy_qr'),
+                array('dt' => 18, 'db' => 'posx_tipo_participacion'),
+                array('dt' => 19, 'db' => 'posy_tipo_participacion'),
+                array('dt' => 20, 'db' => 'fuente_pdf'),
+                array('dt' => 21, 'db' => 'tamano_titulo'),
+                array('dt' => 22, 'db' => 'tamano_subtitulo'),
+                array('dt' => 23, 'db' => 'tamano_texto'),
+                array('dt' => 24, 'db' => 'color_nombre_participante', 'formatter' => function ($color) {
                     if ($color != '') {
                         $datos = explode(", ", $color);
                         if (count($datos) == 3) {
@@ -68,7 +71,7 @@ class Configuracion extends PSG_Controller
                         return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
                     }
                 }),
-                array('dt' => 24, 'db' => 'color_subtitulo', 'formatter' => function ($color) {
+                array('dt' => 25, 'db' => 'color_subtitulo', 'formatter' => function ($color) {
                     if ($color != '') {
                         $datos = explode(", ", $color);
                         if (count($datos) == 3) {
@@ -80,30 +83,30 @@ class Configuracion extends PSG_Controller
                         return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
                     }
                 }),
-                array('dt' => 25, 'db' => 'detalle_curso'),
-                array('dt' => 26, 'db' => 'horario'),
-                array('dt' => 27, 'db' => 'url_pdf'),
-                array('dt' => 28, 'db' => 'banner_curso', 'formatter' => function ($banner) {
+                array('dt' => 26, 'db' => 'detalle_curso'),
+                array('dt' => 27, 'db' => 'horario'),
+                array('dt' => 28, 'db' => 'url_pdf'),
+                array('dt' => 29, 'db' => 'banner_curso', 'formatter' => function ($banner) {
                     if ($banner == "") {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                     } else {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$banner") . '" alt="foto curso" />';
                     }
                 }),
-                array('dt' => 29, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
+                array('dt' => 30, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
                     return '<span class="label label-light-success label-inline font-weight-bolder mr-2">' . $celular . '</span>';
                 }),
-                array('dt' => 30, 'db' => 'inversion', 'formatter' => function ($inversion) {
+                array('dt' => 31, 'db' => 'inversion', 'formatter' => function ($inversion) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
                 }),
-                array('dt' => 31, 'db' => 'descuento', 'formatter' => function ($des) {
+                array('dt' => 32, 'db' => 'descuento', 'formatter' => function ($des) {
                     if ($des == "") {
                         $des = 0;
                     }
                     return '<span class="label label-warning label-inline font-weight-bolder mr-2">' . $des . ' %</span>';
                 }),
-                array('dt' => 32, 'db' => 'fecha_inicio_descuento'),
-                array('dt' => 33, 'db' => 'fecha_fin_descuento'),
+                array('dt' => 33, 'db' => 'fecha_inicio_descuento'),
+                array('dt' => 34, 'db' => 'fecha_fin_descuento'),
                 // array('dt' => 34, 'db' => 'imagen_personalizado', 'formatter' => function ($img) {
                 //     if ($img == "") {
                 //         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
@@ -114,11 +117,11 @@ class Configuracion extends PSG_Controller
                 // array('dt' => 35, 'db' => 'posx_imagen_personalizado'),
                 // array('dt' => 36, 'db' => 'posy_imagen_personalizado'),
                 // array('dt' => 37, 'db' => 'imprimir_subtitulo'),
-                array('dt' => 34, 'db' => 'subtitulo'),
-                array('dt' => 35, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                array('dt' => 35, 'db' => 'subtitulo'),
+                array('dt' => 36, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 36, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                array('dt' => 37, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
                     return "
                         <a id='btn_agregar_img_sub' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-primary btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Agregar imagen personalizado del curso'>
                         <i class='nav-icon la la-plus'></i>
@@ -586,7 +589,7 @@ class Configuracion extends PSG_Controller
                     [
                         'posx_imagen_personalizado' => $posx_imagen_personalizado,
                         'posy_imagen_personalizado' => $posy_imagen_personalizado,
-                        'imprimir_subtitulo' => ($imprimir == '1')? true: false,
+                        'imprimir_subtitulo' => ($imprimir == '1') ? true : false,
                         'subtitulo' => $subtitulo
                     ],
                     ['id_configuracion_curso' => $id_configuracion_curso]
@@ -634,7 +637,7 @@ class Configuracion extends PSG_Controller
                         ]
                     ));
                 }
-            } 
+            }
         }
     }
 }

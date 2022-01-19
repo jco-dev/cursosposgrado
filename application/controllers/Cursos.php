@@ -217,6 +217,13 @@ class Cursos extends PSG_Controller
 									</a>
 								</li>
 
+								<li class="navi-item">
+									<a onclick="reporte_estudiantes(' . $id . ')" type="button" id="btn_reporte_estudiantes" data-id=' . $id . ' class="navi-link" title="Reporte de estudiantes del curso">
+										<span class="navi-icon"><i class="la la-print"></i></span>
+										<span class="navi-text">Estudiantes PDF</span>
+									</a>
+								</li>
+
 							</ul>
 						</div>
 					</div><script>jQuery(".navi").toggleClass("visible")</script>';
@@ -1137,6 +1144,20 @@ class Cursos extends PSG_Controller
 
 		$rep = new ImprimirCertificado();
 		$rep->imprimir_reporte_total_reacudacion($data_course, $tipo_inscritos, $tipo_preinscritos);
+	}
+
+	public function reporte_estudiantes($id)
+	{
+		$data = $this->sql_ssl->listar_tabla(
+			'inscripcion_curso_vista',
+			['id' => $id]
+		);
+
+		$data_course = $this->cursos_model->get_datos_curso($id);
+
+
+		$rep = new ImprimirCertificado();
+		$rep->imprimir_estudiantes($data, $data_course);
 	}
 
 	public function date_impresion()
