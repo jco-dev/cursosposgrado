@@ -125,6 +125,13 @@
 								</a>
 							</li>
 
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('docente') ?>" class="menu-link">
+									<i class="menu-icon fa fa-plus-circle"></i>
+									<span class="menu-text">Agregar Docente</span>
+								</a>
+							</li>
+
 							<li class="menu-section">
 								<h4 class="menu-text">INSCRIPCIONES</h4>
 								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -642,7 +649,9 @@
 	<script src="<?= base_url('assets/js/entrega/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
-	
+	<script src="<?= base_url('assets/js/docente/index.js') ?>"></script>
+
+
 </body>
 <!--end::Body-->
 
