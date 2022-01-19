@@ -56,35 +56,33 @@ class SendEmail extends PSG_Controller
 
 				//verfificamos certificacion solicitado por curso, modulos o ambos
 				$photo = false;
-
+				$mail->addAttachment("/assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf", "certificado.pdf");
 				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf");
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . ".pdf", 'certificado.pdf');
 					$photo = true;
 				}
-
 				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_1.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_1.pdf");
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_1.pdf", 'certificado_1.pdf');
 					$photo = true;
 				}
 
 				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_2.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_2.pdf");
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_2.pdf", 'certificado_2.pdf');
 					$photo = true;
 				}
 
 				if (file_exists("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_3.pdf")) {
-					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_3.pdf");
+					$mail->addAttachment("assets/certificados/certificados_{$estudiante->id}/$estudiante->id_inscripcion_curso" . "_3.pdf", 'certificado_3.pdf');
 					$photo = true;
 				}
 
-
 				if ($photo) {
-					if (!$mail->send()) {
-						echo 'Error: ' . $mail->ErrorInfo;
-						$not_envied++;
-					} else {
+					if ($mail->send()) {
+						// echo 'Error: ' . $mail->ErrorInfo;
 						$envied++;
 						$cn++;
+					} else {
+						$not_envied++;
 					}
 				}
 			}

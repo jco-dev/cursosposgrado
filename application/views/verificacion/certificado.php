@@ -23,7 +23,6 @@
 									<label class="font-italic">Este certificado está emitido a:</label>
 									<h6 class="font-weight-bold"><i class="fa fa-user"></i> <?php echo $certificado['firstname'] . ' ' . $certificado['lastname']; ?></h6>
 									<label class="font-italic">
-
 										<?php if ($certificado['tipo_participacion'] == "EXPOSITOR") {
 											echo 'Por haber participado en calidad de <strong>EXPOSITOR</strong> del curso: ';
 										} elseif ($certificado['tipo_participacion'] == "ORGANIZADOR") {
@@ -42,19 +41,27 @@
 										} ?>
 									</label>
 									<h6 class="font-weight-bold"><i class="fa fa-graduation-cap"></i>
-										<?php
-										echo mb_convert_case(preg_replace('/\s+/', ' ', $certificado['fullname']), MB_CASE_UPPER); ?>
+										<?= mb_convert_case(preg_replace('/\s+/', ' ', $certificado['fullname']), MB_CASE_UPPER) ?>
 									</h6>
+									<?php if (intval($certificado['calificacion_final']) >= $nota_aprobacion) { ?>
+										<label class="font-italic">
+											Nota Final:
+										</label>
+										<h6 class="font-weight-bold text-success" style="background: white; ">
+											<strong><?= $certificado['calificacion_final'] ?></strong>
+										</h6>
+									<?php } ?>
+
 									<?php
 									if ($certificado['fecha_inicial'] != "0000-00-00") { ?>
 										<label class="font-italic">Realizado en fecha:</label>
 										<h6 class="font-weight-bold"><i class="fa fa-calendar"></i>
-											<?php echo  strtolower(fecha_literal($certificado['fecha_certificacion'], 1)); ?>
+											<?= strtolower(fecha_literal($certificado['fecha_certificacion'], 1)) ?>
 										</h6>
 									<?php } else { ?>
 										<label class="font-italic">Realizado en fecha:</label>
 										<h6 class="font-weight-bold"><i class="fa fa-calendar"></i>
-											<?php echo  strtolower(fecha_literal($certificado['fecha_registro'], 1)); ?>
+											<?= strtolower(fecha_literal($certificado['fecha_registro'], 1)) ?>
 										</h6>
 									<?php } ?>
 

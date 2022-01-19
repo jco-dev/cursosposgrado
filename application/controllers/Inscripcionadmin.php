@@ -76,7 +76,7 @@ class Inscripcionadmin extends PSG_Controller
         $paterno = $this->input->post('paterno');
         $materno = $this->input->post('materno');
         $genero = $this->input->post('genero');
-        $fecha_nacimiento = ($this->input->post('anio2') != "") ? $this->input->post('anio2') . '-' . $this->input->post('mes2') . '-' . $this->format_dia(intval($this->input->post('dia2'))) : "";
+        $fecha_nacimiento = $this->input->post('anio2') . '-' . $this->input->post('mes2') . '-' . $this->format_dia(intval($this->input->post('dia2')));
         $celular = $this->input->post('celular');
         $id_municipio = $this->input->post('ciudad_residencia');
         $modalidad_inscripcion = $this->input->post('modalidad_inscripcion_local');
@@ -345,6 +345,9 @@ class Inscripcionadmin extends PSG_Controller
                         }
                     }),
                     array('dt' => 15, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                        return '<button class="btn btn-primary btn-imprimir-pdf" id-preinscripcion-curso="' . $id . '"><i class="fa fa-print"></i>PDF</button>';
+                    }),
+                    array('dt' => 16, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
                         $datos = '';
                         if ($row['estado'] == "PREINSCRITO") {
                             $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>
@@ -447,6 +450,9 @@ class Inscripcionadmin extends PSG_Controller
                         }
                     }),
                     array('dt' => 15, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+                        return '<button class="btn btn-primary btn-imprimir-pdf" id-preinscripcion-curso="' . $id . '"><i class="fa fa-print"></i>PDF</button>';
+                    }),
+                    array('dt' => 16, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
                         $datos = '';
                         if ($row['estado'] == "PREINSCRITO") {
                             $datos .= "<option value='PREINSCRITO' selected>PREINSCRITO</option>

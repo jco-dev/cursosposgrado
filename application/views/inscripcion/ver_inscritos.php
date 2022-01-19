@@ -20,7 +20,7 @@
                     </span>
                     Volver a Cursos
                 </a>
-                
+
                 <button type="button" class="btn btn-success ml-5" id="btn_descargar_csv">
                     <i class="fa fa-file-excel"></i>
                     Descargar CSV
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="card-body">
-        
+
             <input type="hidden" id="id_c" name="id_c" value="<?= $id ?>">
             <table class="table table-separate table-head-custom table-checkable" id="tbl_ver_inscripcion">
                 <thead>
@@ -48,6 +48,7 @@
                         <th>transaccion</th>
                         <th>certificaci&oacute;n</th>
                         <th>respaldo</th>
+                        <th>Imprimir Comprobante PDF</th>
                         <th>Cambiar estado</th>
                     </tr>
                 </thead>

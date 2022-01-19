@@ -192,9 +192,9 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
-            if (file_exists('assets/img/img_send_certificate/ofimatica-fondo.jpeg')) {
-                $this->Image('assets/img/img_send_certificate/ofimatica-fondo.jpeg', 0, 0, 279.4, 215.9);
-            }
+            // if (file_exists('assets/img/img_send_certificate/autocad-fondo.jpeg')) {
+            // $this->Image('assets/img/img_send_certificate/autocad-fondo.jpeg', 0, 0, 279.4, 215.9);
+            // }
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -570,9 +570,9 @@ class ImprimirCertificado extends Fpdf_psg
                 $this->Image($datos_curso[0]->imagen_curso, 0, 0, 279.4, 215.9);
             }
 
-            if (file_exists('assets/img/img_send_certificate/ofimatica-fondo.jpeg')) {
-                $this->Image('assets/img/img_send_certificate/ofimatica-fondo.jpeg', 0, 0, 279.4, 215.9);
-            }
+            // if (file_exists('assets/img/img_send_certificate/autocad-fondo.jpeg')) {
+            // $this->Image('assets/img/img_send_certificate/autocad-fondo.jpeg', 0, 0, 279.4, 215.9);
+            // }
 
             // Nombre estudiante
             $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
@@ -1276,7 +1276,7 @@ class ImprimirCertificado extends Fpdf_psg
         $pdf->SetFont('Arial', '', 15);
         $pdf->Cell(40, 8, utf8_decode("Fecha: "), 0, 0, "L");
         $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(45, 8, utf8_decode(strtolower(strftime("%d %b %G", strtotime($data->fecha_pago)))), 0, 1, "R");
+        $pdf->Cell(45, 8, utf8_decode(strtolower(strftime("%d/%m/%G", strtotime($data->fecha_pago)))), 0, 1, "R");
 
         $pdf->setX(0.1);
         $pdf->SetFont('Arial', '', 15);

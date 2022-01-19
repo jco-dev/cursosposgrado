@@ -10,7 +10,7 @@ var KTDatatablesVerInscritos = (function () {
 				ajax: {
 					type: "POST",
 					url: "/inscripcionadmin/ajax_ver_inscritos",
-					data: {id: $("#id_c").val()}
+					data: { id: $("#id_c").val() },
 				},
 				lengthMenu: [
 					[10, 20, 30, 50, 100, -1],
@@ -158,6 +158,10 @@ var KTDatatablesVerInscritos = (function () {
 						}
 					}
 				);
+			})
+			.on("click", ".btn-imprimir-pdf", function (e) {
+				let id = $(this).attr("id-preinscripcion-curso");
+				window.open("/inscripcionadmin/imprimir/" + id, "_blank");
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {
@@ -182,7 +186,7 @@ var KTDatatablesVerInscritos = (function () {
 jQuery(document).ready(function () {
 	$("#cursos").select2({
 		placeholder: "-- seleccione curso --",
-		width: '100%',
+		width: "100%",
 	});
 
 	$("#btn_descargar_csv").on("click", function () {
@@ -194,96 +198,103 @@ jQuery(document).ready(function () {
 
 	let id_cc = $("#id_c").val();
 
-	if(id_cc != null){
-		$("#cursos").val(id_cc).trigger('change');
+	if (id_cc != null) {
+		$("#cursos").val(id_cc).trigger("change");
 	}
 
-	$("#descagar_usuarios_moodle").on("click", function(){
+	$("#descagar_usuarios_moodle").on("click", function () {
 		let id = $("#cursos").val();
 		let estado = $("#estado").val();
-		if(id == ""){
+		if (id == "") {
 			Swal.fire({
 				title: "Por favor, seleccione un curso !!!",
 				icon: "warning",
 				showCancelButton: false,
 				confirmButtonText: "Ok",
 			});
-		}else if(estado == ""){
+		} else if (estado == "") {
 			Swal.fire({
 				title: "Por favor, seleccione un estado !!!",
 				icon: "warning",
 				showCancelButton: false,
 				confirmButtonText: "Ok",
 			});
-		}else{
+		} else {
 			$.post(
-			"/inscripcionadmin/ver_estudiantes",
-			{ id, estado },
-			function (response) {
-				if (response.data > 0) {
-					if (parseInt(response.data) > 0) {
-						window.open("/inscripcionadmin/descargar_csv/?id=" + id + "&estado=" + estado, "_blank");
+				"/inscripcionadmin/ver_estudiantes",
+				{ id, estado },
+				function (response) {
+					if (response.data > 0) {
+						if (parseInt(response.data) > 0) {
+							window.open(
+								"/inscripcionadmin/descargar_csv/?id=" +
+									id +
+									"&estado=" +
+									estado,
+								"_blank"
+							);
+						}
+					} else {
+						Swal.fire({
+							title: "No existe usuarios en el curso !!!",
+							icon: "warning",
+							showCancelButton: false,
+							confirmButtonText: "Ok",
+						});
 					}
-				}else{
-					Swal.fire({
-						title: "No existe usuarios en el curso !!!",
-						icon: "warning",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					});
 				}
-			}
-		);
+			);
 		}
-		
+	});
 
-	})
-
-	$("#descargar_contactos_curso").on("click", function(){
+	$("#descargar_contactos_curso").on("click", function () {
 		let id = $("#cursos").val();
 		let estado = $("#estado").val();
-		if(id == ""){
+		if (id == "") {
 			Swal.fire({
 				title: "Por favor, seleccione un curso !!!",
 				icon: "warning",
 				showCancelButton: false,
 				confirmButtonText: "Ok",
 			});
-		}else if(estado == ""){
+		} else if (estado == "") {
 			Swal.fire({
 				title: "Por favor, seleccione un estado !!!",
 				icon: "warning",
 				showCancelButton: false,
 				confirmButtonText: "Ok",
 			});
-		}else{
+		} else {
 			$.post(
-			"/inscripcionadmin/ver_estudiantes",
-			{ id, estado },
-			function (response) {
-				if (response.data > 0) {
-					if (parseInt(response.data) > 0) {
-						window.open("/inscripcionadmin/descargar_contacto/?id=" + id + "&estado=" + estado, "_blank");
+				"/inscripcionadmin/ver_estudiantes",
+				{ id, estado },
+				function (response) {
+					if (response.data > 0) {
+						if (parseInt(response.data) > 0) {
+							window.open(
+								"/inscripcionadmin/descargar_contacto/?id=" +
+									id +
+									"&estado=" +
+									estado,
+								"_blank"
+							);
+						}
+					} else {
+						Swal.fire({
+							title: "No existe usuarios en el curso !!!",
+							icon: "warning",
+							showCancelButton: false,
+							confirmButtonText: "Ok",
+						});
 					}
-				}else{
-					Swal.fire({
-						title: "No existe usuarios en el curso !!!",
-						icon: "warning",
-						showCancelButton: false,
-						confirmButtonText: "Ok",
-					});
 				}
-			}
-		);
+			);
 		}
-		
+	});
+	$("#cerrar_modal").on("click", function () {
+		$("#cursos").val("").trigger("change");
+		$("#estado").val("");
+	});
 
-	})
-	$("#cerrar_modal").on("click", function(){
-		$("#cursos").val('').trigger('change');
-		$("#estado").val('');
-	})
-
-	
 	KTDatatablesVerInscritos.init();
 });
