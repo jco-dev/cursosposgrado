@@ -653,7 +653,10 @@ jQuery(document).ready(function () {
 		function (e) {
 			let valor = $(this).val();
 			if (valor != "ninguno") {
-				let costo_curso = parseInt(getNumbersInString($("#costo_curso").val()));
+				$("#costo_curso").css("text-decoration", "line-through");
+				let costo_curso = parseInt(
+					getNumbersInString($("#costo_curso").text())
+				);
 				let ci = $("#ci").val();
 				$.ajax({
 					url: "/cupon/porcentaje_cupon",
@@ -665,13 +668,16 @@ jQuery(document).ready(function () {
 				}).done(function (response) {
 					let precio_con_descuento =
 						costo_curso - costo_curso * (response.porcentaje / 100);
-					$(".form-text-costo").text(
-						"Total a cancelar con descuento: Bs. " + precio_con_descuento
+					$(".form-text-costo").html(
+						"Total a cancelar con descuento: Bs. <span class='fw-bold'>" +
+							precio_con_descuento +
+							"</span>"
 					);
 					$(".form-text-costo").fadeTo(400);
 					$("#monto_pago").focus();
 				});
 			} else {
+				$("#costo_curso").removeAttr("style");
 				$(".form-text-costo").text("");
 				$("#monto_pago").val();
 				$("#monto_pago").focus();

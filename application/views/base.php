@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -7,9 +7,7 @@
 	<title>Verificador de certificados | PSG</title>
 	<meta name="description" content="Verificador de certificados psg" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-
 	<link href="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/css/magnific-popup/magnific-popup.css') ?>" rel="stylesheet" type="text/css" />
 	<link href="<?= base_url('assets/plugins/global/plugins.bundle.css') ?>" rel="stylesheet" type="text/css" />
@@ -129,6 +127,17 @@
 								<a href="<?= base_url('docente') ?>" class="menu-link">
 									<i class="menu-icon fa fa-plus-circle"></i>
 									<span class="menu-text">Agregar Docente</span>
+								</a>
+							</li>
+
+							<li class="menu-section">
+								<h4 class="menu-text">CERTIFICADOS</h4>
+								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+							</li>
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('certificado') ?>" class="menu-link">
+									<i class="menu-icon fa fa-plus-circle"></i>
+									<span class="menu-text">Tipo Certificado</span>
 								</a>
 							</li>
 
@@ -637,7 +646,7 @@
 	<script src="<?= base_url('assets/js/magnific-popup/jquery.magnific-popup.min.js') ?>"></script>
 	<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
 	<script src="<?= base_url('assets/js/viewerjs/js/viewer.js') ?>"></script>
-	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos.js') ?>"></script>
+	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos1.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
@@ -650,7 +659,7 @@
 	<script src="<?= base_url('assets/js/modulos/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/docente/index.js') ?>"></script>
-
+	<script src="<?= base_url('assets/js/certificado/index.js') ?>"></script>
 
 </body>
 <!--end::Body-->

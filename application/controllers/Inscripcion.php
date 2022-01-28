@@ -19,6 +19,10 @@ class Inscripcion extends CI_Controller
         $id_curso = $this->encryption->decrypt(base64_decode($id));
         $this->data['data'] = $this->inscripcion_model->data_curso($id_curso);
         $this->data['municipios'] = $this->inscripcion_model->listar_municipios();
+        $this->data['modules'] = $this->sql_ssl->listar_tabla(
+            'certificacion',
+            ['id_course' => $id_curso, 'estado' => "REGISTRADO"],
+        );
         $this->data['curso'] = $id;
         if (isset($this->data['data'])) {
             $this->data['datos'] = $this->inscripcion_model->get_config_curso($id_curso);
@@ -105,12 +109,13 @@ class Inscripcion extends CI_Controller
                     $fecha_pago = $this->input->post('fecha_pago');
                     $monto_pago = $this->input->post('monto_pago');
                     $tipo_certificado_solicitado = $this->input->post('tipo_certificado_solicitado');
+                    $certificacion = $this->input->post('certificacion');
                     $estado = "PREINSCRITO";
 
                     // verificar la inscripcion del curso con ci
                     $respuesta = $this->sql_ssl->listar_tabla(
                         'mdl_participante_preinscripcion_curso',
-                        ['ci' => $ci, 'id_course_moodle' => $id_curso, 'estado' => "PREINSCRITO"]
+                        ['ci' => $ci, 'id_course_moodle' => $id_curso]
                     );
 
                     if (count($respuesta) == 0) {
@@ -169,6 +174,7 @@ class Inscripcion extends CI_Controller
                                         'id_transaccion' => $id_transaccion,
                                         'monto_pago' => $monto_pago,
                                         'tipo_certificacion' => $tipo_certificado_solicitado,
+                                        'certificacion' => $certificacion,
                                         'fecha_pago' => $fecha_pago,
                                         'respaldo_pago' => $ruta,
                                         'estado' => $estado
@@ -237,6 +243,7 @@ class Inscripcion extends CI_Controller
                                         'id_transaccion' => $id_transaccion,
                                         'monto_pago' => $monto_pago,
                                         'tipo_certificacion' => $tipo_certificado_solicitado,
+                                        'certificacion' => $certificacion,
                                         'fecha_pago' => $fecha_pago,
                                         'respaldo_pago' => $ruta,
                                         'estado' => $estado
@@ -421,5 +428,26 @@ class Inscripcion extends CI_Controller
         }
 
         return FALSE;
+    }
+
+    public function verificar_registro()
+    {
+        $ci = $this->input->post('ci');
+        $id_course = $this->encryption->decrypt(base64_decode($this->input->post('id')));
+        // verificar la inscripcion del curso con ci
+        $respuesta = $this->sql_ssl->listar_tabla(
+            'mdl_participante_preinscripcion_curso',
+            ['ci' => $ci, 'id_course_moodle' => $id_course]
+        );
+
+        if (count($respuesta) > 0) {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['data' => true])
+            );
+        } else {
+            $this->output->set_content_type('application/json')->set_output(
+                json_encode(['data' => false])
+            );
+        }
     }
 }

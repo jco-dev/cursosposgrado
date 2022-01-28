@@ -40,7 +40,7 @@
                     <input type="text" class="form-control" name="ci" id="ci" placeholder="Tu respuesta" />
                 </div>
                 <div class="col-lg-3">
-                    <label for="ci"> Expedido <span class="text-danger">*</span></label>
+                    <label for="ci"> Expedido <span class="text-danger">(*)</span></label>
                     <select name="expedido" id="expedido" class="form-control">
                         <option value=""> Elige </option>
                         <option value="QR"> Nueva cédula con código QR </option>
@@ -166,7 +166,6 @@
         </div>
     </div>
 
-
 </div>
 <!--end: Wizard Step 1-->
 <!--begin: Wizard Step 2-->
@@ -218,7 +217,7 @@
             <div class="col-lg-8">
                 <label for="monto_pago">Monto Pago en Bolivianos <span class="text-danger">(*)</span></label>
                 <input type="number" id="monto_pago" name="monto_pago" class="form-control">
-                <div class="form-text-costo fs-7 fw-bold text-muted"></div>
+                <div class="form-text-costo fs-7 font-weight-bold"></div>
             </div>
             <div class="col-lg-4 costo-curso-c">
                 <label for="monto_pago">Costo del Curso</label>
@@ -288,6 +287,33 @@
             </div>
         </div>
     </div>
+
+    <div class="card card-custom mt-6">
+        <?php
+        $listar = null;
+        foreach ($modules as $key => $module) {
+            $listar .= $module->nombre . ', ';
+        }
+        $l = rtrim($listar, ', ');
+        ?>
+        <div class="card-body form-group pb-0">
+            <label for="certificacion">certificación <span class="text-danger">(*)</span></label>
+            <div class="radio-list form-group">
+                <label class="radio">
+                    <input type="radio" name="certificacion" id="certificacion" value="CURSO" <?= (count($modules) === 0) ? 'checked' : '' ?> />
+                    <span></span>Curso
+                </label>
+                <?php if (count($modules) > 0) { ?>
+                    <label class="radio">
+                        <input type="radio" name="certificacion" id="certificacion" value="MÓDULOS" />
+                        <span></span>Módulos &nbsp; <p id="span-modulos" class="m-0">( <?= $l ?> )</p>
+                    </label>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <!--end: Wizard Step 3-->
 
@@ -354,6 +380,10 @@
                     <li class="list-group-item">
                         <strong>Tipo certificado solicitado:</strong>
                         <span id="m_tipo_certificado_solicitado">Ambos</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Certificado:</strong>
+                        <span id="m_certificacion"></span>
                     </li>
                 </ul>
             </div>

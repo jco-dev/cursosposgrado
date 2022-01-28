@@ -61,6 +61,7 @@
                 <span class="text-danger">(*) Obligatorio</span>
             </div>
         </div>
+
         <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
             <!--begin: Wizard Nav-->
             <div class="wizard-nav d-none">
@@ -137,7 +138,7 @@
         </div>
     </div>
     <?php include('_script.global.php'); ?>
-    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion.js') ?>"></script>
+    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion2.js') ?>"></script>
     <script src='https://www.google.com/recaptcha/api.js?render=6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU'></script>
     <script>
         grecaptcha.ready(function() {

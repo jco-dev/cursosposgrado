@@ -73,6 +73,12 @@ class Cursos extends PSG_Controller
 	/** CURSOS */
 	public function ver_cursos()
 	{
+		$this->data['certificate_types'] = $this->sql_ssl->listar_tabla(
+			'tipo_certificado',
+			[
+				'estado' => 'REGISTRADO'
+			],
+		);
 		$this->templater->view('cursos/cursos', $this->data);
 	}
 
@@ -109,20 +115,27 @@ class Cursos extends PSG_Controller
 
 					return "<span class='label label-light-$estado label-inline mr-2'>" . $shortname . "</span>";
 				}),
-				array('dt' => 3, 'db' => 'id', 'formatter' => function ($id) {
+				array('dt' => 3, 'db' => 'certificado', 'formatter' => function ($img) {
+					if ($img == "") {
+						return '<img class="img-thumbnail" width="60" heigth="60" src="' . base_url('assets/img/default.jpg') . '" alt="Imagen tipo certificado" />';
+					} else {
+						return '<img class="img-thumbnail" width="60" heigth="60" src="' . base_url($img) . '" alt="Imagen tipo certificado" />';
+					}
+				}),
+				array('dt' => 4, 'db' => 'id', 'formatter' => function ($id) {
 					$respuesta = $this->cursos_model->contar_estudiantes_inscritos($id);
 					return "<span class='label label-info label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
-				array('dt' => 4, 'db' => 'id', 'formatter' => function ($id) {
+				array('dt' => 5, 'db' => 'id', 'formatter' => function ($id) {
 					$respuesta = $this->cursos_model->contar_estudiantes_preinscritos($id);
 					return "<span class='label label-info label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
-				array('dt' => 5, 'db' => 'id', 'formatter' => function ($id) {
+				array('dt' => 6, 'db' => 'id', 'formatter' => function ($id) {
 					$respuesta = $this->cursos_model->contar_modulos($id);
 					return "<span class='label label-danger label-inline mr-2'>" . $respuesta[0]->cantidad . "</span>";
 				}),
-				array('dt' => 6, 'db' => 'timecreated'),
-				array('dt' => 7, 'db' => 'estado_informe', 'formatter' => function ($state, $row) {
+				array('dt' => 7, 'db' => 'timecreated'),
+				array('dt' => 8, 'db' => 'estado_informe', 'formatter' => function ($state, $row) {
 					// var_dump($row['id']);
 					if ($state == "SI") {
 						return "<span class='estado_informe label label-success label-inline mr-2' valor='NO' curso='" . $row['fullname'] . "' valor='NO' id='" . $row['id'] . "' title='Anular el informe entregado' style='cursor: pointer'>ENTREGADO</span>";
@@ -130,7 +143,7 @@ class Cursos extends PSG_Controller
 						return "<span class='estado_informe label label-danger label-inline mr-2' valor='SI' curso='" . $row['fullname'] . "' id='" . $row['id'] . "' title='Cambiar de estado a entregado el informe' style='cursor: pointer'>NO ENTREGADO</span>";
 					}
 				}),
-				array('dt' => 8, 'db' => 'id', 'formatter' => function ($id, $row) {
+				array('dt' => 9, 'db' => 'id', 'formatter' => function ($id, $row) {
 					$nombre_curso = $row['fullname'];
 					return '<div class="dropdown dropdown-inline lista-opciones">
 						<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</a>
@@ -221,6 +234,12 @@ class Cursos extends PSG_Controller
 									<a onclick="reporte_estudiantes(' . $id . ')" type="button" id="btn_reporte_estudiantes" data-id=' . $id . ' class="navi-link" title="Reporte de estudiantes del curso">
 										<span class="navi-icon"><i class="la la-print"></i></span>
 										<span class="navi-text">Estudiantes PDF</span>
+									</a>
+								</li>
+								<li class="navi-item">
+									<a onclick="add_certificate_type(' . $id . ')" type="button" id="btn_reporte_estudiantes" data-id=' . $id . ' class="navi-link" title="Agregar tipo certificado">
+										<span class="navi-icon"><i class="la la-plus"></i></span>
+										<span class="navi-text">Agregar tipo certificado</span>
 									</a>
 								</li>
 
@@ -633,7 +652,6 @@ class Cursos extends PSG_Controller
 		$tipo = $this->input->post('tipo');
 
 		$datos_curso = $this->cursos_model->get_datos_curso($idcurso);
-
 		$modulos = $this->sql_ssl->listar_tabla(
 			'mdl_certificacion',
 			['id_course' => $idcurso, 'estado' => 'REGISTRADO']
@@ -700,7 +718,7 @@ class Cursos extends PSG_Controller
 	public function imprimir_certificado_todos()
 	{
 		$id = $this->input->post('id');
-		$value = $this->input->post('value');
+		$imprimir_a = $this->input->post('imprimir_a');
 		$estudiantes = $this->cursos_model->get_estudiantes_curso($id);
 		$data = array();
 
@@ -764,6 +782,7 @@ class Cursos extends PSG_Controller
 								array_push($modulo, $r->color_titulo);
 								array_push($modulo, $r->fecha_certificacion);
 								array_push($modulo, "MODULO");
+
 								array_push($data, $modulo);
 							}
 						} elseif ($estudiante->certificacion_unica == "AMBOS") {
@@ -818,12 +837,13 @@ class Cursos extends PSG_Controller
 					// return var_dump($data);
 				}
 
-				$rep = new ImprimirCertificado();
-				if ($datos_curso[0]->orientacion == "horizontal") {
-					$rep->imprimir_todos_version1($datos_curso, $data, $value);
+				if ($datos_curso[0]->metodo === NULL) {
+					$metodo = "certificado1";
 				} else {
-					$rep->imprimir_todos_vertical($datos_curso, $data, $value);
+					$metodo = $datos_curso[0]->metodo;
 				}
+				$rep = new ImprimirCertificado();
+				$rep->$metodo($datos_curso, $data, $imprimir_a, false);
 			}
 		} else {
 			$this->output->set_content_type('application/json')->set_output(json_encode(
@@ -837,8 +857,9 @@ class Cursos extends PSG_Controller
 	public function imprimir_certificado_blanco()
 	{
 		$id = $this->input->post('id');
-		$value = $this->input->post('value');
-		$tipo = $this->input->post('tipo');
+		$tipo_participacion = $this->input->post('tipo_participacion');
+		$imprimir_a = $this->input->post('imprimir_a');
+		// return var_dump($_REQUEST);
 		$datos_curso = $this->cursos_model->get_datos_curso($id);
 		$respuesta = $this->sql_ssl->listar_tabla(
 			'mdl_certificacion',
@@ -852,9 +873,25 @@ class Cursos extends PSG_Controller
 				]
 			));
 		} else {
+			$participation_type = null;
+			$final_note = null;
+			if ($tipo_participacion == "APROBADO" || $tipo_participacion == "PARTICIPADO") {
+				if ($tipo_participacion == "APROBADO") {
+					$final_note = 100;
+				} else {
+					$final_note = 10;
+				}
+				$participation_type = "PARTICIPANTE";
+			} else {
+				$participation_type = $tipo_participacion;
+			}
 			$curso_data = array();
 			foreach ($datos_curso as $key => $curso) {
 				$d = array();
+				array_push($d, NULL);
+				array_push($d, NULL);
+				array_push($d, $final_note);
+				array_push($d, $participation_type);
 				array_push($d, mb_convert_case(preg_replace('/\s+/', ' ', trim($curso->nombre_curso)), MB_CASE_UPPER));
 				array_push($d, $curso->fecha_inicial);
 				array_push($d, $curso->fecha_final);
@@ -864,14 +901,17 @@ class Cursos extends PSG_Controller
 				array_push($d, $curso->posy_imagen_personalizado);
 				array_push($d, $curso->color_subtitulo);
 				array_push($d, $curso->fecha_certificacion);
-				array_push($d, $value);
 				array_push($d, 'CURSO');
 
 				array_push($curso_data, $d);
 			}
-			//
+
 			foreach ($respuesta as $key => $r) {
 				$d = array();
+				array_push($d, NULL);
+				array_push($d, NULL);
+				array_push($d, $final_note);
+				array_push($d, $participation_type);
 				array_push($d, mb_convert_case(preg_replace('/\s+/', ' ', trim($r->nombre)), MB_CASE_UPPER));
 				array_push($d, $r->fecha_inicial);
 				array_push($d, $r->fecha_final);
@@ -881,18 +921,20 @@ class Cursos extends PSG_Controller
 				array_push($d, $r->posy_imagen_modulo);
 				array_push($d, $r->color_titulo);
 				array_push($d, $r->fecha_certificacion);
-				array_push($d, $value);
 				array_push($d, 'MODULO');
 
 				array_push($curso_data, $d);
 			}
-
-			$rep = new ImprimirCertificado();
-			if ($datos_curso[0]->orientacion == "horizontal") {
-				$rep->imprimir_blanco($curso_data, $datos_curso, $tipo);
+			if ($datos_curso == null) {
+				$metodo = 'certificado1';
 			} else {
-				$rep->imprimir_blanco_vertical_version1($curso_data, $datos_curso, $tipo);
+				$metodo = $datos_curso[0]->metodo;
 			}
+
+			// $rep = new ImprimirCertificado();
+			// $rep->$metodo($curso_data, $datos_curso, $imprimir_a, true);
+			$rep = new ImprimirCertificado();
+			$rep->$metodo($datos_curso, $curso_data, $imprimir_a, true);
 		}
 	}
 

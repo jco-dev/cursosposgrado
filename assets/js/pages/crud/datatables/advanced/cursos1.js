@@ -79,7 +79,18 @@ var KTDatatablesCursos = (function () {
 			})
 			.on("click", "#btn_imprimir_todos", function (e) {})
 			.on("click", "#btn_imprimir_blanco", function (e) {})
-			.on("click", "#btn_enviar_por_correo", function (e) {});
+			.on("click", "#btn_enviar_por_correo", function (e) {})
+			.on("click", "tr", function (e) {
+				var tbl_cursos = $("#tbl_cursos").DataTable();
+				// console.log(tbl_cursos.row(this).data());
+				// $(this).css("background-color", "red");
+				if ($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+				} else {
+					tbl_cursos.$("tr.selected").removeClass("selected");
+					$(this).addClass("selected");
+				}
+			});
 
 		$("#kt_datatable_search_status").on("change", function () {
 			datatable.search($(this).val().toLowerCase(), "Status");
@@ -178,20 +189,21 @@ const imprimir_certificados = (id) => {
 						"Seleccione si para que lleve la letra A delante del nombre del participante",
 					input: "select",
 					inputOptions: {
-						tipo: {
+						imprimir_a: {
 							SI: "SI",
 							NO: "NO",
 						},
 					},
 					showCancelButton: true,
-					inputValidator: (value) => {
+					inputValidator: (imprimir_a) => {
 						return new Promise((resolve) => {
 							resolve();
 							$.post(
 								"/cursos/imprimir_certificado_todos",
 								{
 									id,
-									value,
+									imprimir_a,
+									tipo_participacion: null,
 								},
 								function (response) {
 									if (typeof response.error != "undefined") {
@@ -205,10 +217,15 @@ const imprimir_certificados = (id) => {
 											"#toolbar=0&navpanes=0&scrollbar=0";
 										$("#modal-body-certificado").children().remove();
 										$("#modal-body-certificado").html(
-											'<embed src="' +
+											'<object width="100%" height="100%" type="application/pdf" data="' +
 												ruta +
-												'" type="application/pdf" width="100%" height="600px" />'
+												'"?#zoom=85&scrollbar=0&toolbar=0&navpanes=0"><p>Insert your error message here, if the PDF cannot be	displayed.</p></object>'
 										);
+										// $("#modal-body-certificado").html(
+										// 	'<embed src="' +
+										// 		ruta +
+										// 		'" type="application/pdf" width="100%" height="100%" />'
+										// );
 										$("#modal_imprimir_certificado").modal({
 											backdrop: "static",
 											keyboard: true,
@@ -236,7 +253,7 @@ const imprimir_certificado_blanco = (id) => {
 		title: "Seleccione tipo de participacion",
 		input: "select",
 		inputOptions: {
-			tipo: {
+			tipo_participacion: {
 				APROBADO: "APROBADO",
 				EXPOSITOR: "EXPOSITOR",
 				ORGANIZADOR: "ORGANIZADOR",
@@ -244,7 +261,7 @@ const imprimir_certificado_blanco = (id) => {
 			},
 		},
 		showCancelButton: true,
-		inputValidator: (value) => {
+		inputValidator: (tipo_participacion) => {
 			return new Promise((resolve) => {
 				resolve();
 				Swal.fire({
@@ -252,21 +269,21 @@ const imprimir_certificado_blanco = (id) => {
 						"Seleccione si para que lleve la letra A delante del nombre del participante",
 					input: "select",
 					inputOptions: {
-						tipo: {
+						imprimir_a: {
 							SI: "SI",
 							NO: "NO",
 						},
 					},
 					showCancelButton: true,
-					inputValidator: (tipo) => {
+					inputValidator: (imprimir_a) => {
 						return new Promise((resolve) => {
 							resolve();
 							$.post(
 								"/cursos/imprimir_certificado_blanco",
 								{
 									id,
-									value,
-									tipo,
+									tipo_participacion,
+									imprimir_a,
 								},
 								function (response) {
 									if (typeof response.error != "undefined") {
@@ -276,7 +293,7 @@ const imprimir_certificado_blanco = (id) => {
 										$("#modal-body-certificado").html(
 											'<embed src="data:application/pdf;base64,' +
 												response +
-												'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="600px" style="border: none;"/>'
+												'#toolbar=1&navpanes=1&scrollbar=1&zoom=67,100,100" type="application/pdf" width="100%" height="100%" style="border: none;"/>'
 										);
 										$("#modal_imprimir_certificado").modal({
 											backdrop: "static",
@@ -339,6 +356,11 @@ const reporte_estudiantes = (id) => {
 			type: "warning",
 		});
 	}
+};
+
+const add_certificate_type = (id) => {
+	$("#id_course").val(id);
+	$("#modal-add-certificate-type").modal("show");
 };
 
 // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO
@@ -459,5 +481,27 @@ jQuery(document).ready(function () {
 				}
 			}
 		);
+	});
+});
+
+$("#frm-save-tipo-certificate").on("submit", function (e) {
+	e.preventDefault();
+	e.stopPropagation();
+	$.ajax({
+		url: "/certificado/guardar_tipo_certificado",
+		type: "POST",
+		data: $(this).serialize(),
+	}).done(function (response) {
+		if (typeof response.exito != "undefined") {
+			Swal.fire("Éxito!!!", response.exito, "success");
+		}
+
+		if (typeof response.error != "undefined") {
+			Swal.fire("Error!", response.error, "error");
+		}
+
+		$("#modal-add-certificate-type").modal("hide");
+		$("#frm-save-tipo-certificate").trigger("reset");
+		tbl_cursos.DataTable().ajax.reload();
 	});
 });

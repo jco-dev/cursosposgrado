@@ -212,10 +212,11 @@ class Cursos_model extends PSG_Model
 			mcc.posy_imagen_personalizado,
 			mcc.imprimir_subtitulo,
 			mcc.subtitulo,
-			mcc.estado_curso
+			mcc.estado_curso,
+			mtc.metodo
 			FROM mdl_configuracion_curso mcc 
 			INNER JOIN mdl_course mc ON mcc.id_course_moodle = mc.id AND mcc.id_course_moodle = '$id' AND mcc.estado_curso <> 'ELIMINADO'
-			";
+			LEFT JOIN mdl_tipo_certificado mtc on mtc.id_tipo_certificado = mcc.id_tipo_certificado";
 			$query = $this->db->query($sql);
 			if ($query->num_rows() > 0) {
 				return ($query->result());
