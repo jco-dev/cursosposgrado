@@ -94,7 +94,7 @@ class Certificacion extends CI_Controller
 			if ($this->getExpressionResult($sentCode) === $result) {
 				// Mostrar los certificados si ya estan disponible
 				$cursos_persona = $this->certificacion_model->buscar_persona_por_ci($this->input->post('carnet_identidad'), $this->input->post('nro_celular'));
-
+				return var_dump($cursos_persona);
 				if ($cursos_persona != null) {
 					$html .= '<div class="card card-custom bg-radial-gradient-primary card-stretch gutter-b">
 						<div class="card-header border-0 py-5">

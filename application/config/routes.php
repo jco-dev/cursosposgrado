@@ -76,3 +76,4 @@ $route['inscripcion-autocad-2d'] = 'invitacion/video_informaciones/13';
 $route['inscripcion-autocad-3d'] = 'invitacion/video_informaciones/14';
 $route['inscripcion-routers'] = 'invitacion/video_informaciones/15';
 $route['inscripcion-computacion'] = 'invitacion/video_informaciones/16';
+$route['inscripcion-videoconferencias'] = 'invitacion/video_informaciones/17';

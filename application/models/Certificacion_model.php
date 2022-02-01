@@ -24,7 +24,7 @@ class Certificacion_model extends PSG_Model
 			mcc.certificacion_disponible, 
 			mcc.certificacion_disponible_inicio, 
 			mcc.certificacion_disponible_fin
-			from mdl_course mc 
+			from mdl_course mc
 			inner join mdl_configuracion_curso mcc on mc.id = mcc.id_course_moodle
 			inner join mdl_inscripcion_curso mic on mic.id_course_moodle = mcc.id_course_moodle
 			inner join mdl_participante mp on mp.id_user = mic.id_user_moodle  and mp.ci =$ci and mp.celular =$celular";

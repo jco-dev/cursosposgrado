@@ -62,83 +62,91 @@
             </div>
         </div>
 
-        <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
-            <!--begin: Wizard Nav-->
-            <div class="wizard-nav d-none">
-                <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">
-                    <!--begin::Wizard Step 1 Nav-->
-                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
-                        <div class="wizard-label">
-                            <h3 class="wizard-title">
-                                <span>1.</span>Datos personales
-                            </h3>
-                            <div class="wizard-bar"></div>
-                        </div>
-                    </div>
-                    <!--end::Wizard Step 1 Nav-->
-                    <!--begin::Wizard Step 2 Nav-->
-                    <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-label">
-                            <h3 class="wizard-title">
-                                <span>2.</span>Detalles de pago
-                            </h3>
-                            <div class="wizard-bar"></div>
-                        </div>
-                    </div>
-                    <!--end::Wizard Step 2 Nav-->
-                    <!--begin::Wizard Step 3 Nav-->
-                    <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-label">
-                            <h3 class="wizard-title">
-                                <span>3.</span>Tipo de certificaci&oacute;n solicitado
-                            </h3>
-                            <div class="wizard-bar"></div>
-                        </div>
-                    </div>
-                    <!--end::Wizard Step 3 Nav-->
-
-                    <!--begin::Wizard Step 4 Nav-->
-                    <div class="wizard-step" data-wizard-type="step">
-                        <div class="wizard-label">
-                            <h3 class="wizard-title">
-                                <span>4.</span>Completado
-                            </h3>
-                            <div class="wizard-bar"></div>
-                        </div>
-                    </div>
-                    <!--end::Wizard Step 4 Nav-->
-
-                </div>
-            </div>
-            <!--end: Wizard Nav-->
-            <!--begin: Wizard Body-->
-            <div class="row justify-content-center py-10 py-lg-12">
-                <div class="col-lg-12">
-                    <!--begin: Wizard Form-->
-                    <form class="form" id="frm_curso_inscripcion" enctype="multipart/form-data">
-                        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                        <?php include('_curso_id.php'); ?>
-                        <?php include('_form.php'); ?>
-                        <!--begin: Wizard Actions-->
-                        <div class="d-flex justify-content-between border-top mt-0 pt-1">
-                            <div class="mr-2">
-                                <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-prev"> Atr&aacute;s</button>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-info btn-sm font-weight-bolder px-9 py-4 submit" data-wizard-type="action-submit"> Enviar</button>
-                                <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-next"> Siguiente</button>
+        <?php
+        if ($datos[0]->fecha_inicial >= date('Y-m-d')) { ?>
+            <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
+                <!--begin: Wizard Nav-->
+                <div class="wizard-nav d-none">
+                    <div class="wizard-steps px-8 py-8 px-lg-15 py-lg-3">
+                        <!--begin::Wizard Step 1 Nav-->
+                        <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+                            <div class="wizard-label">
+                                <h3 class="wizard-title">
+                                    <span>1.</span>Datos personales
+                                </h3>
+                                <div class="wizard-bar"></div>
                             </div>
                         </div>
-                        <!--end: Wizard Actions-->
-                    </form>
-                    <!--end: Wizard Form-->
+                        <!--end::Wizard Step 1 Nav-->
+                        <!--begin::Wizard Step 2 Nav-->
+                        <div class="wizard-step" data-wizard-type="step">
+                            <div class="wizard-label">
+                                <h3 class="wizard-title">
+                                    <span>2.</span>Detalles de pago
+                                </h3>
+                                <div class="wizard-bar"></div>
+                            </div>
+                        </div>
+                        <!--end::Wizard Step 2 Nav-->
+                        <!--begin::Wizard Step 3 Nav-->
+                        <div class="wizard-step" data-wizard-type="step">
+                            <div class="wizard-label">
+                                <h3 class="wizard-title">
+                                    <span>3.</span>Tipo de certificaci&oacute;n solicitado
+                                </h3>
+                                <div class="wizard-bar"></div>
+                            </div>
+                        </div>
+                        <!--end::Wizard Step 3 Nav-->
+
+                        <!--begin::Wizard Step 4 Nav-->
+                        <div class="wizard-step" data-wizard-type="step">
+                            <div class="wizard-label">
+                                <h3 class="wizard-title">
+                                    <span>4.</span>Completado
+                                </h3>
+                                <div class="wizard-bar"></div>
+                            </div>
+                        </div>
+                        <!--end::Wizard Step 4 Nav-->
+
+                    </div>
                 </div>
+                <!--end: Wizard Nav-->
+                <!--begin: Wizard Body-->
+                <div class="row justify-content-center py-10 py-lg-12">
+                    <div class="col-lg-12">
+                        <!--begin: Wizard Form-->
+                        <form class="form" id="frm_curso_inscripcion" enctype="multipart/form-data">
+                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                            <?php include('_curso_id.php'); ?>
+                            <?php include('_form.php'); ?>
+                            <!--begin: Wizard Actions-->
+                            <div class="d-flex justify-content-between border-top mt-0 pt-1">
+                                <div class="mr-2">
+                                    <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-prev"> Atr&aacute;s</button>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-info btn-sm font-weight-bolder px-9 py-4 submit" data-wizard-type="action-submit"> Enviar</button>
+                                    <button type="button" class="btn btn-secondary btn-sm font-weight-bolder px-9 py-4" data-wizard-type="action-next"> Siguiente</button>
+                                </div>
+                            </div>
+                            <!--end: Wizard Actions-->
+                        </form>
+                        <!--end: Wizard Form-->
+                    </div>
+                </div>
+                <!--end: Wizard Body-->
             </div>
-            <!--end: Wizard Body-->
-        </div>
+        <?php } else { ?>
+            <div class="alert alert-custom alert-warning mt-10" role="alert">
+                <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                <div class="alert-text">La inscripción al curso ha terminado por favor comuníquese con los encargados del curso. Celular de referencia: <?= $datos[0]->celular_referencia ?></div>
+            </div>
+        <?php } ?>
     </div>
     <?php include('_script.global.php'); ?>
-    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion2.js') ?>"></script>
+    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion3.js') ?>"></script>
     <script src='https://www.google.com/recaptcha/api.js?render=6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU'></script>
     <script>
         grecaptcha.ready(function() {

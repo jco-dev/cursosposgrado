@@ -69,6 +69,13 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
+					expedido: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
 					paterno: {
 						validators: {
 							regexp: {
@@ -135,21 +142,21 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
-					anio: {
+					anio1: {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
 						},
 					},
-					mes: {
+					mes1: {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
 							},
 						},
 					},
-					dia: {
+					dia1: {
 						validators: {
 							notEmpty: {
 								message: "Esta pregunta es obligatoria",
