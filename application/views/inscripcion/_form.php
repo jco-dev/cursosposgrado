@@ -25,6 +25,12 @@
             padding-top: 14px;
         }
     }
+
+    @media(max-width:531px) {
+        #span-radio {
+            width: 25px;
+        }
+    }
 </style>
 
 <!--begin: Wizard Step 1-->
@@ -265,7 +271,7 @@
                 <h3 class="card-label text-white">Recojo o envío de certificado</h3>
             </div>
         </div>
-        <div class="card-body text-justify">Describa a continuación la forma de recojo de su certificado (Nota: Para acceder al certificado de aprobación será necesario obtener una nota mínima de 66 puntos) Para el envío de su certificado puede ser por flota o Currier con costo adicional dependiendo de la ciudad que reside </div>
+        <div class="card-body text-justify">Describa a continuación la forma de recojo de su certificado (Nota: Para acceder al certificado de aprobación será necesario obtener una nota mínima de 66 puntos) Para el envío de su certificado puede ser por flota o Currier con costo adicional dependiendo de la ciudad que reside. </div>
     </div>
 
     <div class="card card-custom mt-6">
@@ -292,7 +298,15 @@
         <?php
         $listar = null;
         foreach ($modules as $key => $module) {
-            $listar .= $module->nombre . ', ';
+            if (count($modules) > 1) {
+                if ($key == count($modules) - 2) {
+                    $listar .= ucwords(strtolower($module->nombre)) . ' y ';
+                } else {
+                    $listar .= ucwords(strtolower($module->nombre)) . ', ';
+                }
+            } else {
+                $listar .= ucwords(strtolower($module->nombre));
+            }
         }
         $l = rtrim($listar, ', ');
         ?>
@@ -301,19 +315,18 @@
             <div class="radio-list form-group">
                 <label class="radio">
                     <input type="radio" name="certificacion" id="certificacion" value="CURSO" <?= (count($modules) === 0) ? 'checked' : '' ?> />
-                    <span></span>Curso
+                    <span></span>Curso de <?= $datos[0]->carga_horaria ?> horas académicas.
                 </label>
                 <?php if (count($modules) > 0) { ?>
                     <label class="radio">
                         <input type="radio" name="certificacion" id="certificacion" value="MÓDULOS" />
-                        <span></span>Módulos &nbsp; <p id="span-modulos" class="m-0">( <?= $l ?> )</p>
+                        <span id="span-radio"></span>Módulos&nbsp;(<?= $l ?>)
+                        de <?= $datos[0]->carga_horaria / count($modules) ?> horas académicas cada uno.
                     </label>
                 <?php } ?>
             </div>
         </div>
     </div>
-
-
 </div>
 <!--end: Wizard Step 3-->
 
