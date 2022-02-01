@@ -38,4 +38,30 @@ class Certificacion_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function consultar_cursos($id)
+	{
+		if ($id != null) {
+			$sql = "SELECT
+			mc.fullname,
+			mc.shortname,
+			mic.calificacion_final,
+			mcc.certificacion_disponible,
+			mcc.certificacion_disponible_inicio,
+			mcc.certificacion_disponible_fin,
+			mcc.nota_aprobacion,
+			mcc.carga_horaria
+			FROM mdl_course mc INNER JOIN
+			mdl_inscripcion_curso mic ON mc.id = mic.id_course_moodle AND mic.id_user_moodle = $id
+			INNER JOIN mdl_configuracion_curso mcc ON mic.id_course_moodle = mcc.id_course_moodle";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0) {
+				return ($query->result());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 }

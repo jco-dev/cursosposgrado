@@ -250,8 +250,8 @@
                     <div id="galley">
                         <ul class="pictures">
                             <li>
-                                <img class="img img-thumbnail" data-original="<?= base_url('assets/img/default.jpg') ?>" src="" id="img-preview" />
-                                <i class="fa fa-eye text-info"></i>
+                                <img style="cursor: pointer;" class="img img-thumbnail" data-original="<?= base_url('assets/img/default.jpg') ?>" src="" id="img-preview" />
+                                <i style="cursor: pointer;" class="fa fa-eye text-info"></i>
                             </li>
                         </ul>
                     </div>

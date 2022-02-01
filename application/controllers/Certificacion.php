@@ -93,13 +93,34 @@ class Certificacion extends CI_Controller
 			$result = (int) $this->input->post('result');
 			if ($this->getExpressionResult($sentCode) === $result) {
 				// Mostrar los certificados si ya estan disponible
-				$cursos_persona = $this->certificacion_model->buscar_persona_por_ci($this->input->post('carnet_identidad'), $this->input->post('nro_celular'));
-				return var_dump($cursos_persona);
+				$person = $this->sql_ssl->listar_tabla(
+					'participante',
+					[
+						'ci' => $this->input->post('carnet_identidad'),
+						'celular' => $this->input->post('nro_celular')
+					]
+				);
+				// return var_dump($person);
+				$user = $this->sql_ssl->listar_tabla(
+					'user',
+					[
+						'firstname' => $person[0]->nombre,
+						'lastname' => $person[0]->paterno . ' ' . $person[0]->materno,
+					]
+				);
+
+				if (count($person) == 1 && count($user) == 1) {
+					$cursos_persona = $this->certificacion_model->consultar_cursos($user[0]->id);
+				} else {
+					$cursos_persona = null;
+				}
+
+				// return var_dump($cursos_persona);	
 				if ($cursos_persona != null) {
 					$html .= '<div class="card card-custom bg-radial-gradient-primary card-stretch gutter-b">
 						<div class="card-header border-0 py-5">
-							<h3 class="card-title font-weight-bolder text-white">Estimad@: ' . $cursos_persona[0]->nombre . ' ' . $cursos_persona[0]->paterno . '</h3>
-							<p class="text-white">La disponibilidad de entrega de sus cursos aprobados se detalla acontinuacion:</p>
+							<h3 class="card-title font-weight-bolder text-white">Estimad@: ' . $person[0]->nombre . ' ' . $person[0]->paterno . ' ' . $person[0]->materno . '</h3>
+							<p class="text-white pt-3">La disponibilidad de entrega de sus cursos aprobados se detalla acontinuacion:</p>
 						</div>
 						<div class="card card-custom card-stretch gutter-b" style="border-radius: 5px 5px 0px 0px;">
 							<div class="card-header border-0 pt-5">
