@@ -224,7 +224,7 @@
                                             </div>
                                             <div class="card-body pt-5" height="330">
                                                 <center>
-                                                    <div class="fb-page" data-href="https://www.facebook.com/cursosposgradoupea" data-width="300" data-hide-cover="false" data-show-facepile="true"></div>
+                                                    <div class="fb-page" data-href="https://www.facebook.com/cursosposgradoupea" data-hide-cover="false" data-show-facepile="true" style="width: auto;"></div>
                                                 </center>
                                                 <center class="pt-3">
                                                     <div id="fb-root"></div>

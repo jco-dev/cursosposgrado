@@ -77,3 +77,7 @@ $route['inscripcion-autocad-3d'] = 'invitacion/video_informaciones/14';
 $route['inscripcion-routers'] = 'invitacion/video_informaciones/15';
 $route['inscripcion-computacion'] = 'invitacion/video_informaciones/16';
 $route['inscripcion-videoconferencias'] = 'invitacion/video_informaciones/17';
+$route['inscripcion-canva-v1'] = 'invitacion/video_informaciones/18';
+$route['informacion-canva-1'] = 'invitacion/video_informaciones/19';
+$route['informacion-canva-2'] = 'invitacion/video_informaciones/20';
+$route['informacion-maestria-educacion-superior'] = 'invitacion/video_informaciones/21';

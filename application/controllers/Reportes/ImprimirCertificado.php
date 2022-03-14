@@ -175,7 +175,7 @@ class ImprimirCertificado extends Fpdf_psg
         $pdf = new PDF_WriteTag();
         // TAMAÑOS
         $pdf->ancho = 210;
-        $pdf->alto = 9;
+        $pdf->alto = 6;
         $pdf->alto_subtitulo = 5;
         $pdf->ancho_a = 15;
 
@@ -249,7 +249,7 @@ class ImprimirCertificado extends Fpdf_psg
                 $datos_curso[0]->tamano_subtitulo,
                 $datos_curso[0]->subtitulo,
                 "OpenSans-Regular",
-                13,
+                15,
                 $color_s,
                 $est['tipo'],
                 $datos_curso[0]->imprimir_subtitulo
@@ -432,7 +432,7 @@ class ImprimirCertificado extends Fpdf_psg
     {
         $pdf = new PDF_WriteTag();
         // TAMAÑOS
-        $pdf->ancho = 148;
+        $pdf->ancho = 131;
         $pdf->alto = 8;
         $pdf->alto_subtitulo = 5;
         $pdf->ancho_a = 18;
@@ -552,6 +552,142 @@ class ImprimirCertificado extends Fpdf_psg
                 $pdf->print_qr($code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 'AusterRounded-Light', 10);
             }
         }
+        if ($certificado_blanco == false) {
+            $name = $datos_curso[0]->shortname . date('Y_m_d_H_s_i') . ".pdf";
+            $pdf->Output("F", "assets/pdf_temp/$name");
+            echo "pdf_temp/$name";
+        } else {
+            echo base64_encode($pdf->Output('S'));
+        }
+    }
+
+    // IMPRIMIR TODOS LOS CERTIFICADOS DEL CURSO HORIZONTAL
+    public function certificado4($datos_curso = null, $datos_estudiante = null, $value,  $certificado_blanco)
+    {
+        $pdf = new PDF_WriteTag();
+        // TAMAÑOS
+        $pdf->ancho = 210;
+        $pdf->alto = 6;
+        $pdf->alto_subtitulo = 5;
+        $pdf->ancho_a = 15;
+
+        foreach ($datos_estudiante as $estudiante) {
+
+            $valor = [
+                'id_inscripcion_curso',
+                'nombre_estudiante', 'calificacion_final',
+                'tipo_participacion', 'nombre_curso', 'fecha_inicial',
+                'fecha_final', 'carga_horaria', 'imagen_personalizado',
+                'posx_imagen_personalizado', 'posy_imagen_personalizado',
+                'color_nombre_curso', 'fecha_certificacion', 'tipo'
+            ];
+
+            $est = array();
+            for ($i = 0; $i < count($estudiante); $i++) {
+                $est[$valor[$i]] = $estudiante[$i];
+            }
+
+            $pdf->AddPage("L", "letter");
+
+            // IMAGEN DEL CERTIFICADO
+            if ($datos_curso[0]->imagen_curso != "" || $datos_curso[0]->imagen_curso != NULL) {
+                if ($datos_curso[0]->orientacion == "vertical") {
+                    $w = 215.9;
+                    $h = 279.4;
+                } else {
+                    $w = 279.4;
+                    $h = 215.9;
+                }
+                $pdf->print_imagen($datos_curso[0]->imagen_curso, 0, 0, $w, $h);
+            }
+
+            // CABECERA DEL CERTIFICADO
+            $pdf->AddFont('AusterRounded-Light', '', 'AusterRounded-Light.php');
+            $pdf->SetFont('AusterRounded-Light', '', 17);
+            $pdf->SetXY(43, 59);
+            $pdf->Cell(70, 7, "Otorga el Presente: ", 0, 1, 'L');
+            $pdf->AddFont('BebasNeue-Regular', '', 'BebasNeue-Regular.php');
+            $pdf->SetFont('BebasNeue-Regular', '', 60);
+            $pdf->SetXY(10, 58);
+            $pdf->Cell(0, 20, "CERTIFICADO", 0, 1, 'C');
+
+            // NOMBRE DEL PARTICIPANTE
+            $color_p = explode(", ", $datos_curso[0]->color_nombre_participante);
+            $pdf->print_participante(
+                $est['nombre_estudiante'],
+                $datos_curso[0]->posx_nombre_participante + 15,
+                $datos_curso[0]->posy_nombre_participante,
+                'Arial-bold',
+                $datos_curso[0]->tamano_titulo,
+                'PalaceScriptMT',
+                14,
+                $color_p,
+                '',
+                $value,
+            );
+
+            // TIPO PARTICIPACION
+            $pdf->print_tipo_partipacion(
+                $est['tipo_participacion'],
+                $datos_curso[0]->posx_tipo_participacion,
+                $datos_curso[0]->posy_tipo_participacion,
+                "OpenSans-Light",
+                $datos_curso[0]->tamano_texto,
+                "OpenSans-Regular",
+                [0, 0, 0],
+                $datos_curso[0]->nota_aprobacion,
+                $est['calificacion_final']
+            );
+
+            // NOMBRE DEL CURSO
+            if ($est['color_nombre_curso'] != "") {
+                $color_s = explode(", ", $est['color_nombre_curso']);
+            }
+            $pdf->print_titulo_curso(
+                $est['nombre_curso'],
+                $datos_curso[0]->posx_nombre_curso,
+                $datos_curso[0]->posy_nombre_curso,
+                "BookmanOldStyle-Bold",
+                $datos_curso[0]->tamano_subtitulo,
+                $datos_curso[0]->subtitulo,
+                "OpenSans-Regular",
+                15,
+                $color_s,
+                $est['tipo'],
+                $datos_curso[0]->imprimir_subtitulo
+            );
+
+            //BLOQUE TEXTO
+            $dia = date("d", strtotime($est['fecha_inicial']));
+            $mes = $this->mes_literal(date("m", strtotime($est['fecha_inicial'])));
+            $fecha_final = strtolower(fecha_literal($est['fecha_final']));
+            $carga_horaria = $est['carga_horaria'];
+            $text = utf8_decode("<p>Realizado desde el $dia de $mes hasta el $fecha_final, por la Dirección de Posgrado de la Universidad Pública de El Alto, con una carga horaria de <vb> $carga_horaria horas académicas</vb>.</p>");
+            $fecha_certificacion = "El Alto, " . strtolower(fecha_literal($est['fecha_certificacion']));
+            $pdf->print_bloque_texto(
+                $text,
+                $datos_curso[0]->posx_bloque_texto,
+                $datos_curso[0]->posy_bloque_texto,
+                "OpenSans-Light",
+                $datos_curso[0]->tamano_texto,
+                "OpenSans-Regular",
+                [0, 0, 0],
+                $fecha_certificacion
+
+            );
+
+            //  IMAGEN PERSONALIZADA
+            if ($est['imagen_personalizado'] != "" || $est['imagen_personalizado'] != null) {
+                $pdf->print_imagen($est['imagen_personalizado'], $est['posx_imagen_personalizado'], $est['posy_imagen_personalizado']);
+            }
+
+            //QR
+            if ($certificado_blanco == false) {
+                $code = md5('CERTIFICADO_' . $est['id_inscripcion_curso']);
+                $pdf->print_qr($code, $datos_curso[0]->posx_qr, $datos_curso[0]->posy_qr, 'AusterRounded-Light', 10);
+            }
+        }
+
         if ($certificado_blanco == false) {
             $name = $datos_curso[0]->shortname . date('Y_m_d_H_s_i') . ".pdf";
             $pdf->Output("F", "assets/pdf_temp/$name");

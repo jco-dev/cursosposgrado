@@ -363,8 +363,7 @@ class Inscripcionadmin extends PSG_Controller
                             <option value='ANULADO' selected>ANULADO</option>";
                         }
                         return "<select data-id='$id' class='custom-select form-control bg-secondary' id='estado_preinscrito' name='estado_preinscrito_$id'>
-                            $datos
-                        </select>";
+                       " . $datos . "</select>";
                     })
                 );
 
@@ -468,7 +467,7 @@ class Inscripcionadmin extends PSG_Controller
                             <option value='ANULADO' selected>ANULADO</option>";
                         }
                         return "<select data-id='$id' class='custom-select form-control bg-secondary' id='estado_preinscrito' name='estado_preinscrito_$id'>
-                            $datos
+                            " . $datos . "
                         </select>";
                     })
                 );

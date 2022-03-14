@@ -595,7 +595,7 @@ class PDF_WriteTag extends FPDF
 
 		// FECHA DE CERTIFICACIÓN
 		$this->SetX($x);
-		$this->multiCelda($this->ancho, $this->alto, utf8_decode(($fecha_certificacion)) . "  ", 0, 'R');
+		$this->multiCelda($this->ancho, $this->alto + 2, utf8_decode(($fecha_certificacion)) . "  ", 0, 'R');
 	}
 
 	public function print_imagen($ruta, $x, $y, $w = 0, $h = 0)
