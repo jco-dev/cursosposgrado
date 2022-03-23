@@ -14,7 +14,6 @@ class Reporte_estudiantes_excel extends Spreadsheet
     public function lista_estudiantes($data, $curso)
     {
         $file = new Spreadsheet();
-
         $active_sheet = $file->getActiveSheet();
         $active_sheet->setCellValue('A1', 'username');
         $active_sheet->setCellValue('B1', 'password');
@@ -22,25 +21,27 @@ class Reporte_estudiantes_excel extends Spreadsheet
         $active_sheet->setCellValue('D1', 'lastname');
         $active_sheet->setCellValue('E1', 'email');
         $active_sheet->setCellValue('F1', 'course1');
-
-
+        $active_sheet->setCellValue('G1', 'ci');
+        $active_sheet->setCellValue('H1', 'celular');
 
         $contador = 2;
         if (count($data) != 0) {
             foreach ($data as $value) {
                 $active_sheet->setCellValue("A" . $contador, strtolower(explode(" ", trim($value->nombre))[0]) . $value->ci);
-                $active_sheet->setCellValue("B" . $contador, $value->celular ."_Bolivia");
+                $active_sheet->setCellValue("B" . $contador, $value->celular . "_Bolivia");
                 $active_sheet->setCellValue("C" . $contador, $value->nombre);
                 $active_sheet->setCellValue("D" . $contador, $value->paterno . " " . $value->materno);
                 $active_sheet->setCellValue("E" . $contador, $value->correo);
                 $active_sheet->setCellValue("F" . $contador, $curso);
+                $active_sheet->setCellValue("G" . $contador, $value->ci);
+                $active_sheet->setCellValue("H" . $contador, $value->celular);
                 $contador++;
             }
         }
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($file, "Csv");
 
-        $file_name = $curso ."_".time() . '.' . 'csv';
+        $file_name = $curso . "_" . time() . '.' . 'csv';
 
         $writer->save($file_name);
 
@@ -55,12 +56,11 @@ class Reporte_estudiantes_excel extends Spreadsheet
         unlink($file_name);
 
         exit;
-
     }
 
     public function lista_estudiantes_contacto($data, $curso)
     {
-    
+
         $file = new Spreadsheet();
 
         $active_sheet = $file->getActiveSheet();
@@ -88,7 +88,7 @@ class Reporte_estudiantes_excel extends Spreadsheet
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($file, "Csv");
 
-        $file_name = $curso ."_".time() . '.' . 'csv';
+        $file_name = $curso . "_" . time() . '.' . 'csv';
 
         $writer->save($file_name);
 
@@ -103,6 +103,5 @@ class Reporte_estudiantes_excel extends Spreadsheet
         unlink($file_name);
 
         exit;
-
     }
 }
