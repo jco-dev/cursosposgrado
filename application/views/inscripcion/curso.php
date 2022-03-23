@@ -32,31 +32,34 @@
                 </h4>
                 <hr>
                 <h5 class="text-justify font-size-lg font-weight-normal">
-                    💰 OPCIONES DE PAGO:<br>&nbsp;
-                    <ol>
-                        <li>TRANSFERENCIA BANCARIA O DEPÓSITO DE
-                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                                <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($datos[0]->inversion) ?></del> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
-                            <?php } else { ?>
-                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
-                            <?php } ?>
-                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                                <span class="font-size-md font-weight-normal text-primary"> (DESCUENTO DE <span class="text-primary font-weight-bold"><?= $datos[0]->descuento ?>% </span> HASTA <?= date('d-m-Y', strtotime($datos[0]->fecha_fin_descuento)) ?>) </span>
-                            <?php } ?>
-                            AL SIGUIENTE NÚMERO DE CUENTA:
-                            10000029978464 (SERGIO AUGUSTO PÉREZ GIRONDA - 6046358 LP) - BANCO UNIÓN.
-                        </li>
-                        <li>TRANSFERENCIA A TIGO MONEY DE
-                            <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                                <span class="font-size-md font-weight-normal"> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
-                            <?php } else { ?>
-                                <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
-                            <?php } ?>
-                            AL NÚMERO (INCLUIR COMISIÓN 4 Bs):
-                            📲 76209205 (BRAYAN CONDORI CHOQUE).
-                        </li>
-                        <li>HACIENDO EL PAGO DIRECTAMENTE EN NUESTRA OFICINA: EDIFICIO EMBLEMÁTICO UPEA, 3ER PISO, OFICINA 3 DE POSGRADO - AV. SUCRE S/N ZONA VILLA ESPERANZA :: CIUDAD DE EL ALTO - BOLIVIA.</li>
-                    </ol>
+                    &nbsp;🪙 INVERSIÓN:<?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                    <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($datos[0]->inversion) ?></del> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
+                <?php } else { ?>
+                    <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                <?php } ?>
+                <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                    <span class="font-size-md font-weight-normal text-primary"> (descuento de <span class="text-primary font-weight-bold"><?= $datos[0]->descuento ?>% </span> hasta <?= date('d-m-Y', strtotime($datos[0]->fecha_fin_descuento)) ?>) </span>
+                <?php } ?> <br>&nbsp;
+                ▶️ OPCIONES DE PAGO:
+                <ol>
+                    <li>Transferencia bancaria o depósito de a los siguientes números de cuenta:
+                        <ul>
+                            <li>10000044162084 (Iván Jhonny Mejia Baltazar - 9061397 LP) - Banco Unión.</li>
+                            <li>4071112506 (Iván Jhonny Mejia Baltazar - 9061397 LP) - Banco Mercantil Santa Cruz</li>
+                        </ul>
+                    </li>
+                    <li>Transferencia a Tigo Money
+                        <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                            <span class="font-size-md font-weight-normal"> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
+                        <?php } else { ?>
+                            <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                        <?php } ?>
+                        al número (Incluir comisión 4 Bs):
+                        📲 76209205 (Brayan Condori Choque).
+                    </li>
+                    <li>Haciendo el pago directamente en nuestra oficina: Edificio Emblemático U.P.E.A., 3er piso, Oficina 3 de POSGRADO - Av. Sucre S/N Zona Villa Esperanza
+                        :: Ciudad de El Alto - Bolivia.</li>
+                </ol>
                 </h5>
                 <span class="text-danger">(*) Obligatorio</span>
             </div>

@@ -81,3 +81,7 @@ $route['inscripcion-canva-v1'] = 'invitacion/video_informaciones/18';
 $route['informacion-canva-1'] = 'invitacion/video_informaciones/19';
 $route['informacion-canva-2'] = 'invitacion/video_informaciones/20';
 $route['informacion-maestria-educacion-superior'] = 'invitacion/video_informaciones/21';
+
+$route['inscripcion-router-v4'] = "invitacion/video_informaciones/22";
+$route['inscripcion-excel-v5'] = "invitacion/video_informaciones/23";
+$route['inscripcion-computacion-v4'] = "invitacion/video_informaciones/24";
