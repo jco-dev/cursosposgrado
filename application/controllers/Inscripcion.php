@@ -24,6 +24,7 @@ class Inscripcion extends CI_Controller
             ['id_course' => $id_curso, 'estado' => "REGISTRADO"],
         );
         $this->data['curso'] = $id;
+        $this->data['bancos'] = $this->sql_ssl->listar_tabla('banco');
         if (isset($this->data['data'])) {
             $this->data['datos'] = $this->inscripcion_model->get_config_curso($id_curso);
             $this->load->view("inscripcion/curso", $this->data);
@@ -45,7 +46,6 @@ class Inscripcion extends CI_Controller
 
     public function guardar_preinscripcion()
     {
-        // return var_dump($_REQUEST);
         $this->load->library('form_validation');
         $this->load->helper('email');
 
@@ -183,6 +183,15 @@ class Inscripcion extends CI_Controller
                                 );
 
                                 if (is_numeric($res)) {
+                                    if ($this->sql_ssl->listar_tabla('mdl_banco', ['id_banco' => $this->input->post('id_banco')]))
+                                        $this->sql_ssl->insertar_tabla(
+                                            'mdl_deposito_bancario',
+                                            [
+                                                'id_preinscripcion_curso' => $res,
+                                                'id_banco' => $this->input->post('id_banco'),
+                                                'fecha' => date('Y-m-d'),
+                                            ]
+                                        );
                                     $this->output->set_content_type('application/json')->set_output(
                                         json_encode(['exito' => "Registado al curso correctamente"])
                                     );
@@ -257,6 +266,15 @@ class Inscripcion extends CI_Controller
                                         ['estado' => "UTILIZADO", 'fecha_utilizado_cupon' => date('Y-m-d H:i:s')],
                                         ['id_cupones_participante' => $id_cupones_p]
                                     );
+                                    if ($this->sql_ssl->listar_tabla('mdl_banco', ['id_banco' => $this->input->post('id_banco')]))
+                                        $this->sql_ssl->insertar_tabla(
+                                            'mdl_deposito_bancario',
+                                            [
+                                                'id_preinscripcion_curso' => $res,
+                                                'id_banco' => $this->input->post('id_banco'),
+                                                'fecha' => date('Y-m-d'),
+                                            ]
+                                        );
                                     $this->output->set_content_type('application/json')->set_output(
                                         json_encode(['exito' => "Registado al curso correctamente"])
                                     );
@@ -449,5 +467,11 @@ class Inscripcion extends CI_Controller
                 json_encode(['data' => false])
             );
         }
+    }
+
+    public function listar_bancos()
+    {
+        $data = $this->sql_ssl->listar_tabla('mdl_banco');
+        echo json_encode($data);
     }
 }

@@ -149,18 +149,7 @@
         <?php } ?>
     </div>
     <?php include('_script.global.php'); ?>
-    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion3.js') ?>"></script>
-    <script src='https://www.google.com/recaptcha/api.js?render=6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU'></script>
-    <script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute('6LeBuM4aAAAAAGtVv_eeqnR4n0l0GONpqz-U4OyU', {
-                    action: 'homepage'
-                })
-                .then(function(token) {
-                    document.getElementById('g-recaptcha-response').value = token;
-                });
-        });
-    </script>
+    <script src="<?= base_url('assets/js/pages/custom/wizard/wizard-inscripcion4.js') ?>"></script>
 </body>
 
 </html>

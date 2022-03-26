@@ -194,8 +194,22 @@
                     <input type="radio" name="modalidad_inscripcion" id="modalidad_inscripcion" value="PAGO EFECTIVO" />
                     <span></span>Pago Efectivo
                 </label>
+
+
+            </div>
+            <div id="banco" class="form-group">
+                <hr>
+                <select id='id_banco' name='id_banco' class='form-control' required>
+                    <option value=''> Elige un banco </option>
+                    <?php
+                    foreach ($bancos as $key => $banco) {
+                        echo "<option value='" . $banco->id_banco . "'>" . $banco->nombre . "</option>";
+                    }
+                    ?>
+                </select>
             </div>
         </div>
+
     </div>
 
     <div class="card card-custom mt-6">

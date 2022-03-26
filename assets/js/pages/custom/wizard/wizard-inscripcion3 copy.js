@@ -182,6 +182,13 @@ var KTWizard3 = (function () {
 							},
 						},
 					},
+					id_banco: {
+						validators: {
+							notEmpty: {
+								message: "Esta pregunta es obligatoria",
+							},
+						},
+					},
 					id_transaccion: {
 						validators: {
 							notEmpty: {
@@ -761,4 +768,15 @@ jQuery(document).ready(function () {
 
 		return numbers.join("");
 	}
+
+	$("#banco").hide();
+	$("input[type=radio][name=modalidad_inscripcion]").change(function () {
+		if (this.value == "TIGO MONEY" || this.value == "PAGO EFECTIVO") {
+			$("#id_banco").append('<option value="BANCO" selected>BANCO</option>');
+			$("#banco").hide();
+		} else {
+			$("#id_banco option[value='BANCO']").remove();
+			$("#banco").show();
+		}
+	});
 });

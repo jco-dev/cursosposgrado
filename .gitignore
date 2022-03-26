@@ -48,3 +48,6 @@ assets/img/imagen_personalizado_curso/
 /application/config/database.php
 /application/config/config.php
 /public/metronic/
+
+# Visual Studio Code
+.vscode/

@@ -219,4 +219,15 @@ class Inscripcion_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function listar_bancos()
+	{
+		$sql = "SELECT * FROM mdl_banco";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }
