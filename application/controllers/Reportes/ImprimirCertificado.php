@@ -1294,4 +1294,120 @@ class ImprimirCertificado extends Fpdf_psg
         // );
         $this->Ln();
     }
+
+    public function imprimir_envios($curso, $data)
+    {
+        if ($data != NULL) {
+
+            if (count($data) % 2 == 0) {
+                $j = 0;
+                $k = 0;
+                for ($i = 0; $i < count($data) / 2; $i++) {
+                    $this->AddPage("P", "letter");
+                    $this->SetFont('Arial', 'B', 14);
+                    $this->Image("assets/img/img_send_certificate/membrete.jpg", 0, 0, 215.9, 279.4);
+                    $this->SetFont('Arial', 'B', 10);
+
+                    foreach ($data as $key => $value) {
+                        if ($key == $k + $j) {
+                            $this->SetXY(52, 50);
+                            $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
+                            $this->SetXY(52, 61);
+                            $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
+                            $this->SetXY(52, 72);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 72);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 84);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
+                            $this->SetXY(52, 103);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
+
+
+                            break;
+                        }
+                    }
+
+                    foreach ($data as $key => $value) {
+                        if ($key ==  $k + $j + 1) {
+                            $this->SetXY(52, 192);
+                            $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
+                            $this->SetXY(52, 203);
+                            $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
+                            $this->SetXY(52, 214);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 225);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
+                            $this->SetXY(52, 244);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
+                            break;
+                        }
+                    }
+                    $j++;
+                    $k++;
+                }
+            } else {
+                $j = 0;
+                $k = 0;
+                for ($z = 0; $z < count($data) / 2; $z++) {
+
+                    $this->AddPage("P", "letter");
+                    $this->SetFont('Arial', 'B', 14);
+                    $this->Image("assets/img/img_send_certificate/membrete.jpg", 0, 0, 215.9, 279.4);
+                    $this->SetFont('Arial', 'B', 10);
+
+                    foreach ($data as $key => $value) {
+                        if ($key == $k + $j) {
+                            $this->SetXY(52, 50);
+                            $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
+                            $this->SetXY(52, 61);
+                            $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
+                            $this->SetXY(52, 72);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 72);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 84);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
+                            $this->SetXY(52, 103);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
+
+
+                            break;
+                        }
+                    }
+
+                    foreach ($data as $key => $value) {
+                        if ($key ==  $k + $j + 1) {
+                            $this->SetXY(52, 192);
+                            $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
+                            $this->SetXY(52, 203);
+                            $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
+                            $this->SetXY(52, 214);
+                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
+                            $this->SetXY(52, 225);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
+                            $this->SetXY(52, 244);
+                            $this->SetFont('Arial', 'B', 9);
+                            $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
+                            break;
+                        }
+                    }
+                    $j++;
+                    $k++;
+                }
+            }
+        } else {
+            $this->AddPage("P", "letter");
+            $this->SetFont('Arial', '', 9);
+            $this->Cell(0, 10, utf8_decode('NO HAY PARTICIPANTE PARA EL ENVÍO'), 1, 1, 'C');
+        }
+        $this->Output("D", $curso[0]->shortname . ".pdf", true);
+    }
 }

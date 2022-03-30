@@ -4,7 +4,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-title">
                 <h3 class="card-label">
-                    Listado de Estudiantes del Curso
+                    Listado de Estudiantes del Curso: <?= $nombre_curso . " -> " . $nombre_corto ?>
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -98,7 +98,7 @@
                             <input type="number" class="form-control" id="monto_pago" name="monto_pago" />
                             <span class="form-text text-muted">Monto pago</span>
                         </div>
-                        
+
                     </div>
                     <input type="hidden" id="id_inscripcion_curso" name="id_inscripcion_curso">
 
@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="form-group row">
-                        
+
                         <div class="col-lg-4">
                             <label for="fecha_entrega">Fecha Entrega: </label>
                             <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" />
@@ -145,7 +145,7 @@
 
                         <div class="col-lg-4">
                             <label for="entregado_a">Certificado recogido: </label>
-                            <select name="certificado_recogido" id="certificado_recogido" class="form-control" >
+                            <select name="certificado_recogido" id="certificado_recogido" class="form-control">
                                 <option value="no">no</option>
                                 <option value="si">si</option>
                             </select>
@@ -156,7 +156,7 @@
                             <input type="text" class="form-control" id="entregado_a" name="entregado_a" />
                             <span class="form-text text-muted">Ingrese a la persona entregado</span>
                         </div>
-                        
+
                     </div>
 
                     <div class="form-group row">

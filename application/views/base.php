@@ -660,6 +660,7 @@
 	<script src="<?= base_url('assets/js/inscripcion/inscripcion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/docente/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/certificado/index.js') ?>"></script>
+	<script src="<?= base_url('assets/js/envio/index.js') ?>"></script>
 
 </body>
 <!--end::Body-->

@@ -17,7 +17,7 @@ class Cursos extends PSG_Controller
 
 	public function index()
 	{
-		$this->data['total_course'] = $this->cursos_model->total_course();
+		$this->data['total_course'] = $this->cursos_mPOSTodel->total_course();
 		$this->data['total_cursos'] = $this->cursos_model->total_cursos();
 		$this->data['course'] = $this->cursos_model->lista_course(TRUE);
 		$this->data['cursos'] = $this->cursos_model->lista_cursos(TRUE);
@@ -85,6 +85,12 @@ class Cursos extends PSG_Controller
 	public function ver_estudiantes($id)
 	{
 		$this->data['id'] = $id;
+		$data = $this->sql_ssl->listar_tabla(
+			'course',
+			['id' => $id]
+		);
+		$this->data['nombre_curso'] = $data[0]->fullname;
+		$this->data['nombre_corto'] = $data[0]->shortname;
 		$this->templater->view('cursos/estudiantes', $this->data);
 	}
 
@@ -240,6 +246,15 @@ class Cursos extends PSG_Controller
 									<a onclick="add_certificate_type(' . $id . ')" type="button" id="btn_reporte_estudiantes" data-id=' . $id . ' class="navi-link" title="Agregar tipo certificado">
 										<span class="navi-icon"><i class="la la-plus"></i></span>
 										<span class="navi-text">Agregar tipo certificado</span>
+									</a>
+								</li>
+
+								</li>
+
+									<li class="navi-item">
+									<a href="' . base_url("cursos/agregar_envios/" . $id) . '" class="navi-link" title="Agregar envio de certificados">
+										<span class="navi-icon"><i class="fa fa-truck"></i></span>
+										<span class="navi-text">Envío de Certificados</span>
 									</a>
 								</li>
 
@@ -1237,5 +1252,190 @@ class Cursos extends PSG_Controller
 				]
 			));
 		}
+	}
+
+	public function agregar_envios($id)
+	{
+		$this->data['id'] = $id;
+		$data = $this->sql_ssl->listar_tabla(
+			'course',
+			['id' => $id]
+		);
+		$this->data['nombre_curso'] = $data[0]->fullname;
+		$this->data['nombre_corto'] = $data[0]->shortname;
+		$this->templater->view('cursos/listado_envios', $this->data);
+	}
+
+	public function ajax_envio_curso()
+	{
+		if ($this->input->is_ajax_request()) {
+			$table = "mdl_curso_envio_certificados";
+			$primaryKey = 'id_envio_certificado';
+			$where = "id_course_moodle = " . $this->input->post('id');
+			$columns = array(
+				array('dt' => 0, 'db' => 'id_envio_certificado'),
+				array('dt' => 1, 'db' => 'remitente'),
+				array('dt' => 2, 'db' => 'nombre'),
+				array('dt' => 3, 'db' => 'celular'),
+				array('dt' => 4, 'db' => 'direccion'),
+				array('dt' => 5, 'db' => 'departamento'),
+				array('dt' => 6, 'db' => 'estado', 'formatter' => function ($d, $row) {
+					if ($d == 'REGISTRADO') {
+						return '<span class="label  label-inline label-info">REGISTRADO</span>';
+					} else if ($d == 'CONFIRMADO') {
+						return '<span class="label  label-inline label-success">CONFIRMADO</span>';
+					} else {
+						return '<span class="label  label-inline label-danger">ELIMINADO</span>';
+					}
+				}),
+				array('dt' => 7, 'db' => 'id_envio_certificado', 'formatter' => function ($id, $row) {
+					$opcion = '';
+					if ($row['estado'] == "REGISTRADO") {
+						$opcion .= '<option selected value="REGISTRADO">REGISTRADO</option>
+						<option value="CONFIRMADO">CONFIRMADO</option>
+						<option value="ELIMINADO">ELIMINADO</option>';
+					} elseif ($row['estado'] == "CONFIRMADO") {
+						$opcion .= '<option value="REGISTRADO">REGISTRADO</option>
+						<option selected value="CONFIRMADO">CONFIRMADO</option>
+						<option value="ELIMINADO">ELIMINADO</option>';
+					} else {
+						$opcion .= '<option value="REGISTRADO">REGISTRADO</option>
+						<option  value="CONFIRMADO">CONFIRMADO</option>
+						<option selected value="ELIMINADO">ELIMINADO</option>';
+					}
+					return '<select id="estado_envio" data-id=' . $id . '  name="estado_envio" class="form-control">
+						' . $opcion . '
+					</select>
+					<buttton id="btn_editar_envio" data-id=' . $id . ' data-remitente="' . $row['remitente'] . '" data-nombre="' . $row['nombre'] . '" data-celular="' . $row['celular'] . '" data-direccion= "' . $row['direccion'] . '" data-departamento="' . $row['departamento'] . '" class="btn btn-warning btn-sm btn-block mt-1"><i class="fa fa-edit"></i></button>';
+				})
+			);
+			$sql_details = array(
+				'driver' => $this->db->dbdriver,
+				'user' => $this->db->username,
+				'pass' => $this->db->password,
+				'db' => $this->db->database,
+				'host' => $this->db->hostname
+			);
+
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $where, NULL)
+			));
+
+			return;
+		}
+	}
+
+	public function listar_participantes_curso()
+	{
+		// var_dump($this->input->get('id'));
+		$table = "mdl_envio_participantes_curso";
+		$primaryKey = 'id_preinscripcion_curso';
+		$where = "id_course_moodle = " . $this->input->get('id');
+		$columns = array(
+			array('dt' => 0, 'db' => 'id_preinscripcion_curso'),
+			array('dt' => 1, 'db' => 'id_preinscripcion_curso', 'formatter' => function ($id, $row) {
+				return '
+						<button class="btn btn-info btn-sm add" data-id-preinscripcion="' . $id . '" data-participante-preinscripcion="' . $row['participante'] . '" data-celular-preinscripcion="' . $row['celular'] . '" data-departamento-preinscripcion="' . $row['departamento'] . '">Agregar</button>
+					';
+			}),
+			array('dt' => 2, 'db' => 'ci'),
+			array('dt' => 3, 'db' => 'participante'),
+			array('dt' => 4, 'db' => 'celular'),
+			array('dt' => 5, 'db' => 'correo'),
+			array('dt' => 6, 'db' => 'departamento'),
+		);
+		$sql_details = array(
+			'driver' => $this->db->dbdriver,
+			'user' => $this->db->username,
+			'pass' => $this->db->password,
+			'db' => $this->db->database,
+			'host' => $this->db->hostname
+		);
+
+		$this->output->set_content_type('application/json')->set_output(json_encode(
+			SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $where, NULL)
+		));
+
+		return;
+	}
+
+	public function guardar_envio()
+	{
+		if ($this->sql_ssl->listar_tabla('envio_certificados', ['id_preinscripcion_curso' => $this->input->post('id_envio_preinscripcion')])) {
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => "El participante ya esta registrado en el envio"
+				]
+			));
+		} else {
+			if ($this->sql_ssl->insertar_tabla(
+				'envio_certificados',
+				[
+					'remitente' => $this->input->post('remitente_persona_envio'),
+					'id_preinscripcion_curso' => $this->input->post('id_envio_preinscripcion'),
+					'direccion' => $this->input->post('direccion_persona_envio'),
+				]
+			))
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'exito' => "Persona Agregado para envio correctamente"
+					]
+				));
+			else
+				$this->output->set_content_type('application/json')->set_output(json_encode(
+					[
+						'error' => "El al registrar el envio"
+					]
+				));
+		}
+	}
+
+	public function ajax_estado_envio()
+	{
+		$id = $this->input->post('id');
+		$valor = $this->input->post('valor');
+		if ($this->sql_ssl->modificar_tabla('envio_certificados', ['estado' => $valor], ['id_envio_certificado' => $id]))
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'exito' => "Estado modificado correctamente"
+				]
+			));
+		else
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => "Error al modificar el estado"
+				]
+			));
+	}
+
+	public function editar_envio()
+	{
+		$data = [
+			'remitente' => trim($this->input->post('editar_remitente')),
+			'direccion' => trim($this->input->post('editar_direccion')),
+		];
+		$id = $this->input->post('editar_id');
+
+		if ($this->sql_ssl->modificar_tabla('envio_certificados', $data, ['id_envio_certificado' => $id]))
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'exito' => "Datos modificados correctamente"
+				]
+			));
+		else
+			$this->output->set_content_type('application/json')->set_output(json_encode(
+				[
+					'error' => "Error al modificar los datos"
+				]
+			));
+	}
+
+	public function reporte_envios($id)
+	{
+
+		$data_course = $this->cursos_model->get_datos_curso($id);
+		$data = $this->cursos_model->get_datos_envio($id);
+		$rep = new ImprimirCertificado();
+		$rep->imprimir_envios($data_course, $data);
 	}
 }

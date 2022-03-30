@@ -480,4 +480,27 @@ class Cursos_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function get_datos_envio($id)
+	{
+		if ($id != null) {
+			$sql = "SELECT
+			mec.remitente,
+			CONCAT_WS(' ', mp.nombre, mp.paterno, mp.materno) as participante,
+			mp.celular,
+			mec.direccion,
+			(SELECT md.nombre  FROM mdl_municipios mm join mdl_provincias mp2 on mm.id_provincia=mp2.id_provincia and mm.id_municipio = mp.id_municipio  JOIN
+			mdl_departamentos md on mp2.id_departamento = md.id_departamento) as departamento
+			from mdl_preinscripcion_curso mpc join mdl_envio_certificados mec on mpc.id_preinscripcion_curso = mec.id_preinscripcion_curso 
+			and mpc.id_course_moodle  = $id and mec.estado='CONFIRMADO'
+			join mdl_participante mp on mpc.id_participante = mp.id_participante ";
+			$query = $this->db->query($sql);
+			if ($query->num_rows() > 0)
+				return ($query->result());
+			else
+				return null;
+		} else {
+			return null;
+		}
+	}
 }
