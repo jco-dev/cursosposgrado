@@ -184,7 +184,7 @@
                                         L&iacute;mite de Inscripci&oacute;n: &nbsp;
                                     </a>
                                 </div>
-                                <span class="text-danger font-weight-bold min-w-45px"><span><?= $curso->fecha_inicial ?></span>
+                                <span class="text-danger font-weight-bold min-w-45px"><span><?= $curso->limite_inscripcion ?></span>
                             </div>
                             <!--end::Límite de inscripción-->
 

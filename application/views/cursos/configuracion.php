@@ -1164,6 +1164,7 @@
                         <th>Imagen</th>
                         <th>Nota Aprobacion</th>
                         <th>fecha inicial</th>
+                        <th>Límite inscripción</th>
                         <th>fecha final</th>
                         <th>Carga Horaria</th>
                         <th>Fecha Certificacion</th>
@@ -1227,7 +1228,7 @@
                                 <div class="dz-message needsclick">
 
                                     Arrastrar o dar click para subir imagen del certificado.
-
+                                    fecha_inicial
                                 </div>
 
                             </div>
@@ -1247,25 +1248,25 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label for="nota_aprobacion">Nota Aprobaci&oacute;n <span class="text-danger">(*)</span>: </label>
                             <input type="number" class="form-control" id="nota_aprobacion" name="nota_aprobacion" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                            <span class="form-text text-muted">Ingrese la nota de aprobacion</span>
                         </div>
                         <div class="col-lg-3">
                             <label for="fecha_inicial">Fecha Inicio: </label>
                             <input type="date" class="form-control" id="fecha_inicial" name="fecha_inicial" />
-                            <span class="form-text text-muted">Ingrese fecha de Inicio del curso</span>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="limite_inscripcion">Límite inscripción: </label>
+                            <input type="date" class="form-control" id="limite_inscripcion" name="limite_inscripcion" />
                         </div>
                         <div class="col-lg-3">
                             <label for="fecha_final">Fecha Final: </label>
                             <input type="date" class="form-control" id="fecha_final" name="fecha_final" />
-                            <span class="form-text text-muted">Ingrese fecha Fin del curso</span>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label for="carga_horaria">Carga Horaria <span class="text-danger">(*)</span>:</label>
                             <input type="number" class="form-control" id="carga_horaria" name="carga_horaria" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
-                            <span class="form-text text-muted">Ingrese carga horaria del curso</span>
                         </div>
                     </div>
 

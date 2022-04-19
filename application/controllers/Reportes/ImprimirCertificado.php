@@ -1310,21 +1310,20 @@ class ImprimirCertificado extends Fpdf_psg
 
                     foreach ($data as $key => $value) {
                         if ($key == $k + $j) {
-                            $this->SetXY(52, 50);
+                            $this->SetXY(52, 43.2);
                             $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
-                            $this->SetXY(52, 61);
+                            $this->SetXY(52, 54.2);
                             $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
-                            $this->SetXY(52, 72);
+                            $this->SetXY(52, 64.6);
                             $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 72);
-                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 84);
+                            $this->SetXY(52, 75.9);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
-                            $this->SetXY(52, 103);
+                            $this->SetXY(52, 91);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
-
+                            $code = 'https://clik.upea.bo/r/cursos-posgrado';
+                            $this->Image("http://localhost/generar_qr/qr_generator.php?code=" . $code, 170, 100.5, 17, 17, "png");
 
                             break;
                         }
@@ -1332,16 +1331,16 @@ class ImprimirCertificado extends Fpdf_psg
 
                     foreach ($data as $key => $value) {
                         if ($key ==  $k + $j + 1) {
-                            $this->SetXY(52, 192);
+                            $this->SetXY(52, 184);
                             $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
-                            $this->SetXY(52, 203);
+                            $this->SetXY(52, 195);
                             $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
-                            $this->SetXY(52, 214);
+                            $this->SetXY(52, 205);
                             $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 225);
+                            $this->SetXY(52, 216);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
-                            $this->SetXY(52, 244);
+                            $this->SetXY(52, 232);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
                             break;
@@ -1362,38 +1361,34 @@ class ImprimirCertificado extends Fpdf_psg
 
                     foreach ($data as $key => $value) {
                         if ($key == $k + $j) {
-                            $this->SetXY(52, 50);
+                            $this->SetXY(52, 43.2);
                             $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
-                            $this->SetXY(52, 61);
+                            $this->SetXY(52, 54.2);
                             $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
-                            $this->SetXY(52, 72);
+                            $this->SetXY(52, 64.6);
                             $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 72);
-                            $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 84);
+                            $this->SetXY(52, 75.9);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
-                            $this->SetXY(52, 103);
+                            $this->SetXY(52, 91);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
-
-
                             break;
                         }
                     }
 
                     foreach ($data as $key => $value) {
                         if ($key ==  $k + $j + 1) {
-                            $this->SetXY(52, 192);
+                            $this->SetXY(52, 184);
                             $this->Cell(132, 8, utf8_decode($value->remitente), 0, 0, 'L');
-                            $this->SetXY(52, 203);
+                            $this->SetXY(52, 195);
                             $this->Cell(132, 8, utf8_decode($value->participante), 0, 0, 'L');
-                            $this->SetXY(52, 214);
+                            $this->SetXY(52, 205);
                             $this->Cell(132, 8, utf8_decode($value->celular), 0, 0, 'L');
-                            $this->SetXY(52, 225);
+                            $this->SetXY(52, 216);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 6, utf8_decode($value->direccion . ' - ' . $value->departamento), 0, 'J');
-                            $this->SetXY(52, 244);
+                            $this->SetXY(52, 232);
                             $this->SetFont('Arial', 'B', 9);
                             $this->multiCelda(132, 4, utf8_decode($curso[0]->nombre_curso), 0, 'L');
                             break;

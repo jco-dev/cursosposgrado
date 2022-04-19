@@ -648,7 +648,7 @@
 	<script src="<?= base_url('assets/js/viewerjs/js/viewer.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/cursos1.js') ?>"></script>
 	<script src="<?= base_url('assets/js/pages/features/miscellaneous/sweetalert2.js') ?>"></script>
-	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion.js') ?>"></script>
+	<script src="<?= base_url('assets/js/pages/crud/datatables/advanced/configuracion1.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_inscritos.js') ?>"></script>
 	<script src="<?= base_url('assets/js/inscripcion/ver_informacion.js') ?>"></script>
 	<script src="<?= base_url('assets/js/cursos/cursos.js') ?>"></script>

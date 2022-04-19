@@ -23,6 +23,8 @@ var KTDatatablesConfiguracion = (function () {
 					},
 				],
 				responsive: true,
+				// order by datatables
+				order: [[0, "desc"]],
 			})
 			.on("click", "#btn_editar_conf", function () {
 				let id = $(this).attr("data-id");
@@ -43,6 +45,9 @@ var KTDatatablesConfiguracion = (function () {
 							);
 							$("#nota_aprobacion").val(response.exito[0].nota_aprobacion);
 							$("#fecha_inicial").val(response.exito[0].fecha_inicial);
+							$("#limite_inscripcion").val(
+								response.exito[0].limite_inscripcion
+							);
 							$("#fecha_final").val(response.exito[0].fecha_final);
 							$("#carga_horaria").val(response.exito[0].carga_horaria);
 							$("#fecha_certificacion").val(
@@ -217,6 +222,43 @@ var KTDatatablesConfiguracion = (function () {
 						}
 					}
 				);
+			})
+			.on("click", "#btn_terminar", function () {
+				let id = $(this).attr("data-id");
+
+				Swal.fire({
+					title: "Estas seguro de terminar la configuracion del curso?",
+					text: "Esta accion solo el administrador lo puede revertir",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonText: "Si, terminar!",
+					cancelButtonText: "No, Cancelar!",
+					reverseButtons: true,
+				}).then(function (result) {
+					if (result.value) {
+						$.post(
+							"/configuracion/terminar_configuracion",
+							{
+								id,
+							},
+							function (response) {
+								if (typeof response.exito != "undefined") {
+									Swal.fire("Exito!", response.exito, "success");
+									tbl_configuracion_curso.DataTable().ajax.reload();
+								}
+								if (typeof response.error != "undefined") {
+									Swal.fire("Error!", response.error, "error");
+								}
+							}
+						);
+					} else if (result.dismiss === "cancel") {
+						Swal.fire(
+							"Cancelado",
+							"La configuracion del curso esta a salvo :)",
+							"error"
+						);
+					}
+				});
 			});
 
 		$("#kt_datatable_search_status").on("change", function () {

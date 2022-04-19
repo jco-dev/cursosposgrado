@@ -18,6 +18,7 @@ class Ofertas_model extends PSG_Model
 			mcc.banner_curso,
 			mcc.detalle_curso,
 			DATE_FORMAT(mcc.fecha_inicial, '%d-%m-%Y') as fecha_inicial,
+			DATE_FORMAT(mcc.limite_inscripcion, '%d-%m-%Y') as limite_inscripcion,
 			DATE_FORMAT(mcc.fecha_final, '%d-%m-%Y') as fecha_final,
 			mcc.inversion,
 			mcc.carga_horaria,
@@ -28,7 +29,7 @@ class Ofertas_model extends PSG_Model
 			DATE_FORMAT(mcc.fecha_fin_descuento, '%d-%m-%Y') as fecha_fin_descuento
 			from mdl_configuracion_curso mcc
 			inner join mdl_course mc on mcc.id_course_moodle = mc.id 
-			WHERE DATE_FORMAT(mcc.fecha_inicial, '%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d') AND mcc.proximo_curso = 'no'";
+			WHERE DATE_FORMAT(mcc.limite_inscripcion, '%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d') AND mcc.proximo_curso = 'no'";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0) {
 			return ($query->result());

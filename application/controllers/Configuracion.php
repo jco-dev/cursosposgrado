@@ -41,25 +41,26 @@ class Configuracion extends PSG_Controller
                 }),
                 array('dt' => 4, 'db' => 'nota_aprobacion'),
                 array('dt' => 5, 'db' => 'fecha_inicial'),
-                array('dt' => 6, 'db' => 'fecha_final'),
-                array('dt' => 7, 'db' => 'carga_horaria'),
-                array('dt' => 8, 'db' => 'fecha_certificacion'),
-                array('dt' => 9, 'db' => 'fecha_creacion'),
-                array('dt' => 10, 'db' => 'posx_nombre_participante'),
-                array('dt' => 11, 'db' => 'posy_nombre_participante'),
-                array('dt' => 12, 'db' => 'posx_bloque_texto'),
-                array('dt' => 13, 'db' => 'posy_bloque_texto'),
-                array('dt' => 14, 'db' => 'posx_nombre_curso'),
-                array('dt' => 15, 'db' => 'posy_nombre_curso'),
-                array('dt' => 16, 'db' => 'posx_qr'),
-                array('dt' => 17, 'db' => 'posy_qr'),
-                array('dt' => 18, 'db' => 'posx_tipo_participacion'),
-                array('dt' => 19, 'db' => 'posy_tipo_participacion'),
-                array('dt' => 20, 'db' => 'fuente_pdf'),
-                array('dt' => 21, 'db' => 'tamano_titulo'),
-                array('dt' => 22, 'db' => 'tamano_subtitulo'),
-                array('dt' => 23, 'db' => 'tamano_texto'),
-                array('dt' => 24, 'db' => 'color_nombre_participante', 'formatter' => function ($color) {
+                array('dt' => 6, 'db' => 'limite_inscripcion'),
+                array('dt' => 7, 'db' => 'fecha_final'),
+                array('dt' => 8, 'db' => 'carga_horaria'),
+                array('dt' => 9, 'db' => 'fecha_certificacion'),
+                array('dt' => 10, 'db' => 'fecha_creacion'),
+                array('dt' => 11, 'db' => 'posx_nombre_participante'),
+                array('dt' => 12, 'db' => 'posy_nombre_participante'),
+                array('dt' => 13, 'db' => 'posx_bloque_texto'),
+                array('dt' => 14, 'db' => 'posy_bloque_texto'),
+                array('dt' => 15, 'db' => 'posx_nombre_curso'),
+                array('dt' => 16, 'db' => 'posy_nombre_curso'),
+                array('dt' => 17, 'db' => 'posx_qr'),
+                array('dt' => 18, 'db' => 'posy_qr'),
+                array('dt' => 19, 'db' => 'posx_tipo_participacion'),
+                array('dt' => 20, 'db' => 'posy_tipo_participacion'),
+                array('dt' => 21, 'db' => 'fuente_pdf'),
+                array('dt' => 22, 'db' => 'tamano_titulo'),
+                array('dt' => 23, 'db' => 'tamano_subtitulo'),
+                array('dt' => 24, 'db' => 'tamano_texto'),
+                array('dt' => 25, 'db' => 'color_nombre_participante', 'formatter' => function ($color) {
                     if ($color != '') {
                         $datos = explode(", ", $color);
                         if (count($datos) == 3) {
@@ -71,7 +72,7 @@ class Configuracion extends PSG_Controller
                         return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
                     }
                 }),
-                array('dt' => 25, 'db' => 'color_subtitulo', 'formatter' => function ($color) {
+                array('dt' => 26, 'db' => 'color_subtitulo', 'formatter' => function ($color) {
                     if ($color != '') {
                         $datos = explode(", ", $color);
                         if (count($datos) == 3) {
@@ -83,30 +84,30 @@ class Configuracion extends PSG_Controller
                         return "<span style='padding: 5px; border-radius: 5px;background-color:" . $this->rgb2html(0, 0, 0) . ";color:" . $this->rgb2html(0, 0, 0) . "'>colorcolorcolor</span>";
                     }
                 }),
-                array('dt' => 26, 'db' => 'detalle_curso'),
-                array('dt' => 27, 'db' => 'horario'),
-                array('dt' => 28, 'db' => 'url_pdf'),
-                array('dt' => 29, 'db' => 'banner_curso', 'formatter' => function ($banner) {
+                array('dt' => 27, 'db' => 'detalle_curso'),
+                array('dt' => 28, 'db' => 'horario'),
+                array('dt' => 29, 'db' => 'url_pdf'),
+                array('dt' => 30, 'db' => 'banner_curso', 'formatter' => function ($banner) {
                     if ($banner == "") {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
                     } else {
                         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url("$banner") . '" alt="foto curso" />';
                     }
                 }),
-                array('dt' => 30, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
+                array('dt' => 31, 'db' => 'celular_referencia', 'formatter' => function ($celular) {
                     return '<span class="label label-light-success label-inline font-weight-bolder mr-2">' . $celular . '</span>';
                 }),
-                array('dt' => 31, 'db' => 'inversion', 'formatter' => function ($inversion) {
+                array('dt' => 32, 'db' => 'inversion', 'formatter' => function ($inversion) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">Bs. ' . $inversion . '</span>';
                 }),
-                array('dt' => 32, 'db' => 'descuento', 'formatter' => function ($des) {
+                array('dt' => 33, 'db' => 'descuento', 'formatter' => function ($des) {
                     if ($des == "") {
                         $des = 0;
                     }
                     return '<span class="label label-warning label-inline font-weight-bolder mr-2">' . $des . ' %</span>';
                 }),
-                array('dt' => 33, 'db' => 'fecha_inicio_descuento'),
-                array('dt' => 34, 'db' => 'fecha_fin_descuento'),
+                array('dt' => 34, 'db' => 'fecha_inicio_descuento'),
+                array('dt' => 35, 'db' => 'fecha_fin_descuento'),
                 // array('dt' => 34, 'db' => 'imagen_personalizado', 'formatter' => function ($img) {
                 //     if ($img == "") {
                 //         return '<img class="img-thumbnail" width="120" heigth="120" src="' . base_url('assets/img/default.jpg') . '" alt="foto curso" />';
@@ -117,12 +118,15 @@ class Configuracion extends PSG_Controller
                 // array('dt' => 35, 'db' => 'posx_imagen_personalizado'),
                 // array('dt' => 36, 'db' => 'posy_imagen_personalizado'),
                 // array('dt' => 37, 'db' => 'imprimir_subtitulo'),
-                array('dt' => 35, 'db' => 'subtitulo'),
-                array('dt' => 36, 'db' => 'estado_curso', 'formatter' => function ($estado) {
+                array('dt' => 36, 'db' => 'subtitulo'),
+                array('dt' => 37, 'db' => 'estado_curso', 'formatter' => function ($estado) {
                     return '<span class="label label-primary label-inline font-weight-bolder mr-2">' . $estado . '</span>';
                 }),
-                array('dt' => 37, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
-                    return "
+                array('dt' => 38, 'db' => 'id_configuracion_curso', 'formatter' => function ($id, $row) {
+                    if ($row['estado_curso'] == 'TERMINADO') {
+                        return "sin acciones";
+                    } else {
+                        return  "
                         <a id='btn_agregar_img_sub' titulo='" . $row['fullname'] . "' data-id=" . $id . " href='javascript:;' class='btn btn-light-primary btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Agregar imagen personalizado del curso'>
                         <i class='nav-icon la la-plus'></i>
                         </a>
@@ -133,7 +137,11 @@ class Configuracion extends PSG_Controller
                         <a id='btn_eliminar_conf' data-id=" . $id . " href='javascript:;' class='btn btn-light-danger btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Eliminar el curso de la configuracion'>
                             <i class='nav-icon la la-trash'></i>
                         </a>
+
+                        <a id='btn_terminar' data-id=" . $id . " href='javascript:;' class='btn btn-danger btn-sm font-weight-bold mr-2 btn-clean btn-icon' title='Terminar la configuración del curso'>
+                            FIN</a>
                     ";
+                    }
                 })
             );
             $sql_details = array(
@@ -198,6 +206,7 @@ class Configuracion extends PSG_Controller
             $id_configuracion_curso = $this->input->post('id_configuracion_curso');
             $nota_aprobacion = $this->input->post('nota_aprobacion');
             $fecha_inicial = $this->input->post('fecha_inicial');
+            $limite_inscripcion = $this->input->post('limite_inscripcion');
             $fecha_final = $this->input->post('fecha_final');
             $carga_horaria = $this->input->post('carga_horaria');
             $fecha_certificacion = $this->input->post('fecha_certificacion');
@@ -285,6 +294,7 @@ class Configuracion extends PSG_Controller
                     [
                         'nota_aprobacion' => $nota_aprobacion,
                         'fecha_inicial' => $fecha_inicial,
+                        'limite_inscripcion' => $limite_inscripcion,
                         'fecha_final' => $fecha_final,
                         'carga_horaria' => $carga_horaria,
                         'fecha_certificacion' => $fecha_certificacion,
@@ -342,6 +352,7 @@ class Configuracion extends PSG_Controller
                         'imagen_curso' => $ruta,
                         'nota_aprobacion' => $nota_aprobacion,
                         'fecha_inicial' => $fecha_inicial,
+                        'limite_inscripcion' => $limite_inscripcion,
                         'fecha_final' => $fecha_final,
                         'carga_horaria' => $carga_horaria,
                         'fecha_certificacion' => $fecha_certificacion,
@@ -400,6 +411,7 @@ class Configuracion extends PSG_Controller
                     [
                         'nota_aprobacion' => $nota_aprobacion,
                         'fecha_inicial' => $fecha_inicial,
+                        'limite_inscripcion' => $limite_inscripcion,
                         'fecha_final' => $fecha_final,
                         'carga_horaria' => $carga_horaria,
                         'fecha_certificacion' => $fecha_certificacion,
@@ -458,6 +470,7 @@ class Configuracion extends PSG_Controller
                         'imagen_curso' => $ruta,
                         'nota_aprobacion' => $nota_aprobacion,
                         'fecha_inicial' => $fecha_inicial,
+                        'limite_inscripcion' => $limite_inscripcion,
                         'fecha_final' => $fecha_final,
                         'carga_horaria' => $carga_horaria,
                         'fecha_certificacion' => $fecha_certificacion,
@@ -529,6 +542,29 @@ class Configuracion extends PSG_Controller
             $this->output->set_content_type('application/json')->set_output(json_encode(
                 [
                     'error' => 'Error eliminar la configuracion del curso'
+                ]
+            ));
+        }
+    }
+
+    public function terminar_configuracion()
+    {
+        $id = $this->input->post('id');
+        $respuesta = $this->sql_ssl->modificar_tabla(
+            'configuracion_curso',
+            ['estado_curso' => 'TERMINADO'],
+            ['id_configuracion_curso' => $id]
+        );
+        if ($respuesta) {
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                [
+                    'exito' => 'Configuracion del curso terminado correctamente'
+                ]
+            ));
+        } else {
+            $this->output->set_content_type('application/json')->set_output(json_encode(
+                [
+                    'error' => 'Error al terminar la configuración del curso'
                 ]
             ));
         }
