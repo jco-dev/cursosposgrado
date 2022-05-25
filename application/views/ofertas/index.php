@@ -30,10 +30,10 @@
             font-size: 12px;
             text-decoration: none;
             color: white;
-            background: #A51214;
+            background: #3b5998;
             outline: none;
             border-radius: 4px;
-            border: .7px solid #800E10;
+            border: .7px solid #3b5998;
             position: relative;
             overflow: visible;
             /* IE9 & 10 */
@@ -45,15 +45,15 @@
 
 
         .btn-cupon:hover {
-            background: #a61715;
+            background: #3b5998;
             color: white;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75), 0 0 40px #FFF;
             box-shadow:
                 inset 1px 1px 0px rgba(255, 255, 255, 0.25),
                 /* highlight */
-                inset 0 0 6px #a23227,
+                inset 0 0 6px #3b5998,
                 /* inner glow */
-                inset 0 80px 80px -40px #a23227,
+                inset 0 80px 80px -40px #3b5998,
                 /* gradient */
                 1px 1px 3px rgba(0, 0, 0, 0.75);
             /* shadow */
@@ -71,6 +71,18 @@
             }
         }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R807821KNJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-R807821KNJ');
+    </script>
 </head>
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed page-loading">
@@ -170,8 +182,8 @@
                                 if (count($validar_fecha) > 0) {
                                 ?>
                                     <a class="btn-cupon text-white" style="display: flex; justify-content: space-around; padding: 10px; 30px;" href="<?= base_url('/cupon'); ?>">
-                                        <i class="fas fa-gift text-white icon-cupon" style="display: flex; justify-content: center; align-items: center;"></i>
-                                        <span class="text-cupon" style="margin-left: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">OBTENER MI CUPÓN POR FIN DE AÑO</span>
+                                        <i class="fas fa-thumbs-up text-white icon-cupon" style="display: flex; justify-content: center; align-items: center;"></i>
+                                        <span class="text-cupon" style="margin-left: 5px; text-align: center; display: flex; align-items: center; justify-content: center;">OBTENER MI CUPÓN</span>
                                     </a>
                                 <?php
                                 }

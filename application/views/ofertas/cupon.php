@@ -123,33 +123,40 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <!--begin::List Widget 10-->
-                                            <div class="card card-custom card-stretch gutter-b">
-                                                <div class="row">
-                                                    <?php
+                                            <?php
+                                            if (count($validar_fecha) > 0)
+                                                    $fecha_fin_canje = date_format(date_create($validar_fecha[0]->fecha_fin_canje), 'd/m/Y');
                                                     if (count($validar_fecha) > 0) {
                                                     ?>
+                                            <div class="card card-custom card-stretch gutter-b">
+                                                <input type="datetime" name="fecha_final" class="d-none" id="fecha_final" value="<?= $validar_fecha[0]->fecha_fin ?>">
+                                                <div class="row">
+                                                    
                                                         <div class="col-lg-12 p-10">
                                                             <div class="contenedo-cupon">
-                                                                <img src="assets/img/img_send_certificate/cupon.jpg" class="cupon-image" alt="Imagen de cupón">
+                                                                <img src="assets/img/img_send_certificate/50k-1.jpeg" class="cupon-image" alt="Imagen de cupón">
                                                                 <h3 style="font-weight: bold;">¡Obtén tu descuento ahora!</h3>
                                                                 <h6 style="text-align: center;">Consigue tus descuentos para tus próximas inscripciones en cualquiera de nuestros cursos.</h6>
-                                                                <h6 style="text-align: center;">¿Qué tienes que hacer para conseguir tu cupón por fin de año?</h6>
+                                                                <h6 style="text-align: center;">¿Qué tienes que hacer para conseguir tu cupón?</h6>
 
                                                                 <section style="padding-left: 5px;padding-right: 5px;">
                                                                     <p>👉 Regístrate en el formulario.</p>
-                                                                    <p>💵 Obtén un cupón de descuento del <strong>30%</strong>.</p>
-                                                                    <p>🔄 Comparte esta noticia con tus amig@s para que obtengan su cupón por fin de año.</p>
+                                                                    <p>💵 Obtén un cupón de descuento del <strong><?= $validar_fecha[0]->porcentaje ?>%</strong>.</p>
+                                                                    <p>🔄 Comparte esta noticia con tus amig@s para que obtengan su cupón.</p>
                                                                 </section>
                                                                 <h5 style="font-weight: bold; text-align: center;">Cupón canjeable sólo en la inscripción de cualquiera de nuestros cursos validando el código.</h5>
-                                                                <p>📆 Promoción válida hasta: <span style="font-weight: bold;">31/12/2021</span></p>
+                                                                <p>📆 Promoción válida hasta: <span style="font-weight: bold;"><?= date_format(date_create($validar_fecha[0]->fecha_fin_canje), 'd/m/Y') ?></span></p>
                                                                 <div id="cupon-fecha-fin"></div>
 
-                                                                <button class="btn button-cupon">¡OBTÉN TUS CUPONES AHORA!</button>
+                                                                <button class="btn button-cupon">¡OBTÉN TU CUPÓN AHORA!</button>
 
 
                                                             </div>
                                                         </div>
-                                                    <?php
+                                                    
+                                                </div>
+                                            </div>
+                                            <?php
                                                     } else {
                                                     ?>
 
@@ -161,8 +168,7 @@
                                                             </a>
                                                         </div>
                                                     <?php } ?>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -341,11 +347,11 @@
         </div>
     </div>
 
-    <form id="frm-pdf-registro" action="/cupon/cupon_pdf">
+    <!-- <form id="frm-pdf-registro" action="/cupon/cupon_pdf">
         <input type="hidden" name="numero" id="numero">
         <input type="hidden" name="codigo" id="codigo">
         <input type="submit">
-    </form>
+    </form> -->
 
     <div id="kt_scrolltop" class="scrolltop">
         <span class="svg-icon">

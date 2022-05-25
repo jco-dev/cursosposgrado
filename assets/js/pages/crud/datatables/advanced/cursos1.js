@@ -215,6 +215,7 @@ const imprimir_certificados = (id) => {
 											"/assets/" +
 											response +
 											"#toolbar=0&navpanes=0&scrollbar=0";
+										$("#visualizar-certificado").attr("href", ruta);
 										$("#modal-body-certificado").children().remove();
 										$("#modal-body-certificado").html(
 											'<object width="100%" height="100%" type="application/pdf" data="' +

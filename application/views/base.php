@@ -130,6 +130,13 @@
 								</a>
 							</li>
 
+							<li class="menu-item" aria-haspopup="true">
+								<a href="<?= base_url('evento') ?>" class="menu-link">
+									<i class="menu-icon fa fa-plus-circle"></i>
+									<span class="menu-text">Evento 50K</span>
+								</a>
+							</li>
+
 							<li class="menu-section">
 								<h4 class="menu-text">CERTIFICADOS</h4>
 								<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -661,6 +668,7 @@
 	<script src="<?= base_url('assets/js/docente/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/certificado/index.js') ?>"></script>
 	<script src="<?= base_url('assets/js/envio/index.js') ?>"></script>
+	<script src="<?= base_url('assets/js/evento/index.js') ?>"></script>
 
 </body>
 <!--end::Body-->

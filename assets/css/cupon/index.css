@@ -36,7 +36,7 @@
 }
 
 .button-cupon-submit {
-	background-color: #b50624;
+	background-color: #4b34cb;
 	color: white;
 	padding: 8px 48px;
 	margin-top: 15px;
@@ -46,11 +46,11 @@
 
 .button-cupon-submit:hover {
 	color: white;
-	background-color: #dc001a;
+	background-color: #6684ff;
 }
 
 .button-cupon {
-	background-color: #b50624;
+	background-color: #4b34cb;
 	color: white;
 	padding: 8px 48px;
 	margin-top: 15px;
@@ -60,5 +60,5 @@
 
 .button-cupon:hover {
 	color: white;
-	background-color: #dc001a;
+	background-color: #6684ff;
 }

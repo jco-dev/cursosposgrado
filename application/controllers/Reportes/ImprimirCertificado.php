@@ -1405,4 +1405,30 @@ class ImprimirCertificado extends Fpdf_psg
         }
         $this->Output("D", $curso[0]->shortname . ".pdf", true);
     }
+
+    public function printInscritos($data)
+    {
+        $this->AddPage("P", "letter");
+        $this->SetFont('Arial', 'B', 14);
+        $this->multiCelda(0, 8,'LISTADO DE INSCRITOS', 0, 'C');
+        $this->SetFont('Arial', 'B', 9);
+
+        $this->Cell(10,5,'Nro',1,0,'C');
+        $this->Cell(60,5,'NOMBRE',1,0,'C');
+        $this->Cell(40,5,'CELULAR',1,0,'C');
+        $this->Cell(40,5,'EMAIL',1,0,'C');
+        $this->Cell(50,5,'HORA EVENTO',1,0,'C');
+
+        foreach($data as $key => $value){
+            $this->SetFont('Arial', '', 9);
+            $this->Ln();
+            $this->Cell(10,5,$key+1,1,0,'C');
+            $this->Cell(60,5,utf8_decode($value->nombre_completo),1,0,'L');
+            $this->Cell(40,5,utf8_decode($value->nro_celular),1,0,'C');
+            $this->Cell(40,5,utf8_decode($value->correo),1,0,'L');
+            $this->Cell(50,5,utf8_decode($value->hora_evento),1,0,'L');
+        }
+       
+        $this->Output("D", "listado.pdf", true);
+    }
 }

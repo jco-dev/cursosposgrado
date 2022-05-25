@@ -68,4 +68,16 @@ class Cupon_model extends PSG_Model
 			return null;
 		}
 	}
+
+	public function listar_cupones_segun_fecha()
+	{
+
+		$sql = "SELECT * FROM mdl_cupones mc WHERE " . date('Y-m-d') . " BETWEEN mc.fecha_inicio AND mc.fecha_fin";
+		$query = $this->db->query($sql);
+		if ($query->num_rows() > 0) {
+			return ($query->result());
+		} else {
+			return null;
+		}
+	}
 }

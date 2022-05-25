@@ -62,10 +62,6 @@
             <div class="modal-body" id="modal-body-certificado">
 
             </div>
-            <div class="modal-footer">
-                <a href="#" target="_blank" id="visualizar-certificado" class="btn btn-info">Vizualizar en una ventana</a>
-                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Cerrar</button>
-            </div>
         </div>
     </div>
 </div>

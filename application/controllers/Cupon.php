@@ -16,7 +16,9 @@ class Cupon extends CI_Controller
 
 	public function index()
 	{
-		$this->data['validar_fecha'] = $this->sql_ssl->listar_tabla('cupones', ['fecha_inicio <= ' => date('Y-m-d'), 'fecha_fin >= ' => date('Y-m-d')]);
+		$this->data['validar_fecha'] = $this->sql_ssl->listar_tabla('cupones', ['fecha_inicio <= ' => date('Y-m-d H:i:s'), 'fecha_fin >= ' => date('Y-m-d H:i:s')]);
+		// $this->data['validar_fecha'] = $this->cupon_model->listar_cupones_segun_fecha();
+		// return var_dump($this->data['validar_fecha']);
 		$this->load->view('ofertas/cupon', $this->data);
 	}
 
@@ -78,11 +80,12 @@ class Cupon extends CI_Controller
 		// obtener id_cupon del cupon
 		$cupones = $this->sql_ssl->listar_tabla(
 			'mdl_cupones',
-			['estado' => 'REGISTRADO', 'fecha_inicio <=' => date('Y-m-d'), 'fecha_fin >=' => date('Y-m-d')]
+			['estado' => 'REGISTRADO', 'fecha_inicio <=' => date('Y-m-d H:i:s'), 'fecha_fin >=' => date('Y-m-d H:i:s')]
 		);
 
 		if (count($cupones) > 0) {
 			// verificar el registro de cantidad de cupones del participante
+
 			if ($this->verificar_cantidad_registro($id_participante, $cupones[0]->id_cupones, intval($cupones[0]->cantidad)) === true) {
 				$response = $this->cupon_model->get_id_last_number_cupon($cupones[0]->id_cupones);
 				$numero = $this->numero_cupon($response, $cupones[0]->sigla_cupon);
@@ -162,7 +165,6 @@ class Cupon extends CI_Controller
 			'mdl_cupones_participante',
 			['id_participante' => $id_participante, 'id_cupones' => $id_cupones]
 		);
-
 		if (count($respuesta) < $cantidad) {
 			return true;
 		} else {

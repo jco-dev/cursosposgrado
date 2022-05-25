@@ -30,7 +30,7 @@ class Ofertas extends CI_Controller
 			}
 		}
 
-		$this->data['validar_fecha'] = $this->sql_ssl->listar_tabla('cupones', ['fecha_inicio <= ' => date('Y-m-d'), 'fecha_fin >= ' => date('Y-m-d')]);
+		$this->data['validar_fecha'] = $this->sql_ssl->listar_tabla('cupones', ['fecha_inicio <= ' => date('Y-m-d H:i:s'), 'fecha_fin >= ' => date('Y-m-d H:i:s')]);
 
 		$this->load->view('ofertas/index', $this->data);
 	}

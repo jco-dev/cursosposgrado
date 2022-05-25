@@ -121,6 +121,7 @@ class Inscripcion_model extends PSG_Model
 			$sql = "SELECT
 			cc.fecha_inicial,
 			cc.fecha_final,
+			cc.limite_inscripcion,
 			cc.carga_horaria,
 			cc.inversion,
 			cc.horario,

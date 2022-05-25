@@ -86,3 +86,5 @@ $route['inscripcion-router-v4'] = "invitacion/video_informaciones/22";
 $route['inscripcion-excel-v5'] = "invitacion/video_informaciones/23";
 $route['inscripcion-computacion-v4'] = "invitacion/video_informaciones/24";
 $route['inscripcion-ofimatica-b'] = "invitacion/video_informaciones/25";
+
+$route['success'] = "promociones/exito";

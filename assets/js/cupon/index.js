@@ -1,32 +1,41 @@
-simplyCountdown("#cupon-fecha-fin", {
-	year: 2021,
-	month: 12,
-	day: 31,
-	hours: 23,
-	minutes: 59,
-	seconds: 0,
-	words: {
-		days: "Día",
-		hours: "Hora",
-		minutes: "Minuto",
-		seconds: "Segundo",
-		pluralLetter: "s",
-	},
-	plural: true,
-	inline: false,
-	inlineClass: "simply-countdown-inline",
+const cupon = (year, month, day, hour, minute) => {
+	simplyCountdown("#cupon-fecha-fin", {
+		year: year,
+		month: month,
+		day: day,
+		hours: hour,
+		minutes: minute,
+		seconds: 00,
+		words: {
+			days: "Día",
+			hours: "Hora",
+			minutes: "Minuto",
+			seconds: "Segundo",
+			pluralLetter: "s",
+		},
+		plural: true,
+		inline: false,
+		inlineClass: "simply-countdown-inline",
 
-	enableUtc: false,
-	onEnd: function () {
-		return;
-	},
-	refresh: 1000,
-	sectionClass: "simply-section",
-	amountClass: "simply-amount",
-	wordClass: "simply-word",
-	zeroPad: false,
-	countUp: false,
-});
+		enableUtc: false,
+		onEnd: function () {
+			return;
+		},
+		refresh: 1000,
+		sectionClass: "simply-section",
+		amountClass: "simply-amount",
+		wordClass: "simply-word",
+		zeroPad: false,
+		countUp: false,
+	});
+};
+
+fecha_fin = $("#fecha_final").val();
+fecha_fin = fecha_fin.split(" ");
+fecha = fecha_fin[0].split("-");
+hora = fecha_fin[1].split(":");
+
+cupon(fecha[0], fecha[1], fecha[2], hora[0], hora[1]);
 
 const ocultar_boton_buscar = () => {
 	$(".btn-buscar-ci").attr("mdb-animation", "fade-in-left");
@@ -59,6 +68,7 @@ const ocultar_formulario = () => {
 const limpiar_formulario = (ci) => {
 	$("#frm_inscripcion_cupon").trigger("reset");
 	$("#ci_cupon").val(ci);
+	$("#id_participante_cupon").val("");
 };
 
 $(".button-cupon").click(function () {
@@ -165,7 +175,6 @@ $("#frm_inscripcion_cupon").ajaxForm({
 		agregar_animacion_icono("button-reservar-cupon-icono", "fas fa-save");
 	},
 	success: function (response) {
-		agregar_animacion_icono("button-reservar-cupon-icono", "fas fa-save ");
 		// console.log(response);
 		if (typeof response.warning != "undefined") {
 			Swal.fire("Advertencia!", response.warning, "warning");
@@ -174,6 +183,7 @@ $("#frm_inscripcion_cupon").ajaxForm({
 		}
 
 		if (typeof response.numero != "undefined") {
+			agregar_animacion_icono("button-reservar-cupon-icono", "fas fa-save ");
 			$("#numero").val(response.numero);
 			$("#codigo").val(response.codigo);
 

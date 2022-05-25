@@ -31,15 +31,19 @@
                     <?= $data[0]->detalle_curso ?>
                 </h4>
                 <hr>
-                <h5 class="text-justify font-size-lg font-weight-normal">
-                    &nbsp;🪙 INVERSIÓN:<?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                    <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($datos[0]->inversion) ?></del> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
-                <?php } else { ?>
-                    <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                <?php
+
+                if ($datos[0]->limite_inscripcion >= date('Y-m-d')) { ?>
+                    <h5 class="text-justify font-size-lg font-weight-normal">
+                        &nbsp;🪙 INVERSIÓN:<?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                        <span class="font-size-md font-weight-normal"><del class="text-danger">Bs. <?= intval($datos[0]->inversion) ?></del> <span class="font-weight-bold">Bs. <?= intval(($datos[0]->inversion) - ($datos[0]->inversion * $datos[0]->descuento / 100)) ?></span> </span>
+                    <?php } else { ?>
+                        <span class="font-size-md font-weight-normal"><span class="font-weight-bold">Bs. <?= intval($datos[0]->inversion) ?></span> </span>
+                    <?php } ?>
+                    <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
+                        <span class="font-size-md font-weight-normal text-primary"> (descuento de <span class="text-primary font-weight-bold"><?= $datos[0]->descuento ?>% </span> hasta <?= date('d-m-Y', strtotime($datos[0]->fecha_fin_descuento)) ?>) </span>
+                    <?php } ?> <br>&nbsp;
                 <?php } ?>
-                <?php if (strtotime(date('d-m-Y')) >= strtotime($datos[0]->fecha_inicio_descuento) && strtotime(date('d-m-Y')) <= strtotime($datos[0]->fecha_fin_descuento) && $datos[0]->descuento > 0) { ?>
-                    <span class="font-size-md font-weight-normal text-primary"> (descuento de <span class="text-primary font-weight-bold"><?= $datos[0]->descuento ?>% </span> hasta <?= date('d-m-Y', strtotime($datos[0]->fecha_fin_descuento)) ?>) </span>
-                <?php } ?> <br>&nbsp;
                 ▶️ OPCIONES DE PAGO:
                 <ol>
                     <li>Transferencia bancaria o depósito de a los siguientes números de cuenta:
@@ -60,13 +64,13 @@
                     <li>Haciendo el pago directamente en nuestra oficina: Edificio Emblemático U.P.E.A., 3er piso, Oficina 3 de POSGRADO - Av. Sucre S/N Zona Villa Esperanza
                         :: Ciudad de El Alto - Bolivia.</li>
                 </ol>
-                </h5>
-                <span class="text-danger">(*) Obligatorio</span>
+                    </h5>
+                    <span class="text-danger">(*) Obligatorio</span>
             </div>
         </div>
 
         <?php
-        if ($datos[0]->fecha_inicial >= date('Y-m-d')) { ?>
+        if ($datos[0]->limite_inscripcion >= date('Y-m-d')) { ?>
             <div class="wizard wizard-3" id="kt_wizard_v3" data-wizard-state="step-first" data-wizard-clickable="true">
                 <!--begin: Wizard Nav-->
                 <div class="wizard-nav d-none">
@@ -144,7 +148,7 @@
         <?php } else { ?>
             <div class="alert alert-custom alert-warning mt-10" role="alert">
                 <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                <div class="alert-text">La inscripción al curso ha terminado por favor comuníquese con los encargados del curso. Celular de referencia: <?= $datos[0]->celular_referencia ?></div>
+                <div class="alert-text">La inscripción al curso ha terminado por favor comuníquese con los encargados del curso. Celular de referencia: <?= isset($datos[0]->celular_referencia) ? $datos[0]->celular_referencia : '62332648' ?></div>
             </div>
         <?php } ?>
     </div>
