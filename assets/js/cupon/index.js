@@ -175,7 +175,7 @@ $("#frm_inscripcion_cupon").ajaxForm({
 		agregar_animacion_icono("button-reservar-cupon-icono", "fas fa-save");
 	},
 	success: function (response) {
-		// console.log(response);
+		console.log(response);
 		if (typeof response.warning != "undefined") {
 			Swal.fire("Advertencia!", response.warning, "warning");
 			$("#frm_inscripcion_cupon").trigger("reset");
