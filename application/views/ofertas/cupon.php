@@ -613,6 +613,7 @@
     <script src="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') ?>"></script>
     <script src="<?= base_url('assets/plugins/custom/gmaps/gmaps.js') ?>"></script>
     <script src="<?= base_url('assets/js/pages/widgets.js') ?>"></script>
+    <script src="<?= base_url('assets/js/oferta/oferta1.js') ?>"></script>
     <script src="<?= base_url('assets/js/jquery.form.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/jquery.expander.js') ?>"></script>
     <script src="<?= base_url('assets/js/simplyCountdown.min.js') ?>"></script>

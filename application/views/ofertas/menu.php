@@ -8,6 +8,12 @@
             </a>
         </li>
 
+        <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+            <a href="<?= base_url('promociones'); ?>" class="menu-link">
+                <span class="menu-text">Promociones</span>
+            </a>
+        </li>
+
         <!-- <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
             <a href="javascript:;" class="menu-link menu-toggle">
                 <span class="menu-text">Verificar</span>
